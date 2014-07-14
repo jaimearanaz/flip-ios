@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FLPViewController : UIViewController
+@interface FLPMainScrenViewController : UIViewController
 
 @end

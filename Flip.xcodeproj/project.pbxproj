@@ -14,8 +14,7 @@
 		6F1AA1651973EAA400101766 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1AA1641973EAA400101766 /* main.m */; };
 		6F1AA1691973EAA400101766 /* FLPAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1AA1681973EAA400101766 /* FLPAppDelegate.m */; };
 		6F1AA16C1973EAA400101766 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F1AA16A1973EAA400101766 /* Main_iPhone.storyboard */; };
-		6F1AA16F1973EAA400101766 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F1AA16D1973EAA400101766 /* Main_iPad.storyboard */; };
-		6F1AA1721973EAA400101766 /* FLPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1AA1711973EAA400101766 /* FLPViewController.m */; };
+		6F1AA1721973EAA400101766 /* FLPMainScrenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1AA1711973EAA400101766 /* FLPMainScrenViewController.m */; };
 		6F1AA1741973EAA400101766 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F1AA1731973EAA400101766 /* Images.xcassets */; };
 		6F1AA17B1973EAA400101766 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F1AA17A1973EAA400101766 /* XCTest.framework */; };
 		6F1AA17C1973EAA500101766 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F1AA1581973EAA400101766 /* Foundation.framework */; };
@@ -46,15 +45,18 @@
 		6F1AA1671973EAA400101766 /* FLPAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FLPAppDelegate.h; sourceTree = "<group>"; };
 		6F1AA1681973EAA400101766 /* FLPAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FLPAppDelegate.m; sourceTree = "<group>"; };
 		6F1AA16B1973EAA400101766 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
-		6F1AA16E1973EAA400101766 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
-		6F1AA1701973EAA400101766 /* FLPViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FLPViewController.h; sourceTree = "<group>"; };
-		6F1AA1711973EAA400101766 /* FLPViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FLPViewController.m; sourceTree = "<group>"; };
+		6F1AA1701973EAA400101766 /* FLPMainScrenViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FLPMainScrenViewController.h; sourceTree = "<group>"; };
+		6F1AA1711973EAA400101766 /* FLPMainScrenViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FLPMainScrenViewController.m; sourceTree = "<group>"; };
 		6F1AA1731973EAA400101766 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		6F1AA1791973EAA400101766 /* FlipTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlipTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F1AA17A1973EAA400101766 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		6F1AA1821973EAA500101766 /* FlipTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FlipTests-Info.plist"; sourceTree = "<group>"; };
 		6F1AA1841973EAA500101766 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6F1AA1861973EAA500101766 /* FlipTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FlipTests.m; sourceTree = "<group>"; };
+		6F1AA1921973EB2E00101766 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main_iPhone.strings; sourceTree = "<group>"; };
+		6F1AA1931973EB2E00101766 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6F1AA1941973EB2E00101766 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6F1AA1961973ECEE00101766 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main_iPhone.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,12 +116,11 @@
 		6F1AA15E1973EAA400101766 /* Flip */ = {
 			isa = PBXGroup;
 			children = (
+				6F1AA1911973EAF800101766 /* views */,
+				6F1AA1901973EAF000101766 /* controllers */,
+				6F1AA16A1973EAA400101766 /* Main_iPhone.storyboard */,
 				6F1AA1671973EAA400101766 /* FLPAppDelegate.h */,
 				6F1AA1681973EAA400101766 /* FLPAppDelegate.m */,
-				6F1AA16A1973EAA400101766 /* Main_iPhone.storyboard */,
-				6F1AA16D1973EAA400101766 /* Main_iPad.storyboard */,
-				6F1AA1701973EAA400101766 /* FLPViewController.h */,
-				6F1AA1711973EAA400101766 /* FLPViewController.m */,
 				6F1AA1731973EAA400101766 /* Images.xcassets */,
 				6F1AA15F1973EAA400101766 /* Supporting Files */,
 			);
@@ -153,6 +154,22 @@
 				6F1AA1831973EAA500101766 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6F1AA1901973EAF000101766 /* controllers */ = {
+			isa = PBXGroup;
+			children = (
+				6F1AA1701973EAA400101766 /* FLPMainScrenViewController.h */,
+				6F1AA1711973EAA400101766 /* FLPMainScrenViewController.m */,
+			);
+			name = controllers;
+			sourceTree = "<group>";
+		};
+		6F1AA1911973EAF800101766 /* views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -215,6 +232,7 @@
 			knownRegions = (
 				en,
 				Base,
+				es,
 			);
 			mainGroup = 6F1AA14C1973EAA400101766;
 			productRefGroup = 6F1AA1561973EAA400101766 /* Products */;
@@ -232,7 +250,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F1AA16F1973EAA400101766 /* Main_iPad.storyboard in Resources */,
 				6F1AA1741973EAA400101766 /* Images.xcassets in Resources */,
 				6F1AA16C1973EAA400101766 /* Main_iPhone.storyboard in Resources */,
 				6F1AA1631973EAA400101766 /* InfoPlist.strings in Resources */,
@@ -255,7 +272,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F1AA1651973EAA400101766 /* main.m in Sources */,
-				6F1AA1721973EAA400101766 /* FLPViewController.m in Sources */,
+				6F1AA1721973EAA400101766 /* FLPMainScrenViewController.m in Sources */,
 				6F1AA1691973EAA400101766 /* FLPAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -283,6 +300,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				6F1AA1621973EAA400101766 /* en */,
+				6F1AA1931973EB2E00101766 /* es */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -291,22 +309,17 @@
 			isa = PBXVariantGroup;
 			children = (
 				6F1AA16B1973EAA400101766 /* Base */,
+				6F1AA1921973EB2E00101766 /* es */,
+				6F1AA1961973ECEE00101766 /* en */,
 			);
 			name = Main_iPhone.storyboard;
-			sourceTree = "<group>";
-		};
-		6F1AA16D1973EAA400101766 /* Main_iPad.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6F1AA16E1973EAA400101766 /* Base */,
-			);
-			name = Main_iPad.storyboard;
 			sourceTree = "<group>";
 		};
 		6F1AA1831973EAA500101766 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				6F1AA1841973EAA500101766 /* en */,
+				6F1AA1941973EB2E00101766 /* es */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -395,6 +408,7 @@
 				GCC_PREFIX_HEADER = "Flip/Flip-Prefix.pch";
 				INFOPLIST_FILE = "Flip/Flip-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -408,6 +422,7 @@
 				GCC_PREFIX_HEADER = "Flip/Flip-Prefix.pch";
 				INFOPLIST_FILE = "Flip/Flip-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

@@ -1,0 +1,6 @@
+/* Localized versions of Info.plist keys */
+
+// Main screen
+"MAIN_SELECT" = "Selecciona una fuente para tus fotos";
+"MAIN_CAMERA" = "Cámara";
+"MAIN_RECORDS" = "Ver mis records";
