@@ -25,7 +25,8 @@
     [super viewDidLoad];
 	
     _selectLbl.text = NSLocalizedString(@"MAIN_SELECT", @"");
-    _cameraBtn.titleLabel.text = NSLocalizedString(@"MAIN_CAMERA", @"");
+    [_cameraBtn setTitle:NSLocalizedString(@"MAIN_CAMERA", @"") forState:UIControlStateNormal];
+    [_recordsBtn setTitle:NSLocalizedString(@"MAIN_RECORDS", @"") forState:UIControlStateNormal];
 }
 
 - (void)didReceiveMemoryWarning

@@ -1,6 +1,1 @@
 /* Localized versions of Info.plist keys */
-
-// Main screen
-"MAIN_SELECT" = "Select a source for your photos";
-"MAIN_CAMERA" = "Camera";
-"MAIN_RECORDS" = "See my records";

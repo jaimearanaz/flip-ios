@@ -21,6 +21,7 @@
 		6F1AA17D1973EAA500101766 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F1AA15C1973EAA400101766 /* UIKit.framework */; };
 		6F1AA1851973EAA500101766 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F1AA1831973EAA500101766 /* InfoPlist.strings */; };
 		6F1AA1871973EAA500101766 /* FlipTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1AA1861973EAA500101766 /* FlipTests.m */; };
+		6F1AA1991973FE9900101766 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F1AA19B1973FE9900101766 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,10 +54,11 @@
 		6F1AA1821973EAA500101766 /* FlipTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FlipTests-Info.plist"; sourceTree = "<group>"; };
 		6F1AA1841973EAA500101766 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6F1AA1861973EAA500101766 /* FlipTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FlipTests.m; sourceTree = "<group>"; };
-		6F1AA1921973EB2E00101766 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main_iPhone.strings; sourceTree = "<group>"; };
 		6F1AA1931973EB2E00101766 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6F1AA1941973EB2E00101766 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		6F1AA1961973ECEE00101766 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main_iPhone.strings; sourceTree = "<group>"; };
+		6F1AA19A1973FE9900101766 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6F1AA19C1973FE9B00101766 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6F1AA19D1973FE9B00101766 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +136,7 @@
 				6F1AA1611973EAA400101766 /* InfoPlist.strings */,
 				6F1AA1641973EAA400101766 /* main.m */,
 				6F1AA1661973EAA400101766 /* Flip-Prefix.pch */,
+				6F1AA19B1973FE9900101766 /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -251,6 +254,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F1AA1741973EAA400101766 /* Images.xcassets in Resources */,
+				6F1AA1991973FE9900101766 /* Localizable.strings in Resources */,
 				6F1AA16C1973EAA400101766 /* Main_iPhone.storyboard in Resources */,
 				6F1AA1631973EAA400101766 /* InfoPlist.strings in Resources */,
 			);
@@ -309,8 +313,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				6F1AA16B1973EAA400101766 /* Base */,
-				6F1AA1921973EB2E00101766 /* es */,
-				6F1AA1961973ECEE00101766 /* en */,
 			);
 			name = Main_iPhone.storyboard;
 			sourceTree = "<group>";
@@ -322,6 +324,16 @@
 				6F1AA1941973EB2E00101766 /* es */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		6F1AA19B1973FE9900101766 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6F1AA19A1973FE9900101766 /* Base */,
+				6F1AA19C1973FE9B00101766 /* es */,
+				6F1AA19D1973FE9B00101766 /* en */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -404,10 +416,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Flip/Flip-Prefix.pch";
 				INFOPLIST_FILE = "Flip/Flip-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "5409A3A6-2A30-455D-A168-55A698992539";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -418,10 +432,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Jaime Aranaz (JU2RPJFHF7)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Flip/Flip-Prefix.pch";
 				INFOPLIST_FILE = "Flip/Flip-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "ACE15740-AF2A-4096-A8A6-34F8FEF7C4A4";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -486,6 +502,7 @@
 				6F1AA18C1973EAA500101766 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6F1AA18D1973EAA500101766 /* Build configuration list for PBXNativeTarget "FlipTests" */ = {
 			isa = XCConfigurationList;
@@ -494,6 +511,7 @@
 				6F1AA18F1973EAA500101766 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

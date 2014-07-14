@@ -68,6 +68,7 @@
                     <connections>
                         <outlet property="cameraBtn" destination="Cnf-b3-mNA" id="qkm-nm-WuT"/>
                         <outlet property="facebookBtn" destination="fFk-FV-fyo" id="gu3-On-Dpy"/>
+                        <outlet property="recordsBtn" destination="iUh-rM-8BA" id="Quk-xp-jQe"/>
                         <outlet property="selectLbl" destination="rLb-7Q-WyZ" id="gi9-P7-oxc"/>
                         <outlet property="twitterBtn" destination="ky9-hR-iZY" id="dEH-UG-8la"/>
                     </connections>
