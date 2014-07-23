@@ -12,8 +12,9 @@
 
 @implementation FLPCameraPhotoSource
 
-- (NSArray *)getPhotosFromSource:(NSInteger)number
+- (void)getPhotosFromSource:(NSInteger)number succesBlock:(void(^)(NSArray* photos))success failureBlock:(void(^)(NSError *error))failure
 {
+    FLPLogDebug(@"number: %ld", number);
     NSMutableArray __block *photos = [[NSMutableArray alloc] init];
     ALAssetsLibrary *assetsLibrary = [[ALAssetsLibrary alloc] init];
     NSInteger __block numberOfPhotos = number;
@@ -27,6 +28,8 @@
                                          // Set range
                                          numberOfPhotos = (group.numberOfAssets < number) ? group.numberOfAssets  : number;
                                          NSRange range = NSMakeRange(0, numberOfPhotos - 1);
+                                         FLPLogDebug(@"photos in group: %ld", group.numberOfAssets);
+                                         FLPLogDebug(@"final number to get: %ld", numberOfPhotos);
                                          
                                          // Enumerate all photos in current group
                                          [group enumerateAssetsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:range]
@@ -39,17 +42,18 @@
                                                                       UIImage *image = [UIImage imageWithCGImage:[repr fullResolutionImage]];
                                                                       // Add image
                                                                       [photos addObject:image];
+                                                                      FLPLogDebug(@"add image: %ld", photos.count);
                                                                       
                                                                       *stop = (photos.count == numberOfPhotos) ? YES : NO;
                                                                   }
                                                               }];
                                      }
-                                     *stop = NO;
+                                     *stop = YES;
+                                     success(photos);
                                  } failureBlock:^(NSError *error) {
-                                     NSLog(@"error: %@", error);
+                                     FLPLogError(@"error: %@", [error localizedDescription]);
+                                     failure(error);
                                  }];
-    
-    return photos;
 }
 
 @end

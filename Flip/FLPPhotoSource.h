@@ -20,19 +20,21 @@
 @property (nonatomic) BOOL internetRequired;
 
 /**
- * Returns the specified number of photos from source.
+ * Gets the specified number of photos from source.
  * Maybe an Internet connection is needed; that situation is indicated by |internetRequired|.
- * @param index number of photos to get from the original source
- * @return Array with the specified number of photos, or less if there aren't enough in source
+ * @param number Number of photos to get from the original source
+ * @param success Block to execute if operation is successful; it contains an array of UIImages
+ * @param failure Block to execute if operation fails
  */
-- (NSArray *)getPhotosFromSource:(NSInteger)number;
+- (void)getPhotosFromSource:(NSInteger)number succesBlock:(void(^)(NSArray* photos))success failureBlock:(void(^)(NSError *error))failure;
 
 /**
- * Returns all the available photos from the source.
+ * Gets all the available photos from the source.
  * Maybe an Internet connection is needed; that situation is indicated by |internetRequired|.
- * @return Array with all available photos from the source
+ * @param success Block to execute if operation is successful; it contains an array of UIImages
+ * @param failure Block to execute if operation fails
  */
-- (NSArray *)getPhotosFromSource;
+- (void)getPhotosFromSourceSuccesBlock:(void(^)(NSArray* photos))success failureBlock:(void(^)(NSError *error))failure;
 
 /**
  * Returns all the available photos saved in local from source.

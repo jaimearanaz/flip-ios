@@ -11,14 +11,14 @@
 @implementation FLPPhotoSource
 
 
-- (NSArray *)getPhotosFromSource:(NSInteger)number
+- (void)getPhotosFromSource:(NSInteger)number succesBlock:(void(^)(NSArray* photos))success failureBlock:(void(^)(NSError *error))failure
 {
-    return nil;
+
 }
 
-- (NSArray *)getPhotosFromSource
+- (void)getPhotosFromSourceSuccesBlock:(void(^)(NSArray* photos))success failureBlock:(void(^)(NSError *error))failure
 {
-    return nil;
+    
 }
 
 - (NSArray *)getPhotosFromLocal

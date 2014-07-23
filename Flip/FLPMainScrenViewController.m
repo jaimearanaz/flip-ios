@@ -7,6 +7,9 @@
 //
 
 #import "FLPMainScrenViewController.h"
+#import "FLPCameraPhotoSource.h"
+
+#import "MBProgressHUD.h"
 
 @interface FLPMainScrenViewController ()
 
@@ -15,6 +18,10 @@
 @property (nonatomic, weak) IBOutlet UIButton *facebookBtn;
 @property (nonatomic, weak) IBOutlet UIButton *twitterBtn;
 @property (nonatomic, weak) IBOutlet UIButton *recordsBtn;
+
+- (IBAction)onCameraButtonPressed:(id)sender;
+- (IBAction)onFacebookButtonPressed:(id)sender;
+- (IBAction)onTwitterButtonPressed:(id)sender;
 
 @end
 
@@ -33,6 +40,47 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)enableButtons
+{
+    _cameraBtn.enabled = YES;
+    _facebookBtn.enabled = YES;
+    _twitterBtn.enabled = YES;
+}
+
+- (void)disableButtons
+{
+    _cameraBtn.enabled = NO;
+    _facebookBtn.enabled = NO;
+    _twitterBtn.enabled = NO;}
+
+#pragma mark IBAction methods
+
+- (IBAction)onCameraButtonPressed:(id)sender
+{
+    FLPLogDebug(@"camera button pressed");
+    FLPCameraPhotoSource *cameraSource = [[FLPCameraPhotoSource alloc] init];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+    [cameraSource getPhotosFromSource:10
+                          succesBlock:^(NSArray *photos) {
+                              [MBProgressHUD hideHUDForView:self.view animated:YES];
+                          }
+                         failureBlock:^(NSError *error) {
+                             [MBProgressHUD hideHUDForView:self.view animated:YES];
+                         }];
+
+}
+
+- (IBAction)onFacebookButtonPressed:(id)sender
+{
+    FLPLogDebug(@"Facebook button pressed");
+}
+
+- (IBAction)onTwitterButtonPressed:(id)sender
+{
+    FLPLogDebug(@"Twitter button pressed");
 }
 
 @end
