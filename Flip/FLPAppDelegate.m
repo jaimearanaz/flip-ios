@@ -7,6 +7,11 @@
 //
 
 #import "FLPAppDelegate.h"
+#import "FLPLogFormatter.h"
+
+#import "DDASLLogger.h"
+#import "DDLog.h"
+#import "DDTTYLogger.h"
 
 @implementation FLPAppDelegate
 
@@ -14,6 +19,26 @@
 {
     // Override point for customization after application launch.
     return YES;
+}
+
+/**
+ *  Sets all log frameworks levels
+ */
+- (void)setLogLevels
+{
+#ifdef DEBUG
+    FLPLogDebug(@"Set debug log levels");
+    int appLogLevel = LOG_LEVEL_VERBOSE;
+#else
+    int appLogLevel = LOG_LEVEL_WARN;
+#endif
+    
+    // App logs
+    [DDLog addLogger:[DDASLLogger sharedInstance] withLogLevel:appLogLevel];
+    [DDLog addLogger:[DDTTYLogger sharedInstance] withLogLevel:appLogLevel];
+    FLPLogFormatter* logFormatter = [FLPLogFormatter new];
+    [[DDASLLogger sharedInstance] setLogFormatter:logFormatter];
+    [[DDTTYLogger sharedInstance] setLogFormatter:logFormatter];
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application
