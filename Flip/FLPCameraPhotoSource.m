@@ -17,7 +17,6 @@
     FLPLogDebug(@"number: %ld", number);
     NSMutableArray __block *photos = [[NSMutableArray alloc] init];
     ALAssetsLibrary *assetsLibrary = [[ALAssetsLibrary alloc] init];
-    NSInteger __block numberOfPhotos = number;
     
     [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos
                                  usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
@@ -25,26 +24,27 @@
                                          
                                          // Get photos only
                                          [group setAssetsFilter:[ALAssetsFilter allPhotos]];
-                                         // Set range
-                                         numberOfPhotos = (group.numberOfAssets < number) ? group.numberOfAssets  : number;
-                                         NSRange range = NSMakeRange(0, numberOfPhotos - 1);
                                          FLPLogDebug(@"photos in group: %ld", group.numberOfAssets);
-                                         FLPLogDebug(@"final number to get: %ld", numberOfPhotos);
+                                       
+                                         // Set range
+                                         NSRange range;
+                                         if (group.numberOfAssets <= number) {
+                                             range = NSMakeRange(0, group.numberOfAssets);
+                                         } else {
+                                             range = [self randomRangeFrom:0 to:group.numberOfAssets with:number];
+                                         }
                                          
+                                         FLPLogDebug(@"range starts %d length %d", (int)range.location, (int)range.length);
+
                                          // Enumerate all photos in current group
                                          [group enumerateAssetsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:range]
                                                                  options:0
                                                               usingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
                                                                   if (result != nil) {
-                                                                      
-                                                                      // TODO: maybe thumbnail is better instead defaultRepresentation?
-                                                                      ALAssetRepresentation *repr = [result defaultRepresentation];
-                                                                      UIImage *image = [UIImage imageWithCGImage:[repr fullResolutionImage]];
+                                                                      UIImage *image = [UIImage imageWithCGImage:[result thumbnail]];
                                                                       // Add image
                                                                       [photos addObject:image];
                                                                       FLPLogDebug(@"add image: %ld", photos.count);
-                                                                      
-                                                                      *stop = (photos.count == numberOfPhotos) ? YES : NO;
                                                                   }
                                                               }];
                                      }
@@ -54,6 +54,30 @@
                                      FLPLogError(@"error: %@", [error localizedDescription]);
                                      failure(error);
                                  }];
+}
+
+
+/**
+ *  Returns a random range between |min| and |max| with |number| elements
+ *  @param min    Minimun position for range
+ *  @param max    Maximum position for range
+ *  @param number Number of elements in range
+ *  @return A random NSRange, or [0,0] if error
+ */
+- (NSRange)randomRangeFrom:(NSInteger)min to:(NSInteger)max with:(NSInteger)number
+{
+    FLPLogDebug(@"random range between %d and %d with %d elements", (int)min, (int)max, (int)number);
+    
+    NSInteger startRange, lengthRange;
+    if ((max <= min) || ((max - min) < number)) {
+        startRange = 0;
+        lengthRange = 0;
+    } else {
+        startRange = (arc4random() % (max - number));
+        lengthRange = number;
+    }
+
+    return NSMakeRange(startRange, lengthRange);
 }
 
 @end
