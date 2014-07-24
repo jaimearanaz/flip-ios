@@ -23,6 +23,7 @@
 		6F1AA1871973EAA500101766 /* FlipTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1AA1861973EAA500101766 /* FlipTests.m */; };
 		6F1AA1991973FE9900101766 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F1AA19B1973FE9900101766 /* Localizable.strings */; };
 		6F67A358197FD19600AC9CF5 /* FLPLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F67A357197FD19600AC9CF5 /* FLPLogFormatter.m */; };
+		6F7B2DE01980FC9200C9FE69 /* FLPGridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7B2DDF1980FC9200C9FE69 /* FLPGridViewController.m */; };
 		6FF58536197FC95100926DF9 /* FLPCameraPhotoSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF58535197FC95100926DF9 /* FLPCameraPhotoSource.m */; };
 		6FF58538197FCA5800926DF9 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FF58537197FCA5800926DF9 /* AssetsLibrary.framework */; };
 		6FFC51671976659800668F82 /* FLPPhotoSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFC51661976659800668F82 /* FLPPhotoSource.m */; };
@@ -66,6 +67,8 @@
 		6F1AA19D1973FE9B00101766 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6F67A356197FD19600AC9CF5 /* FLPLogFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPLogFormatter.h; sourceTree = "<group>"; };
 		6F67A357197FD19600AC9CF5 /* FLPLogFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPLogFormatter.m; sourceTree = "<group>"; };
+		6F7B2DDE1980FC9200C9FE69 /* FLPGridViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPGridViewController.h; sourceTree = "<group>"; };
+		6F7B2DDF1980FC9200C9FE69 /* FLPGridViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPGridViewController.m; sourceTree = "<group>"; };
 		6FF58534197FC95100926DF9 /* FLPCameraPhotoSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPCameraPhotoSource.h; sourceTree = "<group>"; };
 		6FF58535197FC95100926DF9 /* FLPCameraPhotoSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPCameraPhotoSource.m; sourceTree = "<group>"; };
 		6FF58537197FCA5800926DF9 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
@@ -185,6 +188,8 @@
 			children = (
 				6F1AA1701973EAA400101766 /* FLPMainScrenViewController.h */,
 				6F1AA1711973EAA400101766 /* FLPMainScrenViewController.m */,
+				6F7B2DDE1980FC9200C9FE69 /* FLPGridViewController.h */,
+				6F7B2DDF1980FC9200C9FE69 /* FLPGridViewController.m */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
@@ -351,6 +356,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F7B2DE01980FC9200C9FE69 /* FLPGridViewController.m in Sources */,
 				6F67A358197FD19600AC9CF5 /* FLPLogFormatter.m in Sources */,
 				6FFC51671976659800668F82 /* FLPPhotoSource.m in Sources */,
 				6FF58536197FC95100926DF9 /* FLPCameraPhotoSource.m in Sources */,

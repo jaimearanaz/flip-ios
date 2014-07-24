@@ -8,6 +8,7 @@
 
 #import "FLPMainScrenViewController.h"
 #import "FLPCameraPhotoSource.h"
+#import "FLPGridViewController.h"
 
 #import "MBProgressHUD.h"
 
@@ -18,6 +19,7 @@
 @property (nonatomic, weak) IBOutlet UIButton *facebookBtn;
 @property (nonatomic, weak) IBOutlet UIButton *twitterBtn;
 @property (nonatomic, weak) IBOutlet UIButton *recordsBtn;
+@property (nonatomic, strong) __block NSArray *photos;
 
 - (IBAction)onCameraButtonPressed:(id)sender;
 - (IBAction)onFacebookButtonPressed:(id)sender;
@@ -42,6 +44,14 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"gridSegue"]) {
+        FLPGridViewController *gridViewController=(FLPGridViewController *)segue.destinationViewController;
+        gridViewController.photos = _photos;
+    }
+}
+
 - (void)enableButtons
 {
     _cameraBtn.enabled = YES;
@@ -55,7 +65,7 @@
     _facebookBtn.enabled = NO;
     _twitterBtn.enabled = NO;}
 
-#pragma mark IBAction methods
+#pragma mark - IBAction methods
 
 - (IBAction)onCameraButtonPressed:(id)sender
 {
@@ -66,6 +76,8 @@
     [cameraSource getPhotosFromSource:10
                           succesBlock:^(NSArray *photos) {
                               [MBProgressHUD hideHUDForView:self.view animated:YES];
+                              _photos = photos;
+                              [self performSegueWithIdentifier:@"gridSegue" sender:self];
                           }
                          failureBlock:^(NSError *error) {
                              [MBProgressHUD hideHUDForView:self.view animated:YES];

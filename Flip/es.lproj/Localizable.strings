@@ -10,3 +10,6 @@
 "MAIN_SELECT" = "Selecciona una fuente para tus fotos";
 "MAIN_CAMERA" = "Cámara";
 "MAIN_RECORDS" = "Ver mis records";
+
+// Other
+"OTHER_BACK" = "Atrás";
