@@ -13,7 +13,9 @@
 "MAIN_ALERT" = "Error";
 "MAIN_ENOUGH_PHOTOS_CAMERA" = "¡Necesitas tener al menos %d fotos en tu Carrete!";
 "MAIN_ENOUGH_PHOTOS_OTHER" = "¡Necesitas tener al menos %d fotos!";
+"MAIN_SELECT_TWITTER" = "Selecciona una cuenta de Twitter";
 
 // Other
 "OTHER_BACK" = "Atrás";
-"OTHER_OK" = "Ok";
+"OTHER_OK" = "Aceptar";
+"OTHER_CANCEL" = "Cancelar";
