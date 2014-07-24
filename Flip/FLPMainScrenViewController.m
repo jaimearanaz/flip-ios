@@ -78,6 +78,8 @@
 - (IBAction)onTwitterButtonPressed:(id)sender
 {
     FLPLogDebug(@"Twitter button pressed");
+
+    [self disableButtons];
     
     [PFTwitterSignOn setCredentialsWithConsumerKey:kTwitterConsumerKey andSecret:kTwitterSecretKey];
     [PFTwitterSignOn requestAuthenticationWithSelectCallback:^(NSArray *accounts, twitterAccountCallback callback) {
@@ -113,6 +115,8 @@
 
         FLPLogDebug(@"login with Twitter successful, with name '%@' and id '%@'", accountInfo[@"name"], accountInfo[@"id"]);
         
+        [self enableButtons];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
 }
 
@@ -126,9 +130,11 @@
 {
     if (buttonIndex != actionSheet.cancelButtonIndex) {
         FLPLogDebug(@"Twitter account selected");
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         _twitterCallback([_twitterAccounts objectAtIndex:buttonIndex]);
     } else {
         [self enableButtons];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
     }
 }
 
@@ -151,9 +157,11 @@
 - (void)preparePhotosFromSource
 {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self disableButtons];
     
     [_photoSource getPhotosFromSource:kMinimunPhotos
                           succesBlock:^(NSArray *photos) {
+                              [self enableButtons];
                               [MBProgressHUD hideHUDForView:self.view animated:YES];
                               _photos = photos;
                               
@@ -174,6 +182,7 @@
                               }
                           }
                          failureBlock:^(NSError *error) {
+                             [self enableButtons];
                              [MBProgressHUD hideHUDForView:self.view animated:YES];
                          }];
 }
