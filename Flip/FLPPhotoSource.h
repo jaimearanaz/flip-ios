@@ -10,8 +10,8 @@
 
 /**
  * This class represents a source of photos.
- * The source may have a remote origin though Internet, so |internetRequired| indicates that an Internet connection is needed.
- * If |internetRequired| is set to YES, use appropriate methods to storage and recover photos from local, and save connections.
+ * The source may have a remote origin through Internet, so |internetRequired| will be set to YES
+ * Use appropriate methods to storage and recover photos from local, and save connections.
  */
 @interface FLPPhotoSource : NSObject
 

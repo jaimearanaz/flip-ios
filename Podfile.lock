@@ -6,13 +6,16 @@ PODS:
   - CocoaLumberjack/Extensions (1.6.5.1):
     - CocoaLumberjack/Core
   - MBProgressHUD (0.8)
+  - WCAlertView (1.0.1)
 
 DEPENDENCIES:
   - CocoaLumberjack (~> 1.6.2)
   - MBProgressHUD (~> 0.8)
+  - WCAlertView (~> 1.0.1)
 
 SPEC CHECKSUMS:
   CocoaLumberjack: baf4a09a3bcbdfea3363556a90104e026d3504e2
   MBProgressHUD: c356980b0cd097f19acec959b49dca5eb8ec31be
+  WCAlertView: 91e70d413b87d4e97f7c42574ef6a6b46881baf9
 
 COCOAPODS: 0.33.1
