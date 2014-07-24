@@ -10,6 +10,10 @@
 "MAIN_SELECT" = "Selecciona una fuente para tus fotos";
 "MAIN_CAMERA" = "Cámara";
 "MAIN_RECORDS" = "Ver mis records";
+"MAIN_ALERT" = "Error";
+"MAIN_ENOUGH_PHOTOS_CAMERA" = "¡Necesitas tener al menos %d fotos en tu Carrete!";
+"MAIN_ENOUGH_PHOTOS_OTHER" = "¡Necesitas tener al menos %d fotos!";
 
 // Other
 "OTHER_BACK" = "Atrás";
+"OTHER_OK" = "Ok";

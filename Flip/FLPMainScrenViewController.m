@@ -8,9 +8,13 @@
 
 #import "FLPMainScrenViewController.h"
 #import "FLPCameraPhotoSource.h"
+#import "FLPPhotoSource.h"
 #import "FLPGridViewController.h"
 
 #import "MBProgressHUD.h"
+#import "WCAlertView.h"
+
+#define kMinimunPhotos 10
 
 @interface FLPMainScrenViewController ()
 
@@ -20,6 +24,7 @@
 @property (nonatomic, weak) IBOutlet UIButton *twitterBtn;
 @property (nonatomic, weak) IBOutlet UIButton *recordsBtn;
 @property (nonatomic, strong) __block NSArray *photos;
+@property (nonatomic, strong) __block FLPPhotoSource *photoSource;
 
 - (IBAction)onCameraButtonPressed:(id)sender;
 - (IBAction)onFacebookButtonPressed:(id)sender;
@@ -28,6 +33,8 @@
 @end
 
 @implementation FLPMainScrenViewController
+
+#pragma mark - UIViewController methods
 
 - (void)viewDidLoad
 {
@@ -52,6 +59,27 @@
     }
 }
 
+#pragma mark - IBAction methods
+
+- (IBAction)onCameraButtonPressed:(id)sender
+{
+    FLPLogDebug(@"camera button pressed");
+    _photoSource = [[FLPCameraPhotoSource alloc] init];
+    [self preparePhotosFromSource];
+}
+
+- (IBAction)onFacebookButtonPressed:(id)sender
+{
+    FLPLogDebug(@"Facebook button pressed");
+}
+
+- (IBAction)onTwitterButtonPressed:(id)sender
+{
+    FLPLogDebug(@"Twitter button pressed");
+}
+
+#pragma mark - Custom methods
+
 - (void)enableButtons
 {
     _cameraBtn.enabled = YES;
@@ -63,36 +91,58 @@
 {
     _cameraBtn.enabled = NO;
     _facebookBtn.enabled = NO;
-    _twitterBtn.enabled = NO;}
+    _twitterBtn.enabled = NO;
+}
 
-#pragma mark - IBAction methods
-
-- (IBAction)onCameraButtonPressed:(id)sender
+- (void)preparePhotosFromSource
 {
-    FLPLogDebug(@"camera button pressed");
-    FLPCameraPhotoSource *cameraSource = [[FLPCameraPhotoSource alloc] init];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
-    [cameraSource getPhotosFromSource:10
+    [_photoSource getPhotosFromSource:kMinimunPhotos
                           succesBlock:^(NSArray *photos) {
                               [MBProgressHUD hideHUDForView:self.view animated:YES];
                               _photos = photos;
-                              [self performSegueWithIdentifier:@"gridSegue" sender:self];
+                              
+                              // No enough photos available
+                              if ((_photos == nil) || (_photos.count < kMinimunPhotos) || ((_photos != nil) && (photos.count == 0))) {
+                                  
+                                  NSString *message = [self customErrorMessage:_photoSource];
+                                  
+                                  [WCAlertView showAlertWithTitle:NSLocalizedString(@"MAIN_ALERT", nil)
+                                                          message:message
+                                               customizationBlock:nil
+                                                  completionBlock:nil
+                                                cancelButtonTitle:NSLocalizedString(@"OTHER_OK", nil)
+                                                otherButtonTitles:nil];
+                                  
+                              } else {
+                                  [self performSegueWithIdentifier:@"gridSegue" sender:self];
+                              }
                           }
                          failureBlock:^(NSError *error) {
                              [MBProgressHUD hideHUDForView:self.view animated:YES];
                          }];
-
 }
 
-- (IBAction)onFacebookButtonPressed:(id)sender
+/**
+ *  Customizes the error message where there is not enough photos in the selected source
+ *  @param photoSource Source where the photos are located
+ *  @return Customized error message
+ */
+- (NSString *)customErrorMessage:(FLPPhotoSource *)photoSource
 {
-    FLPLogDebug(@"Facebook button pressed");
-}
+    NSString *message = nil;
+    
+    // Camera
+    if ([photoSource isKindOfClass:[FLPCameraPhotoSource class]]) {
+        message = [NSString stringWithFormat:NSLocalizedString(@"MAIN_ENOUGH_PHOTOS_CAMERA", nil), kMinimunPhotos];
 
-- (IBAction)onTwitterButtonPressed:(id)sender
-{
-    FLPLogDebug(@"Twitter button pressed");
+    // Other source
+    } else {
+        message = NSLocalizedString(@"MAIN_ENOUGH_PHOTOS_OTHER", nil);
+    }
+    
+    return message;
 }
 
 @end

@@ -10,6 +10,10 @@
 "MAIN_SELECT" = "Select a source for your photos";
 "MAIN_CAMERA" = "Camera";
 "MAIN_RECORDS" = "See my records";
+"MAIN_ALERT" = "Error";
+"MAIN_ENOUGH_PHOTOS_CAMERA" = "You need at least %d photos in your Camera Roll!";
+"MAIN_ENOUGH_PHOTOS_OTHER" = "You must have at least %d photos!";
 
 // Other
 "OTHER_BACK" = "Back";
+"OTHER_OK" = "Ok";

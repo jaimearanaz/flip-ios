@@ -47,9 +47,8 @@
                                                                       FLPLogDebug(@"add image: %ld", photos.count);
                                                                   }
                                                               }];
+                                         success(photos);
                                      }
-                                     *stop = YES;
-                                     success(photos);
                                  } failureBlock:^(NSError *error) {
                                      FLPLogError(@"error: %@", [error localizedDescription]);
                                      failure(error);
