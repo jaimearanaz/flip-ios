@@ -69,6 +69,7 @@
 		6F67A357197FD19600AC9CF5 /* FLPLogFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPLogFormatter.m; sourceTree = "<group>"; };
 		6F7B2DDE1980FC9200C9FE69 /* FLPGridViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPGridViewController.h; sourceTree = "<group>"; };
 		6F7B2DDF1980FC9200C9FE69 /* FLPGridViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPGridViewController.m; sourceTree = "<group>"; };
+		6F7B2DE11981144D00C9FE69 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		6FF58534197FC95100926DF9 /* FLPCameraPhotoSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPCameraPhotoSource.h; sourceTree = "<group>"; };
 		6FF58535197FC95100926DF9 /* FLPCameraPhotoSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPCameraPhotoSource.m; sourceTree = "<group>"; };
 		6FF58537197FCA5800926DF9 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
@@ -149,6 +150,7 @@
 				6F1AA16A1973EAA400101766 /* Main_iPhone.storyboard */,
 				6F1AA1671973EAA400101766 /* FLPAppDelegate.h */,
 				6F1AA1681973EAA400101766 /* FLPAppDelegate.m */,
+				6F7B2DE11981144D00C9FE69 /* Constants.h */,
 			);
 			path = Flip;
 			sourceTree = "<group>";

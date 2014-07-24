@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 MobiOak. All rights reserved.
 //
 
+#import <PFTwitterSignOn/PFTwitterSignOn.h>
+
 #import "FLPMainScrenViewController.h"
 #import "FLPCameraPhotoSource.h"
 #import "FLPPhotoSource.h"
@@ -13,8 +15,6 @@
 
 #import "MBProgressHUD.h"
 #import "WCAlertView.h"
-
-#define kMinimunPhotos 10
 
 @interface FLPMainScrenViewController ()
 
@@ -76,6 +76,8 @@
 - (IBAction)onTwitterButtonPressed:(id)sender
 {
     FLPLogDebug(@"Twitter button pressed");
+    
+    [PFTwitterSignOn setCredentialsWithConsumerKey:kTwitterConsumerKey andSecret:kTwitterSecretKey];
 }
 
 #pragma mark - Custom methods
