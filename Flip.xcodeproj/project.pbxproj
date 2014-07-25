@@ -22,6 +22,7 @@
 		6F1AA1851973EAA500101766 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F1AA1831973EAA500101766 /* InfoPlist.strings */; };
 		6F1AA1871973EAA500101766 /* FlipTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1AA1861973EAA500101766 /* FlipTests.m */; };
 		6F1AA1991973FE9900101766 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F1AA19B1973FE9900101766 /* Localizable.strings */; };
+		6F3B3A911982571200EA4BA1 /* TwitterKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6F3B3A901982571200EA4BA1 /* TwitterKeys.plist */; };
 		6F67A358197FD19600AC9CF5 /* FLPLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F67A357197FD19600AC9CF5 /* FLPLogFormatter.m */; };
 		6F7B2DE01980FC9200C9FE69 /* FLPGridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7B2DDF1980FC9200C9FE69 /* FLPGridViewController.m */; };
 		6FF58536197FC95100926DF9 /* FLPCameraPhotoSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF58535197FC95100926DF9 /* FLPCameraPhotoSource.m */; };
@@ -65,6 +66,7 @@
 		6F1AA19A1973FE9900101766 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6F1AA19C1973FE9B00101766 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6F1AA19D1973FE9B00101766 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6F3B3A901982571200EA4BA1 /* TwitterKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TwitterKeys.plist; sourceTree = "<group>"; };
 		6F67A356197FD19600AC9CF5 /* FLPLogFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPLogFormatter.h; sourceTree = "<group>"; };
 		6F67A357197FD19600AC9CF5 /* FLPLogFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPLogFormatter.m; sourceTree = "<group>"; };
 		6F7B2DDE1980FC9200C9FE69 /* FLPGridViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPGridViewController.h; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 				6F1AA1641973EAA400101766 /* main.m */,
 				6F1AA1661973EAA400101766 /* Flip-Prefix.pch */,
 				6F1AA19B1973FE9900101766 /* Localizable.strings */,
+				6F3B3A901982571200EA4BA1 /* TwitterKeys.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -304,6 +307,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F1AA1741973EAA400101766 /* Images.xcassets in Resources */,
+				6F3B3A911982571200EA4BA1 /* TwitterKeys.plist in Resources */,
 				6F1AA1991973FE9900101766 /* Localizable.strings in Resources */,
 				6F1AA16C1973EAA400101766 /* Main_iPhone.storyboard in Resources */,
 				6F1AA1631973EAA400101766 /* InfoPlist.strings in Resources */,

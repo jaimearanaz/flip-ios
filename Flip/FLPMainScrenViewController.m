@@ -81,7 +81,11 @@
 
     [self disableButtons];
     
-    [PFTwitterSignOn setCredentialsWithConsumerKey:kTwitterConsumerKey andSecret:kTwitterSecretKey];
+    NSString *twitterPlist = [[NSBundle mainBundle] pathForResource:@"TwitterKeys" ofType:@"plist"];
+    NSDictionary *twitterKeys = [[NSDictionary alloc] initWithContentsOfFile:twitterPlist];
+
+    [PFTwitterSignOn setCredentialsWithConsumerKey:[twitterKeys objectForKey:@"ConsumerKey"]
+                                         andSecret:[twitterKeys objectForKey:@"SecretKey"]];
     [PFTwitterSignOn requestAuthenticationWithSelectCallback:^(NSArray *accounts, twitterAccountCallback callback) {
         FLPLogDebug(@"more than one Twitter account");
         
@@ -176,7 +180,8 @@
                                                   completionBlock:nil
                                                 cancelButtonTitle:NSLocalizedString(@"OTHER_OK", nil)
                                                 otherButtonTitles:nil];
-                                  
+                                
+                            
                               } else {
                                   [self performSegueWithIdentifier:@"gridSegue" sender:self];
                               }

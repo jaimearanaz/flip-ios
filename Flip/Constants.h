@@ -7,6 +7,4 @@
 //
 
 #define kMinimunPhotos 10
-#define kTwitterConsumerKey @"PM7JmewRv3Vk9xCE7qXy3wrh4"
-#define kTwitterSecretKey @"Yv9xucS2diFV9n3Tlmzn0GRSZFarNZFylZBqkO3fqNJpN9Kpp4"
 
