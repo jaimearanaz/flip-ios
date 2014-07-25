@@ -81,6 +81,7 @@
 
     [self disableButtons];
     
+    // Twitter keys are stored in a plist file, not tracked in git repository
     NSString *twitterPlist = [[NSBundle mainBundle] pathForResource:@"TwitterKeys" ofType:@"plist"];
     NSDictionary *twitterKeys = [[NSDictionary alloc] initWithContentsOfFile:twitterPlist];
 
