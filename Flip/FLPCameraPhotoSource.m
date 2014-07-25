@@ -12,6 +12,15 @@
 
 @implementation FLPCameraPhotoSource
 
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        self.internetRequired = NO;
+    }
+    return self;
+}
+
 - (void)getPhotosFromSource:(NSInteger)number succesBlock:(void(^)(NSArray* photos))success failureBlock:(void(^)(NSError *error))failure
 {
     FLPLogDebug(@"number: %ld", number);

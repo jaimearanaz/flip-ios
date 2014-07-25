@@ -11,6 +11,7 @@
 #import "FLPMainScrenViewController.h"
 #import "FLPCameraPhotoSource.h"
 #import "FLPPhotoSource.h"
+#import "FLPTwitterPhotoSource.h"
 #import "FLPGridViewController.h"
 
 #import "MBProgressHUD.h"
@@ -85,8 +86,8 @@
     NSString *twitterPlist = [[NSBundle mainBundle] pathForResource:@"TwitterKeys" ofType:@"plist"];
     NSDictionary *twitterKeys = [[NSDictionary alloc] initWithContentsOfFile:twitterPlist];
 
-    [PFTwitterSignOn setCredentialsWithConsumerKey:[twitterKeys objectForKey:@"ConsumerKey"]
-                                         andSecret:[twitterKeys objectForKey:@"SecretKey"]];
+    [PFTwitterSignOn setCredentialsWithConsumerKey:[twitterKeys objectForKey:@"consumerKey"]
+                                         andSecret:[twitterKeys objectForKey:@"secretKey"]];
     [PFTwitterSignOn requestAuthenticationWithSelectCallback:^(NSArray *accounts, twitterAccountCallback callback) {
         FLPLogDebug(@"more than one Twitter account");
         
@@ -118,10 +119,19 @@
         
     } andCompletion:^(NSDictionary *accountInfo, NSError *error) {
 
-        FLPLogDebug(@"login with Twitter successful, with name '%@' and id '%@'", accountInfo[@"name"], accountInfo[@"id"]);
+        // login via web or via account, now we have NSDictionary with user data
         
-        [self enableButtons];
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        FLPLogDebug(@"login with Twitter successful");
+        FLPLogDebug(@"screen name '%@', name '%@', id '%@'", accountInfo[@"screen_name"], accountInfo[@"name"], accountInfo[@"id"]);
+        FLPLogDebug(@"access token '%@', token secret '%@'", accountInfo[@"accessToken"], accountInfo[@"tokenSecret"]);
+        
+        _photoSource = [[FLPTwitterPhotoSource alloc] initWithOAuthConsumerKey:[twitterKeys objectForKey:@"consumerKey"]
+                                                                consumerSecret:[twitterKeys objectForKey:@"secretKey"]
+                                                                    oauthToken:accountInfo[@"accessToken"]
+                                                              oauthTokenSecret:accountInfo[@"tokenSecret"]
+                                                                     screeName:accountInfo[@"screen_name"]];
+        
+        [self preparePhotosFromSource];
     }];
 }
 
@@ -164,6 +174,8 @@
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self disableButtons];
     
+    if (_photoSource) {
+    
     [_photoSource getPhotosFromSource:kMinimunPhotos
                           succesBlock:^(NSArray *photos) {
                               [self enableButtons];
@@ -191,6 +203,9 @@
                              [self enableButtons];
                              [MBProgressHUD hideHUDForView:self.view animated:YES];
                          }];
+    } else {
+        FLPLogError(@"No photo source configured!");
+    }
 }
 
 /**
@@ -205,10 +220,13 @@
     // Camera
     if ([photoSource isKindOfClass:[FLPCameraPhotoSource class]]) {
         message = [NSString stringWithFormat:NSLocalizedString(@"MAIN_ENOUGH_PHOTOS_CAMERA", nil), kMinimunPhotos];
+        
+    } else if ([photoSource isKindOfClass:[FLPTwitterPhotoSource class]]) {
+            message = [NSString stringWithFormat:NSLocalizedString(@"MAIN_ENOUGH_PHOTOS_TWITTER", nil), kMinimunPhotos];
 
     // Other source
     } else {
-        message = NSLocalizedString(@"MAIN_ENOUGH_PHOTOS_OTHER", nil);
+        message = [NSString stringWithFormat:NSLocalizedString(@"MAIN_ENOUGH_PHOTOS_OTHER", nil), kMinimunPhotos];
     }
     
     return message;
