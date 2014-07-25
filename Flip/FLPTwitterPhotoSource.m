@@ -19,6 +19,7 @@
 @property (nonatomic) NSString *oauthToken;
 @property (nonatomic) NSString *oauthTokenSecret;
 @property (nonatomic) NSString *screenName;
+@property (nonatomic) STTwitterAPI *twitterApi;
 
 @end
 
@@ -52,43 +53,49 @@
     }
     
     FLPLogDebug(@"number: %ld", number);
-    NSMutableArray __block *photos = [[NSMutableArray alloc] init];
 
-    STTwitterAPI *twitterAPI = [STTwitterAPI twitterAPIWithOAuthConsumerKey:_consumerKey
+    _twitterApi = [STTwitterAPI twitterAPIWithOAuthConsumerKey:_consumerKey
                                                             consumerSecret:_secretKey
                                                                 oauthToken:_oauthToken
                                                           oauthTokenSecret:_oauthTokenSecret];
     
-    // Obtener todos los friends y followers
-    // Seleccionar |number| friends al azar
-    // Obtener las fotos de esos friends
-    
-    // First, get friends from Twitter
-    // Second, get followers from Twitter
-    // Third, get random friends and followers
-    // Fourth, get photos from random friends and followers
+    // Steps:
+    // 1. get friends from Twitter
+    // 2. get followers from Twitter
+    // 3. get random friends and followers
+    // 4. get photos from random friends and followers
     
     // TODO: friends and followers are return in 5000 users per page, use pagination for bigger Twitter accounts?
+    // TODO: lookup users are return in 200 users per page, paginate?
+    // TODO: users can have "default_profile_image" set to TRUE (egg image), filter?
     
-    // First, get friends from Twitter
-    [twitterAPI getFriendsIDsForScreenName:_screenName
+    // 1. get friends from Twitter
+    [_twitterApi getFriendsIDsForScreenName:_screenName
                               successBlock:^(NSArray *friends) {
                                   FLPLogDebug(@"number of friends: %ld", friends.count);
                                   
-                                  // Second, get followers from Twitter
-                                  [twitterAPI getFollowersIDsForScreenName:_screenName
+                                  // 1. get followers from Twitter
+                                  [_twitterApi getFollowersIDsForScreenName:_screenName
                                                               successBlock:^(NSArray *followers) {
                                                                   FLPLogDebug(@"number of followers: %ld", followers.count);
 
-                                                                  // Select random friends and followers
-                                                                  NSArray *users = [self selectUsers:number
+                                                                  // 3. get random friends and followers
+                                                                  NSArray *randomUsers = [self selectUsers:number
                                                                                          fromFriends:friends
                                                                                          andFollowers:followers];
                                                                   
-                                                                  FLPLogDebug(@"number of selected users: %ld", users.count);
-                                                                  
-                                                                  
-                                                                  success(photos);
+                                                                  FLPLogDebug(@"number of selected users: %ld", randomUsers.count);
+                                                   
+                                                                  // 4. get photos from random friends and followers
+                                                                  [self downloadPhotosForUsers:randomUsers
+                                                                                   succesBlock:^(NSArray *photos) {
+                                                                                       success(photos);
+                                                                                   }
+                                                                                  failureBlock:^(NSError *error) {
+                                                                                      FLPLogError(@"error downloading photos: %@", [error localizedDescription]);
+                                                                                      failure(error);
+                                                                                  }];
+
                                                               }
                                                                 errorBlock:^(NSError *error) {
                                                                     FLPLogError(@"error getting followers: %@", [error localizedDescription]);
@@ -133,6 +140,63 @@
     }
     
     return result;
+}
+
+/**
+ *  Downloads profile photos for given users
+ *  @param users Users to download their profile photos
+ *  @return An array of UIImages with users profile photos
+ */
+- (NSMutableArray *)getPhotosForUsers:(NSArray *)users
+{
+    NSMutableArray *photos = [[NSMutableArray alloc] init];
+    
+    for (NSDictionary* user in users) {
+        
+        // default profile photo is "_normal.png"
+        // try to download bigger version photo
+        NSString *imageUrl = [user objectForKey:@"profile_image_url"];
+        imageUrl = [imageUrl stringByReplacingOccurrencesOfString:@"_normal" withString:@"_bigger"];
+        UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imageUrl]]];
+        
+        [photos addObject:image];
+        FLPLogDebug(@"add image: %@", [user objectForKey:@"profile_image_url"]);
+        
+    }
+    
+    return photos;
+}
+
+/**
+ * Gets complete description of given users and downloads their profile photos
+ * @param users   Users to get complete description and download their profile photos
+ * @param success Block to execute if operation is successful; it contains an array of UIImages
+ * @param failure Block to execute if operation fails
+ */
+- (void)downloadPhotosForUsers:(NSArray *)users succesBlock:(void(^)(NSArray* photos))success failureBlock:(void(^)(NSError *error))failure
+{
+    NSString * usersId = [users componentsJoinedByString:@","];
+    
+    // Fourth, get photos from random friends and followers
+    [_twitterApi getUsersLookupForScreenName:nil
+                                   orUserID:usersId
+                            includeEntities:0
+                               successBlock:^(NSArray *usersLookup) {
+                                   FLPLogDebug(@"number of complete users: %ld", usersLookup.count);
+                                   NSMutableArray *photos = [[NSMutableArray alloc] init];
+                                   
+                                   if (usersLookup.count == users.count) {
+                                       photos = [self getPhotosForUsers:usersLookup];
+                                       success(photos);
+                                   } else {
+                                       failure([NSError errorWithDomain:@"" code:0 userInfo:nil]);
+                                   }
+                                   
+                               } errorBlock:^(NSError *error) {
+                                   FLPLogError(@"error getting lookup users: %@", [error localizedDescription]);
+                                   failure(error);
+                               }];
+    
 }
 
 @end

@@ -80,6 +80,7 @@
 {
     FLPLogDebug(@"Twitter button pressed");
 
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self disableButtons];
     
     // Twitter keys are stored in a plist file, not tracked in git repository
@@ -130,7 +131,7 @@
                                                                     oauthToken:accountInfo[@"accessToken"]
                                                               oauthTokenSecret:accountInfo[@"tokenSecret"]
                                                                      screeName:accountInfo[@"screen_name"]];
-        
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
         [self preparePhotosFromSource];
     }];
 }
@@ -145,7 +146,6 @@
 {
     if (buttonIndex != actionSheet.cancelButtonIndex) {
         FLPLogDebug(@"Twitter account selected");
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         _twitterCallback([_twitterAccounts objectAtIndex:buttonIndex]);
     } else {
         [self enableButtons];
@@ -178,6 +178,7 @@
     
     [_photoSource getPhotosFromSource:kMinimunPhotos
                           succesBlock:^(NSArray *photos) {
+                              FLPLogDebug(@"success");
                               [self enableButtons];
                               [MBProgressHUD hideHUDForView:self.view animated:YES];
                               _photos = photos;
@@ -200,6 +201,7 @@
                               }
                           }
                          failureBlock:^(NSError *error) {
+                             FLPLogDebug(@"failure");
                              [self enableButtons];
                              [MBProgressHUD hideHUDForView:self.view animated:YES];
                          }];
