@@ -6,8 +6,11 @@
 //  Copyright (c) 2014 MobiOak. All rights reserved.
 //
 
+#import <AFOAuth1Client/AFOAuth1Client.h>
+
 #import "FLPAppDelegate.h"
 #import "FLPLogFormatter.h"
+#import "FLPMainScrenViewController.h"
 
 #import "DDASLLogger.h"
 #import "DDLog.h"
@@ -41,6 +44,52 @@
     FLPLogFormatter* logFormatter = [FLPLogFormatter new];
     [[DDASLLogger sharedInstance] setLogFormatter:logFormatter];
     [[DDTTYLogger sharedInstance] setLogFormatter:logFormatter];
+}
+
+/**
+ *  Checks if given callback URL responds to Facebook callback
+ *  @return YES if callbac URL respondes to Facebook callback, NO otherwise
+ */
+- (bool)handleFacebookUrl:(NSURL *)callbackUrl
+{
+    return NO;//[FBSession.activeSession handleOpenURL:url];
+}
+
+/**
+ *  Checks if given callback URL responds to Twitter callback
+ *  @return YES if callbac URL respondes to Twitter callback, NO otherwise
+ */
+- (bool)handleTwitterUrl:(NSURL *)callbackUrl
+{
+    return ([[callbackUrl scheme] rangeOfString:@"mobioakflip"].location != NSNotFound);
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    FLPLogDebug(@"url %@", url);
+    
+    // Callback from Facebook web login
+    if ([self handleFacebookUrl:url]) {
+        return YES;
+        
+    // Callback from Twitter web login
+    } else if ([self handleTwitterUrl:url]) {
+        
+        // User has canceled Twitter login
+        if ([[url absoluteString] rangeOfString:@"denied="].location != NSNotFound) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:FLP_WEB_LOGIN_TWITTER_CANCELED_NOTIFICATION object:nil];
+            
+        // User logged successfuly in Twitter web
+        } else {
+            NSNotification *notification = [NSNotification notificationWithName:kAFApplicationLaunchedWithURLNotification
+                                                                         object:nil
+                                                                       userInfo:@{kAFApplicationLaunchOptionsURLKey: url}];
+            [[NSNotificationCenter defaultCenter] postNotification:notification];
+        }
+        return YES;
+    }
+    
+    return NO;
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application

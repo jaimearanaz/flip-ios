@@ -82,6 +82,7 @@
 {
     FLPLogDebug(@"Twitter button pressed");
 
+    [self subscribeToTwitterNotifications];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self disableButtons];
     
@@ -122,11 +123,13 @@
         
     } andCompletion:^(NSDictionary *accountInfo, NSError *error) {
 
-        // login via web or via account, now we have NSDictionary with user data
+        // Logged via web or via local account, now we have NSDictionary with user data
         
         FLPLogDebug(@"login with Twitter successful");
         FLPLogDebug(@"screen name '%@', name '%@', id '%@'", accountInfo[@"screen_name"], accountInfo[@"name"], accountInfo[@"id"]);
         FLPLogDebug(@"access token '%@', token secret '%@'", accountInfo[@"accessToken"], accountInfo[@"tokenSecret"]);
+        
+        [self unsubscribeToTwitterNotifications];
         
         _photoSource = [[FLPTwitterPhotoSource alloc] initWithOAuthConsumerKey:[twitterKeys objectForKey:@"consumerKey"]
                                                                 consumerSecret:[twitterKeys objectForKey:@"secretKey"]
@@ -334,6 +337,28 @@
     }
     
     return message;
+}
+
+- (void)twitterLoginCanceledNotification
+{
+    [self enableButtons];
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    [self unsubscribeToTwitterNotifications];
+}
+
+- (void)subscribeToTwitterNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(twitterLoginCanceledNotification)
+                                                 name:FLP_WEB_LOGIN_TWITTER_CANCELED_NOTIFICATION
+                                               object:nil];
+}
+
+- (void)unsubscribeToTwitterNotifications
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:FLP_WEB_LOGIN_TWITTER_CANCELED_NOTIFICATION
+                                                  object:nil];
 }
 
 @end
