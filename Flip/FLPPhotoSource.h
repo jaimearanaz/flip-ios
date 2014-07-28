@@ -10,8 +10,8 @@
 
 /**
  * This class represents a source of photos.
- * The source may have a remote origin through Internet, so |internetRequired| will be set to YES
- * Use appropriate methods to storage and recover photos from local, and save connections.
+ * The source may have a remote origin through Internet, so |internetRequired| will be set to YES.
+ * Use appropriate methods to save and load photos from cache, and save connections.
  */
 @interface FLPPhotoSource : NSObject
 
@@ -20,51 +20,38 @@
 @property (nonatomic) BOOL internetRequired;
 
 /**
- * Gets the specified number of photos from source.
+ * Gets the specified number of random photos from source.
  * Maybe an Internet connection is needed; that situation is indicated by |internetRequired|.
- * @param number Number of photos to get from the original source
+ * You are encourage to save photos to cache in order to avoid future connections
+ * @param number Number of random photos to get from the original source
  * @param success Block to execute if operation is successful; it contains an array of UIImages
  * @param failure Block to execute if operation fails
  */
-- (void)getPhotosFromSource:(NSInteger)number succesBlock:(void(^)(NSArray* photos))success failureBlock:(void(^)(NSError *error))failure;
+- (void)getRandomPhotosFromSource:(NSInteger)number succesBlock:(void(^)(NSArray* photos))success failureBlock:(void(^)(NSError *error))failure;
 
 /**
- * Gets all the available photos from the source.
- * Maybe an Internet connection is needed; that situation is indicated by |internetRequired|.
- * @param success Block to execute if operation is successful; it contains an array of UIImages
- * @param failure Block to execute if operation fails
+ * Returns all the available photos saved in cache.
+ * Photos must be previously saved from original source.
+ * @param finish Block to execute when operation is finished, it contains an array of UIImages
  */
-- (void)getPhotosFromSourceSuccesBlock:(void(^)(NSArray* photos))success failureBlock:(void(^)(NSError *error))failure;
+- (void)getPhotosFromCacheFinishBlock:(void(^)(NSArray* photos))finish;
 
 /**
- * Returns all the available photos saved in local from source.
- * Photos must be previously saved from source.
- * @param finish Block to execute when operation is finished; it contains an array of UIImages
+ *  Checks if there are photos saved in cache; NO otherwise
+ *  @return YES if there are photos saved in cache; NO otherwise
  */
-- (void)getPhotosFromLocalFinishBlock:(void(^)(NSArray* photos))finish;
+- (BOOL)hasPhotosInCache;
 
 /**
- *  Returns YES if there are photos stored in local cache; NO otherwise
- *  @return YES if there are photos stored in local cache; NO otherwise
+ * Saves the given photos to cache, in device disk storage.
+ * @param photos Array of photos to be saved in cache
  */
-- (BOOL)photosInLocal;
+- (void)savePhotosToCache:(NSArray *)photos;
 
 /**
- * Saves the given photos to local.
- * @param photos Array of photos to be saved in local
+ * Deletes all the saved photos in cache.
  */
-- (void)savePhotosToLocal:(NSArray *)photos;
-
-/**
- * Updates the saved photos in local with its original source.
- * @return Array of photos after updating
- */
-- (NSArray *)updatePhotosFromSource;
-
-/**
- * Resets all the saved photos in local.
- */
-- (void)deleteLocal;
+- (void)deleteCache;
 
 
 @end

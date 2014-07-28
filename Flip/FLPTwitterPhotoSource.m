@@ -47,7 +47,9 @@ static NSString * const kFileName = @"twitter";
 
 #pragma mark - FLPPhotoSource superclass methods
 
-- (void)getPhotosFromSource:(NSInteger)number succesBlock:(void(^)(NSArray* photos))success failureBlock:(void(^)(NSError *error))failure
+- (void)getRandomPhotosFromSource:(NSInteger)number
+                      succesBlock:(void(^)(NSArray* photos))success
+                     failureBlock:(void(^)(NSError *error))failure
 {
  
     if ((!_consumerKey) || (!_secretKey) || (!_oauthToken) || (!_oauthTokenSecret) || (!_screenName)) {
@@ -113,7 +115,7 @@ static NSString * const kFileName = @"twitter";
     
 }
 
-- (void)savePhotosToLocal:(NSArray *)photos
+- (void)savePhotosToCache:(NSArray *)photos
 {
     FLPLogDebug(@"");
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -127,7 +129,7 @@ static NSString * const kFileName = @"twitter";
     }
 }
 
-- (BOOL)photosInLocal
+- (BOOL)hasPhotosInCache
 {
     FLPLogDebug(@"");
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -138,7 +140,7 @@ static NSString * const kFileName = @"twitter";
     return (image != nil);
 }
 
-- (void)getPhotosFromLocalFinishBlock:(void(^)(NSArray* photos))finish;
+- (void)getPhotosFromCacheFinishBlock:(void(^)(NSArray* photos))finish;
 {
     FLPLogDebug(@"");
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -163,7 +165,7 @@ static NSString * const kFileName = @"twitter";
     finish([self sortRandomlyArray:photos]);
 }
 
-- (void)deleteLocal;
+- (void)deleteCache;
 {
     FLPLogDebug(@"");
     NSFileManager *fileManager = [NSFileManager defaultManager];

@@ -11,37 +11,27 @@
 @implementation FLPPhotoSource
 
 
-- (void)getPhotosFromSource:(NSInteger)number succesBlock:(void(^)(NSArray* photos))success failureBlock:(void(^)(NSError *error))failure
-{
-
-}
-
-- (void)getPhotosFromSourceSuccesBlock:(void(^)(NSArray* photos))success failureBlock:(void(^)(NSError *error))failure
+- (void)getRandomPhotosFromSource:(NSInteger)number succesBlock:(void(^)(NSArray* photos))success failureBlock:(void(^)(NSError *error))failure
 {
     
 }
 
-- (BOOL)photosInLocal
+- (void)getPhotosFromCacheFinishBlock:(void(^)(NSArray* photos))finish
+{
+    
+}
+
+- (BOOL)hasPhotosInCache
 {
     return NO;
 }
 
-- (void)getPhotosFromLocalFinishBlock:(void(^)(NSArray* photos))finish;
+- (void)savePhotosToCache:(NSArray *)photos
 {
-
+    
 }
 
-- (void)savePhotosToLocal:(NSArray *)photos
-{
-
-}
-
-- (NSArray *)updatePhotosFromSource
-{
-    return nil;
-}
-
-- (void)deleteLocal
+- (void)deleteCache
 {
     
 }

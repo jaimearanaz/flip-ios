@@ -196,7 +196,7 @@
 
 /**
  * Prepares photos from source and runs segue to next view controller.
- * Photos may be downloaded from source or loaded from cache, depending on network status and photo source
+ * Photos may be downloaded from source or loaded from cache, depending on network status and the photo source
  */
 - (void)preparePhotos
 {
@@ -250,9 +250,9 @@
             if (_networkStatus == SCNetworkStatusNotReachable) {
                 FLPLogDebug(@"no internet connection");
                 
-                if ([_photoSource photosInLocal]) {
+                if ([_photoSource hasPhotosInCache]) {
                     FLPLogDebug(@"load photos from cache");
-                    [_photoSource getPhotosFromLocalFinishBlock:^(NSArray *photos) {
+                    [_photoSource getPhotosFromCacheFinishBlock:^(NSArray *photos) {
                         successBlock(photos);
                     }];
                 } else {
@@ -271,10 +271,10 @@
             } else if (_networkStatus == SCNetworkStatusReachableViaWiFi) {
                 FLPLogDebug(@"internet connection via WiFi");
                 
-                [_photoSource deleteLocal];
-                [_photoSource getPhotosFromSource:kMinimunPhotos
+                [_photoSource deleteCache];
+                [_photoSource getRandomPhotosFromSource:kMinimunPhotos
                                       succesBlock:^(NSArray *photos) {
-                                          [_photoSource savePhotosToLocal:photos];
+                                          [_photoSource savePhotosToCache:photos];
                                           successBlock(photos);
                                       }
                                      failureBlock:^(NSError *error) {
@@ -285,17 +285,17 @@
             } else if (_networkStatus == SCNetworkStatusReachableViaCellular) {
                 FLPLogDebug(@"internet connection via cellular");
                 
-                if ([_photoSource photosInLocal]) {
+                if ([_photoSource hasPhotosInCache]) {
                     FLPLogDebug(@"load photos from cache");
-                    [_photoSource getPhotosFromLocalFinishBlock:^(NSArray *photos) {
+                    [_photoSource getPhotosFromCacheFinishBlock:^(NSArray *photos) {
                         successBlock(photos);
                     }];
                 } else {
                     FLPLogDebug(@"download photos from source");
-                    [_photoSource deleteLocal];
-                    [_photoSource getPhotosFromSource:kMinimunPhotos
+                    [_photoSource deleteCache];
+                    [_photoSource getRandomPhotosFromSource:kMinimunPhotos
                                           succesBlock:^(NSArray *photos) {
-                                              [_photoSource savePhotosToLocal:photos];
+                                              [_photoSource savePhotosToCache:photos];
                                               successBlock(photos);
                                           }
                                          failureBlock:^(NSError *error) {
@@ -307,7 +307,7 @@
         // Source doesn't need an internet connection
         } else {
             FLPLogDebug(@"no internet connection is needed");
-            [_photoSource getPhotosFromSource:kMinimunPhotos
+            [_photoSource getRandomPhotosFromSource:kMinimunPhotos
                                   succesBlock:^(NSArray *photos) {
                                       successBlock(photos);
                                   }
