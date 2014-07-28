@@ -92,6 +92,12 @@
 
     [PFTwitterSignOn setCredentialsWithConsumerKey:[twitterKeys objectForKey:@"consumerKey"]
                                          andSecret:[twitterKeys objectForKey:@"secretKey"]];
+    
+    // Login with Twitter
+    // Two ways to login:
+    // a) with user account in device, through the selectCallback in this method
+    // b) with Twitter login web view, through |application:openURL:sourceApplication:annotation:| method in app delegate
+
     [PFTwitterSignOn requestAuthenticationWithSelectCallback:^(NSArray *accounts, twitterAccountCallback callback) {
         FLPLogDebug(@"more than one Twitter account");
         
@@ -123,7 +129,7 @@
         
     } andCompletion:^(NSDictionary *accountInfo, NSError *error) {
 
-        // Logged via web or via local account, now we have NSDictionary with user data
+        // Logged via web or via local account, at this point we have NSDictionary with user data
         
         FLPLogDebug(@"login with Twitter successful");
         FLPLogDebug(@"screen name '%@', name '%@', id '%@'", accountInfo[@"screen_name"], accountInfo[@"name"], accountInfo[@"id"]);
