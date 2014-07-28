@@ -21,9 +21,14 @@
     
 }
 
-- (NSArray *)getPhotosFromLocal
+- (BOOL)photosInLocal
 {
-    return nil;
+    return NO;
+}
+
+- (void)getPhotosFromLocalFinishBlock:(void(^)(NSArray* photos))finish;
+{
+
 }
 
 - (void)savePhotosToLocal:(NSArray *)photos
@@ -36,7 +41,7 @@
     return nil;
 }
 
-- (void)reset
+- (void)deleteLocal
 {
     
 }

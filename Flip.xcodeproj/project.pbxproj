@@ -133,12 +133,12 @@
 		6F1AA1571973EAA400101766 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EBC66B07440B4166BA92308A /* libPods.a */,
 				6FF58537197FCA5800926DF9 /* AssetsLibrary.framework */,
 				6F1AA15A1973EAA400101766 /* CoreGraphics.framework */,
 				6F1AA1581973EAA400101766 /* Foundation.framework */,
 				6F1AA15C1973EAA400101766 /* UIKit.framework */,
 				6F1AA17A1973EAA400101766 /* XCTest.framework */,
-				EBC66B07440B4166BA92308A /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

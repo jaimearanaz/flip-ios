@@ -21,6 +21,8 @@
     return self;
 }
 
+#pragma mark - FLPPhotoSource superclass methods
+
 - (void)getPhotosFromSource:(NSInteger)number succesBlock:(void(^)(NSArray* photos))success failureBlock:(void(^)(NSError *error))failure
 {
     FLPLogDebug(@"number: %ld", number);
@@ -64,6 +66,12 @@
                                  }];
 }
 
+- (BOOL)photosInLocal
+{
+    return NO;
+}
+
+#pragma mark - Private methods
 
 /**
  *  Returns a random range between |min| and |max| with |number| elements

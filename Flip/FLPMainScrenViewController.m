@@ -16,6 +16,7 @@
 
 #import "MBProgressHUD.h"
 #import "WCAlertView.h"
+#import "SCNetworkReachability.h"
 
 @interface FLPMainScrenViewController () <UIActionSheetDelegate>
 
@@ -28,6 +29,7 @@
 @property (nonatomic, strong) __block FLPPhotoSource *photoSource;
 @property (nonatomic, strong) NSArray *twitterAccounts;
 @property (nonatomic, strong) __block twitterAccountCallback twitterCallback;
+@property (nonatomic) __block SCNetworkStatus networkStatus;
 
 - (IBAction)onCameraButtonPressed:(id)sender;
 - (IBAction)onFacebookButtonPressed:(id)sender;
@@ -68,7 +70,7 @@
 {
     FLPLogDebug(@"camera button pressed");
     _photoSource = [[FLPCameraPhotoSource alloc] init];
-    [self preparePhotosFromSource];
+    [self checkReachabilityAndPreparePhotos];
 }
 
 - (IBAction)onFacebookButtonPressed:(id)sender
@@ -132,7 +134,7 @@
                                                               oauthTokenSecret:accountInfo[@"tokenSecret"]
                                                                      screeName:accountInfo[@"screen_name"]];
         [MBProgressHUD hideHUDForView:self.view animated:YES];
-        [self preparePhotosFromSource];
+        [self checkReachabilityAndPreparePhotos];
     }];
 }
 
@@ -169,42 +171,141 @@
     _twitterBtn.enabled = NO;
 }
 
-- (void)preparePhotosFromSource
+/**
+ * Checks internet connection and prepares photos from source
+ */
+- (void)checkReachabilityAndPreparePhotos
+{
+    // Check intenter connection
+    [SCNetworkReachability host:@"www.google.es" reachabilityStatus:^(SCNetworkStatus status)
+     {
+         // Internet status is known, prepare photos
+         _networkStatus = status;
+         [self preparePhotos];
+     }];
+}
+
+/**
+ * Prepares photos from source and runs segue to next view controller.
+ * Photos may be downloaded from source or loaded from cache, depending on network status and photo source
+ */
+- (void)preparePhotos
 {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self disableButtons];
     
-    if (_photoSource) {
+    // Declare block to execute when getting photos is successful
+    // Runs segue to next view controller
+    void (^successBlock)(NSArray *);
+    successBlock = ^(NSArray *photos) {
+        FLPLogDebug(@"success");
+        [self enableButtons];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        _photos = photos;
+        // No enough photos available
+        if ((_photos == nil) || (_photos.count < kMinimunPhotos) || ((_photos != nil) && (photos.count == 0))) {
+            NSString *message = [self customNoPhotosMessageForSource:_photoSource];
+            [WCAlertView showAlertWithTitle:NSLocalizedString(@"MAIN_ALERT", nil)
+                                    message:message
+                         customizationBlock:nil
+                            completionBlock:nil
+                          cancelButtonTitle:NSLocalizedString(@"OTHER_OK", nil)
+                          otherButtonTitles:nil];
+        } else {
+            [self performSegueWithIdentifier:@"gridSegue" sender:self];
+        }
+    };
     
-    [_photoSource getPhotosFromSource:kMinimunPhotos
-                          succesBlock:^(NSArray *photos) {
-                              FLPLogDebug(@"success");
-                              [self enableButtons];
-                              [MBProgressHUD hideHUDForView:self.view animated:YES];
-                              _photos = photos;
-                              
-                              // No enough photos available
-                              if ((_photos == nil) || (_photos.count < kMinimunPhotos) || ((_photos != nil) && (photos.count == 0))) {
-                                  
-                                  NSString *message = [self customNoPhotosMessageForSource:_photoSource];
-                                  
-                                  [WCAlertView showAlertWithTitle:NSLocalizedString(@"MAIN_ALERT", nil)
-                                                          message:message
-                                               customizationBlock:nil
-                                                  completionBlock:nil
-                                                cancelButtonTitle:NSLocalizedString(@"OTHER_OK", nil)
-                                                otherButtonTitles:nil];
-                                
-                            
-                              } else {
-                                  [self performSegueWithIdentifier:@"gridSegue" sender:self];
-                              }
-                          }
-                         failureBlock:^(NSError *error) {
-                             FLPLogDebug(@"failure");
-                             [self enableButtons];
-                             [MBProgressHUD hideHUDForView:self.view animated:YES];
-                         }];
+    // Declare block to execute when getting photos fails
+    void (^failureBlock)(NSError *);
+    failureBlock = ^(NSError *error) {
+        FLPLogDebug(@"failure");
+        [self enableButtons];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [WCAlertView showAlertWithTitle:NSLocalizedString(@"MAIN_ALERT", nil)
+                                message:NSLocalizedString(@"MAIN_GENERIC_ERROR", nil)
+                     customizationBlock:nil
+                        completionBlock:nil
+                      cancelButtonTitle:NSLocalizedString(@"OTHER_OK", nil)
+                      otherButtonTitles:nil];
+    };
+
+    
+    if (_photoSource) {
+        
+        // Source needs an internet connection
+        if ([_photoSource internetRequired]) {
+            FLPLogDebug(@"internet connection is needed");
+            
+            // No internet available, try to use cache
+            if (_networkStatus == SCNetworkStatusNotReachable) {
+                FLPLogDebug(@"no internet connection");
+                
+                if ([_photoSource photosInLocal]) {
+                    FLPLogDebug(@"load photos from cache");
+                    [_photoSource getPhotosFromLocalFinishBlock:^(NSArray *photos) {
+                        successBlock(photos);
+                    }];
+                } else {
+                    FLPLogDebug(@"no cache available");
+                    [self enableButtons];
+                    [MBProgressHUD hideHUDForView:self.view animated:YES];
+                    [WCAlertView showAlertWithTitle:NSLocalizedString(@"MAIN_ALERT", nil)
+                                            message:NSLocalizedString(@"MAIN_INERNET_CONNECTION", nil)
+                                 customizationBlock:nil
+                                    completionBlock:nil
+                                  cancelButtonTitle:NSLocalizedString(@"OTHER_OK", nil)
+                                  otherButtonTitles:nil];
+                }
+                
+            // WiFi connection available, download photos from source and save them to cache
+            } else if (_networkStatus == SCNetworkStatusReachableViaWiFi) {
+                FLPLogDebug(@"internet connection via WiFi");
+                
+                [_photoSource deleteLocal];
+                [_photoSource getPhotosFromSource:kMinimunPhotos
+                                      succesBlock:^(NSArray *photos) {
+                                          [_photoSource savePhotosToLocal:photos];
+                                          successBlock(photos);
+                                      }
+                                     failureBlock:^(NSError *error) {
+                                         failureBlock(error);
+                                     }];
+                
+            // Cellular connection available, try to use cache or download photos from source
+            } else if (_networkStatus == SCNetworkStatusReachableViaCellular) {
+                FLPLogDebug(@"internet connection via cellular");
+                
+                if ([_photoSource photosInLocal]) {
+                    FLPLogDebug(@"load photos from cache");
+                    [_photoSource getPhotosFromLocalFinishBlock:^(NSArray *photos) {
+                        successBlock(photos);
+                    }];
+                } else {
+                    FLPLogDebug(@"download photos from source");
+                    [_photoSource deleteLocal];
+                    [_photoSource getPhotosFromSource:kMinimunPhotos
+                                          succesBlock:^(NSArray *photos) {
+                                              [_photoSource savePhotosToLocal:photos];
+                                              successBlock(photos);
+                                          }
+                                         failureBlock:^(NSError *error) {
+                                             failureBlock(error);
+                                         }];
+                }
+            }
+            
+        // Source doesn't need an internet connection
+        } else {
+            FLPLogDebug(@"no internet connection is needed");
+            [_photoSource getPhotosFromSource:kMinimunPhotos
+                                  succesBlock:^(NSArray *photos) {
+                                      successBlock(photos);
+                                  }
+                                 failureBlock:^(NSError *error) {
+                                    failureBlock(error);
+                                 }];
+        }
     } else {
         FLPLogError(@"No photo source configured!");
     }
@@ -223,8 +324,9 @@
     if ([photoSource isKindOfClass:[FLPCameraPhotoSource class]]) {
         message = [NSString stringWithFormat:NSLocalizedString(@"MAIN_ENOUGH_PHOTOS_CAMERA", nil), kMinimunPhotos];
         
+    // Twitter
     } else if ([photoSource isKindOfClass:[FLPTwitterPhotoSource class]]) {
-            message = [NSString stringWithFormat:NSLocalizedString(@"MAIN_ENOUGH_PHOTOS_TWITTER", nil), kMinimunPhotos];
+        message = [NSString stringWithFormat:NSLocalizedString(@"MAIN_ENOUGH_PHOTOS_TWITTER", nil), kMinimunPhotos];
 
     // Other source
     } else {

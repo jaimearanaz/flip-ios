@@ -39,9 +39,15 @@
 /**
  * Returns all the available photos saved in local from source.
  * Photos must be previously saved from source.
- * @return Array with all photos saved in device
+ * @param finish Block to execute when operation is finished; it contains an array of UIImages
  */
-- (NSArray *)getPhotosFromLocal;
+- (void)getPhotosFromLocalFinishBlock:(void(^)(NSArray* photos))finish;
+
+/**
+ *  Returns YES if there are photos stored in local cache; NO otherwise
+ *  @return YES if there are photos stored in local cache; NO otherwise
+ */
+- (BOOL)photosInLocal;
 
 /**
  * Saves the given photos to local.
@@ -58,7 +64,7 @@
 /**
  * Resets all the saved photos in local.
  */
-- (void)reset;
+- (void)deleteLocal;
 
 
 @end

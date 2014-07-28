@@ -12,6 +12,8 @@
 
 #import "STTwitterAPI.h"
 
+static NSString * const kFileName = @"twitter";
+
 @interface FLPTwitterPhotoSource()
 
 @property (nonatomic) NSString *secretKey;
@@ -43,6 +45,8 @@
     return self;
 }
 
+#pragma mark - FLPPhotoSource superclass methods
+
 - (void)getPhotosFromSource:(NSInteger)number succesBlock:(void(^)(NSArray* photos))success failureBlock:(void(^)(NSError *error))failure
 {
  
@@ -65,7 +69,7 @@
     // 3. get random friends and followers
     // 4. get photos from random friends and followers
     
-    // TODO: friends and followers are return in 5000 users per page, use pagination for bigger Twitter accounts?
+    // TODO: friends and followers are return in 5000 users per page, paginate?
     // TODO: lookup users are return in 200 users per page, paginate?
     // TODO: users can have "default_profile_image" set to TRUE (egg image), filter?
     
@@ -108,6 +112,78 @@
                               }];
     
 }
+
+- (void)savePhotosToLocal:(NSArray *)photos
+{
+    FLPLogDebug(@"");
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSInteger index = 0;
+    for (UIImage *image in photos) {
+        NSString *fileName = [NSString stringWithFormat:@"%@_%ld", kFileName, index];
+        NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:fileName];
+        FLPLogDebug(@"saving to disk %@", fileName);
+        [UIImagePNGRepresentation(image) writeToFile:filePath atomically:YES];
+        index++;
+    }
+}
+
+- (BOOL)photosInLocal
+{
+    FLPLogDebug(@"");
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *fileName = [NSString stringWithFormat:@"%@_0", kFileName];
+    NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:fileName];
+    UIImage *image = [UIImage imageWithContentsOfFile:filePath];
+
+    return (image != nil);
+}
+
+- (void)getPhotosFromLocalFinishBlock:(void(^)(NSArray* photos))finish;
+{
+    FLPLogDebug(@"");
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSMutableArray *photos = [[NSMutableArray alloc] init];
+    
+    NSInteger index = 0;
+    NSString *fileName = [NSString stringWithFormat:@"%@_0", kFileName];
+    NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:fileName];
+    UIImage *image = [UIImage imageWithContentsOfFile:filePath];
+    
+    // Load image one by one
+    while (image != nil) {
+        FLPLogDebug(@"loading from disk %@", fileName);
+        [photos addObject:image];
+        index++;
+        fileName = [NSString stringWithFormat:@"%@_%ld", kFileName, index];
+        filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:fileName];
+        image = [UIImage imageWithContentsOfFile:filePath];
+    }
+
+    // Sort randomly before execute block
+    finish([self sortRandomlyArray:photos]);
+}
+
+- (void)deleteLocal;
+{
+    FLPLogDebug(@"");
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    
+    BOOL success = YES;
+    NSInteger index = 0;
+    NSError *error;
+    while (success) {
+        NSString *fileName = [NSString stringWithFormat:@"%@_%ld", kFileName, index];
+        NSString *filePath = [documentsPath stringByAppendingPathComponent:fileName];
+        success = [fileManager removeItemAtPath:filePath error:&error];
+        if (success) {
+            FLPLogDebug(@"deleting from disk %@", fileName);
+        }
+        index++;
+    }
+}
+
+#pragma mark - Private methods
 
 /**
  *  Selects random users between friends and followers.
@@ -197,6 +273,23 @@
                                    failure(error);
                                }];
     
+}
+
+/**
+ *  Sorts the given array randomly
+ *  @param array Array to sort randomly
+ *  @return The given array sorted randomly
+ */
+- (NSMutableArray *)sortRandomlyArray:(NSMutableArray *)array
+{
+    NSUInteger count = [array count];
+    for (NSUInteger i = 0; i < count; ++i) {
+        NSUInteger numElements = count - i;
+        NSUInteger n = (arc4random() % numElements) + i;
+        [array exchangeObjectAtIndex:i withObjectAtIndex:n];
+    }
+    
+    return array;
 }
 
 @end
