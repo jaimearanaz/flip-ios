@@ -80,13 +80,14 @@ static NSString * const kFileName = @"twitter";
                               successBlock:^(NSArray *friends) {
                                   FLPLogDebug(@"number of friends: %ld", friends.count);
                                   
-                                  // 1. get followers from Twitter
+                                  // 2. get followers from Twitter
                                   [_twitterApi getFollowersIDsForScreenName:_screenName
                                                               successBlock:^(NSArray *followers) {
                                                                   FLPLogDebug(@"number of followers: %ld", followers.count);
 
                                                                   // 3. get random friends and followers
-                                                                  NSArray *randomUsers = [self selectUsers:number
+                                                                  // Select (|number| * 2) random users to previse errors with some of them
+                                                                  NSArray *randomUsers = [self selectUsers:(number * 2)
                                                                                          fromFriends:friends
                                                                                          andFollowers:followers];
                                                                   
@@ -95,7 +96,9 @@ static NSString * const kFileName = @"twitter";
                                                                   // 4. get photos from random friends and followers
                                                                   [self downloadPhotosForUsers:randomUsers
                                                                                    succesBlock:^(NSArray *photos) {
-                                                                                       success(photos);
+                                                                                       // Reduce photos to |number|
+                                                                                       NSArray *finalPhotos = [photos subarrayWithRange:NSMakeRange(0, number)];
+                                                                                       success(finalPhotos);
                                                                                    }
                                                                                   failureBlock:^(NSError *error) {
                                                                                       FLPLogError(@"error downloading photos: %@", [error localizedDescription]);
@@ -188,7 +191,7 @@ static NSString * const kFileName = @"twitter";
 #pragma mark - Private methods
 
 /**
- *  Selects random users between friends and followers.
+ *  Selects random users between given friends and followers.
  *  @param number    Number of users to select. If friends and followers aren't enough, returns all of them.
  *  @param friends   List of friends
  *  @param followers List of followers
@@ -221,7 +224,7 @@ static NSString * const kFileName = @"twitter";
 }
 
 /**
- *  Downloads profile photos for given users
+ *  Downloads profile photos from Twitter API for given users
  *  @param users Users to download their profile photos
  *  @return An array of UIImages with users profile photos
  */
@@ -230,6 +233,7 @@ static NSString * const kFileName = @"twitter";
     NSMutableArray *photos = [[NSMutableArray alloc] init];
     
     for (NSDictionary* user in users) {
+        FLPLogDebug(@"add image: %@", [user objectForKey:@"profile_image_url"]);
         
         // default profile photo is "_normal.png"
         // try to download bigger version photo
@@ -238,15 +242,13 @@ static NSString * const kFileName = @"twitter";
         UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imageUrl]]];
         
         [photos addObject:image];
-        FLPLogDebug(@"add image: %@", [user objectForKey:@"profile_image_url"]);
-        
     }
     
     return photos;
 }
 
 /**
- * Gets complete description of given users and downloads their profile photos
+ * Gets complete description from Twitter API for given users, and downloads their profile photos
  * @param users   Users to get complete description and download their profile photos
  * @param success Block to execute if operation is successful; it contains an array of UIImages
  * @param failure Block to execute if operation fails
@@ -255,6 +257,8 @@ static NSString * const kFileName = @"twitter";
 {
     NSString * usersId = [users componentsJoinedByString:@","];
     
+    // TODO: max. of users are 100 per request, paginate?
+    
     // Fourth, get photos from random friends and followers
     [_twitterApi getUsersLookupForScreenName:nil
                                    orUserID:usersId
@@ -262,14 +266,8 @@ static NSString * const kFileName = @"twitter";
                                successBlock:^(NSArray *usersLookup) {
                                    FLPLogDebug(@"number of complete users: %ld", usersLookup.count);
                                    NSMutableArray *photos = [[NSMutableArray alloc] init];
-                                   
-                                   if (usersLookup.count == users.count) {
-                                       photos = [self getPhotosForUsers:usersLookup];
-                                       success(photos);
-                                   } else {
-                                       failure([NSError errorWithDomain:@"" code:0 userInfo:nil]);
-                                   }
-                                   
+                                   photos = [self getPhotosForUsers:usersLookup];
+                                   success(photos);
                                } errorBlock:^(NSError *error) {
                                    FLPLogError(@"error getting lookup users: %@", [error localizedDescription]);
                                    failure(error);
