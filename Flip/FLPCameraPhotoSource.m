@@ -14,10 +14,7 @@
 
 - (id)init
 {
-    self = [super init];
-    if (self) {
-        self.internetRequired = NO;
-    }
+    self = [super initInternetRequired:NO cacheName:@""];
     return self;
 }
 

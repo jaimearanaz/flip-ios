@@ -20,6 +20,14 @@
 @property (nonatomic) BOOL internetRequired;
 
 /**
+ *  Initializes a new photo source object
+ *  @param internetRequired YES if Internet is required for this source, NO if not
+ *  @param cacheFilename    Name for cache files
+ *  @return FLPPhotoSource object
+ */
+- (id)initInternetRequired:(BOOL)internetRequired cacheName:(NSString *)cacheFilename;
+
+/**
  * Gets the specified number of random photos from source.
  * Maybe an Internet connection is needed; that situation is indicated by |internetRequired|.
  * You are encourage to save photos to cache in order to avoid future connections
