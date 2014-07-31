@@ -38,7 +38,13 @@
     for (UIView *view in self.view.subviews) {
         if ([view isKindOfClass:[UIImageView class]] && (_photos.count > index)) {
             UIImageView *imageView = (UIImageView *)view;
-            [imageView setImage:[_photos objectAtIndex:index]];
+            UIImage *image = (UIImage *)[_photos objectAtIndex:index];
+            if (image.size.height != image.size.width) {
+                [imageView setImage:[self imageCrop:image]];
+            } else {
+                [imageView setImage:image];
+            }
+            
             index++;
         }
         
@@ -56,6 +62,40 @@
 - (IBAction)backButtonPressed:(id)sender
 {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - Private methods
+
+-(UIImage*)imageCrop:(UIImage*)original
+{
+    UIImage *ret = nil;
+    
+    // This calculates the crop area.
+    
+    float originalWidth  = original.size.width;
+    float originalHeight = original.size.height;
+    
+    float edge = fminf(originalWidth, originalHeight);
+    
+    float posX = (originalWidth   - edge) / 2.0f;
+    float posY = (originalHeight  - edge) / 2.0f;
+    
+    
+    CGRect cropSquare = CGRectMake(posX, posY,
+                                   edge, edge);
+    
+    
+    // This performs the image cropping.
+    
+    CGImageRef imageRef = CGImageCreateWithImageInRect([original CGImage], cropSquare);
+    
+    ret = [UIImage imageWithCGImage:imageRef
+                              scale:original.scale
+                        orientation:original.imageOrientation];
+    
+    CGImageRelease(imageRef);
+    
+    return ret;
 }
 
 @end

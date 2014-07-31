@@ -7,6 +7,7 @@
 //
 
 #import <AFOAuth1Client/AFOAuth1Client.h>
+#import <FacebookSDK/FacebookSDK.h>
 
 #import "FLPAppDelegate.h"
 #import "FLPLogFormatter.h"
@@ -48,16 +49,16 @@
 
 /**
  *  Checks if given callback URL responds to Facebook callback
- *  @return YES if callbac URL respondes to Facebook callback, NO otherwise
+ *  @return YES if callback URL responds to Facebook callback, NO otherwise
  */
 - (bool)handleFacebookUrl:(NSURL *)callbackUrl
 {
-    return NO;//[FBSession.activeSession handleOpenURL:url];
+    return [FBSession.activeSession handleOpenURL:callbackUrl];
 }
 
 /**
  *  Checks if given callback URL responds to Twitter callback
- *  @return YES if callbac URL respondes to Twitter callback, NO otherwise
+ *  @return YES if callback URL responds to Twitter callback, NO otherwise
  */
 - (bool)handleTwitterUrl:(NSURL *)callbackUrl
 {

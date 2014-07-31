@@ -7,10 +7,12 @@
 //
 
 #import <PFTwitterSignOn/PFTwitterSignOn.h>
+#import <FacebookSDK/FacebookSDK.h>
 
 #import "FLPMainScrenViewController.h"
-#import "FLPCameraPhotoSource.h"
 #import "FLPPhotoSource.h"
+#import "FLPCameraPhotoSource.h"
+#import "FLPFacebookPhotoSource.h"
 #import "FLPTwitterPhotoSource.h"
 #import "FLPGridViewController.h"
 
@@ -76,6 +78,31 @@
 - (IBAction)onFacebookButtonPressed:(id)sender
 {
     FLPLogDebug(@"Facebook button pressed");
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self disableButtons];
+    
+    [FBSession openActiveSessionWithReadPermissions:kFacebookPermissions
+                                       allowLoginUI:YES
+                                  completionHandler:^(FBSession *session, FBSessionState state, NSError *error) {
+                                      
+                                      [self enableButtons];
+                                      [MBProgressHUD hideHUDForView:self.view animated:YES];
+                                      
+                                      if (state == FBSessionStateOpen) {
+                                          FLPLogDebug(@"Facebook session opened");
+                                          _photoSource = [[FLPFacebookPhotoSource alloc] init];
+                                          [FBSession setActiveSession:session];
+                                          [self checkReachabilityAndPreparePhotos];
+                                          
+                                          
+                                      } else if (state == FBSessionStateClosed || state==FBSessionStateClosedLoginFailed) {
+                                          FLPLogDebug(@"Facebook session closed or failed");
+                                      }
+                                      
+                                      if (error) {
+                                          FLPLogDebug(@"Facebook session error: %@", [error localizedDescription]);
+                                      }
+                                  }];
 }
 
 - (IBAction)onTwitterButtonPressed:(id)sender

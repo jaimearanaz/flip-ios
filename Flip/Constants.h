@@ -7,4 +7,4 @@
 //
 
 #define kMinimunPhotos 10
-
+#define kFacebookPermissions @[@"public_profile", @"user_photos"]
