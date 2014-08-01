@@ -24,6 +24,7 @@
 
 - (void)getRandomPhotosFromSource:(NSInteger)number succesBlock:(void(^)(NSArray* photos))success failureBlock:(void(^)(NSError *error))failure
 {
+    FLPLogDebug(@"");
     
     // Steps:
     // 1. get all photo URLs where user is tagged
@@ -136,8 +137,8 @@
     NSMutableDictionary *allPhotos = [[NSMutableDictionary alloc] init];
     [allPhotos setValuesForKeysWithDictionary:uploaded];
     [allPhotos setValuesForKeysWithDictionary:tagged];
-
-    NSArray *allUrls = [NSArray arrayWithArray:[allPhotos allValues]];
+    
+    NSMutableArray *allUrls = [NSMutableArray arrayWithArray:[allPhotos allValues]];
     NSMutableArray *result = [[NSMutableArray alloc] init];
     
     // Tagged and uploaded photos aren't enough, return all of them
@@ -150,7 +151,8 @@
         for (int i = 0; i < number; i++) {
             NSInteger randomIndex = arc4random() % allUrls.count;
             [result addObject:[allUrls objectAtIndex:randomIndex]];
-            FLPLogDebug(@"add photo URL %@", [allUrls objectAtIndex:randomIndex]);
+            [allUrls removeObjectAtIndex:randomIndex];
+            FLPLogDebug(@"add random %ld photo URL %@", (long)randomIndex, [allUrls objectAtIndex:randomIndex]);
         }
     }
     
