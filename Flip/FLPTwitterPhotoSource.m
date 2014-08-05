@@ -82,35 +82,45 @@
                                                               successBlock:^(NSArray *followers) {
                                                                   FLPLogDebug(@"number of followers: %ld", followers.count);
 
-                                                                  // 3. get random friends and followers
-                                                                  // Select (|number| * 2) random users to previse errors with some of them
-                                                                  NSArray *randomUsers = [self selectUsers:(number * 2)
-                                                                                         fromFriends:friends
-                                                                                         andFollowers:followers];
-                                                                  
-                                                                  FLPLogDebug(@"number of selected users: %ld", randomUsers.count);
-                                                   
-                                                                  // 4. get photos from random friends and followers
-                                                                  [self downloadPhotosForUsers:randomUsers
-                                                                                   succesBlock:^(NSArray *photos) {
-                                                                                       // Reduce photos to |number|
-                                                                                       NSArray *finalPhotos = [photos subarrayWithRange:NSMakeRange(0, number)];
-                                                                                       success(finalPhotos);
-                                                                                   }
-                                                                                  failureBlock:^(NSError *error) {
-                                                                                      FLPLogError(@"error downloading photos: %@", [error localizedDescription]);
-                                                                                      failure(error);
-                                                                                  }];
+                                                                  if ((friends.count + followers.count) >= number) {
+                                                                      
+                                                                      // 3. get random friends and followers
+                                                                      NSArray *randomUsers = [self selectUsers:number
+                                                                                                   fromFriends:friends
+                                                                                                  andFollowers:followers];
+
+                                                                      // 4. get photos from random friends and followers
+                                                                      [self downloadPhotosForUsers:randomUsers
+                                                                                       succesBlock:^(NSArray *photos) {
+                                                                                           success(photos);
+                                                                                       }
+                                                                                      failureBlock:^(NSError *error) {
+                                                                                          FLPLogDebug(@"error: %@", [error localizedDescription]);
+                                                                                          failure([NSError errorWithDomain:@""
+                                                                                                                      code:kErrorDownloadingPhotos
+                                                                                                                  userInfo:nil]);
+                                                                                      }];
+                                                                
+                                                                  // There are no enough friends and folloers on Twitter
+                                                                  } else {
+                                                                      failure([NSError errorWithDomain:@""
+                                                                                                  code:KErrorEnoughPhotos
+                                                                                              userInfo:nil]);
+                                                                  }
 
                                                               }
                                                                 errorBlock:^(NSError *error) {
-                                                                    FLPLogError(@"error getting followers: %@", [error localizedDescription]);
-                                                                    failure(error);
+                                                                    FLPLogDebug(@"error: %@", [error localizedDescription]);
+                                                                    failure([NSError errorWithDomain:@""
+                                                                                                code:kErrorDownloadingPhotos
+                                                                                            userInfo:nil]);
                                                                 }];
                                   
                               } errorBlock:^(NSError *error) {
-                                  FLPLogError(@"error getting friends: %@", [error localizedDescription]);
-                                  failure(error);
+                                  FLPLogDebug(@"error: %@", [error localizedDescription]);
+                                  failure([NSError errorWithDomain:@""
+                                                              code:kErrorDownloadingPhotos
+                                                          userInfo:nil]);
                               }];
     
 }
@@ -166,9 +176,20 @@
         // try to download bigger version photo
         NSString *imageUrl = [user objectForKey:@"profile_image_url"];
         imageUrl = [imageUrl stringByReplacingOccurrencesOfString:@"_normal" withString:@"_bigger"];
-        UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imageUrl]]];
-        
-        [photos addObject:image];
+        NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:imageUrl]
+                                                    cachePolicy:NSURLCacheStorageAllowed
+                                                timeoutInterval:10];
+        NSURLResponse *response;
+        NSError *error;
+        NSData *data = [NSURLConnection sendSynchronousRequest:urlRequest
+                                             returningResponse:&response
+                                                         error:&error];
+        if (!error) {
+            UIImage *image = [UIImage imageWithData:data];
+            [photos addObject:image];
+        } else {
+            FLPLogDebug(@"error downloading: %@", [error localizedDescription]);
+        }
     }
     
     return photos;

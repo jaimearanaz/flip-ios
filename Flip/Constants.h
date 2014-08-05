@@ -8,3 +8,7 @@
 
 #define kMinimunPhotos 10
 #define kFacebookPermissions @[@"public_profile", @"user_photos"]
+
+// Errors
+#define kErrorDownloadingPhotos 1
+#define KErrorEnoughPhotos 2

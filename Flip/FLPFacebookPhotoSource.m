@@ -44,26 +44,44 @@
                                                                 offset:0
                                                            succesBlock:^(NSDictionary *uploadedPhotos) {
                                                                
-                                                               // 3. get random photo URLs betweeb tagged and uploaded
-                                                               // Select (|number| * 2) random photos to previse errors with some of them
-                                                               NSArray *randomPhotos = [self selectPhotos:(number * 2)
-                                                                       fromTagged:taggedPhotos
-                                                                      andUploaded:uploadedPhotos];
-                                                               
-                                                               // 4. download photos
-                                                               NSArray *downloadedPhotos = [self downloadPhotosFromUrls:randomPhotos];
-                                                               
-                                                               // Reduce photos to |number|
-                                                               NSArray *finalPhotos = [downloadedPhotos subarrayWithRange:NSMakeRange(0, number)];
-                                                               
-                                                               success(finalPhotos);
+                                                               // There are enough photos
+                                                               if ((taggedPhotos.count + uploadedPhotos.count) >= number) {
+                                                                   
+                                                                   // 3. get random photo URLs between tagged and uploaded
+                                                                   NSArray *randomPhotos = [self selectPhotos:number
+                                                                                                   fromTagged:taggedPhotos
+                                                                                                  andUploaded:uploadedPhotos];
+                                                                   
+                                                                   // 4. download photos
+                                                                   NSArray *downloadedPhotos = [self downloadPhotosFromUrls:randomPhotos];
+                                                                   
+                                                                   if (downloadedPhotos.count < number) {
+                                                                       failure([NSError errorWithDomain:@""
+                                                                                                   code:kErrorDownloadingPhotos
+                                                                                               userInfo:nil]);
+                                                                   } else {
+                                                                       success(downloadedPhotos);
+                                                                   }
+                                                                   
+                                                               // There are no enough photos on Facebook
+                                                               } else {
+                                                                   failure([NSError errorWithDomain:@""
+                                                                                               code:KErrorEnoughPhotos
+                                                                                           userInfo:nil]);
+                                                               }
                                                            }
                                                           failureBlock:^(NSError *error) {
-                                                              failure(error);
+                                                              FLPLogDebug(@"error: %@", [error localizedDescription]);
+                                                              failure([NSError errorWithDomain:@""
+                                                                                          code:kErrorDownloadingPhotos
+                                                                                      userInfo:nil]);
                                                           }];
                                 }
                                failureBlock:^(NSError *error) {
-                                   failure(error);
+                                   FLPLogDebug(@"error: %@", [error localizedDescription]);
+                                   failure([NSError errorWithDomain:@""
+                                                               code:kErrorDownloadingPhotos
+                                                           userInfo:nil]);
                                }];
 }
 
@@ -170,8 +188,21 @@
     
     for (NSString *url in urls) {
         FLPLogDebug(@"download Facebook photo: %@", url);
-        UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:url]]];
-        [photos addObject:image];
+
+        NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:url]
+                                                    cachePolicy:NSURLCacheStorageAllowed
+                                                timeoutInterval:10];
+        NSURLResponse *response;
+        NSError *error;
+        NSData *data = [NSURLConnection sendSynchronousRequest:urlRequest
+                                             returningResponse:&response
+                                                         error:&error];
+        if (!error) {
+            UIImage *image = [UIImage imageWithData:data];
+            [photos addObject:image];
+        } else {
+            FLPLogDebug(@"error downloading: %@", [error localizedDescription]);
+        }
     }
     
     return photos;

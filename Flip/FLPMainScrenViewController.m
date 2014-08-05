@@ -238,16 +238,7 @@
         [self enableButtons];
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         _photos = photos;
-        // No enough photos available
-        if ((_photos == nil) || (_photos.count < kMinimunPhotos) || ((_photos != nil) && (photos.count == 0))) {
-            NSString *message = [self customNoPhotosMessageForSource:_photoSource];
-            [WCAlertView showAlertWithTitle:NSLocalizedString(@"MAIN_ALERT", nil)
-                                    message:message
-                         customizationBlock:nil
-                            completionBlock:nil
-                          cancelButtonTitle:NSLocalizedString(@"OTHER_OK", nil)
-                          otherButtonTitles:nil];
-        } else {
+        if ((_photos != nil) && (photos.count != 0)) {
             [self performSegueWithIdentifier:@"gridSegue" sender:self];
         }
     };
@@ -258,12 +249,25 @@
         FLPLogDebug(@"failure");
         [self enableButtons];
         [MBProgressHUD hideHUDForView:self.view animated:YES];
-        [WCAlertView showAlertWithTitle:NSLocalizedString(@"MAIN_ALERT", nil)
-                                message:NSLocalizedString(@"MAIN_GENERIC_ERROR", nil)
-                     customizationBlock:nil
-                        completionBlock:nil
-                      cancelButtonTitle:NSLocalizedString(@"OTHER_OK", nil)
-                      otherButtonTitles:nil];
+        
+        if (error.code == KErrorEnoughPhotos) {
+            NSString *message = [self customNoPhotosMessageForSource:_photoSource];
+            [WCAlertView showAlertWithTitle:NSLocalizedString(@"MAIN_ALERT", nil)
+                                    message:message
+                         customizationBlock:nil
+                            completionBlock:nil
+                          cancelButtonTitle:NSLocalizedString(@"OTHER_OK", nil)
+                          otherButtonTitles:nil];
+        } else {
+            [WCAlertView showAlertWithTitle:NSLocalizedString(@"MAIN_ALERT", nil)
+                                    message:NSLocalizedString(@"MAIN_GENERIC_ERROR", nil)
+                         customizationBlock:nil
+                            completionBlock:nil
+                          cancelButtonTitle:NSLocalizedString(@"OTHER_OK", nil)
+                          otherButtonTitles:nil];
+        }
+        
+
     };
 
     
