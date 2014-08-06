@@ -10,4 +10,7 @@
 
 @interface FLPGridImageView : UIImageView
 
+@property (nonatomic) NSInteger position;
+@property (nonatomic) NSInteger imageIndex;
+
 @end

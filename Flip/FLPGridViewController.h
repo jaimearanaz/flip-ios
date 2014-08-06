@@ -11,5 +11,6 @@
 @interface FLPGridViewController : UIViewController
 
 @property (nonatomic, strong) NSArray *photos;
+@property (nonatomic) NSInteger size;
 
 @end

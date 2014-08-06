@@ -15,6 +15,12 @@
 @property (nonatomic, weak) IBOutlet UIButton *smallBtn;
 @property (nonatomic, weak) IBOutlet UIButton *normalBtn;
 @property (nonatomic, weak) IBOutlet UIButton *bigBtn;
+@property (nonatomic) NSInteger size;
+
+- (IBAction)onSmallButtonPressed:(id)sender;
+- (IBAction)onNormalButtonPressed:(id)sender;
+- (IBAction)onBigButtonPressed:(id)sender;
+- (IBAction)onBackButtonPressed:(id)sender;
 
 @end
 
@@ -37,6 +43,10 @@
     [_smallBtn setTitle:NSLocalizedString(@"SIZE_SMALL", @"") forState:UIControlStateNormal];
     [_normalBtn setTitle:NSLocalizedString(@"SIZE_NORMAL", @"") forState:UIControlStateNormal];
     [_bigBtn setTitle:NSLocalizedString(@"SIZE_BIG", @"") forState:UIControlStateNormal];
+    
+    // TODO: remove
+    [_normalBtn setEnabled:NO];
+    [_bigBtn setEnabled:NO];
 }
 
 - (void)didReceiveMemoryWarning
@@ -50,6 +60,7 @@
     if ([segue.identifier isEqualToString:@"gridSegue"]) {
         FLPGridViewController *gridViewController=(FLPGridViewController *)segue.destinationViewController;
         gridViewController.photos = _photos;
+        gridViewController.size = _size;
     }
 }
 
@@ -58,18 +69,21 @@
 - (IBAction)onSmallButtonPressed:(id)sender
 {
     FLPLogDebug(@"small button pressed");
+    _size = 6;
     [self performSegueWithIdentifier:@"gridSegue" sender:self];
 }
 
 - (IBAction)onNormalButtonPressed:(id)sender
 {
     FLPLogDebug(@"normal button pressed");
+    _size = 9;
     [self performSegueWithIdentifier:@"gridSegue" sender:self];
 }
 
 - (IBAction)onBigButtonPressed:(id)sender
 {
     FLPLogDebug(@"big button pressed");
+    _size = 12;
     [self performSegueWithIdentifier:@"gridSegue" sender:self];
 }
 
