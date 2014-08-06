@@ -8,9 +8,10 @@
 
 #import "FLPGridViewController.h"
 
-@interface FLPGridViewController ()
+@interface FLPGridViewController () <UIScrollViewDelegate>
 
 @property (nonatomic, weak) IBOutlet UIButton *backBtn;
+@property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 
 - (IBAction)backButtonPressed:(id)sender;
 
@@ -35,7 +36,7 @@
     
     // Draw images from |photos| array
     NSInteger index = 0;
-    for (UIView *view in self.view.subviews) {
+    for (UIView *view in _scrollView.subviews) {
         if ([view isKindOfClass:[UIImageView class]] && (_photos.count > index)) {
             UIImageView *imageView = (UIImageView *)view;
             UIImage *image = (UIImage *)[_photos objectAtIndex:index];
@@ -49,6 +50,14 @@
         }
         
     }
+    FLPLogDebug(@"content height before %ld", (long)_scrollView.contentSize.height);
+    [_scrollView setContentSize:CGSizeMake(_scrollView.frame.size.width, _scrollView.frame.size.height * 3)];
+    FLPLogDebug(@"content height after %ld", (long)_scrollView.contentSize.height);
+    [_scrollView setScrollEnabled:YES];
+    [_scrollView setClipsToBounds:YES];
+    _scrollView.delegate = self;
+    FLPLogDebug(@"content size %ld", (long)_scrollView.contentSize.height);
+    ;
 }
 
 - (void)didReceiveMemoryWarning
@@ -61,7 +70,7 @@
 
 - (IBAction)backButtonPressed:(id)sender
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self performSegueWithIdentifier:@"mainSegue" sender:self];
 }
 
 #pragma mark - Private methods

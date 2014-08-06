@@ -14,7 +14,7 @@
 #import "FLPCameraPhotoSource.h"
 #import "FLPFacebookPhotoSource.h"
 #import "FLPTwitterPhotoSource.h"
-#import "FLPGridViewController.h"
+#import "FLPSizeViewController.h"
 
 #import "MBProgressHUD.h"
 #import "WCAlertView.h"
@@ -50,6 +50,13 @@
     _selectLbl.text = NSLocalizedString(@"MAIN_SELECT", @"");
     [_cameraBtn setTitle:NSLocalizedString(@"MAIN_CAMERA", @"") forState:UIControlStateNormal];
     [_recordsBtn setTitle:NSLocalizedString(@"MAIN_RECORDS", @"") forState:UIControlStateNormal];
+    
+    // Check internet connection
+    [SCNetworkReachability host:@"www.google.es" reachabilityStatus:^(SCNetworkStatus status)
+     {
+         // Set Internet status
+         _networkStatus = status;
+     }];
 }
 
 - (void)didReceiveMemoryWarning
@@ -60,9 +67,9 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:@"gridSegue"]) {
-        FLPGridViewController *gridViewController=(FLPGridViewController *)segue.destinationViewController;
-        gridViewController.photos = _photos;
+    if ([segue.identifier isEqualToString:@"sizeSegue"]) {
+        FLPSizeViewController *sizeViewController=(FLPSizeViewController *)segue.destinationViewController;
+        sizeViewController.photos = _photos;
     }
 }
 
@@ -212,7 +219,7 @@
  */
 - (void)checkReachabilityAndPreparePhotos
 {
-    // Check intenter connection
+    // Check internet connection
     [SCNetworkReachability host:@"www.google.es" reachabilityStatus:^(SCNetworkStatus status)
      {
          // Internet status is known, prepare photos
@@ -239,7 +246,7 @@
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         _photos = photos;
         if ((_photos != nil) && (photos.count != 0)) {
-            [self performSegueWithIdentifier:@"gridSegue" sender:self];
+            [self performSegueWithIdentifier:@"sizeSegue" sender:self];
         }
     };
     

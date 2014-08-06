@@ -27,6 +27,8 @@
 		6F5AD5C71987ABF600B65D09 /* FLPFacebookPhotoSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5AD5C61987ABF600B65D09 /* FLPFacebookPhotoSource.m */; };
 		6F67A358197FD19600AC9CF5 /* FLPLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F67A357197FD19600AC9CF5 /* FLPLogFormatter.m */; };
 		6F7B2DE01980FC9200C9FE69 /* FLPGridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7B2DDF1980FC9200C9FE69 /* FLPGridViewController.m */; };
+		6FA783E51992A12000F8B8AC /* FLPGridImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA783E41992A12000F8B8AC /* FLPGridImageView.m */; };
+		6FA783E81992A26400F8B8AC /* FLPSizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA783E71992A26400F8B8AC /* FLPSizeViewController.m */; };
 		6FF58536197FC95100926DF9 /* FLPCameraPhotoSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF58535197FC95100926DF9 /* FLPCameraPhotoSource.m */; };
 		6FF58538197FCA5800926DF9 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FF58537197FCA5800926DF9 /* AssetsLibrary.framework */; };
 		6FFC51671976659800668F82 /* FLPPhotoSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFC51661976659800668F82 /* FLPPhotoSource.m */; };
@@ -78,6 +80,10 @@
 		6F7B2DDE1980FC9200C9FE69 /* FLPGridViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPGridViewController.h; sourceTree = "<group>"; };
 		6F7B2DDF1980FC9200C9FE69 /* FLPGridViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPGridViewController.m; sourceTree = "<group>"; };
 		6F7B2DE11981144D00C9FE69 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		6FA783E31992A12000F8B8AC /* FLPGridImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPGridImageView.h; sourceTree = "<group>"; };
+		6FA783E41992A12000F8B8AC /* FLPGridImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPGridImageView.m; sourceTree = "<group>"; };
+		6FA783E61992A26400F8B8AC /* FLPSizeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPSizeViewController.h; sourceTree = "<group>"; };
+		6FA783E71992A26400F8B8AC /* FLPSizeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPSizeViewController.m; sourceTree = "<group>"; };
 		6FF58534197FC95100926DF9 /* FLPCameraPhotoSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPCameraPhotoSource.h; sourceTree = "<group>"; };
 		6FF58535197FC95100926DF9 /* FLPCameraPhotoSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPCameraPhotoSource.m; sourceTree = "<group>"; };
 		6FF58537197FCA5800926DF9 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
@@ -199,6 +205,8 @@
 			children = (
 				6F1AA1701973EAA400101766 /* FLPMainScrenViewController.h */,
 				6F1AA1711973EAA400101766 /* FLPMainScrenViewController.m */,
+				6FA783E61992A26400F8B8AC /* FLPSizeViewController.h */,
+				6FA783E71992A26400F8B8AC /* FLPSizeViewController.m */,
 				6F7B2DDE1980FC9200C9FE69 /* FLPGridViewController.h */,
 				6F7B2DDF1980FC9200C9FE69 /* FLPGridViewController.m */,
 			);
@@ -208,6 +216,8 @@
 		6F1AA1911973EAF800101766 /* views */ = {
 			isa = PBXGroup;
 			children = (
+				6FA783E31992A12000F8B8AC /* FLPGridImageView.h */,
+				6FA783E41992A12000F8B8AC /* FLPGridImageView.m */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -377,7 +387,9 @@
 				6F3B3A9419825C1C00EA4BA1 /* FLPTwitterPhotoSource.m in Sources */,
 				6FFC51671976659800668F82 /* FLPPhotoSource.m in Sources */,
 				6FF58536197FC95100926DF9 /* FLPCameraPhotoSource.m in Sources */,
+				6FA783E51992A12000F8B8AC /* FLPGridImageView.m in Sources */,
 				6F1AA1651973EAA400101766 /* main.m in Sources */,
+				6FA783E81992A26400F8B8AC /* FLPSizeViewController.m in Sources */,
 				6F1AA1721973EAA400101766 /* FLPMainScrenViewController.m in Sources */,
 				6F5AD5C71987ABF600B65D09 /* FLPFacebookPhotoSource.m in Sources */,
 				6F1AA1691973EAA400101766 /* FLPAppDelegate.m in Sources */,

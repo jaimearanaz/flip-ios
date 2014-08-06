@@ -18,6 +18,12 @@
 "MAIN_GENERIC_ERROR" = "Ha habido un error obteniendo tus fotos de la fuente seleccionada. Por favor, inténtalo de nuevo.";
 "MAIN_INERNET_CONNECTION" = "Necesitas una conexión a Internet para descargar fotos de esta fuente.";
 
+// Size screen
+"SIZE_SELECT" = "Selecciona un tamaño para el mosaico";
+"SIZE_SMALL" = "Pequeño (3x4)";
+"SIZE_NORMAL" = "Normal (3x6)";
+"SIZE_BIG" = "Grande (3x8)";
+
 // Other
 "OTHER_BACK" = "Atrás";
 "OTHER_OK" = "Aceptar";

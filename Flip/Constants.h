@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 MobiOak. All rights reserved.
 //
 
-#define kMinimunPhotos 10
+#define kMinimunPhotos 15
 #define kFacebookPermissions @[@"public_profile", @"user_photos"]
 
 // Errors

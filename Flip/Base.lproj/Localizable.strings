@@ -18,6 +18,12 @@
 "MAIN_GENERIC_ERROR" = "There was an error getting your photos from selected source. Please try again.";
 "MAIN_INERNET_CONNECTION" = "You need an internet connection to download photos from this source.";
 
+// Size screen
+"SIZE_SELECT" = "Select a size for the grid";
+"SIZE_SMALL" = "Small (3x4)";
+"SIZE_NORMAL" = "Normal (3x6)";
+"SIZE_BIG" = "Big (3x8)";
+
 // Other
 "OTHER_BACK" = "Back";
 "OTHER_OK" = "Ok";
