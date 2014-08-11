@@ -51,6 +51,30 @@
     _photosInGrid = [self sortRandomlyArray:_photosInGrid];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    double delay;
+    switch (_size) {
+        case kGridSizeSmall:
+            delay = kGridDelaySmall;
+            break;
+        case kGridSizeNormal:
+            delay = kGridDelayNormal;
+            break;
+        case kGridSizeBig:
+            delay = kGridDelayBig;
+            break;
+        default:
+            delay = kGridDelaySmall;
+    }
+    
+    for (int i=0; i < (_size * 2); i++) {
+        UICollectionViewCell *cell = [_collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+        [cell performSelector:@selector(flipCellAnimated:) withObject:[NSNumber numberWithBool:YES] afterDelay:delay];
+        delay += 0.1;
+    }
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -87,6 +111,9 @@
     } else {
         [cell.imageView setImage:image];
     }
+    cell.coverLbl.text = [NSString stringWithFormat:@"%ld", (indexPath.row + 1)];
+    
+    [cell.contentView bringSubviewToFront:cell.imageView];
     
     return cell;
 }
@@ -95,7 +122,8 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-
+    FLPCollectionViewCell *cell = (FLPCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    [cell flipCellAnimated:[NSNumber numberWithBool:YES]];
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath

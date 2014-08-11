@@ -11,6 +11,12 @@
 @interface FLPCollectionViewCell : UICollectionViewCell
 
 @property (nonatomic, weak) IBOutlet UIImageView *imageView;
+@property (nonatomic, weak) IBOutlet UIView *coverView;
+@property (nonatomic, weak) IBOutlet UILabel *coverLbl;
 @property (nonatomic) NSInteger imageIndex;
+@property (nonatomic) BOOL fixed;
+
+- (BOOL)isImageShowing;
+- (void)flipCellAnimated:(NSNumber *)animated;
 
 @end

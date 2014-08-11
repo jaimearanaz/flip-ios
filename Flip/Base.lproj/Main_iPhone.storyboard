@@ -161,15 +161,47 @@
                                             <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Cb-T8-fat">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5Cb-T8-fat">
                                                     <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </imageView>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QJj-et-eb0">
+                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <subviews>
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UOB-jR-yhZ">
+                                                            <rect key="frame" x="20" y="20" width="60" height="60"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
+                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="centerY" secondItem="UOB-jR-yhZ" secondAttribute="centerY" id="AR5-8T-xBx"/>
+                                                        <constraint firstAttribute="trailing" secondItem="UOB-jR-yhZ" secondAttribute="trailing" constant="20" symbolic="YES" id="Cf0-wI-6VX"/>
+                                                        <constraint firstItem="UOB-jR-yhZ" firstAttribute="leading" secondItem="QJj-et-eb0" secondAttribute="leading" constant="20" symbolic="YES" id="W0w-vs-xde"/>
+                                                        <constraint firstItem="UOB-jR-yhZ" firstAttribute="top" secondItem="QJj-et-eb0" secondAttribute="top" constant="20" symbolic="YES" id="XQp-Zb-Twg"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <constraints>
+                                            <constraint firstItem="QJj-et-eb0" firstAttribute="top" secondItem="5Cb-T8-fat" secondAttribute="top" id="6mU-QM-Mgq"/>
+                                            <constraint firstItem="QJj-et-eb0" firstAttribute="leading" secondItem="5Cb-T8-fat" secondAttribute="leading" id="BrC-Ae-sXk"/>
+                                            <constraint firstItem="QJj-et-eb0" firstAttribute="trailing" secondItem="5Cb-T8-fat" secondAttribute="trailing" id="T3B-kJ-Ct5"/>
+                                            <constraint firstItem="QJj-et-eb0" firstAttribute="top" secondItem="eZL-oo-8Yo" secondAttribute="top" id="qpX-pL-Hwg"/>
+                                            <constraint firstAttribute="trailing" secondItem="QJj-et-eb0" secondAttribute="trailing" id="rAr-EO-emy"/>
+                                            <constraint firstAttribute="bottom" secondItem="QJj-et-eb0" secondAttribute="bottom" id="toM-cJ-asw"/>
+                                            <constraint firstItem="QJj-et-eb0" firstAttribute="bottom" secondItem="5Cb-T8-fat" secondAttribute="bottom" id="uHs-l1-Oqh"/>
+                                            <constraint firstItem="QJj-et-eb0" firstAttribute="leading" secondItem="eZL-oo-8Yo" secondAttribute="leading" id="zyM-Vb-HnA"/>
+                                        </constraints>
                                         <size key="customSize" width="100" height="100"/>
                                         <connections>
+                                            <outlet property="coverLbl" destination="UOB-jR-yhZ" id="0pJ-Xr-gc7"/>
+                                            <outlet property="coverView" destination="QJj-et-eb0" id="Jdc-q1-Svi"/>
                                             <outlet property="imageView" destination="5Cb-T8-fat" id="aqb-FO-qbf"/>
                                         </connections>
                                     </collectionViewCell>

@@ -65,21 +65,21 @@
 - (IBAction)onSmallButtonPressed:(id)sender
 {
     FLPLogDebug(@"small button pressed");
-    _size = 6;
+    _size = kGridSizeSmall;
     [self performSegueWithIdentifier:@"gridSegue" sender:self];
 }
 
 - (IBAction)onNormalButtonPressed:(id)sender
 {
     FLPLogDebug(@"normal button pressed");
-    _size = 9;
+    _size = kGridSizeNormal;
     [self performSegueWithIdentifier:@"gridSegue" sender:self];
 }
 
 - (IBAction)onBigButtonPressed:(id)sender
 {
     FLPLogDebug(@"big button pressed");
-    _size = 12;
+    _size = kGridSizeBig;
     [self performSegueWithIdentifier:@"gridSegue" sender:self];
 }
 
