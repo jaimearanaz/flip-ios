@@ -1,14 +1,14 @@
 //
-//  FLPGridImageView.m
+//  FLPCollectionViewCell.m
 //  Flip
 //
-//  Created by Jaime on 06/08/14.
+//  Created by Jaime on 11/08/14.
 //  Copyright (c) 2014 MobiOak. All rights reserved.
 //
 
-#import "FLPGridImageView.h"
+#import "FLPCollectionViewCell.h"
 
-@implementation FLPGridImageView
+@implementation FLPCollectionViewCell
 
 - (id)initWithFrame:(CGRect)frame
 {

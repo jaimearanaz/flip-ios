@@ -7,11 +7,17 @@
 //
 
 #import "FLPGridViewController.h"
+#import "FLPCollectionViewCell.h"
 
-@interface FLPGridViewController () <UIScrollViewDelegate>
+@interface FLPGridViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, weak) IBOutlet UIButton *backBtn;
-@property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
+@property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
+
+// This array represents the duplicate photos in grid, identified by its indexes inside |photos|
+// Grid will be build up with the same array order
+// i.e. photosInGrid = [0, 1, 3, 0, 4, 4, 3, 5, 2, 1, 5, 2]
+@property (nonatomic, strong) NSMutableArray *photosInGrid;
 
 - (IBAction)backButtonPressed:(id)sender;
 
@@ -34,43 +40,15 @@
     
     [_backBtn setTitle:NSLocalizedString(@"OTHER_BACK", @"") forState:UIControlStateNormal];
     
-    // Create an array with duplicate photos indexes, and same size as grid
-    // i.e. photosInGrid = [0, 1, 3, 0, 4, 4, 3, 5, 2, 1, 5, 2]
-    NSMutableArray *photosInGrid = [[NSMutableArray alloc] init];
+    // Configure |photosInGrid|, for example [0, 1, 3, 0, 4, 4, 3, 5, 2, 1, 5, 2]
+    _photosInGrid = [[NSMutableArray alloc] init];
     for (int i=0; i < (_size * 2); i++) {
-        [photosInGrid addObject:[NSNumber numberWithInt:(i % _size)]];
-        //FLPLogDebug(@"add photo to grid %ld", (long)[photosInGrid lastObject]);
+        [_photosInGrid addObject:[NSNumber numberWithInt:(i % _size)]];
+        FLPLogDebug(@"add photo to grid %ld", (long)[(NSNumber *)[_photosInGrid lastObject] integerValue]);
     }
     
     // Sort the array randomly
-    photosInGrid = [self sortRandomlyArray:photosInGrid];
-    
-    // Draw images from |photos| array
-    NSInteger index = 0;
-    FLPLogDebug(@"subviews %ld", (long)_scrollView.subviews.count);
-    for (UIView *view in _scrollView.subviews) {
-        if (([view isKindOfClass:[UIImageView class]]) && (photosInGrid.count > index)) {
-            UIImageView *imageView = (UIImageView *)view;
-            NSNumber *photoIndex = (NSNumber *)[photosInGrid objectAtIndex:index];
-            UIImage *image = (UIImage *)[_photos objectAtIndex:[photoIndex integerValue]];
-            if (image.size.height != image.size.width) {
-                [imageView setImage:[self imageCrop:image]];
-            } else {
-                [imageView setImage:image];
-            }
-            FLPLogDebug(@"index %ld", (long)index);
-            index++;
-        }
-    }
-    
-    FLPLogDebug(@"content height before %ld", (long)_scrollView.contentSize.height);
-    [_scrollView setContentSize:CGSizeMake(_scrollView.frame.size.width, _scrollView.frame.size.height * 3)];
-    FLPLogDebug(@"content height after %ld", (long)_scrollView.contentSize.height);
-    [_scrollView setScrollEnabled:YES];
-    [_scrollView setClipsToBounds:YES];
-    _scrollView.delegate = self;
-    FLPLogDebug(@"content size %ld", (long)_scrollView.contentSize.height);
-    ;
+    _photosInGrid = [self sortRandomlyArray:_photosInGrid];
 }
 
 - (void)didReceiveMemoryWarning
@@ -84,6 +62,61 @@
 - (IBAction)backButtonPressed:(id)sender
 {
     [self performSegueWithIdentifier:@"mainSegue" sender:self];
+}
+
+#pragma mark - UICollectionViewDataSource methods
+
+- (NSInteger)numberOfSectionsInCollectionView: (UICollectionView *)collectionView
+{
+    return 1;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return (_size * 2);
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    FLPCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"gridCell" forIndexPath:indexPath];
+    cell.imageIndex = [(NSNumber *)[_photosInGrid objectAtIndex:indexPath.row] integerValue];
+    FLPLogDebug(@"cell index %ld", (long)cell.imageIndex);
+    UIImage *image = (UIImage *)[_photos objectAtIndex:cell.imageIndex];
+    if (image.size.height != image.size.width) {
+        [cell.imageView setImage:[self imageCrop:image]];
+    } else {
+        [cell.imageView setImage:image];
+    }
+    
+    return cell;
+}
+
+#pragma mark - UICollectionViewDelegate methods
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+
+}
+
+#pragma mark - UICollectionViewDelegateFlowLayout methods
+
+- (CGSize)collectionView:(UICollectionView *)collectionView
+                  layout:(UICollectionViewLayout*)collectionViewLayout
+  sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return CGSizeMake(90, 90);
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView
+                   layout:(UICollectionViewLayout*)collectionViewLayout
+minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
+{
+    return 5;
 }
 
 #pragma mark - Private methods

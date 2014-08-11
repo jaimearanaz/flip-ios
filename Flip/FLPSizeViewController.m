@@ -43,10 +43,6 @@
     [_smallBtn setTitle:NSLocalizedString(@"SIZE_SMALL", @"") forState:UIControlStateNormal];
     [_normalBtn setTitle:NSLocalizedString(@"SIZE_NORMAL", @"") forState:UIControlStateNormal];
     [_bigBtn setTitle:NSLocalizedString(@"SIZE_BIG", @"") forState:UIControlStateNormal];
-    
-    // TODO: remove
-    [_normalBtn setEnabled:NO];
-    [_bigBtn setEnabled:NO];
 }
 
 - (void)didReceiveMemoryWarning
