@@ -9,13 +9,16 @@
 #define kMinimunPhotos 12
 #define kFacebookPermissions @[@"public_profile", @"user_photos"]
 
-#define kGridSizeSmall 6
-#define kGridSizeNormal 9
-#define kGridSizeBig 12
+// Number of photos in grid
+#define kGridSmallPhotos 12
+#define kGridNormalPhotos 18
+#define kGridBigPhotos 24
 
-#define kGridDelaySmall 2
-#define kGridDelayNormal 4
-#define kGridDelayBig 6
+// Seconds of delay in grid animation
+#define kGridSmallDelay 2
+#define kGridNormalDelay 4
+#define kGridBigDelay 6
+#define kGridGeneralDelay 1
 
 // Errors
 #define kErrorDownloadingPhotos 1

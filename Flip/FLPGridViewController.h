@@ -8,13 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+typedef enum {
+    GridSizeSmall,
+    GridSizeNormal,
+    GridSizeBig
+} GridSizeType;
+
 @interface FLPGridViewController : UIViewController
 
 // Array with original photos
 @property (nonatomic, strong) NSArray *photos;
-
-// Number of photos from |photos| to use in grid view
-// Total size of grid will be |size| * 2
-@property (nonatomic) NSInteger size;
+@property (nonatomic) GridSizeType gridSize;
 
 @end

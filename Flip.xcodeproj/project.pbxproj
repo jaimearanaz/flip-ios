@@ -23,6 +23,7 @@
 		6F1AA1871973EAA500101766 /* FlipTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1AA1861973EAA500101766 /* FlipTests.m */; };
 		6F1AA1991973FE9900101766 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F1AA19B1973FE9900101766 /* Localizable.strings */; };
 		6F33AC7C1998C14000FBF9C4 /* FLPCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F33AC7B1998C14000FBF9C4 /* FLPCollectionViewCell.m */; };
+		6F33AC841999245500FBF9C4 /* FLPGridItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F33AC831999245500FBF9C4 /* FLPGridItem.m */; };
 		6F3B3A911982571200EA4BA1 /* TwitterKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6F3B3A901982571200EA4BA1 /* TwitterKeys.plist */; };
 		6F3B3A9419825C1C00EA4BA1 /* FLPTwitterPhotoSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3B3A9319825C1C00EA4BA1 /* FLPTwitterPhotoSource.m */; };
 		6F5AD5C71987ABF600B65D09 /* FLPFacebookPhotoSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5AD5C61987ABF600B65D09 /* FLPFacebookPhotoSource.m */; };
@@ -72,6 +73,8 @@
 		6F1AA19D1973FE9B00101766 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6F33AC7A1998C14000FBF9C4 /* FLPCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPCollectionViewCell.h; sourceTree = "<group>"; };
 		6F33AC7B1998C14000FBF9C4 /* FLPCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPCollectionViewCell.m; sourceTree = "<group>"; };
+		6F33AC821999245500FBF9C4 /* FLPGridItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPGridItem.h; sourceTree = "<group>"; };
+		6F33AC831999245500FBF9C4 /* FLPGridItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPGridItem.m; sourceTree = "<group>"; };
 		6F3B3A901982571200EA4BA1 /* TwitterKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TwitterKeys.plist; sourceTree = "<group>"; };
 		6F3B3A9219825C1C00EA4BA1 /* FLPTwitterPhotoSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPTwitterPhotoSource.h; sourceTree = "<group>"; };
 		6F3B3A9319825C1C00EA4BA1 /* FLPTwitterPhotoSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPTwitterPhotoSource.m; sourceTree = "<group>"; };
@@ -155,6 +158,7 @@
 		6F1AA15E1973EAA400101766 /* Flip */ = {
 			isa = PBXGroup;
 			children = (
+				6F33AC811999244600FBF9C4 /* model */,
 				6F67A355197FD17F00AC9CF5 /* utils */,
 				6FFC51641976655B00668F82 /* sources */,
 				6F1AA1911973EAF800101766 /* views */,
@@ -220,6 +224,15 @@
 				6F33AC7B1998C14000FBF9C4 /* FLPCollectionViewCell.m */,
 			);
 			name = views;
+			sourceTree = "<group>";
+		};
+		6F33AC811999244600FBF9C4 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				6F33AC821999245500FBF9C4 /* FLPGridItem.h */,
+				6F33AC831999245500FBF9C4 /* FLPGridItem.m */,
+			);
+			name = model;
 			sourceTree = "<group>";
 		};
 		6F67A355197FD17F00AC9CF5 /* utils */ = {
@@ -385,6 +398,7 @@
 				6F7B2DE01980FC9200C9FE69 /* FLPGridViewController.m in Sources */,
 				6F67A358197FD19600AC9CF5 /* FLPLogFormatter.m in Sources */,
 				6F3B3A9419825C1C00EA4BA1 /* FLPTwitterPhotoSource.m in Sources */,
+				6F33AC841999245500FBF9C4 /* FLPGridItem.m in Sources */,
 				6FFC51671976659800668F82 /* FLPPhotoSource.m in Sources */,
 				6FF58536197FC95100926DF9 /* FLPCameraPhotoSource.m in Sources */,
 				6F1AA1651973EAA400101766 /* main.m in Sources */,

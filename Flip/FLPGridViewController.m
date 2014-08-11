@@ -8,6 +8,7 @@
 
 #import "FLPGridViewController.h"
 #import "FLPCollectionViewCell.h"
+#import "FLPGridItem.h"
 
 @interface FLPGridViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
@@ -18,6 +19,10 @@
 // Grid will be build up with the same array order
 // i.e. photosInGrid = [0, 1, 3, 0, 4, 4, 3, 5, 2, 1, 5, 2]
 @property (nonatomic, strong) NSMutableArray *photosInGrid;
+@property (nonatomic) NSInteger numOfPhotos;
+@property (nonatomic) NSInteger numOfPhotosMatched;
+@property (nonatomic) FLPGridItem *firstPhoto;
+@property (nonatomic) FLPGridItem *secondPhoto;
 
 - (IBAction)backButtonPressed:(id)sender;
 
@@ -38,13 +43,32 @@
 {
     [super viewDidLoad];
     
+    switch (_gridSize) {
+        case GridSizeSmall:
+            _numOfPhotos = kGridSmallPhotos;
+            break;
+        case GridSizeNormal:
+            _numOfPhotos = kGridNormalPhotos;
+            break;
+        case GridSizeBig:
+            _numOfPhotos = kGridBigPhotos;
+            break;
+        default:
+            break;
+    }
+    
+    _numOfPhotosMatched = 0;
+
     [_backBtn setTitle:NSLocalizedString(@"OTHER_BACK", @"") forState:UIControlStateNormal];
     
     // Configure |photosInGrid|, for example [0, 1, 3, 0, 4, 4, 3, 5, 2, 1, 5, 2]
     _photosInGrid = [[NSMutableArray alloc] init];
-    for (int i=0; i < (_size * 2); i++) {
-        [_photosInGrid addObject:[NSNumber numberWithInt:(i % _size)]];
-        FLPLogDebug(@"add photo to grid %ld", (long)[(NSNumber *)[_photosInGrid lastObject] integerValue]);
+    for (int i=0; i < (_numOfPhotos); i++) {
+        FLPGridItem *gridItem = [[FLPGridItem alloc] init];
+        gridItem.imageIndex = (i % (_numOfPhotos/2));
+        gridItem.isShowing = [NSNumber numberWithBool:YES];
+        gridItem.isMatched = [NSNumber numberWithBool:NO];
+        [_photosInGrid addObject:gridItem];
     }
     
     // Sort the array randomly
@@ -54,25 +78,21 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     double delay;
-    switch (_size) {
-        case kGridSizeSmall:
-            delay = kGridDelaySmall;
+    switch (_gridSize) {
+        case GridSizeSmall:
+            delay = kGridSmallDelay;
             break;
-        case kGridSizeNormal:
-            delay = kGridDelayNormal;
+        case GridSizeNormal:
+            delay = kGridNormalDelay;
             break;
-        case kGridSizeBig:
-            delay = kGridDelayBig;
+        case GridSizeBig:
+            delay = kGridBigDelay;
             break;
         default:
-            delay = kGridDelaySmall;
+            delay = kGridSmallDelay;
     }
     
-    for (int i=0; i < (_size * 2); i++) {
-        UICollectionViewCell *cell = [_collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
-        [cell performSelector:@selector(flipCellAnimated:) withObject:[NSNumber numberWithBool:YES] afterDelay:delay];
-        delay += 0.1;
-    }
+    [self performSelector:@selector(hideAllPhotos) withObject:nil afterDelay:delay];
 }
 
 - (void)didReceiveMemoryWarning
@@ -97,15 +117,16 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return (_size * 2);
+    return (_numOfPhotos);
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    FLPLogDebug(@"row %ld", (long)indexPath.row);
     FLPCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"gridCell" forIndexPath:indexPath];
-    cell.imageIndex = [(NSNumber *)[_photosInGrid objectAtIndex:indexPath.row] integerValue];
-    FLPLogDebug(@"cell index %ld", (long)cell.imageIndex);
-    UIImage *image = (UIImage *)[_photos objectAtIndex:cell.imageIndex];
+    FLPGridItem *gridItem = [_photosInGrid objectAtIndex:indexPath.row];
+    
+    UIImage *image = (UIImage *)[_photos objectAtIndex:gridItem.imageIndex];
     if (image.size.height != image.size.width) {
         [cell.imageView setImage:[self imageCrop:image]];
     } else {
@@ -113,7 +134,11 @@
     }
     cell.coverLbl.text = [NSString stringWithFormat:@"%ld", (indexPath.row + 1)];
     
-    [cell.contentView bringSubviewToFront:cell.imageView];
+    if ([gridItem.isShowing boolValue]) {
+        [cell.contentView bringSubviewToFront:cell.imageView];
+    } else {
+        [cell.contentView bringSubviewToFront:cell.coverView];
+    }
     
     return cell;
 }
@@ -123,7 +148,60 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     FLPCollectionViewCell *cell = (FLPCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
-    [cell flipCellAnimated:[NSNumber numberWithBool:YES]];
+    FLPGridItem *gridItem = [_photosInGrid objectAtIndex:indexPath.row];
+
+    if ([gridItem.isMatched boolValue] == NO) {
+
+        if (_firstPhoto == nil) {
+            gridItem.isShowing = [NSNumber numberWithBool:YES];
+            _firstPhoto = gridItem;
+            [cell flipCellAnimated:[NSNumber numberWithBool:YES]];
+            
+        } else {
+            
+            if (gridItem != _firstPhoto) {
+                gridItem.isShowing = [NSNumber numberWithBool:YES];
+                _secondPhoto = gridItem;
+                [cell flipCellAnimated:[NSNumber numberWithBool:YES]];
+                
+                // Photos match, keep showing
+                if (_firstPhoto.imageIndex == _secondPhoto.imageIndex) {
+                    _firstPhoto.isMatched = [NSNumber numberWithBool:YES];
+                    _firstPhoto = nil;
+                    _secondPhoto.isMatched = [NSNumber numberWithBool:YES];
+                    _secondPhoto = nil;
+                    _numOfPhotosMatched += 2;
+                    
+                    // All photos matched, return to main view
+                    if (_numOfPhotosMatched == _numOfPhotos) {
+                        [self performSelector:@selector(backButtonPressed:)
+                                   withObject:nil
+                                   afterDelay:kGridGeneralDelay];
+                    }
+                    
+                // Photos don't match, hide them
+                } else {
+
+                    NSInteger firstPhotoRow = [_photosInGrid indexOfObject:_firstPhoto];
+                    NSIndexPath *firstIndexPath = [NSIndexPath indexPathForItem:firstPhotoRow inSection:0];
+                    FLPCollectionViewCell *_firstCell = (FLPCollectionViewCell *)[_collectionView cellForItemAtIndexPath:firstIndexPath];
+                    FLPCollectionViewCell *_secondCell = cell;
+                    
+                    [_firstCell performSelector:@selector(flipCellAnimated:)
+                               withObject:[NSNumber numberWithBool:YES]
+                               afterDelay:kGridGeneralDelay];
+                    [_secondCell performSelector:@selector(flipCellAnimated:)
+                                      withObject:[NSNumber numberWithBool:YES]
+                                      afterDelay:kGridGeneralDelay];
+                    
+                    _firstPhoto.isShowing = [NSNumber numberWithBool:NO];
+                    _firstPhoto = nil;
+                    _secondPhoto.isShowing = [NSNumber numberWithBool:NO];
+                    _secondPhoto = nil;
+                }
+            }
+        }
+    }
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
@@ -149,7 +227,27 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 
 #pragma mark - Private methods
 
--(UIImage*)imageCrop:(UIImage*)original
+/**
+ * Hides all photos in grid
+ */
+- (void)hideAllPhotos
+{
+    double delay = 0;
+    for (int i=0; i < (_numOfPhotos); i++) {
+        UICollectionViewCell *cell = [_collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+        [cell performSelector:@selector(flipCellAnimated:) withObject:[NSNumber numberWithBool:YES] afterDelay:delay];
+        FLPGridItem *gridItem = [_photosInGrid objectAtIndex:i];
+        [gridItem performSelector:@selector(setIsShowing:) withObject:[NSNumber numberWithBool:NO] afterDelay:delay];
+        delay += 0.1;
+    }
+}
+
+/**
+ * Crops and returns the given image to be squared
+ * @param original Image to crop
+ * @return Image cropped
+ */
+- (UIImage *)imageCrop:(UIImage*)original
 {
     UIImage *ret = nil;
     

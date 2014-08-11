@@ -10,20 +10,6 @@
 
 @implementation FLPCollectionViewCell
 
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
-    }
-    return self;
-}
-
-- (BOOL)isImageShowing
-{
-    return ([self.contentView.subviews objectAtIndex:0] == _coverView);
-}
-
 - (void)flipCellAnimated:(NSNumber *)animated
 {
     if ([animated boolValue]) {
@@ -31,18 +17,18 @@
                           duration:0.4
                            options:UIViewAnimationOptionTransitionFlipFromRight
                         animations:^{
-                            if ([self isImageShowing]) {
-                                [self.contentView bringSubviewToFront:_coverView];
-                            } else {
+                            if ([self.contentView.subviews objectAtIndex:0] == _imageView) {
                                 [self.contentView bringSubviewToFront:_imageView];
+                            } else {
+                                [self.contentView bringSubviewToFront:_coverView];
                             }
                         } completion:^(BOOL finished) {
                         }];
     } else {
-        if ([self isImageShowing]) {
-            [self.contentView bringSubviewToFront:_coverView];
-        } else {
+        if ([self.contentView.subviews objectAtIndex:0] == _imageView) {
             [self.contentView bringSubviewToFront:_imageView];
+        } else {
+            [self.contentView bringSubviewToFront:_coverView];
         }
     }
 }
