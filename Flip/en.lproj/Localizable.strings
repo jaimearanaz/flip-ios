@@ -27,9 +27,18 @@
 // Grid screen
 "GRID_EXIT" = "Exit";
 "GRID_EXIT_CONFIRM" = "Are you sure you want to leave?";
+"SCORE_TIME" = "Time";
+
+// Score screen
+"SCORE_TIME" = "Time";
+"SCORE_ERRORS" = "Errors";
+"SCORE_PENALIZATION" = "Penalization";
+"SCORE_TIME_FINAL" = "Final time";
 
 // Other
 "OTHER_BACK" = "Back";
 "OTHER_OK" = "Ok";
 "OTHER_CANCEL" = "Cancel";
 "OTHER_YES" = "Yes";
+"OTHER_EXIT" = "Exit";
+"OTHER_NEXT" = "Next";

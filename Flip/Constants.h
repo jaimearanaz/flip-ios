@@ -23,3 +23,6 @@
 // Errors
 #define kErrorDownloadingPhotos 1
 #define KErrorEnoughPhotos 2
+
+// Others
+#define kPenalizationPerError 2

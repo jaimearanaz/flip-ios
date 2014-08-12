@@ -28,8 +28,16 @@
 "GRID_EXIT" = "Salir";
 "GRID_EXIT_CONFIRM" = "¿Seguro que quieres salir?";
 
+// Score screen
+"SCORE_TIME" = "Tiempo";
+"SCORE_ERRORS" = "Errores";
+"SCORE_PENALIZATION" = "Penalización";
+"SCORE_TIME_FINAL" = "Tiempo final";
+
 // Other
 "OTHER_BACK" = "Atrás";
 "OTHER_OK" = "Aceptar";
 "OTHER_CANCEL" = "Cancelar";
 "OTHER_YES" = "Sí";
+"OTHER_EXIT" = "Salir";
+"OTHER_NEXT" = "Continuar";

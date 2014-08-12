@@ -9,6 +9,7 @@
 #import "FLPGridViewController.h"
 #import "FLPCollectionViewCell.h"
 #import "FLPGridItem.h"
+#import "FLPScoreViewController.h"
 
 #import "WCAlertView.h"
 
@@ -26,6 +27,7 @@
 @property (nonatomic) NSInteger numOfPhotosMatched;
 @property (nonatomic) NSInteger numOfErrors;
 @property (nonatomic) NSDate *startDate;
+@property (nonatomic) NSDate *endDate;
 @property (nonatomic, strong) NSTimer *timer;
 @property (nonatomic) FLPGridItem *firstPhoto;
 @property (nonatomic) FLPGridItem *secondPhoto;
@@ -67,7 +69,7 @@
     _numOfPhotosMatched = 0;
     _numOfErrors = 0;
 
-    [_backBtn setTitle:NSLocalizedString(@"OTHER_BACK", @"") forState:UIControlStateNormal];
+    [_backBtn setTitle:NSLocalizedString(@"OTHER_EXIT", @"") forState:UIControlStateNormal];
     
     // Configure |photosInGrid|, for example [0, 1, 3, 0, 4, 4, 3, 5, 2, 1, 5, 2]
     _photosInGrid = [[NSMutableArray alloc] init];
@@ -110,6 +112,15 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"scoreSegue"]) {
+        FLPScoreViewController *scoreViewController=(FLPScoreViewController *)segue.destinationViewController;
+        scoreViewController.time = _endDate;
+        scoreViewController.numOfErrors = _numOfErrors;
+    }
 }
 
 #pragma mark - IBAction methods
@@ -197,7 +208,7 @@
                     // All photos matched, return to main view
                     if (_numOfPhotosMatched == _numOfPhotos) {
                         [self stopTimer];
-                        [self performSelector:@selector(exitGame)
+                        [self performSelector:@selector(endGame)
                                    withObject:nil
                                    afterDelay:kGridGeneralDelay];
                     }
@@ -281,11 +292,11 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 {
     NSDate *currentDate = [NSDate date];
     NSTimeInterval timeInterval = [currentDate timeIntervalSinceDate:_startDate];
-    NSDate *timerDate = [NSDate dateWithTimeIntervalSince1970:timeInterval];
+    _endDate = [NSDate dateWithTimeIntervalSince1970:timeInterval];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"mm:ss.SSS"];
+    [dateFormatter setDateFormat:@"mm:ss:SSS"];
     [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0.0]];
-    NSString *timeString=[dateFormatter stringFromDate:timerDate];
+    NSString *timeString=[dateFormatter stringFromDate:_endDate];
     _timerLbl.text = timeString;
 }
 
@@ -294,6 +305,12 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
     [self stopTimer];
     [self performSegueWithIdentifier:@"mainSegue" sender:self];
 }
+
+- (void)endGame
+{
+    [self performSegueWithIdentifier:@"scoreSegue" sender:self];
+}
+
 /**
  * Hides all photos in grid
  */
