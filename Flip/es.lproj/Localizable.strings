@@ -33,6 +33,14 @@
 "SCORE_ERRORS" = "Errores";
 "SCORE_PENALIZATION" = "Penalización";
 "SCORE_TIME_FINAL" = "Tiempo final";
+"SCORE_RECORD" = "¡Enhorabuena, nuevo récord!";
+
+// Records screen
+"RECORDS_TITLE" = "Mejores tiempos";
+"RECORDS_SMALL" = "Pequeño";
+"RECORDS_NORMAL" = "Normal";
+"RECORDS_BIG" = "Grande";
+"RECORDS_NONE" = "Ninguno, ¡pruébalo!";
 
 // Other
 "OTHER_BACK" = "Atrás";
@@ -41,3 +49,4 @@
 "OTHER_YES" = "Sí";
 "OTHER_EXIT" = "Salir";
 "OTHER_NEXT" = "Continuar";
+"OTHER_MAIN" = "Inicio";

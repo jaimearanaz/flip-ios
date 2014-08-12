@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+#import "FLPGridViewController.h"
+
 @interface FLPScoreViewController : UIViewController
 
 @property (nonatomic, strong) NSDate *time;
 @property (nonatomic) NSInteger numOfErrors;
+@property (nonatomic) GridSizeType sizeType;
 
 @end

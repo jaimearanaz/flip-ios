@@ -34,6 +34,14 @@
 "SCORE_ERRORS" = "Errors";
 "SCORE_PENALIZATION" = "Penalization";
 "SCORE_TIME_FINAL" = "Final time";
+"SCORE_RECORD" = "Congrats, new record!";
+
+// Records screen
+"RECORDS_TITLE" = "Best times";
+"RECORDS_SMALL" = "Small";
+"RECORDS_NORMAL" = "Normal";
+"RECORDS_BIG" = "Big";
+"RECORDS_NONE" = "None, try it!";
 
 // Other
 "OTHER_BACK" = "Back";
@@ -42,3 +50,4 @@
 "OTHER_YES" = "Yes";
 "OTHER_EXIT" = "Exit";
 "OTHER_NEXT" = "Next";
+"OTHER_MAIN" = "Main";

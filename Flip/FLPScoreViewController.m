@@ -19,6 +19,8 @@
 @property (nonatomic, weak) IBOutlet UILabel *penalizationResultLbl;
 @property (nonatomic, weak) IBOutlet UILabel *finalTimeLbl;
 @property (nonatomic, weak) IBOutlet UILabel *finalTimeResultLbl;
+@property (nonatomic, weak) IBOutlet UILabel *recordLbl;
+@property (nonatomic) BOOL newRecord;
 
 - (IBAction)nextButtonPressed:(id)sender;
 
@@ -39,7 +41,7 @@
 {
     [super viewDidLoad];
     
-    [_nextBtn setTitle:NSLocalizedString(@"OTHER_NEXT", @"") forState:UIControlStateNormal];
+    
     
     _timeLbl.text = NSLocalizedString(@"SCORE_TIME", @"");
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -57,23 +59,38 @@
     [penalizationDateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0.0]];
     _penalizationResultLbl.text = [penalizationDateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:penalizationSeconds]];
     
-    _finalTimeLbl.text = NSLocalizedString(@"SCORE_FINAL_TIME", @"");
+    _finalTimeLbl.text = NSLocalizedString(@"SCORE_TIME_FINAL", @"");
     NSDate *finalTime = [NSDate dateWithTimeInterval:penalizationSeconds sinceDate:_time];
     _finalTimeResultLbl.text = [dateFormatter stringFromDate:finalTime];
-}
+    
+    NSString *key = @"";
+    switch (_sizeType) {
+        case GridSizeSmall:
+            key = @"small";
+            break;
+        case GridSizeNormal:
+            key = @"normal";
+            break;
+        case GridSizeBig:
+            key = @"big";
+            break;
+    }
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSDate *record = (NSDate *)[userDefaults objectForKey:key];
+    
+    _recordLbl.text = NSLocalizedString(@"SCORE_RECORD", @"");
+    if (([record compare:finalTime] == NSOrderedDescending) || (record == nil)) {
+        [userDefaults setObject:finalTime forKey:key];
+        [_nextBtn setTitle:NSLocalizedString(@"OTHER_NEXT", @"") forState:UIControlStateNormal];
+        _recordLbl.hidden = NO;
+        _newRecord = YES;
+    } else {
+        [_nextBtn setTitle:NSLocalizedString(@"OTHER_MAIN", @"") forState:UIControlStateNormal];
+        _recordLbl.hidden = YES;
+        _newRecord = NO;
+    }
 
-- (void)updateTimer
-{
-    /*
-    NSDate *currentDate = [NSDate date];
-    NSTimeInterval timeInterval = [currentDate timeIntervalSinceDate:_startDate];
-    _endDate = [NSDate dateWithTimeIntervalSince1970:timeInterval];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"mm:ss.SSS"];
-    [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0.0]];
-    NSString *timeString=[dateFormatter stringFromDate:_endDate];
-    _timerLbl.text = timeString;
-     */
 }
 
 - (void)didReceiveMemoryWarning
@@ -82,22 +99,15 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 #pragma mark - IBAction methods
 
 - (IBAction)nextButtonPressed:(id)sender
 {
-    [self performSegueWithIdentifier:@"mainSegue" sender:self];
+    if (_newRecord) {
+        [self performSegueWithIdentifier:@"recordSegue" sender:self];
+    } else {
+        [self performSegueWithIdentifier:@"mainSegue" sender:self];
+    }
 }
 
 @end

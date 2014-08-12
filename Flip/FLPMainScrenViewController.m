@@ -36,6 +36,7 @@
 - (IBAction)onCameraButtonPressed:(id)sender;
 - (IBAction)onFacebookButtonPressed:(id)sender;
 - (IBAction)onTwitterButtonPressed:(id)sender;
+- (IBAction)onRecordsButtonPressed:(id)sender;
 
 @end
 
@@ -181,8 +182,13 @@
     }];
 }
 
+- (IBAction)onRecordsButtonPressed:(id)sender
+{
+    [self performSegueWithIdentifier:@"recordFromMainSegue" sender:self];
+}
 
-# pragma marck UIActionSheetDelegate methods
+
+# pragma mark - UIActionSheetDelegate methods
 
 /**
  *  Called when user selects a Twitter account or cancels action sheet
