@@ -104,7 +104,10 @@
             default:
                 delay = kGridSmallDelay;
         }
-        [self performSelector:@selector(startGame) withObject:nil afterDelay:delay];
+        [self performSelector:@selector(startGame)
+                   withObject:nil
+                   afterDelay:delay
+                      inModes:[NSArray arrayWithObject:NSRunLoopCommonModes]];
     }
 }
 
@@ -212,7 +215,8 @@
                         [self stopTimer];
                         [self performSelector:@selector(endGame)
                                    withObject:nil
-                                   afterDelay:kGridGeneralDelay];
+                                   afterDelay:kGridGeneralDelay
+                                      inModes:[NSArray arrayWithObject:NSRunLoopCommonModes]];
                     }
                     
                 // Photos don't match, hide them
@@ -224,11 +228,13 @@
                     FLPCollectionViewCell *_secondCell = cell;
                     
                     [_firstCell performSelector:@selector(flipCellAnimated:)
-                               withObject:[NSNumber numberWithBool:YES]
-                               afterDelay:kGridGeneralDelay];
+                                     withObject:[NSNumber numberWithBool:YES]
+                                     afterDelay:kGridGeneralDelay
+                                        inModes:[NSArray arrayWithObject:NSRunLoopCommonModes]];
                     [_secondCell performSelector:@selector(flipCellAnimated:)
                                       withObject:[NSNumber numberWithBool:YES]
-                                      afterDelay:kGridGeneralDelay];
+                                      afterDelay:kGridGeneralDelay
+                                         inModes:[NSArray arrayWithObject:NSRunLoopCommonModes]];
                     
                     _firstPhoto.isShowing = [NSNumber numberWithBool:NO];
                     _firstPhoto = nil;
@@ -265,6 +271,9 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 
 #pragma mark - Private methods
 
+/**
+ *  Starts game
+ */
 - (void)startGame
 {
     [self hideAllPhotos];
@@ -272,6 +281,9 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
     _started = YES;
 }
 
+/**
+ *  Starts timer to update time of game
+ */
 - (void)startTimer
 {
     if (_timer == nil) {
@@ -281,9 +293,15 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
                                                 selector:@selector(updateTimer)
                                                 userInfo:nil
                                                 repeats:YES];
+        NSRunLoop *runloop = [NSRunLoop currentRunLoop];
+        [runloop addTimer:_timer forMode:NSRunLoopCommonModes];
+        [runloop addTimer:_timer forMode:UITrackingRunLoopMode];
     }
 }
 
+/**
+ *  Stops timer to end updating time of game
+ */
 - (void)stopTimer
 {
     [_timer invalidate];
@@ -321,9 +339,15 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
     double delay = 0;
     for (int i=0; i < (_numOfPhotos); i++) {
         UICollectionViewCell *cell = [_collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
-        [cell performSelector:@selector(flipCellAnimated:) withObject:[NSNumber numberWithBool:YES] afterDelay:delay];
+        [cell performSelector:@selector(flipCellAnimated:)
+                   withObject:[NSNumber numberWithBool:YES]
+                   afterDelay:delay
+                      inModes:[NSArray arrayWithObject:NSRunLoopCommonModes]];
         FLPGridItem *gridItem = [_photosInGrid objectAtIndex:i];
-        [gridItem performSelector:@selector(setIsShowing:) withObject:[NSNumber numberWithBool:NO] afterDelay:delay];
+        [gridItem performSelector:@selector(setIsShowing:)
+                       withObject:[NSNumber numberWithBool:NO]
+                       afterDelay:delay
+                          inModes:[NSArray arrayWithObject:NSRunLoopCommonModes]];
         delay += 0.1;
     }
 }
