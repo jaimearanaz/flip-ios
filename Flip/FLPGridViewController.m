@@ -14,6 +14,7 @@
 
 @property (nonatomic, weak) IBOutlet UIButton *backBtn;
 @property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
+@property (nonatomic, weak) IBOutlet UILabel *timerLbl;
 
 // This array represents the duplicate photos in grid, identified by its indexes inside |photos|
 // Grid will be build up with the same array order
@@ -21,8 +22,12 @@
 @property (nonatomic, strong) NSMutableArray *photosInGrid;
 @property (nonatomic) NSInteger numOfPhotos;
 @property (nonatomic) NSInteger numOfPhotosMatched;
+@property (nonatomic) NSInteger numOfErrors;
+@property (nonatomic) NSDate *startDate;
+@property (nonatomic, strong) NSTimer *timer;
 @property (nonatomic) FLPGridItem *firstPhoto;
 @property (nonatomic) FLPGridItem *secondPhoto;
+@property (nonatomic) BOOL started;
 
 - (IBAction)backButtonPressed:(id)sender;
 
@@ -58,6 +63,7 @@
     }
     
     _numOfPhotosMatched = 0;
+    _numOfErrors = 0;
 
     [_backBtn setTitle:NSLocalizedString(@"OTHER_BACK", @"") forState:UIControlStateNormal];
     
@@ -77,22 +83,25 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    double delay;
-    switch (_gridSize) {
-        case GridSizeSmall:
-            delay = kGridSmallDelay;
-            break;
-        case GridSizeNormal:
-            delay = kGridNormalDelay;
-            break;
-        case GridSizeBig:
-            delay = kGridBigDelay;
-            break;
-        default:
-            delay = kGridSmallDelay;
-    }
+    [super viewDidAppear:animated];
     
-    [self performSelector:@selector(hideAllPhotos) withObject:nil afterDelay:delay];
+    if (!_started) {
+        double delay;
+        switch (_gridSize) {
+            case GridSizeSmall:
+                delay = kGridSmallDelay;
+                break;
+            case GridSizeNormal:
+                delay = kGridNormalDelay;
+                break;
+            case GridSizeBig:
+                delay = kGridBigDelay;
+                break;
+            default:
+                delay = kGridSmallDelay;
+        }
+        [self performSelector:@selector(startGame) withObject:nil afterDelay:delay];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -150,13 +159,15 @@
     FLPCollectionViewCell *cell = (FLPCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
     FLPGridItem *gridItem = [_photosInGrid objectAtIndex:indexPath.row];
 
-    if ([gridItem.isMatched boolValue] == NO) {
+    if ((_started) && ([gridItem.isMatched boolValue] == NO)) {
 
+        // It's first photo
         if (_firstPhoto == nil) {
             gridItem.isShowing = [NSNumber numberWithBool:YES];
             _firstPhoto = gridItem;
             [cell flipCellAnimated:[NSNumber numberWithBool:YES]];
             
+        // It's second photo
         } else {
             
             if (gridItem != _firstPhoto) {
@@ -174,6 +185,7 @@
                     
                     // All photos matched, return to main view
                     if (_numOfPhotosMatched == _numOfPhotos) {
+                        [self stopTimer];
                         [self performSelector:@selector(backButtonPressed:)
                                    withObject:nil
                                    afterDelay:kGridGeneralDelay];
@@ -198,6 +210,8 @@
                     _firstPhoto = nil;
                     _secondPhoto.isShowing = [NSNumber numberWithBool:NO];
                     _secondPhoto = nil;
+                    
+                    _numOfErrors++;
                 }
             }
         }
@@ -226,6 +240,43 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 }
 
 #pragma mark - Private methods
+
+- (void)startGame
+{
+    [self hideAllPhotos];
+    [self startTimer];
+    _started = YES;
+}
+
+- (void)startTimer
+{
+    if (_timer == nil) {
+        _startDate = [NSDate date];
+        _timer = [NSTimer scheduledTimerWithTimeInterval:0.001
+                                                  target:self
+                                                selector:@selector(updateTimer)
+                                                userInfo:nil
+                                                repeats:YES];
+    }
+}
+
+- (void)stopTimer
+{
+    [_timer invalidate];
+    _timer = nil;
+}
+
+- (void)updateTimer
+{
+    NSDate *currentDate = [NSDate date];
+    NSTimeInterval timeInterval = [currentDate timeIntervalSinceDate:_startDate];
+    NSDate *timerDate = [NSDate dateWithTimeIntervalSince1970:timeInterval];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"mm:ss.SSS"];
+    [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0.0]];
+    NSString *timeString=[dateFormatter stringFromDate:timerDate];
+    _timerLbl.text = timeString;
+}
 
 /**
  * Hides all photos in grid
