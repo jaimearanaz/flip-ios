@@ -162,7 +162,7 @@
  *  @param users  List of users
  *  @return Selected random users
  */
-- (NSArray *)selectRandom:(NSInteger)number fromUsers:(NSArray *)users
+- (NSArray *)selectRandom:(NSInteger)number fromUsers:(NSMutableArray *)users
 {
     NSMutableArray *result = [[NSMutableArray alloc] init];
     
@@ -177,6 +177,7 @@
             NSInteger randomIndex = arc4random() % users.count;
             [result addObject:[users objectAtIndex:randomIndex]];
             FLPLogDebug(@"add user id %@", [users objectAtIndex:randomIndex]);
+            [users removeObjectAtIndex:randomIndex];
         }
     }
     
