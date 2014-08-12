@@ -24,7 +24,12 @@
 "SIZE_NORMAL" = "Normal (3x6)";
 "SIZE_BIG" = "Big (3x8)";
 
+// Grid screen
+"GRID_EXIT" = "Exit";
+"GRID_EXIT_CONFIRM" = "Are you sure you want to leave?";
+
 // Other
 "OTHER_BACK" = "Back";
 "OTHER_OK" = "Ok";
 "OTHER_CANCEL" = "Cancel";
+"OTHER_YES" = "Yes";

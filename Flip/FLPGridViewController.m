@@ -10,6 +10,8 @@
 #import "FLPCollectionViewCell.h"
 #import "FLPGridItem.h"
 
+#import "WCAlertView.h"
+
 @interface FLPGridViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, weak) IBOutlet UIButton *backBtn;
@@ -114,7 +116,16 @@
 
 - (IBAction)backButtonPressed:(id)sender
 {
-    [self performSegueWithIdentifier:@"mainSegue" sender:self];
+    [WCAlertView showAlertWithTitle:NSLocalizedString(@"GRID_EXIT", @"")
+                            message:NSLocalizedString(@"GRID_EXIT_CONFIRM", @"")
+                 customizationBlock:nil
+                    completionBlock:^(NSUInteger buttonIndex, WCAlertView *alertView) {
+                        if (buttonIndex == 1) {
+                            [self exitGame];
+                        }
+                    }
+                  cancelButtonTitle:NSLocalizedString(@"OTHER_CANCEL", @"")
+                  otherButtonTitles:NSLocalizedString(@"OTHER_YES", @""), nil];
 }
 
 #pragma mark - UICollectionViewDataSource methods
@@ -186,7 +197,7 @@
                     // All photos matched, return to main view
                     if (_numOfPhotosMatched == _numOfPhotos) {
                         [self stopTimer];
-                        [self performSelector:@selector(backButtonPressed:)
+                        [self performSelector:@selector(exitGame)
                                    withObject:nil
                                    afterDelay:kGridGeneralDelay];
                     }
@@ -278,6 +289,11 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
     _timerLbl.text = timeString;
 }
 
+- (void)exitGame
+{
+    [self stopTimer];
+    [self performSegueWithIdentifier:@"mainSegue" sender:self];
+}
 /**
  * Hides all photos in grid
  */
