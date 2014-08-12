@@ -12,8 +12,9 @@
 
 @interface FLPScoreViewController : UIViewController
 
+@property (nonatomic, strong) NSArray *photos;
 @property (nonatomic, strong) NSDate *time;
 @property (nonatomic) NSInteger numOfErrors;
-@property (nonatomic) GridSizeType sizeType;
+@property (nonatomic) GridSizeType gridSize;
 
 @end

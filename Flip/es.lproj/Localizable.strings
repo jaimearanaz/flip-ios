@@ -34,6 +34,7 @@
 "SCORE_PENALIZATION" = "Penalización";
 "SCORE_TIME_FINAL" = "Tiempo final";
 "SCORE_RECORD" = "¡Enhorabuena, nuevo récord!";
+"SCORE_AGAIN" = "¡Otra vez!";
 
 // Records screen
 "RECORDS_TITLE" = "Mejores tiempos";

@@ -23,6 +23,7 @@
 @property (nonatomic) BOOL newRecord;
 
 - (IBAction)nextButtonPressed:(id)sender;
+- (IBAction)tryAgainButtonPressed:(id)sender;
 
 @end
 
@@ -64,7 +65,7 @@
     _finalTimeResultLbl.text = [dateFormatter stringFromDate:finalTime];
     
     NSString *key = @"";
-    switch (_sizeType) {
+    switch (_gridSize) {
         case GridSizeSmall:
             key = @"small";
             break;
@@ -99,6 +100,15 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"gridFromScoreSegue"]) {
+        FLPGridViewController *gridViewController=(FLPGridViewController *)segue.destinationViewController;
+        gridViewController.photos = _photos;
+        gridViewController.gridSize = _gridSize;
+    }
+}
+
 #pragma mark - IBAction methods
 
 - (IBAction)nextButtonPressed:(id)sender
@@ -108,6 +118,11 @@
     } else {
         [self performSegueWithIdentifier:@"mainSegue" sender:self];
     }
+}
+
+- (IBAction)tryAgainButtonPressed:(id)sender
+{
+    [self performSegueWithIdentifier:@"gridFromScoreSegue" sender:self];
 }
 
 @end

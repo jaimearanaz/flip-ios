@@ -120,7 +120,8 @@
         FLPScoreViewController *scoreViewController=(FLPScoreViewController *)segue.destinationViewController;
         scoreViewController.time = _endDate;
         scoreViewController.numOfErrors = _numOfErrors;
-        scoreViewController.sizeType = _gridSize;
+        scoreViewController.gridSize = _gridSize;
+        scoreViewController.photos = _photos;
     }
 }
 
