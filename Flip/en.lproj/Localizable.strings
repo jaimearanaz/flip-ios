@@ -27,7 +27,6 @@
 // Grid screen
 "GRID_EXIT" = "Exit";
 "GRID_EXIT_CONFIRM" = "Are you sure you want to leave?";
-"SCORE_TIME" = "Time";
 
 // Score screen
 "SCORE_TIME" = "Time";
@@ -42,7 +41,7 @@
 "RECORDS_SMALL" = "Small";
 "RECORDS_NORMAL" = "Normal";
 "RECORDS_BIG" = "Big";
-"RECORDS_NONE" = "None, try it!";
+"RECORDS_NONE" = "--:--:---";
 
 // Other
 "OTHER_BACK" = "Back";

@@ -11,6 +11,7 @@
 @interface FLPScoreViewController ()
 
 @property (nonatomic, weak) IBOutlet UIButton *nextBtn;
+@property (nonatomic, weak) IBOutlet UIButton *tryAgainBtn;
 @property (nonatomic, weak) IBOutlet UILabel *timeLbl;
 @property (nonatomic, weak) IBOutlet UILabel *timeResultLbl;
 @property (nonatomic, weak) IBOutlet UILabel *errorsLbl;
@@ -42,7 +43,7 @@
 {
     [super viewDidLoad];
     
-    
+    [_tryAgainBtn setTitle:NSLocalizedString(@"SCORE_AGAIN", @"") forState:UIControlStateNormal];
     
     _timeLbl.text = NSLocalizedString(@"SCORE_TIME", @"");
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];

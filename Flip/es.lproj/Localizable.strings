@@ -41,7 +41,7 @@
 "RECORDS_SMALL" = "Pequeño";
 "RECORDS_NORMAL" = "Normal";
 "RECORDS_BIG" = "Grande";
-"RECORDS_NONE" = "Ninguno, ¡pruébalo!";
+"RECORDS_NONE" = "--:--:---";
 
 // Other
 "OTHER_BACK" = "Atrás";

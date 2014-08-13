@@ -357,7 +357,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="blA-Jq-1PM">
-                                <rect key="frame" x="227" y="25" width="65" height="30"/>
+                                <rect key="frame" x="201" y="25" width="91" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="Next">
@@ -446,6 +446,7 @@
                         <outlet property="recordLbl" destination="ryl-kF-g3y" id="5Mw-Zc-SEf"/>
                         <outlet property="timeLbl" destination="Xbe-aJ-Ie1" id="FVg-3H-ais"/>
                         <outlet property="timeResultLbl" destination="puV-hu-PfX" id="zee-3r-psV"/>
+                        <outlet property="tryAgainBtn" destination="tfg-5J-dlH" id="4Yn-tA-PwZ"/>
                         <segue destination="2Iz-SI-UwT" kind="modal" identifier="recordSegue" modalTransitionStyle="coverVertical" id="oh0-n8-j6h"/>
                         <segue destination="vXZ-lx-hvc" kind="modal" identifier="mainSegue" modalTransitionStyle="coverVertical" id="3re-2Y-CXD"/>
                         <segue destination="20h-2Q-q9d" kind="modal" identifier="gridFromScoreSegue" modalTransitionStyle="coverVertical" id="YUz-iQ-Yzn"/>
@@ -568,8 +569,8 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="3xf-SL-qbY"/>
+        <segue reference="3re-2Y-CXD"/>
+        <segue reference="YUz-iQ-Yzn"/>
         <segue reference="oh0-n8-j6h"/>
-        <segue reference="qOx-sb-9An"/>
     </inferredMetricsTieBreakers>
 </document>
