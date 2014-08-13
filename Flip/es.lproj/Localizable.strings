@@ -12,7 +12,7 @@
 "MAIN_RECORDS" = "Ver mis records";
 "MAIN_ALERT" = "Error";
 "MAIN_ENOUGH_PHOTOS_CAMERA" = "¡Necesitas tener al menos %d fotos en tu Carrete!";
-"MAIN_ENOUGH_PHOTOS_TWITTER" = "¡Necesitas tener al menos %d friends y followers en Twitter!";
+"MAIN_ENOUGH_PHOTOS_TWITTER" = "¡Necesitas tener al menos %d friends y followers con una imagen de perfil válida en Twitter!";
 "MAIN_ENOUGH_PHOTOS_OTHER" = "¡Necesitas tener al menos %d fotos!";
 "MAIN_SELECT_TWITTER" = "Selecciona una cuenta de Twitter";
 "MAIN_GENERIC_ERROR" = "Ha habido un error obteniendo tus fotos de la fuente seleccionada. Por favor, inténtalo de nuevo.";
