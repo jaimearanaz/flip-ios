@@ -15,5 +15,6 @@
 @property (nonatomic, weak) IBOutlet UILabel *coverLbl;
 
 - (void)flipCellAnimated:(NSNumber *)animated;
+- (BOOL)isShowingImage;
 
 @end

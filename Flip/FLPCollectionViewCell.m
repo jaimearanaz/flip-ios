@@ -10,6 +10,11 @@
 
 @implementation FLPCollectionViewCell
 
+- (BOOL)isShowingImage
+{
+    return ([self.contentView.subviews objectAtIndex:1] == _imageView);
+}
+
 - (void)flipCellAnimated:(NSNumber *)animated
 {
     if ([animated boolValue]) {
@@ -17,18 +22,18 @@
                           duration:0.4
                            options:UIViewAnimationOptionTransitionFlipFromRight
                         animations:^{
-                            if ([self.contentView.subviews objectAtIndex:0] == _imageView) {
-                                [self.contentView bringSubviewToFront:_imageView];
-                            } else {
+                            if ([self isShowingImage]) {
                                 [self.contentView bringSubviewToFront:_coverView];
+                            } else {
+                                [self.contentView bringSubviewToFront:_imageView];
                             }
                         } completion:^(BOOL finished) {
                         }];
     } else {
-        if ([self.contentView.subviews objectAtIndex:0] == _imageView) {
-            [self.contentView bringSubviewToFront:_imageView];
-        } else {
+        if ([self isShowingImage]) {
             [self.contentView bringSubviewToFront:_coverView];
+        } else {
+            [self.contentView bringSubviewToFront:_imageView];
         }
     }
 }

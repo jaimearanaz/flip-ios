@@ -336,18 +336,23 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
  */
 - (void)hideAllPhotos
 {
-    double delay = 0;
+    // Set model data
     for (int i=0; i < (_numOfPhotos); i++) {
-        UICollectionViewCell *cell = [_collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
-        [cell performSelector:@selector(flipCellAnimated:)
-                   withObject:[NSNumber numberWithBool:YES]
-                   afterDelay:delay
-                      inModes:[NSArray arrayWithObject:NSRunLoopCommonModes]];
         FLPGridItem *gridItem = [_photosInGrid objectAtIndex:i];
-        [gridItem performSelector:@selector(setIsShowing:)
-                       withObject:[NSNumber numberWithBool:NO]
+        gridItem.isShowing = NO;
+    }
+    
+    // Set cells
+    NSArray *visiblePaths = [_collectionView indexPathsForVisibleItems];
+    double delay = 0;
+    for (NSIndexPath *indexPath in visiblePaths) {
+        FLPCollectionViewCell *cell = (FLPCollectionViewCell *)[_collectionView cellForItemAtIndexPath:indexPath];
+        if ([cell isShowingImage]) {
+            [cell performSelector:@selector(flipCellAnimated:)
+                       withObject:[NSNumber numberWithBool:YES]
                        afterDelay:delay
                           inModes:[NSArray arrayWithObject:NSRunLoopCommonModes]];
+        }
         delay += 0.1;
     }
 }

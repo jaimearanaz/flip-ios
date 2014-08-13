@@ -116,14 +116,14 @@
                             if (photos.count >= number) {
                                 success(photos);
                                 
-                                // Not enough photos
+                            // Error downloading some photos
                             } else {
                                 failure([NSError errorWithDomain:@""
-                                                            code:KErrorEnoughPhotos
+                                                            code:kErrorDownloadingPhotos
                                                         userInfo:nil]);
                             }
                             
-                            // Not enough complete users
+                        // Not enough complete users
                         } else {
                             failure([NSError errorWithDomain:@""
                                                         code:KErrorEnoughPhotos
@@ -195,13 +195,6 @@
     
     for (NSDictionary* user in users) {
         FLPLogDebug(@"add image: %@", [user objectForKey:@"profile_image_url"]);
-        FLPLogDebug(@"default image: %@", [user objectForKey:@"default_profile_image"]);
-        BOOL defaultProfile = [[user objectForKey:@"default_profile_image"] boolValue];
-
-        if (defaultProfile) {
-            FLPLogDebug(@"egg image, skip user");
-            continue;
-        }
         
         // default profile photo is "_normal.png"
         // try to download bigger version photo
@@ -217,7 +210,11 @@
                                                          error:&error];
         if (!error) {
             UIImage *image = [UIImage imageWithData:data];
-            [photos addObject:image];
+            if (image) {
+                [photos addObject:image];
+            } else {
+                FLPLogDebug(@"error generating image");
+            }
         } else {
             FLPLogDebug(@"error downloading: %@", [error localizedDescription]);
         }
@@ -237,7 +234,7 @@
                  failureBlock:(void(^)(NSError *error))failure
 {
     // Select 100 users randomly, request it's up to 100
-    NSArray *randomUsers = [self selectRandom:100 fromUsers:usersId];
+    NSArray *randomUsers = [self selectRandom:100 fromUsers:[NSMutableArray arrayWithArray:usersId]];
     
     NSString * allUsers = [randomUsers componentsJoinedByString:@","];
     [_twitterApi getUsersLookupForScreenName:nil
