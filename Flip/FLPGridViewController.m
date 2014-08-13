@@ -12,12 +12,14 @@
 #import "FLPScoreViewController.h"
 
 #import "WCAlertView.h"
+#import "GADBannerView.h"
 
 @interface FLPGridViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, weak) IBOutlet UIButton *backBtn;
 @property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
 @property (nonatomic, weak) IBOutlet UILabel *timerLbl;
+@property (nonatomic, weak) IBOutlet UIView *bannerView;
 
 // Array with the duplicated images in grid, it represents indexes from |photos| array
 // e.g. [0, 1, 3, 0, 4, 4, 3, 5, 2, 1, 5, 2]
@@ -91,6 +93,13 @@
     
     // Sort the array randomly
     _photosInGrid = [self sortRandomlyArray:_photosInGrid];
+    
+    // Banner
+    GADBannerView *banner = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner];
+    banner.adUnitID = kAddMobID;
+    banner.rootViewController = self;
+    [_bannerView addSubview:banner];
+    [banner loadRequest:[GADRequest request]];
 }
 
 - (void)viewDidAppear:(BOOL)animated

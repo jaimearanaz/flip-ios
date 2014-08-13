@@ -8,6 +8,8 @@
 
 #import "FLPScoreViewController.h"
 
+#import "GADBannerView.h"
+
 @interface FLPScoreViewController ()
 
 @property (nonatomic, weak) IBOutlet UIButton *nextBtn;
@@ -21,6 +23,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *finalTimeLbl;
 @property (nonatomic, weak) IBOutlet UILabel *finalTimeResultLbl;
 @property (nonatomic, weak) IBOutlet UILabel *recordLbl;
+@property (nonatomic, weak) IBOutlet UIView *bannerView;
 @property (nonatomic) BOOL newRecord;
 
 - (IBAction)nextButtonPressed:(id)sender;
@@ -92,7 +95,13 @@
         _recordLbl.hidden = YES;
         _newRecord = NO;
     }
-
+    
+    // Banner
+    GADBannerView *banner = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner];
+    banner.adUnitID = kAddMobID;
+    banner.rootViewController = self;
+    [_bannerView addSubview:banner];
+    [banner loadRequest:[GADRequest request]];
 }
 
 - (void)didReceiveMemoryWarning

@@ -8,6 +8,8 @@
 
 #import "FLPRecordsViewController.h"
 
+#import "GADBannerView.h"
+
 @interface FLPRecordsViewController ()
 
 @property (nonatomic, weak) IBOutlet UILabel *titleLbl;
@@ -18,6 +20,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *bigLbl;
 @property (nonatomic, weak) IBOutlet UILabel *bigResultLbl;
 @property (nonatomic, weak) IBOutlet UIButton *mainBtn;
+@property (nonatomic, weak) IBOutlet UIView *bannerView;
 
 - (IBAction)mainButtonPressed:(id)sender;
 
@@ -59,6 +62,13 @@
     
     _bigLbl.text = NSLocalizedString(@"RECORDS_BIG", @"");
     _bigResultLbl.text = (recordBig) ? [dateFormatter stringFromDate:recordBig] : NSLocalizedString(@"RECORDS_NONE", @"");
+    
+    // Banner
+    GADBannerView *banner = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner];
+    banner.adUnitID = kAddMobID;
+    banner.rootViewController = self;
+    [_bannerView addSubview:banner];
+    [banner loadRequest:[GADRequest request]];
 }
 
 - (void)didReceiveMemoryWarning

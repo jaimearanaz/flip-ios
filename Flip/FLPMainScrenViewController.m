@@ -19,6 +19,7 @@
 #import "MBProgressHUD.h"
 #import "WCAlertView.h"
 #import "SCNetworkReachability.h"
+#import "GADBannerView.h"
 
 @interface FLPMainScrenViewController () <UIActionSheetDelegate>
 
@@ -27,6 +28,7 @@
 @property (nonatomic, weak) IBOutlet UIButton *facebookBtn;
 @property (nonatomic, weak) IBOutlet UIButton *twitterBtn;
 @property (nonatomic, weak) IBOutlet UIButton *recordsBtn;
+@property (nonatomic, weak) IBOutlet UIView *bannerView;
 @property (nonatomic, strong) __block NSArray *photos;
 @property (nonatomic, strong) __block FLPPhotoSource *photoSource;
 @property (nonatomic, strong) NSArray *twitterAccounts;
@@ -58,6 +60,13 @@
          // Set Internet status
          _networkStatus = status;
      }];
+    
+    // Banner
+    GADBannerView *banner = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner];
+    banner.adUnitID = kAddMobID;
+    banner.rootViewController = self;
+    [_bannerView addSubview:banner];
+    [banner loadRequest:[GADRequest request]];
 }
 
 - (void)didReceiveMemoryWarning

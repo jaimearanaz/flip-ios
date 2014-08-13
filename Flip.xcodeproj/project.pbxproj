@@ -29,6 +29,13 @@
 		6F5AD5C71987ABF600B65D09 /* FLPFacebookPhotoSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5AD5C61987ABF600B65D09 /* FLPFacebookPhotoSource.m */; };
 		6F67A358197FD19600AC9CF5 /* FLPLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F67A357197FD19600AC9CF5 /* FLPLogFormatter.m */; };
 		6F7B2DE01980FC9200C9FE69 /* FLPGridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7B2DDF1980FC9200C9FE69 /* FLPGridViewController.m */; };
+		6F8782FC199BB0DC00AA118E /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8782FB199BB0DC00AA118E /* libGoogleAdMobAds.a */; };
+		6F8782FE199BB11000AA118E /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8782FD199BB11000AA118E /* AdSupport.framework */; };
+		6F878300199BB11900AA118E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8782FF199BB11900AA118E /* AudioToolbox.framework */; };
+		6F878302199BB12900AA118E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F878301199BB12900AA118E /* AVFoundation.framework */; };
+		6F878304199BB13500AA118E /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F878303199BB13500AA118E /* MessageUI.framework */; };
+		6F878306199BB14100AA118E /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F878305199BB14100AA118E /* StoreKit.framework */; };
+		6F878308199BB14C00AA118E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F878307199BB14C00AA118E /* SystemConfiguration.framework */; };
 		6F87A771199A17B400C2303A /* FLPScoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F87A770199A17B400C2303A /* FLPScoreViewController.m */; };
 		6F87A774199A320E00C2303A /* FLPRecordsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F87A773199A320E00C2303A /* FLPRecordsViewController.m */; };
 		6FA783E81992A26400F8B8AC /* FLPSizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA783E71992A26400F8B8AC /* FLPSizeViewController.m */; };
@@ -87,6 +94,25 @@
 		6F7B2DDE1980FC9200C9FE69 /* FLPGridViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPGridViewController.h; sourceTree = "<group>"; };
 		6F7B2DDF1980FC9200C9FE69 /* FLPGridViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPGridViewController.m; sourceTree = "<group>"; };
 		6F7B2DE11981144D00C9FE69 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		6F8782EF199BB0DC00AA118E /* GADAdMobExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdMobExtras.h; sourceTree = "<group>"; };
+		6F8782F0199BB0DC00AA118E /* GADAdNetworkExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdNetworkExtras.h; sourceTree = "<group>"; };
+		6F8782F1199BB0DC00AA118E /* GADAdSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdSize.h; sourceTree = "<group>"; };
+		6F8782F2199BB0DC00AA118E /* GADBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADBannerView.h; sourceTree = "<group>"; };
+		6F8782F3199BB0DC00AA118E /* GADBannerViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADBannerViewDelegate.h; sourceTree = "<group>"; };
+		6F8782F4199BB0DC00AA118E /* GADInAppPurchase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInAppPurchase.h; sourceTree = "<group>"; };
+		6F8782F5199BB0DC00AA118E /* GADInAppPurchaseDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInAppPurchaseDelegate.h; sourceTree = "<group>"; };
+		6F8782F6199BB0DC00AA118E /* GADInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInterstitial.h; sourceTree = "<group>"; };
+		6F8782F7199BB0DC00AA118E /* GADInterstitialDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInterstitialDelegate.h; sourceTree = "<group>"; };
+		6F8782F8199BB0DC00AA118E /* GADModules.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADModules.h; sourceTree = "<group>"; };
+		6F8782F9199BB0DC00AA118E /* GADRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequest.h; sourceTree = "<group>"; };
+		6F8782FA199BB0DC00AA118E /* GADRequestError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequestError.h; sourceTree = "<group>"; };
+		6F8782FB199BB0DC00AA118E /* libGoogleAdMobAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAdMobAds.a; sourceTree = "<group>"; };
+		6F8782FD199BB11000AA118E /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		6F8782FF199BB11900AA118E /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		6F878301199BB12900AA118E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		6F878303199BB13500AA118E /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		6F878305199BB14100AA118E /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		6F878307199BB14C00AA118E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		6F87A76F199A17B400C2303A /* FLPScoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPScoreViewController.h; sourceTree = "<group>"; };
 		6F87A770199A17B400C2303A /* FLPScoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPScoreViewController.m; sourceTree = "<group>"; };
 		6F87A772199A320E00C2303A /* FLPRecordsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPRecordsViewController.h; sourceTree = "<group>"; };
@@ -107,11 +133,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F878308199BB14C00AA118E /* SystemConfiguration.framework in Frameworks */,
+				6F878306199BB14100AA118E /* StoreKit.framework in Frameworks */,
+				6F878304199BB13500AA118E /* MessageUI.framework in Frameworks */,
+				6F878302199BB12900AA118E /* AVFoundation.framework in Frameworks */,
+				6F878300199BB11900AA118E /* AudioToolbox.framework in Frameworks */,
+				6F8782FE199BB11000AA118E /* AdSupport.framework in Frameworks */,
 				6FF58538197FCA5800926DF9 /* AssetsLibrary.framework in Frameworks */,
 				6F1AA15B1973EAA400101766 /* CoreGraphics.framework in Frameworks */,
 				6F1AA1591973EAA400101766 /* Foundation.framework in Frameworks */,
 				6F1AA15D1973EAA400101766 /* UIKit.framework in Frameworks */,
 				D6BB898A4D1F49E8A43AE354 /* libPods.a in Frameworks */,
+				6F8782FC199BB0DC00AA118E /* libGoogleAdMobAds.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -151,6 +184,12 @@
 		6F1AA1571973EAA400101766 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6F878307199BB14C00AA118E /* SystemConfiguration.framework */,
+				6F878305199BB14100AA118E /* StoreKit.framework */,
+				6F878303199BB13500AA118E /* MessageUI.framework */,
+				6F878301199BB12900AA118E /* AVFoundation.framework */,
+				6F8782FF199BB11900AA118E /* AudioToolbox.framework */,
+				6F8782FD199BB11000AA118E /* AdSupport.framework */,
 				EBC66B07440B4166BA92308A /* libPods.a */,
 				6FF58537197FCA5800926DF9 /* AssetsLibrary.framework */,
 				6F1AA15A1973EAA400101766 /* CoreGraphics.framework */,
@@ -164,6 +203,7 @@
 		6F1AA15E1973EAA400101766 /* Flip */ = {
 			isa = PBXGroup;
 			children = (
+				6F8782EE199BB0B600AA118E /* adMob */,
 				6F33AC811999244600FBF9C4 /* model */,
 				6F67A355197FD17F00AC9CF5 /* utils */,
 				6FFC51641976655B00668F82 /* sources */,
@@ -252,6 +292,26 @@
 				6F67A357197FD19600AC9CF5 /* FLPLogFormatter.m */,
 			);
 			name = utils;
+			sourceTree = "<group>";
+		};
+		6F8782EE199BB0B600AA118E /* adMob */ = {
+			isa = PBXGroup;
+			children = (
+				6F8782EF199BB0DC00AA118E /* GADAdMobExtras.h */,
+				6F8782F0199BB0DC00AA118E /* GADAdNetworkExtras.h */,
+				6F8782F1199BB0DC00AA118E /* GADAdSize.h */,
+				6F8782F2199BB0DC00AA118E /* GADBannerView.h */,
+				6F8782F3199BB0DC00AA118E /* GADBannerViewDelegate.h */,
+				6F8782F4199BB0DC00AA118E /* GADInAppPurchase.h */,
+				6F8782F5199BB0DC00AA118E /* GADInAppPurchaseDelegate.h */,
+				6F8782F6199BB0DC00AA118E /* GADInterstitial.h */,
+				6F8782F7199BB0DC00AA118E /* GADInterstitialDelegate.h */,
+				6F8782F8199BB0DC00AA118E /* GADModules.h */,
+				6F8782F9199BB0DC00AA118E /* GADRequest.h */,
+				6F8782FA199BB0DC00AA118E /* GADRequestError.h */,
+				6F8782FB199BB0DC00AA118E /* libGoogleAdMobAds.a */,
+			);
+			name = adMob;
 			sourceTree = "<group>";
 		};
 		6FFC51641976655B00668F82 /* sources */ = {
@@ -562,6 +622,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Flip/Flip-Prefix.pch";
 				INFOPLIST_FILE = "Flip/Flip-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Flip",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "5409A3A6-2A30-455D-A168-55A698992539";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -579,6 +643,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Flip/Flip-Prefix.pch";
 				INFOPLIST_FILE = "Flip/Flip-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Flip",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "ACE15740-AF2A-4096-A8A6-34F8FEF7C4A4";
 				TARGETED_DEVICE_FAMILY = 1;

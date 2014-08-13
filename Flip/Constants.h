@@ -26,3 +26,5 @@
 
 // Others
 #define kPenalizationPerError 2
+
+#define kAddMobID @"ca-app-pub-5749330139035133/4247378009";

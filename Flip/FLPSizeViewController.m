@@ -9,12 +9,15 @@
 #import "FLPSizeViewController.h"
 #import "FLPGridViewController.h"
 
+#import "GADBannerView.h"
+
 @interface FLPSizeViewController ()
 
 @property (nonatomic, weak) IBOutlet UIButton *backBtn;
 @property (nonatomic, weak) IBOutlet UIButton *smallBtn;
 @property (nonatomic, weak) IBOutlet UIButton *normalBtn;
 @property (nonatomic, weak) IBOutlet UIButton *bigBtn;
+@property (nonatomic, weak) IBOutlet UIView *bannerView;
 @property (nonatomic) GridSizeType size;
 
 - (IBAction)onSmallButtonPressed:(id)sender;
@@ -43,6 +46,13 @@
     [_smallBtn setTitle:NSLocalizedString(@"SIZE_SMALL", @"") forState:UIControlStateNormal];
     [_normalBtn setTitle:NSLocalizedString(@"SIZE_NORMAL", @"") forState:UIControlStateNormal];
     [_bigBtn setTitle:NSLocalizedString(@"SIZE_BIG", @"") forState:UIControlStateNormal];
+    
+    // Banner
+    GADBannerView *banner = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner];
+    banner.adUnitID = kAddMobID;
+    banner.rootViewController = self;
+    [_bannerView addSubview:banner];
+    [banner loadRequest:[GADRequest request]];
 }
 
 - (void)didReceiveMemoryWarning
