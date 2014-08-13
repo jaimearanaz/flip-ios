@@ -22,7 +22,9 @@
     return self;
 }
 
-- (void)getRandomPhotosFromSource:(NSInteger)number succesBlock:(void(^)(NSArray* photos))success failureBlock:(void(^)(NSError *error))failure
+- (void)getPhotosFromSource:(NSInteger)number
+                succesBlock:(void(^)(NSArray* photos))success
+               failureBlock:(void(^)(NSError *error))failure
 {
     FLPLogDebug(@"");
     

@@ -8,6 +8,9 @@
 
 #import "FLPPhotoSource.h"
 
+/**
+ * This class represents a Camera photo source. No Internet connection is required
+ */
 @interface FLPCameraPhotoSource : FLPPhotoSource
 
 @end

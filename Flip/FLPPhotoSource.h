@@ -15,8 +15,7 @@
  */
 @interface FLPPhotoSource : NSObject
 
-// YES, if this resource requires an Internet connection to get photos from origin
-// NO, if an Internet connection is not needed
+// YES, if an Internet connection is required to download original photos
 @property (nonatomic) BOOL internetRequired;
 
 /**
@@ -35,7 +34,7 @@
  * @param success Block to execute if operation is successful; it contains an array of UIImages
  * @param failure Block to execute if operation fails
  */
-- (void)getRandomPhotosFromSource:(NSInteger)number succesBlock:(void(^)(NSArray* photos))success failureBlock:(void(^)(NSError *error))failure;
+- (void)getPhotosFromSource:(NSInteger)number succesBlock:(void(^)(NSArray* photos))success failureBlock:(void(^)(NSError *error))failure;
 
 /**
  * Returns all the available photos saved in cache.

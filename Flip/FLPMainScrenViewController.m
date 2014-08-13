@@ -313,7 +313,7 @@
                 FLPLogDebug(@"internet connection via WiFi");
                 
                 [_photoSource deleteCache];
-                [_photoSource getRandomPhotosFromSource:kMinimunPhotos
+                [_photoSource getPhotosFromSource:kMinimunPhotos
                                       succesBlock:^(NSArray *photos) {
                                           [_photoSource savePhotosToCache:photos];
                                           successBlock(photos);
@@ -334,7 +334,7 @@
                 } else {
                     FLPLogDebug(@"download photos from source");
                     [_photoSource deleteCache];
-                    [_photoSource getRandomPhotosFromSource:kMinimunPhotos
+                    [_photoSource getPhotosFromSource:kMinimunPhotos
                                           succesBlock:^(NSArray *photos) {
                                               [_photoSource savePhotosToCache:photos];
                                               successBlock(photos);
@@ -348,7 +348,7 @@
         // Source doesn't need an internet connection
         } else {
             FLPLogDebug(@"no internet connection is needed");
-            [_photoSource getRandomPhotosFromSource:kMinimunPhotos
+            [_photoSource getPhotosFromSource:kMinimunPhotos
                                   succesBlock:^(NSArray *photos) {
                                       successBlock(photos);
                                   }

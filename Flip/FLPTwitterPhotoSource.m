@@ -44,7 +44,7 @@
 
 #pragma mark - FLPPhotoSource superclass methods
 
-- (void)getRandomPhotosFromSource:(NSInteger)number
+- (void)getPhotosFromSource:(NSInteger)number
                       succesBlock:(void(^)(NSArray* photos))success
                      failureBlock:(void(^)(NSError *error))failure
 {

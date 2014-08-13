@@ -20,9 +20,9 @@
 
 #pragma mark - FLPPhotoSource superclass methods
 
-- (void)getRandomPhotosFromSource:(NSInteger)number
-                      succesBlock:(void(^)(NSArray* photos))success
-                     failureBlock:(void(^)(NSError *error))failure
+- (void)getPhotosFromSource:(NSInteger)number
+                succesBlock:(void(^)(NSArray* photos))success
+               failureBlock:(void(^)(NSError *error))failure
 {
     FLPLogDebug(@"number: %ld", number);
     NSMutableArray __block *photos = [[NSMutableArray alloc] init];

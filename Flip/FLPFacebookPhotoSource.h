@@ -8,6 +8,9 @@
 
 #import "FLPPhotoSource.h"
 
+/**
+ * This class represents a Facebook photo source. Internet connection is required
+ */
 @interface FLPFacebookPhotoSource : FLPPhotoSource
 
 @end
