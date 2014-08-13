@@ -165,10 +165,7 @@
     } andCompletion:^(NSDictionary *accountInfo, NSError *error) {
 
         // Logged via web or via local account, at this point we have NSDictionary with user data
-        
         FLPLogDebug(@"login with Twitter successful");
-        FLPLogDebug(@"screen name '%@', name '%@', id '%@'", accountInfo[@"screen_name"], accountInfo[@"name"], accountInfo[@"id"]);
-        FLPLogDebug(@"access token '%@', token secret '%@'", accountInfo[@"accessToken"], accountInfo[@"tokenSecret"]);
         
         [self unsubscribeToTwitterNotifications];
         

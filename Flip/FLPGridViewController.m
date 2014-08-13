@@ -19,18 +19,26 @@
 @property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
 @property (nonatomic, weak) IBOutlet UILabel *timerLbl;
 
-// This array represents the duplicate photos in grid, identified by its indexes inside |photos|
-// Grid will be build up with the same array order
-// i.e. photosInGrid = [0, 1, 3, 0, 4, 4, 3, 5, 2, 1, 5, 2]
+// Array with the duplicated images in grid, it represents indexes from |photos| array
+// e.g. [0, 1, 3, 0, 4, 4, 3, 5, 2, 1, 5, 2]
 @property (nonatomic, strong) NSMutableArray *photosInGrid;
+// Total number of images in grid
 @property (nonatomic) NSInteger numOfPhotos;
+// Number of images matched in grid
 @property (nonatomic) NSInteger numOfPhotosMatched;
+// Number of errors trying to match images in grid
 @property (nonatomic) NSInteger numOfErrors;
+// Starting game time
 @property (nonatomic) NSDate *startDate;
+// Ending game time
 @property (nonatomic) NSDate *endDate;
+// Time to update game timing
 @property (nonatomic, strong) NSTimer *timer;
+// First image to try match
 @property (nonatomic) FLPGridItem *firstPhoto;
+// Second image to try match
 @property (nonatomic) FLPGridItem *secondPhoto;
+// YES if game has started
 @property (nonatomic) BOOL started;
 
 - (IBAction)backButtonPressed:(id)sender;
@@ -158,7 +166,6 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    FLPLogDebug(@"row %ld", (long)indexPath.row);
     FLPCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"gridCell" forIndexPath:indexPath];
     FLPGridItem *gridItem = [_photosInGrid objectAtIndex:indexPath.row];
     
@@ -170,11 +177,39 @@
     }
     cell.coverLbl.text = [NSString stringWithFormat:@"%ld", (indexPath.row + 1)];
     
+
+    // Game is not started, show all images
+    if (!_started) {
+        [cell flipCellToImageAnimated:[NSNumber numberWithBool:NO]];
+        FLPLogDebug(@"row %ld, not started", (long)indexPath.row);
+        
+    // Game is started
+    } else {
+        
+        // Matched
+        if ([gridItem.isMatched boolValue]) {
+            [cell flipCellToImageAnimated:[NSNumber numberWithBool:NO]];
+            FLPLogDebug(@"row %ld, matched", (long)indexPath.row);
+        } else {
+            // Selected
+            if ([gridItem.isShowing boolValue]) {
+                [cell flipCellToImageAnimated:[NSNumber numberWithBool:NO]];
+                FLPLogDebug(@"row %ld, is showing", (long)indexPath.row);
+            // Not selected
+            } else {
+                [cell flipCellToCoverAnimated:[NSNumber numberWithBool:NO]];
+                FLPLogDebug(@"row %ld, not showing", (long)indexPath.row);
+            }
+        }
+    }
+
+    /*
     if ([gridItem.isShowing boolValue]) {
         [cell.contentView bringSubviewToFront:cell.imageView];
     } else {
         [cell.contentView bringSubviewToFront:cell.coverView];
     }
+    */
     
     return cell;
 }
@@ -192,7 +227,7 @@
         if (_firstPhoto == nil) {
             gridItem.isShowing = [NSNumber numberWithBool:YES];
             _firstPhoto = gridItem;
-            [cell flipCellAnimated:[NSNumber numberWithBool:YES]];
+            [cell flipCellToImageAnimated:[NSNumber numberWithBool:YES]];
             
         // It's second photo
         } else {
@@ -200,7 +235,7 @@
             if (gridItem != _firstPhoto) {
                 gridItem.isShowing = [NSNumber numberWithBool:YES];
                 _secondPhoto = gridItem;
-                [cell flipCellAnimated:[NSNumber numberWithBool:YES]];
+                [cell flipCellToImageAnimated:[NSNumber numberWithBool:YES]];
                 
                 // Photos match, keep showing
                 if (_firstPhoto.imageIndex == _secondPhoto.imageIndex) {
@@ -227,11 +262,11 @@
                     FLPCollectionViewCell *_firstCell = (FLPCollectionViewCell *)[_collectionView cellForItemAtIndexPath:firstIndexPath];
                     FLPCollectionViewCell *_secondCell = cell;
                     
-                    [_firstCell performSelector:@selector(flipCellAnimated:)
+                    [_firstCell performSelector:@selector(flipCellToCoverAnimated:)
                                      withObject:[NSNumber numberWithBool:YES]
                                      afterDelay:kGridGeneralDelay
                                         inModes:[NSArray arrayWithObject:NSRunLoopCommonModes]];
-                    [_secondCell performSelector:@selector(flipCellAnimated:)
+                    [_secondCell performSelector:@selector(flipCellToCoverAnimated:)
                                       withObject:[NSNumber numberWithBool:YES]
                                       afterDelay:kGridGeneralDelay
                                          inModes:[NSArray arrayWithObject:NSRunLoopCommonModes]];
@@ -337,22 +372,16 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 - (void)hideAllPhotos
 {
     // Set model data
+    double delay = 0;
     for (int i=0; i < (_numOfPhotos); i++) {
         FLPGridItem *gridItem = [_photosInGrid objectAtIndex:i];
         gridItem.isShowing = NO;
-    }
-    
-    // Set cells
-    NSArray *visiblePaths = [_collectionView indexPathsForVisibleItems];
-    double delay = 0;
-    for (NSIndexPath *indexPath in visiblePaths) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForItem:i inSection:0];
         FLPCollectionViewCell *cell = (FLPCollectionViewCell *)[_collectionView cellForItemAtIndexPath:indexPath];
-        if ([cell isShowingImage]) {
-            [cell performSelector:@selector(flipCellAnimated:)
+            [cell performSelector:@selector(flipCellToCoverAnimated:)
                        withObject:[NSNumber numberWithBool:YES]
                        afterDelay:delay
                           inModes:[NSArray arrayWithObject:NSRunLoopCommonModes]];
-        }
         delay += 0.1;
     }
 }

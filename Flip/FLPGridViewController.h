@@ -16,8 +16,9 @@ typedef enum {
 
 @interface FLPGridViewController : UIViewController
 
-// Array with original photos
+// Array with all original images
 @property (nonatomic, strong) NSArray *photos;
+// Size for this grid
 @property (nonatomic) GridSizeType gridSize;
 
 @end
