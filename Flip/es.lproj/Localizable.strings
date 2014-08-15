@@ -7,9 +7,14 @@
 */
 
 // Main screen
-"MAIN_SELECT" = "Selecciona una fuente para tus fotos";
+"MAIN_SELECT_SOURCE" = "Selecciona una fuente para tus fotos";
+"MAIN_SELECT_GRID" = "Selecciona un tamaño para el mosaico";
 "MAIN_CAMERA" = "Cámara";
 "MAIN_RECORDS" = "Ver mis records";
+"MAIN_SMALL" = "Pequeño (3x4)";
+"MAIN_NORMAL" = "Normal (3x6)";
+"MAIN_BIG" = "Grande (3x8)";
+"MAIN_SOURCE" = "Cambiar fuente";
 "MAIN_ALERT" = "Error";
 "MAIN_ENOUGH_PHOTOS_CAMERA" = "¡Necesitas tener al menos %d fotos en tu Carrete!";
 "MAIN_ENOUGH_PHOTOS_TWITTER" = "¡Necesitas tener al menos %d friends y followers con una imagen de perfil válida en Twitter!";
@@ -17,12 +22,6 @@
 "MAIN_SELECT_TWITTER" = "Selecciona una cuenta de Twitter";
 "MAIN_GENERIC_ERROR" = "Ha habido un error obteniendo tus fotos de la fuente seleccionada. Por favor, inténtalo de nuevo.";
 "MAIN_INERNET_CONNECTION" = "Necesitas una conexión a Internet para descargar fotos de esta fuente.";
-
-// Size screen
-"SIZE_SELECT" = "Selecciona un tamaño para el mosaico";
-"SIZE_SMALL" = "Pequeño (3x4)";
-"SIZE_NORMAL" = "Normal (3x6)";
-"SIZE_BIG" = "Grande (3x8)";
 
 // Grid screen
 "GRID_EXIT" = "Salir";

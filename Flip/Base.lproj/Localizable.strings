@@ -7,9 +7,14 @@
 */
 
 // Main screen
-"MAIN_SELECT" = "Select a source for your photos";
+"MAIN_SELECT_SOURCE" = "Select a source for your photos";
+"MAIN_SELECT_GRID" = "Select size for the grid";
 "MAIN_CAMERA" = "Camera";
 "MAIN_RECORDS" = "See my records";
+"MAIN_SMALL" = "Small (3x4)";
+"MAIN_NORMAL" = "Normal (3x6)";
+"MAIN_BIG" = "Big (3x8)";
+"MAIN_SOURCE" = "Change source";
 "MAIN_ALERT" = "Error";
 "MAIN_ENOUGH_PHOTOS_CAMERA" = "You need at least %d photos in your Camera Roll!";
 "MAIN_ENOUGH_PHOTOS_TWITTER" = "You need at least %d friends and followers with a valid image profile in Twitter!";
@@ -17,12 +22,6 @@
 "MAIN_SELECT_TWITTER" = "Select one Twitter account";
 "MAIN_GENERIC_ERROR" = "There was an error getting your photos from selected source. Please try again.";
 "MAIN_INERNET_CONNECTION" = "You need an internet connection to download photos from this source.";
-
-// Size screen
-"SIZE_SELECT" = "Select a size for the grid";
-"SIZE_SMALL" = "Small (3x4)";
-"SIZE_NORMAL" = "Normal (3x6)";
-"SIZE_BIG" = "Big (3x8)";
 
 // Grid screen
 "GRID_EXIT" = "Exit";

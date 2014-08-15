@@ -14,7 +14,7 @@
 #import "FLPCameraPhotoSource.h"
 #import "FLPFacebookPhotoSource.h"
 #import "FLPTwitterPhotoSource.h"
-#import "FLPSizeViewController.h"
+#import "FLPGridViewController.h"
 
 #import "MBProgressHUD.h"
 #import "WCAlertView.h"
@@ -23,22 +23,35 @@
 
 @interface FLPMainScrenViewController () <UIActionSheetDelegate>
 
-@property (nonatomic, weak) IBOutlet UILabel *selectLbl;
+@property (nonatomic, weak) __block IBOutlet UIView *selectSourceView;
+@property (nonatomic, weak) __block IBOutlet UIView *selectSizeView;
+@property (nonatomic, weak) IBOutlet UILabel *selectSourceLbl;
+@property (nonatomic, weak) IBOutlet UILabel *selectGridLbl;
 @property (nonatomic, weak) IBOutlet UIButton *cameraBtn;
 @property (nonatomic, weak) IBOutlet UIButton *facebookBtn;
 @property (nonatomic, weak) IBOutlet UIButton *twitterBtn;
 @property (nonatomic, weak) IBOutlet UIButton *recordsBtn;
+@property (nonatomic, weak) IBOutlet UIButton *smallBtn;
+@property (nonatomic, weak) IBOutlet UIButton *normalBtn;
+@property (nonatomic, weak) IBOutlet UIButton *bigBtn;
+@property (nonatomic, weak) IBOutlet UIButton *sourceBtn;
 @property (nonatomic, weak) IBOutlet UIView *bannerView;
 @property (nonatomic, strong) __block NSArray *photos;
 @property (nonatomic, strong) __block FLPPhotoSource *photoSource;
 @property (nonatomic, strong) NSArray *twitterAccounts;
 @property (nonatomic, strong) __block twitterAccountCallback twitterCallback;
 @property (nonatomic) __block SCNetworkStatus networkStatus;
+@property (nonatomic, strong) NSArray *changeViewsConstraints;
+@property (nonatomic) GridSizeType size;
 
 - (IBAction)onCameraButtonPressed:(id)sender;
 - (IBAction)onFacebookButtonPressed:(id)sender;
 - (IBAction)onTwitterButtonPressed:(id)sender;
+- (IBAction)onSmallButtonPressed:(id)sender;
+- (IBAction)onNormalButtonPressed:(id)sender;
+- (IBAction)onBigButtonPressed:(id)sender;
 - (IBAction)onRecordsButtonPressed:(id)sender;
+- (IBAction)onSourceButtonPressed:(id)sender;
 
 @end
 
@@ -50,9 +63,14 @@
 {
     [super viewDidLoad];
 	
-    _selectLbl.text = NSLocalizedString(@"MAIN_SELECT", @"");
+    _selectSourceLbl.text = NSLocalizedString(@"MAIN_SELECT_SOURCE", @"");
+    _selectGridLbl.text = NSLocalizedString(@"MAIN_SELECT_GRID", @"");
     [_cameraBtn setTitle:NSLocalizedString(@"MAIN_CAMERA", @"") forState:UIControlStateNormal];
     [_recordsBtn setTitle:NSLocalizedString(@"MAIN_RECORDS", @"") forState:UIControlStateNormal];
+    [_smallBtn setTitle:NSLocalizedString(@"MAIN_SMALL", @"") forState:UIControlStateNormal];
+    [_normalBtn setTitle:NSLocalizedString(@"MAIN_NORMAL", @"") forState:UIControlStateNormal];
+    [_bigBtn setTitle:NSLocalizedString(@"MAIN_BIG", @"") forState:UIControlStateNormal];
+    [_sourceBtn setTitle:NSLocalizedString(@"MAIN_SOURCE", @"") forState:UIControlStateNormal];
     
     // Check internet connection
     [SCNetworkReachability host:@"www.google.es" reachabilityStatus:^(SCNetworkStatus status)
@@ -67,6 +85,8 @@
     banner.rootViewController = self;
     [_bannerView addSubview:banner];
     [banner loadRequest:[GADRequest request]];
+    
+    _changeViewsConstraints = [[NSArray alloc] init];
 }
 
 - (void)didReceiveMemoryWarning
@@ -77,9 +97,10 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:@"sizeSegue"]) {
-        FLPSizeViewController *sizeViewController=(FLPSizeViewController *)segue.destinationViewController;
-        sizeViewController.photos = _photos;
+    if ([segue.identifier isEqualToString:@"gridSegue"]) {
+        FLPGridViewController *gridViewController=(FLPGridViewController *)segue.destinationViewController;
+        gridViewController.photos = _photos;
+        gridViewController.gridSize = _size;
     }
 }
 
@@ -190,9 +211,43 @@
 
 - (IBAction)onRecordsButtonPressed:(id)sender
 {
+    FLPLogDebug(@"");
     [self performSegueWithIdentifier:@"recordFromMainSegue" sender:self];
 }
 
+- (IBAction)onSmallButtonPressed:(id)sender
+{
+    FLPLogDebug(@"");
+    _size = GridSizeSmall;
+    [self performSegueWithIdentifier:@"gridSegue" sender:self];
+}
+
+- (IBAction)onNormalButtonPressed:(id)sender
+{
+    FLPLogDebug(@"");
+    _size = GridSizeNormal;
+    [self performSegueWithIdentifier:@"gridSegue" sender:self];
+}
+
+- (IBAction)onBigButtonPressed:(id)sender
+{
+    FLPLogDebug(@"");
+    _size = GridSizeBig;
+    [self performSegueWithIdentifier:@"gridSegue" sender:self];
+}
+
+- (IBAction)onSourceButtonPressed:(id)sender
+{
+    FLPLogDebug(@"");
+    // Change to select source view
+    [UIView animateWithDuration:0.3
+                     animations:^{
+                         [self.view removeConstraints:_changeViewsConstraints];
+                         [self.view layoutIfNeeded];
+                     }
+                     completion:^(BOOL finished) {
+                     }];
+}
 
 # pragma mark - UIActionSheetDelegate methods
 
@@ -258,7 +313,24 @@
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         _photos = photos;
         if ((_photos != nil) && (photos.count != 0)) {
-            [self performSegueWithIdentifier:@"sizeSegue" sender:self];
+
+            // Change to select size view
+            [UIView animateWithDuration:0.3
+                             animations:^{
+                                 [self.view removeConstraints:_changeViewsConstraints];
+                                 UIView *selectSourceView = self.selectSourceView;
+                                 NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(selectSourceView);
+                                 _changeViewsConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"[selectSourceView]-640-|"
+                                                                                                   options:0
+                                                                                                   metrics:nil
+                                                                                                     views:viewsDictionary];
+                                 [self.view addConstraints:_changeViewsConstraints];
+                                 [self.view layoutIfNeeded];
+                             }
+                             completion:^(BOOL finished) {
+                             }];
+
+            //[self performSegueWithIdentifier:@"sizeSegue" sender:self];
         }
     };
     
