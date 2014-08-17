@@ -124,9 +124,9 @@
 - (IBAction)nextButtonPressed:(id)sender
 {
     if (_newRecord) {
-        [self performSegueWithIdentifier:@"recordSegue" sender:self];
+        [self performSegueWithIdentifier:@"recordsFromScoreSegue" sender:self];
     } else {
-        [self performSegueWithIdentifier:@"mainSegue" sender:self];
+        [self performSegueWithIdentifier:@"mainFromScoreSegue" sender:self];
     }
 }
 

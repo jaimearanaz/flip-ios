@@ -218,8 +218,8 @@
                         <outlet property="smallBtn" destination="Mxm-dX-5Zp" id="CQz-zm-YSF"/>
                         <outlet property="sourceBtn" destination="sL0-Tf-rcq" id="1FR-TM-iXt"/>
                         <outlet property="twitterBtn" destination="ky9-hR-iZY" id="dEH-UG-8la"/>
-                        <segue destination="2Iz-SI-UwT" kind="modal" identifier="recordFromMainSegue" modalTransitionStyle="coverVertical" id="mlP-Gl-dMJ"/>
-                        <segue destination="20h-2Q-q9d" kind="modal" identifier="gridSegue" modalTransitionStyle="flipHorizontal" id="zoe-Iq-vdC"/>
+                        <segue destination="2Iz-SI-UwT" kind="custom" identifier="recordsFromMainSegue" customClass="FLPCoverFromLeftSegue" id="4VQ-hx-PhO"/>
+                        <segue destination="20h-2Q-q9d" kind="custom" identifier="gridFromMainSegue" customClass="FLPFlipFromRightSegue" id="ibe-Gz-0pW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -340,8 +340,8 @@
                         <outlet property="bannerView" destination="WaP-N1-zeL" id="Ltb-Ad-pUZ"/>
                         <outlet property="collectionView" destination="7N5-Ms-QXi" id="yis-Dr-v0v"/>
                         <outlet property="timerLbl" destination="daP-tU-OD0" id="SmX-yv-NFn"/>
-                        <segue destination="vXZ-lx-hvc" kind="modal" identifier="mainSegue" id="jcz-YN-TXR"/>
-                        <segue destination="WwA-J0-4Lf" kind="modal" identifier="scoreSegue" modalTransitionStyle="coverVertical" id="rVN-j2-18b"/>
+                        <segue destination="vXZ-lx-hvc" kind="custom" identifier="mainFromGridSegue" customClass="FLPFlipFromLeftSegue" id="bh2-xp-4J2"/>
+                        <segue destination="WwA-J0-4Lf" kind="custom" identifier="scoreFromGridSegue" customClass="FLPFlipFromLeftSegue" id="ftr-nZ-fQe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z5p-ZD-NNr" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -457,9 +457,9 @@
                         <outlet property="timeLbl" destination="Xbe-aJ-Ie1" id="FVg-3H-ais"/>
                         <outlet property="timeResultLbl" destination="puV-hu-PfX" id="zee-3r-psV"/>
                         <outlet property="tryAgainBtn" destination="tfg-5J-dlH" id="4Yn-tA-PwZ"/>
-                        <segue destination="2Iz-SI-UwT" kind="modal" identifier="recordSegue" modalTransitionStyle="coverVertical" id="oh0-n8-j6h"/>
-                        <segue destination="vXZ-lx-hvc" kind="modal" identifier="mainSegue" modalTransitionStyle="coverVertical" id="3re-2Y-CXD"/>
-                        <segue destination="20h-2Q-q9d" kind="modal" identifier="gridFromScoreSegue" modalTransitionStyle="coverVertical" id="YUz-iQ-Yzn"/>
+                        <segue destination="20h-2Q-q9d" kind="custom" identifier="gridFromScoreSegue" customClass="FLPFlipFromRightSegue" id="bqU-UK-gYp"/>
+                        <segue destination="2Iz-SI-UwT" kind="custom" identifier="recordsFromScoreSegue" customClass="FLPCoverFromRightSegue" id="Kbh-Hl-H2k"/>
+                        <segue destination="vXZ-lx-hvc" kind="custom" identifier="mainFromScoreSegue" customClass="FLPCoverFromRightSegue" id="uZU-Ea-4mk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1dO-TB-MvT" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -573,7 +573,7 @@
                         <outlet property="smallLbl" destination="9Mp-Gj-mwk" id="ppE-Pw-XAU"/>
                         <outlet property="smallResultLbl" destination="yhD-Xc-NzY" id="jy4-2Z-nLK"/>
                         <outlet property="titleLbl" destination="Ojt-5i-Nul" id="1qD-X1-d5b"/>
-                        <segue destination="vXZ-lx-hvc" kind="modal" identifier="mainFromRecordSegue" id="3xf-SL-qbY"/>
+                        <segue destination="vXZ-lx-hvc" kind="custom" identifier="mainFromRecordsSegue" customClass="FLPCoverFromRightSegue" id="woI-t5-zsd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RiB-RU-Dax" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -587,8 +587,8 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="jcz-YN-TXR"/>
-        <segue reference="zoe-Iq-vdC"/>
-        <segue reference="mlP-Gl-dMJ"/>
+        <segue reference="bqU-UK-gYp"/>
+        <segue reference="uZU-Ea-4mk"/>
+        <segue reference="Kbh-Hl-H2k"/>
     </inferredMetricsTieBreakers>
 </document>

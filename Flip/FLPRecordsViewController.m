@@ -81,7 +81,7 @@
 
 - (IBAction)mainButtonPressed:(id)sender
 {
-    [self performSegueWithIdentifier:@"mainFromRecordSegue" sender:self];
+    [self performSegueWithIdentifier:@"mainFromRecordsSegue" sender:self];
 }
 
 @end

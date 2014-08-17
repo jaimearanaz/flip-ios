@@ -97,7 +97,7 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:@"gridSegue"]) {
+    if ([segue.identifier isEqualToString:@"gridFromMainSegue"]) {
         FLPGridViewController *gridViewController=(FLPGridViewController *)segue.destinationViewController;
         gridViewController.photos = _photos;
         gridViewController.gridSize = _size;
@@ -212,28 +212,28 @@
 - (IBAction)onRecordsButtonPressed:(id)sender
 {
     FLPLogDebug(@"");
-    [self performSegueWithIdentifier:@"recordFromMainSegue" sender:self];
+    [self performSegueWithIdentifier:@"recordsFromMainSegue" sender:self];
 }
 
 - (IBAction)onSmallButtonPressed:(id)sender
 {
     FLPLogDebug(@"");
     _size = GridSizeSmall;
-    [self performSegueWithIdentifier:@"gridSegue" sender:self];
+    [self performSegueWithIdentifier:@"gridFromMainSegue" sender:self];
 }
 
 - (IBAction)onNormalButtonPressed:(id)sender
 {
     FLPLogDebug(@"");
     _size = GridSizeNormal;
-    [self performSegueWithIdentifier:@"gridSegue" sender:self];
+    [self performSegueWithIdentifier:@"gridFromMainSegue" sender:self];
 }
 
 - (IBAction)onBigButtonPressed:(id)sender
 {
     FLPLogDebug(@"");
     _size = GridSizeBig;
-    [self performSegueWithIdentifier:@"gridSegue" sender:self];
+    [self performSegueWithIdentifier:@"gridFromMainSegue" sender:self];
 }
 
 - (IBAction)onSourceButtonPressed:(id)sender

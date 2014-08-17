@@ -21,9 +21,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    
     [self setLogLevels];
     
+    [self.window setBackgroundColor:[UIColor colorWithRed:255.0f/255.0f
+                                                    green:204.0f/255.0f
+                                                     blue:102.0f/255.0f
+                                                    alpha:1.0f]];
     return YES;
 }
 

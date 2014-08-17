@@ -136,7 +136,7 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:@"scoreSegue"]) {
+    if ([segue.identifier isEqualToString:@"scoreFromGridSegue"]) {
         FLPScoreViewController *scoreViewController=(FLPScoreViewController *)segue.destinationViewController;
         scoreViewController.time = _endDate;
         scoreViewController.numOfErrors = _numOfErrors;
@@ -367,12 +367,12 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 - (void)exitGame
 {
     [self stopTimer];
-    [self performSegueWithIdentifier:@"mainSegue" sender:self];
+    [self performSegueWithIdentifier:@"mainFromGridSegue" sender:self];
 }
 
 - (void)endGame
 {
-    [self performSegueWithIdentifier:@"scoreSegue" sender:self];
+    [self performSegueWithIdentifier:@"scoreFromGridSegue" sender:self];
 }
 
 /**

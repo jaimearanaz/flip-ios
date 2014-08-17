@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F14871B19A0F5E90087527C /* FLPCoverFromLeftSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F14871A19A0F5E90087527C /* FLPCoverFromLeftSegue.m */; };
+		6F14871E19A0F6640087527C /* FLPCoverFromRightSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F14871D19A0F6640087527C /* FLPCoverFromRightSegue.m */; };
+		6F14872119A0FD110087527C /* FLPFlipFromLeftSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F14872019A0FD110087527C /* FLPFlipFromLeftSegue.m */; };
+		6F14872419A0FDE90087527C /* FLPFlipFromRightSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F14872319A0FDE90087527C /* FLPFlipFromRightSegue.m */; };
 		6F1AA1591973EAA400101766 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F1AA1581973EAA400101766 /* Foundation.framework */; };
 		6F1AA15B1973EAA400101766 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F1AA15A1973EAA400101766 /* CoreGraphics.framework */; };
 		6F1AA15D1973EAA400101766 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F1AA15C1973EAA400101766 /* UIKit.framework */; };
@@ -56,6 +60,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6F14871919A0F5E90087527C /* FLPCoverFromLeftSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPCoverFromLeftSegue.h; sourceTree = "<group>"; };
+		6F14871A19A0F5E90087527C /* FLPCoverFromLeftSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPCoverFromLeftSegue.m; sourceTree = "<group>"; };
+		6F14871C19A0F6640087527C /* FLPCoverFromRightSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPCoverFromRightSegue.h; sourceTree = "<group>"; };
+		6F14871D19A0F6640087527C /* FLPCoverFromRightSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPCoverFromRightSegue.m; sourceTree = "<group>"; };
+		6F14871F19A0FD110087527C /* FLPFlipFromLeftSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPFlipFromLeftSegue.h; sourceTree = "<group>"; };
+		6F14872019A0FD110087527C /* FLPFlipFromLeftSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPFlipFromLeftSegue.m; sourceTree = "<group>"; };
+		6F14872219A0FDE90087527C /* FLPFlipFromRightSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPFlipFromRightSegue.h; sourceTree = "<group>"; };
+		6F14872319A0FDE90087527C /* FLPFlipFromRightSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPFlipFromRightSegue.m; sourceTree = "<group>"; };
 		6F1AA1551973EAA400101766 /* Flip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F1AA1581973EAA400101766 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6F1AA15A1973EAA400101766 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -161,6 +173,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6F14871819A0F5A50087527C /* segues */ = {
+			isa = PBXGroup;
+			children = (
+				6F14871919A0F5E90087527C /* FLPCoverFromLeftSegue.h */,
+				6F14871A19A0F5E90087527C /* FLPCoverFromLeftSegue.m */,
+				6F14871C19A0F6640087527C /* FLPCoverFromRightSegue.h */,
+				6F14871D19A0F6640087527C /* FLPCoverFromRightSegue.m */,
+				6F14871F19A0FD110087527C /* FLPFlipFromLeftSegue.h */,
+				6F14872019A0FD110087527C /* FLPFlipFromLeftSegue.m */,
+				6F14872219A0FDE90087527C /* FLPFlipFromRightSegue.h */,
+				6F14872319A0FDE90087527C /* FLPFlipFromRightSegue.m */,
+			);
+			name = segues;
+			sourceTree = "<group>";
+		};
 		6F1AA14C1973EAA400101766 = {
 			isa = PBXGroup;
 			children = (
@@ -207,6 +234,7 @@
 				6F33AC811999244600FBF9C4 /* model */,
 				6F67A355197FD17F00AC9CF5 /* utils */,
 				6FFC51641976655B00668F82 /* sources */,
+				6F14871819A0F5A50087527C /* segues */,
 				6F1AA1911973EAF800101766 /* views */,
 				6F1AA1901973EAF000101766 /* controllers */,
 				6F1AA15F1973EAA400101766 /* Supporting Files */,
@@ -467,6 +495,7 @@
 			files = (
 				6F7B2DE01980FC9200C9FE69 /* FLPGridViewController.m in Sources */,
 				6F67A358197FD19600AC9CF5 /* FLPLogFormatter.m in Sources */,
+				6F14872419A0FDE90087527C /* FLPFlipFromRightSegue.m in Sources */,
 				6F3B3A9419825C1C00EA4BA1 /* FLPTwitterPhotoSource.m in Sources */,
 				6F33AC841999245500FBF9C4 /* FLPGridItem.m in Sources */,
 				6FFC51671976659800668F82 /* FLPPhotoSource.m in Sources */,
@@ -474,11 +503,14 @@
 				6F1AA1651973EAA400101766 /* main.m in Sources */,
 				6F33AC7C1998C14000FBF9C4 /* FLPCollectionViewCell.m in Sources */,
 				6FA783E81992A26400F8B8AC /* FLPSizeViewController.m in Sources */,
+				6F14871B19A0F5E90087527C /* FLPCoverFromLeftSegue.m in Sources */,
 				6F1AA1721973EAA400101766 /* FLPMainScrenViewController.m in Sources */,
 				6F87A774199A320E00C2303A /* FLPRecordsViewController.m in Sources */,
 				6F87A771199A17B400C2303A /* FLPScoreViewController.m in Sources */,
 				6F5AD5C71987ABF600B65D09 /* FLPFacebookPhotoSource.m in Sources */,
+				6F14872119A0FD110087527C /* FLPFlipFromLeftSegue.m in Sources */,
 				6F1AA1691973EAA400101766 /* FLPAppDelegate.m in Sources */,
+				6F14871E19A0F6640087527C /* FLPCoverFromRightSegue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
