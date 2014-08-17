@@ -27,7 +27,7 @@
     FLPLogDebug(@"number: %ld", number);
     NSMutableArray __block *photos = [[NSMutableArray alloc] init];
     ALAssetsLibrary *assetsLibrary = [[ALAssetsLibrary alloc] init];
-    
+
     [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos
                                  usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
                                      if (group != nil) {
@@ -36,29 +36,30 @@
                                          [group setAssetsFilter:[ALAssetsFilter allPhotos]];
                                          FLPLogDebug(@"photos in group: %ld", group.numberOfAssets);
                                        
-                                         // Set range
-                                         NSRange range;
-                                         if (group.numberOfAssets <= number) {
-                                             range = NSMakeRange(0, group.numberOfAssets);
-                                         } else {
-                                             range = [self randomRangeFrom:0 to:group.numberOfAssets with:number];
-                                         }
-                                         
-                                         FLPLogDebug(@"range starts %d length %d", (int)range.location, (int)range.length);
 
-                                         // Enumerate all photos in current group
-                                         [group enumerateAssetsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:range]
-                                                                 options:0
-                                                              usingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
-                                                                  if (result != nil) {
-                                                                      UIImage *image = [UIImage imageWithCGImage:[result thumbnail]];
-                                                                      // Add image
-                                                                      [photos addObject:image];
-                                                                      FLPLogDebug(@"add image: %ld", photos.count);
-                                                                  }
-                                                              }];
-                                         success(photos);
+                                         if (group.numberOfAssets >= number) {
+                                             NSRange range = [self randomRangeFrom:0 to:group.numberOfAssets with:number];
+                                             FLPLogDebug(@"range starts %d length %d", (int)range.location, (int)range.length);
+                                             
+                                             // Enumerate all photos in current group
+                                             [group enumerateAssetsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:range]
+                                                                     options:0
+                                                                  usingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
+                                                                      if (result != nil) {
+                                                                          UIImage *image = [UIImage imageWithCGImage:[result thumbnail]];
+                                                                          // Add image
+                                                                          [photos addObject:image];
+                                                                          FLPLogDebug(@"add image: %ld", photos.count);
+                                                                      }
+                                                                  }];
+                                             success(photos);
+                                         } else {
+                                             failure([NSError errorWithDomain:@""
+                                                                         code:KErrorEnoughPhotos
+                                                                     userInfo:nil]);
+                                         }
                                      }
+                                     
                                  } failureBlock:^(NSError *error) {
                                      FLPLogError(@"error: %@", [error localizedDescription]);
                                      failure(error);

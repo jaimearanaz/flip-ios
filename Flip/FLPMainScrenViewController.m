@@ -21,6 +21,12 @@
 #import "SCNetworkReachability.h"
 #import "GADBannerView.h"
 
+typedef enum {
+    PhotoSourceCamera,
+    PhotoSourceFacebook,
+    PhotoShourceTwitter
+} PhotoSourceType;
+
 @interface FLPMainScrenViewController () <UIActionSheetDelegate>
 
 @property (nonatomic, weak) __block IBOutlet UIView *selectSourceView;
@@ -43,6 +49,7 @@
 @property (nonatomic) __block SCNetworkStatus networkStatus;
 @property (nonatomic, strong) NSArray *changeViewsConstraints;
 @property (nonatomic) GridSizeType size;
+@property (nonatomic) PhotoSourceType source;
 
 - (IBAction)onCameraButtonPressed:(id)sender;
 - (IBAction)onFacebookButtonPressed:(id)sender;
@@ -109,104 +116,22 @@
 - (IBAction)onCameraButtonPressed:(id)sender
 {
     FLPLogDebug(@"camera button pressed");
-    _photoSource = [[FLPCameraPhotoSource alloc] init];
-    [self checkReachabilityAndPreparePhotos];
+    _source = PhotoSourceCamera;
+    [self showSizeView];
 }
 
 - (IBAction)onFacebookButtonPressed:(id)sender
 {
     FLPLogDebug(@"Facebook button pressed");
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [self disableButtons];
-    
-    [FBSession openActiveSessionWithReadPermissions:kFacebookPermissions
-                                       allowLoginUI:YES
-                                  completionHandler:^(FBSession *session, FBSessionState state, NSError *error) {
-                                      
-                                      [self enableButtons];
-                                      [MBProgressHUD hideHUDForView:self.view animated:YES];
-                                      
-                                      if (state == FBSessionStateOpen) {
-                                          FLPLogDebug(@"Facebook session opened");
-                                          _photoSource = [[FLPFacebookPhotoSource alloc] init];
-                                          [FBSession setActiveSession:session];
-                                          [self checkReachabilityAndPreparePhotos];
-                                          
-                                          
-                                      } else if (state == FBSessionStateClosed || state==FBSessionStateClosedLoginFailed) {
-                                          FLPLogDebug(@"Facebook session closed or failed");
-                                      }
-                                      
-                                      if (error) {
-                                          FLPLogDebug(@"Facebook session error: %@", [error localizedDescription]);
-                                      }
-                                  }];
+    _source = PhotoSourceFacebook;
+    [self showSizeView];
 }
 
 - (IBAction)onTwitterButtonPressed:(id)sender
 {
     FLPLogDebug(@"Twitter button pressed");
-
-    [self subscribeToTwitterNotifications];
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [self disableButtons];
-    
-    // Twitter keys are stored in a plist file, not tracked in git repository
-    NSString *twitterPlist = [[NSBundle mainBundle] pathForResource:@"TwitterKeys" ofType:@"plist"];
-    NSDictionary *twitterKeys = [[NSDictionary alloc] initWithContentsOfFile:twitterPlist];
-
-    [PFTwitterSignOn setCredentialsWithConsumerKey:[twitterKeys objectForKey:@"consumerKey"]
-                                         andSecret:[twitterKeys objectForKey:@"secretKey"]];
-    
-    // Login with Twitter
-    // Two ways to login:
-    // a) with user account in device, through the selectCallback in this method
-    // b) with Twitter login web view, through |application:openURL:sourceApplication:annotation:| method in app delegate
-
-    [PFTwitterSignOn requestAuthenticationWithSelectCallback:^(NSArray *accounts, twitterAccountCallback callback) {
-        FLPLogDebug(@"more than one Twitter account");
-        
-        // User has Twitter accounts on device, use action sheet
-        
-        // Get Twitter account names
-        _twitterAccounts = accounts;
-        NSMutableArray *accountNames = [[accounts valueForKey:@"username"] mutableCopy];
-        [accountNames enumerateObjectsUsingBlock:^(NSString *accountName, NSUInteger index, BOOL *stop){
-            [accountNames replaceObjectAtIndex:index withObject:[NSString stringWithFormat:@"@%@",accountName]];
-        }];
-        
-        // Build and configure action sheet
-        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"MAIN_SELECT_TWITTER", @"")
-                                                                 delegate:self
-                                                        cancelButtonTitle:nil
-                                                   destructiveButtonTitle:nil
-                                                        otherButtonTitles:nil];
-        for (NSString *title in accountNames) {
-            [actionSheet addButtonWithTitle:title];
-        }
-        [actionSheet addButtonWithTitle:NSLocalizedString(@"OTHER_CANCEL", @"")];
-        [actionSheet setCancelButtonIndex:accountNames.count];
-        
-        // Callback when user selects an option
-        _twitterCallback = callback;
-        
-        [actionSheet showInView:self.view];
-        
-    } andCompletion:^(NSDictionary *accountInfo, NSError *error) {
-
-        // Logged via web or via local account, at this point we have NSDictionary with user data
-        FLPLogDebug(@"login with Twitter successful");
-        
-        [self unsubscribeToTwitterNotifications];
-        
-        _photoSource = [[FLPTwitterPhotoSource alloc] initWithOAuthConsumerKey:[twitterKeys objectForKey:@"consumerKey"]
-                                                                consumerSecret:[twitterKeys objectForKey:@"secretKey"]
-                                                                    oauthToken:accountInfo[@"accessToken"]
-                                                              oauthTokenSecret:accountInfo[@"tokenSecret"]
-                                                                     screeName:accountInfo[@"screen_name"]];
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-        [self checkReachabilityAndPreparePhotos];
-    }];
+    _source = PhotoShourceTwitter;
+    [self showSizeView];
 }
 
 - (IBAction)onRecordsButtonPressed:(id)sender
@@ -219,21 +144,22 @@
 {
     FLPLogDebug(@"");
     _size = GridSizeSmall;
-    [self performSegueWithIdentifier:@"gridFromMainSegue" sender:self];
+    [self preparePhotosFromSource];
+    
 }
 
 - (IBAction)onNormalButtonPressed:(id)sender
 {
     FLPLogDebug(@"");
     _size = GridSizeNormal;
-    [self performSegueWithIdentifier:@"gridFromMainSegue" sender:self];
+    [self preparePhotosFromSource];
 }
 
 - (IBAction)onBigButtonPressed:(id)sender
 {
     FLPLogDebug(@"");
     _size = GridSizeBig;
-    [self performSegueWithIdentifier:@"gridFromMainSegue" sender:self];
+    [self preparePhotosFromSource];
 }
 
 - (IBAction)onSourceButtonPressed:(id)sender
@@ -265,20 +191,155 @@
     }
 }
 
-#pragma mark - Custom methods
+#pragma mark - Private methods
 
 - (void)enableButtons
 {
-    _cameraBtn.enabled = YES;
-    _facebookBtn.enabled = YES;
-    _twitterBtn.enabled = YES;
+    _smallBtn.enabled = YES;
+    _normalBtn.enabled = YES;
+    _bigBtn.enabled = YES;
 }
 
 - (void)disableButtons
 {
-    _cameraBtn.enabled = NO;
-    _facebookBtn.enabled = NO;
-    _twitterBtn.enabled = NO;
+    _smallBtn.enabled = NO;
+    _normalBtn.enabled = NO;
+    _bigBtn.enabled = NO;
+}
+
+- (void)showSizeView
+{
+    // Change to select size view
+    [UIView animateWithDuration:0.3
+                     animations:^{
+                         [self.view removeConstraints:_changeViewsConstraints];
+                         UIView *selectSourceView = self.selectSourceView;
+                         NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(selectSourceView);
+                         _changeViewsConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"[selectSourceView]-640-|"
+                                                                                           options:0
+                                                                                           metrics:nil
+                                                                                             views:viewsDictionary];
+                         [self.view addConstraints:_changeViewsConstraints];
+                         [self.view layoutIfNeeded];
+                     }
+                     completion:^(BOOL finished) {
+                     }];
+}
+
+- (void)preparePhotosFromSource
+{
+    switch (_source) {
+        case PhotoSourceCamera:
+            [self preparePhotosFromCamera];
+            break;
+        case PhotoSourceFacebook:
+            [self preparePhotosFromFacebook];
+            break;
+        case PhotoShourceTwitter:
+            [self preparePhotosFromTwitter];
+            break;
+        default:
+            break;
+    }
+}
+
+- (void)preparePhotosFromCamera
+{
+    _photoSource = [[FLPCameraPhotoSource alloc] init];
+    [self checkReachabilityAndPreparePhotos];
+}
+
+- (void)preparePhotosFromFacebook
+{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self disableButtons];
+    
+    [FBSession openActiveSessionWithReadPermissions:kFacebookPermissions
+                                       allowLoginUI:YES
+                                  completionHandler:^(FBSession *session, FBSessionState state, NSError *error) {
+                                      
+                                      [self enableButtons];
+                                      [MBProgressHUD hideHUDForView:self.view animated:YES];
+                                      
+                                      if (state == FBSessionStateOpen) {
+                                          FLPLogDebug(@"Facebook session opened");
+                                          _photoSource = [[FLPFacebookPhotoSource alloc] init];
+                                          [FBSession setActiveSession:session];
+                                          [self checkReachabilityAndPreparePhotos];
+                                          
+                                          
+                                      } else if (state == FBSessionStateClosed || state==FBSessionStateClosedLoginFailed) {
+                                          FLPLogDebug(@"Facebook session closed or failed");
+                                      }
+                                      
+                                      if (error) {
+                                          FLPLogDebug(@"Facebook session error: %@", [error localizedDescription]);
+                                      }
+                                  }];
+}
+
+- (void)preparePhotosFromTwitter
+{
+    [self subscribeToTwitterNotifications];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self disableButtons];
+    
+    // Twitter keys are stored in a plist file, not tracked in git repository
+    NSString *twitterPlist = [[NSBundle mainBundle] pathForResource:@"TwitterKeys" ofType:@"plist"];
+    NSDictionary *twitterKeys = [[NSDictionary alloc] initWithContentsOfFile:twitterPlist];
+    
+    [PFTwitterSignOn setCredentialsWithConsumerKey:[twitterKeys objectForKey:@"consumerKey"]
+                                         andSecret:[twitterKeys objectForKey:@"secretKey"]];
+    
+    // Login with Twitter
+    // Two ways to login:
+    // a) with user account in device, through the selectCallback in this method
+    // b) with Twitter login web view, through |application:openURL:sourceApplication:annotation:| method in app delegate
+    
+    [PFTwitterSignOn requestAuthenticationWithSelectCallback:^(NSArray *accounts, twitterAccountCallback callback) {
+        FLPLogDebug(@"more than one Twitter account");
+        
+        // User has Twitter accounts on device, use action sheet
+        
+        // Get Twitter account names
+        _twitterAccounts = accounts;
+        NSMutableArray *accountNames = [[accounts valueForKey:@"username"] mutableCopy];
+        [accountNames enumerateObjectsUsingBlock:^(NSString *accountName, NSUInteger index, BOOL *stop){
+            [accountNames replaceObjectAtIndex:index withObject:[NSString stringWithFormat:@"@%@",accountName]];
+        }];
+        
+        // Build and configure action sheet
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"MAIN_SELECT_TWITTER", @"")
+                                                                 delegate:self
+                                                        cancelButtonTitle:nil
+                                                   destructiveButtonTitle:nil
+                                                        otherButtonTitles:nil];
+        for (NSString *title in accountNames) {
+            [actionSheet addButtonWithTitle:title];
+        }
+        [actionSheet addButtonWithTitle:NSLocalizedString(@"OTHER_CANCEL", @"")];
+        [actionSheet setCancelButtonIndex:accountNames.count];
+        
+        // Callback when user selects an option
+        _twitterCallback = callback;
+        
+        [actionSheet showInView:self.view];
+        
+    } andCompletion:^(NSDictionary *accountInfo, NSError *error) {
+        
+        // Logged via web or via local account, at this point we have NSDictionary with user data
+        FLPLogDebug(@"login with Twitter successful");
+        
+        [self unsubscribeToTwitterNotifications];
+        
+        _photoSource = [[FLPTwitterPhotoSource alloc] initWithOAuthConsumerKey:[twitterKeys objectForKey:@"consumerKey"]
+                                                                consumerSecret:[twitterKeys objectForKey:@"secretKey"]
+                                                                    oauthToken:accountInfo[@"accessToken"]
+                                                              oauthTokenSecret:accountInfo[@"tokenSecret"]
+                                                                     screeName:accountInfo[@"screen_name"]];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [self checkReachabilityAndPreparePhotos];
+    }];
 }
 
 /**
@@ -314,23 +375,7 @@
         _photos = photos;
         if ((_photos != nil) && (photos.count != 0)) {
 
-            // Change to select size view
-            [UIView animateWithDuration:0.3
-                             animations:^{
-                                 [self.view removeConstraints:_changeViewsConstraints];
-                                 UIView *selectSourceView = self.selectSourceView;
-                                 NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(selectSourceView);
-                                 _changeViewsConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"[selectSourceView]-640-|"
-                                                                                                   options:0
-                                                                                                   metrics:nil
-                                                                                                     views:viewsDictionary];
-                                 [self.view addConstraints:_changeViewsConstraints];
-                                 [self.view layoutIfNeeded];
-                             }
-                             completion:^(BOOL finished) {
-                             }];
-
-            //[self performSegueWithIdentifier:@"sizeSegue" sender:self];
+            [self performSegueWithIdentifier:@"gridFromMainSegue" sender:self];
         }
     };
     
@@ -340,6 +385,15 @@
         FLPLogDebug(@"failure");
         [self enableButtons];
         [MBProgressHUD hideHUDForView:self.view animated:YES];
+        
+        // Change to select source view
+        [UIView animateWithDuration:0.3
+                         animations:^{
+                             [self.view removeConstraints:_changeViewsConstraints];
+                             [self.view layoutIfNeeded];
+                         }
+                         completion:^(BOOL finished) {
+                         }];
         
         if (error.code == KErrorEnoughPhotos) {
             NSString *message = [self customNoPhotosMessageForSource:_photoSource];
@@ -458,6 +512,10 @@
     // Twitter
     } else if ([photoSource isKindOfClass:[FLPTwitterPhotoSource class]]) {
         message = [NSString stringWithFormat:NSLocalizedString(@"MAIN_ENOUGH_PHOTOS_TWITTER", nil), kMinimunPhotos];
+
+    // Facebook
+    } else if ([photoSource isKindOfClass:[FLPFacebookPhotoSource class]]) {
+        message = [NSString stringWithFormat:NSLocalizedString(@"MAIN_ENOUGH_PHOTOS_FACEBOOK", nil), kMinimunPhotos];
 
     // Other source
     } else {
