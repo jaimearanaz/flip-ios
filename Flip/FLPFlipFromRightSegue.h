@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+/**
+ * This class implements a custom segue flipping from right to left
+ */
 @interface FLPFlipFromRightSegue : UIStoryboardSegue
 
 @end

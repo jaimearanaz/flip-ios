@@ -15,7 +15,7 @@
     UIViewController *sourceViewController = (UIViewController *) self.sourceViewController;
     UIViewController *destinationViewController = (UIViewController *) self.destinationViewController;
     
-    [UIView beginAnimations:@"RightFlip" context:nil];
+    [UIView beginAnimations:@"FlipFromRight" context:nil];
     [UIView setAnimationDuration:0.65];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
     [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:sourceViewController.view.superview cache:YES];

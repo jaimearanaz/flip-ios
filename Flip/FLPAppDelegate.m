@@ -27,6 +27,10 @@
                                                     green:204.0f/255.0f
                                                      blue:102.0f/255.0f
                                                     alpha:1.0f]];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 518, 320, 50)];
+    [view setBackgroundColor:[UIColor blackColor]];
+    [self.window addSubview:view];
+    
     return YES;
 }
 

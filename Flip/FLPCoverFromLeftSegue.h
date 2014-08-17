@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+/**
+ * This class implements a custom segue covering from left to right
+ */
 @interface FLPCoverFromLeftSegue : UIStoryboardSegue
 
 @end
