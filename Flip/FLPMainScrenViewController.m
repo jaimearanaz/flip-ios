@@ -29,6 +29,7 @@ typedef enum {
 
 @interface FLPMainScrenViewController () <UIActionSheetDelegate>
 
+@property (nonatomic, weak) IBOutlet UILabel *subtitle;
 @property (nonatomic, weak) __block IBOutlet UIView *selectSourceView;
 @property (nonatomic, weak) __block IBOutlet UIView *selectSizeView;
 @property (nonatomic, weak) IBOutlet UILabel *selectSourceLbl;
@@ -70,13 +71,27 @@ typedef enum {
 {
     [super viewDidLoad];
 	
+    [_subtitle setFont:[UIFont fontWithName:@"Pacifico" size:25]];
+    
+    // Select source view
+    [_selectSourceLbl setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
     _selectSourceLbl.text = NSLocalizedString(@"MAIN_SELECT_SOURCE", @"");
+    [_selectGridLbl setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
     _selectGridLbl.text = NSLocalizedString(@"MAIN_SELECT_GRID", @"");
-    [_cameraBtn setTitle:NSLocalizedString(@"MAIN_CAMERA", @"") forState:UIControlStateNormal];
+    
+    [_cameraBtn.titleLabel setFont:[UIFont fontWithName:@"Pacifico" size:20]];
+        [_cameraBtn setTitle:NSLocalizedString(@"MAIN_CAMERA", @"") forState:UIControlStateNormal];
+    [_facebookBtn.titleLabel setFont:[UIFont fontWithName:@"Pacifico" size:20]];
+    [_twitterBtn.titleLabel setFont:[UIFont fontWithName:@"Pacifico" size:20]];
+    [_recordsBtn.titleLabel setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
     [_recordsBtn setTitle:NSLocalizedString(@"MAIN_RECORDS", @"") forState:UIControlStateNormal];
+    
+    // Select grid size view
+    
     [_smallBtn setTitle:NSLocalizedString(@"MAIN_SMALL", @"") forState:UIControlStateNormal];
     [_normalBtn setTitle:NSLocalizedString(@"MAIN_NORMAL", @"") forState:UIControlStateNormal];
     [_bigBtn setTitle:NSLocalizedString(@"MAIN_BIG", @"") forState:UIControlStateNormal];
+    [_sourceBtn.titleLabel setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
     [_sourceBtn setTitle:NSLocalizedString(@"MAIN_SOURCE", @"") forState:UIControlStateNormal];
     
     // Check internet connection
@@ -86,7 +101,7 @@ typedef enum {
          _networkStatus = status;
      }];
     
-    // Banner
+    // Configure banner
     GADBannerView *banner = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner];
     banner.adUnitID = kAddMobID;
     banner.rootViewController = self;

@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 MobiOak. All rights reserved.
 //
 
-#define kMinimunPhotos 1200
+#define kMinimunPhotos 12
 #define kFacebookPermissions @[@"public_profile", @"user_photos"]
 
 // Number of photos in grid

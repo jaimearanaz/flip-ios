@@ -24,8 +24,8 @@
     [self setLogLevels];
     
     [self.window setBackgroundColor:[UIColor colorWithRed:255.0f/255.0f
-                                                    green:204.0f/255.0f
-                                                     blue:102.0f/255.0f
+                                                    green:189.0f/255.0f
+                                                     blue:0.0f/255.0f
                                                     alpha:1.0f]];
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 518, 320, 50)];
     [view setBackgroundColor:[UIColor blackColor]];

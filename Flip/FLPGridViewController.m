@@ -80,6 +80,7 @@
     _numOfErrors = 0;
 
     [_backBtn setTitle:NSLocalizedString(@"OTHER_EXIT", @"") forState:UIControlStateNormal];
+    [_timerLbl setFont:[UIFont fontWithName:@"Roboto-Bold" size:20]];
     
     // Configure |photosInGrid|, for example [0, 1, 3, 0, 4, 4, 3, 5, 2, 1, 5, 2]
     _photosInGrid = [[NSMutableArray alloc] init];

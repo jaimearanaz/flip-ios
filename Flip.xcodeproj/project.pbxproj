@@ -30,6 +30,8 @@
 		6F33AC841999245500FBF9C4 /* FLPGridItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F33AC831999245500FBF9C4 /* FLPGridItem.m */; };
 		6F3B3A911982571200EA4BA1 /* TwitterKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6F3B3A901982571200EA4BA1 /* TwitterKeys.plist */; };
 		6F3B3A9419825C1C00EA4BA1 /* FLPTwitterPhotoSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3B3A9319825C1C00EA4BA1 /* FLPTwitterPhotoSource.m */; };
+		6F55BE8E19A1618000FC60E7 /* Pacifico.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6F55BE8D19A1617C00FC60E7 /* Pacifico.ttf */; };
+		6F55BE9219A166B900FC60E7 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6F55BE9119A166B900FC60E7 /* Roboto-Bold.ttf */; };
 		6F5AD5C71987ABF600B65D09 /* FLPFacebookPhotoSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5AD5C61987ABF600B65D09 /* FLPFacebookPhotoSource.m */; };
 		6F67A358197FD19600AC9CF5 /* FLPLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F67A357197FD19600AC9CF5 /* FLPLogFormatter.m */; };
 		6F7B2DE01980FC9200C9FE69 /* FLPGridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7B2DDF1980FC9200C9FE69 /* FLPGridViewController.m */; };
@@ -99,6 +101,8 @@
 		6F3B3A901982571200EA4BA1 /* TwitterKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TwitterKeys.plist; sourceTree = "<group>"; };
 		6F3B3A9219825C1C00EA4BA1 /* FLPTwitterPhotoSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPTwitterPhotoSource.h; sourceTree = "<group>"; };
 		6F3B3A9319825C1C00EA4BA1 /* FLPTwitterPhotoSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPTwitterPhotoSource.m; sourceTree = "<group>"; };
+		6F55BE8D19A1617C00FC60E7 /* Pacifico.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Pacifico.ttf; sourceTree = "<group>"; };
+		6F55BE9119A166B900FC60E7 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		6F5AD5C51987ABF600B65D09 /* FLPFacebookPhotoSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPFacebookPhotoSource.h; sourceTree = "<group>"; };
 		6F5AD5C61987ABF600B65D09 /* FLPFacebookPhotoSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPFacebookPhotoSource.m; sourceTree = "<group>"; };
 		6F67A356197FD19600AC9CF5 /* FLPLogFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPLogFormatter.h; sourceTree = "<group>"; };
@@ -230,6 +234,7 @@
 		6F1AA15E1973EAA400101766 /* Flip */ = {
 			isa = PBXGroup;
 			children = (
+				6F55BE8C19A1616E00FC60E7 /* fonts */,
 				6F8782EE199BB0B600AA118E /* adMob */,
 				6F33AC811999244600FBF9C4 /* model */,
 				6F67A355197FD17F00AC9CF5 /* utils */,
@@ -311,6 +316,15 @@
 				6F33AC831999245500FBF9C4 /* FLPGridItem.m */,
 			);
 			name = model;
+			sourceTree = "<group>";
+		};
+		6F55BE8C19A1616E00FC60E7 /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				6F55BE8D19A1617C00FC60E7 /* Pacifico.ttf */,
+				6F55BE9119A166B900FC60E7 /* Roboto-Bold.ttf */,
+			);
+			name = fonts;
 			sourceTree = "<group>";
 		};
 		6F67A355197FD17F00AC9CF5 /* utils */ = {
@@ -439,8 +453,10 @@
 			files = (
 				6F1AA1741973EAA400101766 /* Images.xcassets in Resources */,
 				6F3B3A911982571200EA4BA1 /* TwitterKeys.plist in Resources */,
+				6F55BE8E19A1618000FC60E7 /* Pacifico.ttf in Resources */,
 				6F1AA1991973FE9900101766 /* Localizable.strings in Resources */,
 				6F1AA16C1973EAA400101766 /* Main_iPhone.storyboard in Resources */,
+				6F55BE9219A166B900FC60E7 /* Roboto-Bold.ttf in Resources */,
 				6F1AA1631973EAA400101766 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

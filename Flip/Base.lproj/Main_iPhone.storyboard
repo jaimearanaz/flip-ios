@@ -19,7 +19,7 @@
                             <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Thr-ej-HCN" userLabel="View - Main background">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="960"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" red="1" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.7423607257" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="320" id="2al-d0-3X8"/>
                                     <constraint firstAttribute="height" constant="960" id="fLZ-RW-D9q"/>
@@ -48,6 +48,16 @@
                             <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" placeholderIntrinsicWidth="200" placeholderIntrinsicHeight="61" translatesAutoresizingMaskIntoConstraints="NO" id="LP7-sT-ctl" userLabel="View - Spacing view 2">
                                 <rect key="frame" x="60" y="172" width="200" height="61"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="your photos" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KXR-kt-RgZ" userLabel="Label - Your Photos">
+                                        <rect key="frame" x="20" y="-10" width="160" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <rect key="contentStretch" x="1.3877787807814457e-17" y="1.3877787807814457e-17" width="1" height="1"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="ydg-NS-ee3"/>
@@ -58,7 +68,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Select source for your photos" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rLb-7Q-WyZ">
-                                        <rect key="frame" x="20" y="30" width="280" height="20"/>
+                                        <rect key="frame" x="20" y="30" width="280" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="highlightedColor"/>
@@ -149,7 +159,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sL0-Tf-rcq">
-                                        <rect key="frame" x="60" y="255" width="200" height="30"/>
+                                        <rect key="frame" x="35" y="255" width="250" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <state key="normal" title="Change source">
@@ -161,7 +171,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Select a size for the grid" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="56S-Qh-nKd">
-                                        <rect key="frame" x="20" y="30" width="280" height="22"/>
+                                        <rect key="frame" x="20" y="30" width="280" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="highlightedColor"/>
@@ -182,7 +192,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="0.80000001192092896" blue="0.40000000596046448" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="1" green="0.7423607256999929" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="nvf-ly-HpF" secondAttribute="trailing" id="0rr-mK-ary"/>
                             <constraint firstItem="YN0-p5-ha0" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="-20" id="23Z-vj-VJV"/>
@@ -211,12 +221,13 @@
                         <outlet property="facebookBtn" destination="fFk-FV-fyo" id="gu3-On-Dpy"/>
                         <outlet property="normalBtn" destination="mbU-cI-U4A" id="qRV-Bx-Rlh"/>
                         <outlet property="recordsBtn" destination="iUh-rM-8BA" id="Quk-xp-jQe"/>
-                        <outlet property="selectGridLbl" destination="56S-Qh-nKd" id="kDH-Br-GFY"/>
+                        <outlet property="selectGridLbl" destination="56S-Qh-nKd" id="4I2-sL-Nvh"/>
                         <outlet property="selectSizeView" destination="kxo-yw-E5g" id="QIq-MQ-3Mc"/>
                         <outlet property="selectSourceLbl" destination="rLb-7Q-WyZ" id="tNv-Vg-mhe"/>
-                        <outlet property="selectSourceView" destination="tAh-NM-16j" id="5ra-U2-0p5"/>
+                        <outlet property="selectSourceView" destination="tAh-NM-16j" id="Y0h-NF-sAl"/>
                         <outlet property="smallBtn" destination="Mxm-dX-5Zp" id="CQz-zm-YSF"/>
                         <outlet property="sourceBtn" destination="sL0-Tf-rcq" id="1FR-TM-iXt"/>
+                        <outlet property="subtitle" destination="KXR-kt-RgZ" id="GUb-b9-p2l"/>
                         <outlet property="twitterBtn" destination="ky9-hR-iZY" id="dEH-UG-8la"/>
                         <segue destination="2Iz-SI-UwT" kind="custom" identifier="recordsFromMainSegue" customClass="FLPCoverFromLeftSegue" id="4VQ-hx-PhO"/>
                         <segue destination="20h-2Q-q9d" kind="custom" identifier="gridFromMainSegue" customClass="FLPFlipFromRightSegue" id="ibe-Gz-0pW"/>
@@ -330,7 +341,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="1" green="0.7423607257" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="eA7-jk-nzp"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -442,7 +453,7 @@
                                 <color key="backgroundColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="1" green="0.7423607257" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <connections>
                         <outlet property="bannerView" destination="vmx-15-tnM" id="zWe-T8-39d"/>
@@ -551,7 +562,7 @@
                                 <color key="backgroundColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="1" green="0.7423607257" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="Ojt-5i-Nul" firstAttribute="trailing" secondItem="zbM-YS-3x7" secondAttribute="trailing" id="6OC-Th-BEZ"/>
                             <constraint firstItem="zbM-YS-3x7" firstAttribute="centerX" secondItem="zNz-tb-6SG" secondAttribute="centerX" id="BmM-Wz-veT"/>
@@ -587,8 +598,8 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="ibe-Gz-0pW"/>
-        <segue reference="uZU-Ea-4mk"/>
-        <segue reference="4VQ-hx-PhO"/>
+        <segue reference="bqU-UK-gYp"/>
+        <segue reference="Kbh-Hl-H2k"/>
+        <segue reference="woI-t5-zsd"/>
     </inferredMetricsTieBreakers>
 </document>
