@@ -7,8 +7,8 @@
 */
 
 // Main screen
-"MAIN_SELECT_SOURCE" = "Select a source for your photos";
-"MAIN_SELECT_GRID" = "Select size for the grid";
+"MAIN_SELECT_SOURCE" = "Source for your photos";
+"MAIN_SELECT_GRID" = "Size for the grid";
 "MAIN_CAMERA" = "Camera";
 "MAIN_RECORDS" = "See my records";
 "MAIN_SMALL" = "Small (3x4)";

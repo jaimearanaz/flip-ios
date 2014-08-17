@@ -7,8 +7,8 @@
 */
 
 // Main screen
-"MAIN_SELECT_SOURCE" = "Selecciona una fuente para tus fotos";
-"MAIN_SELECT_GRID" = "Selecciona un tamaño para el mosaico";
+"MAIN_SELECT_SOURCE" = "Origen de tus fotos";
+"MAIN_SELECT_GRID" = "Tamaño para el mosaico";
 "MAIN_CAMERA" = "Cámara";
 "MAIN_RECORDS" = "Ver mis records";
 "MAIN_SMALL" = "Pequeño (3x4)";

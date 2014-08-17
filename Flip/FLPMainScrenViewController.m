@@ -165,14 +165,7 @@ typedef enum {
 - (IBAction)onSourceButtonPressed:(id)sender
 {
     FLPLogDebug(@"");
-    // Change to select source view
-    [UIView animateWithDuration:0.3
-                     animations:^{
-                         [self.view removeConstraints:_changeViewsConstraints];
-                         [self.view layoutIfNeeded];
-                     }
-                     completion:^(BOOL finished) {
-                     }];
+    [self showSourceView];
 }
 
 # pragma mark - UIActionSheetDelegate methods
@@ -209,6 +202,9 @@ typedef enum {
 
 - (void)showSizeView
 {
+    [_selectSourceLbl setAlpha:0];
+    [_selectGridLbl setAlpha:0];
+    
     // Change to select size view
     [UIView animateWithDuration:0.3
                      animations:^{
@@ -223,6 +219,30 @@ typedef enum {
                          [self.view layoutIfNeeded];
                      }
                      completion:^(BOOL finished) {
+                         
+                         [UIView animateWithDuration:0.3
+                                          animations:^{
+                                              [_selectGridLbl setAlpha:1];
+                                          }];
+                     }];
+}
+
+- (void)showSourceView
+{
+    [_selectSourceLbl setAlpha:0];
+    [_selectGridLbl setAlpha:0];
+    
+    // Change to select source view
+    [UIView animateWithDuration:0.3
+                     animations:^{
+                         [self.view removeConstraints:_changeViewsConstraints];
+                         [self.view layoutIfNeeded];
+                     }
+                     completion:^(BOOL finished) {
+                         [UIView animateWithDuration:0.3
+                                          animations:^{
+                                              [_selectSourceLbl setAlpha:1];
+                                          }];
                      }];
 }
 
@@ -385,15 +405,7 @@ typedef enum {
         FLPLogDebug(@"failure");
         [self enableButtons];
         [MBProgressHUD hideHUDForView:self.view animated:YES];
-        
-        // Change to select source view
-        [UIView animateWithDuration:0.3
-                         animations:^{
-                             [self.view removeConstraints:_changeViewsConstraints];
-                             [self.view layoutIfNeeded];
-                         }
-                         completion:^(BOOL finished) {
-                         }];
+        [self showSourceView];
         
         if (error.code == KErrorEnoughPhotos) {
             NSString *message = [self customNoPhotosMessageForSource:_photoSource];
