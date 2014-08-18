@@ -7,11 +7,14 @@
 //
 
 #import "FLPRecordsViewController.h"
+#import "FLPTitleLetterView.h"
 
 #import "GADBannerView.h"
 
 @interface FLPRecordsViewController ()
 
+@property (nonatomic, weak) IBOutlet UIView *titleView;
+@property (nonatomic, weak) IBOutlet UILabel *subtitleLbl;
 @property (nonatomic, weak) IBOutlet UILabel *titleLbl;
 @property (nonatomic, weak) IBOutlet UILabel *smallLbl;
 @property (nonatomic, weak) IBOutlet UILabel *smallResultLbl;
@@ -21,6 +24,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *bigResultLbl;
 @property (nonatomic, weak) IBOutlet UIButton *mainBtn;
 @property (nonatomic, weak) IBOutlet UIView *bannerView;
+@property (nonatomic, strong) NSTimer *timerTitle;
 
 - (IBAction)mainButtonPressed:(id)sender;
 
@@ -43,6 +47,7 @@
     
     [_mainBtn setTitle:NSLocalizedString(@"OTHER_MAIN", @"") forState:UIControlStateNormal];
     _titleLbl.text = NSLocalizedString(@"RECORDS_TITLE", @"");
+    [_subtitleLbl setFont:[UIFont fontWithName:@"Pacifico" size:25]];
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     
@@ -69,6 +74,8 @@
     banner.rootViewController = self;
     [_bannerView addSubview:banner];
     [banner loadRequest:[GADRequest request]];
+    
+    [self startTimer];
 }
 
 - (void)didReceiveMemoryWarning
@@ -81,7 +88,39 @@
 
 - (IBAction)mainButtonPressed:(id)sender
 {
+    [self endTimer];
     [self performSegueWithIdentifier:@"mainFromRecordsSegue" sender:self];
+}
+
+#pragma mark - Private methods
+
+- (void)startTimer
+{
+    if (_timerTitle == nil) {
+        _timerTitle = [NSTimer scheduledTimerWithTimeInterval:3.0
+                                                       target:self
+                                                     selector:@selector(flipRandomLetter)
+                                                     userInfo:nil
+                                                      repeats:YES];
+    }
+}
+
+- (void)endTimer
+{
+    if (_timerTitle != nil) {
+        [_timerTitle invalidate];
+        _timerTitle = nil;
+    }
+}
+
+- (void)flipRandomLetter
+{
+    NSInteger random = (arc4random() % 4);
+    UIView *letter = [_titleView.subviews objectAtIndex:random];
+    
+    if ([letter isKindOfClass:[FLPTitleLetterView class]]){
+        [letter performSelector:@selector(flipAnimated:) withObject:[NSNumber numberWithBool:YES]];
+    }
 }
 
 @end

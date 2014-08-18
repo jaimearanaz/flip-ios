@@ -31,7 +31,7 @@ typedef enum {
 @interface FLPMainScrenViewController () <UIActionSheetDelegate>
 
 @property (nonatomic, weak) IBOutlet UIView *titleView;
-@property (nonatomic, weak) IBOutlet UILabel *subtitleView;
+@property (nonatomic, weak) IBOutlet UILabel *subtitleLbl;
 @property (nonatomic, weak) __block IBOutlet UIView *selectSourceView;
 @property (nonatomic, weak) __block IBOutlet UIView *selectSizeView;
 @property (nonatomic, weak) IBOutlet UILabel *selectSourceLbl;
@@ -74,7 +74,7 @@ typedef enum {
 {
     [super viewDidLoad];
 	
-    [_subtitleView setFont:[UIFont fontWithName:@"Pacifico" size:25]];
+    [_subtitleLbl setFont:[UIFont fontWithName:@"Pacifico" size:25]];
     
     // Select source view
     [_selectSourceLbl setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
