@@ -29,3 +29,5 @@ static const int ddLogLevel = LOG_LEVEL_ERROR;
 #define FLPLogInfo(...) DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, [NSString stringWithFormat:__VA_ARGS__])
 #define FLPLogDebug(...) DDLogDebug(@"%s %@", __PRETTY_FUNCTION__, [NSString stringWithFormat:__VA_ARGS__])
 #define FLPLogVerbose(...) DDLogVerbose(@"%s %@", __PRETTY_FUNCTION__, [NSString stringWithFormat:__VA_ARGS__])
+
+#define isiPhone5 ([[UIScreen mainScreen] bounds].size.height == 568)?TRUE:FALSE
