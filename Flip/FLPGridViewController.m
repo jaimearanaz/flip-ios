@@ -181,9 +181,9 @@
     
     UIImage *image = (UIImage *)[_photos objectAtIndex:gridItem.imageIndex];
     if (image.size.height != image.size.width) {
-        [cell.imageView setImage:[self imageCrop:image]];
+        [cell.photoView setImage:[self imageCrop:image]];
     } else {
-        [cell.imageView setImage:image];
+        [cell.photoView setImage:image];
     }
     cell.coverLbl.text = [NSString stringWithFormat:@"%ld", (indexPath.row + 1)];
     
@@ -304,14 +304,14 @@
                   layout:(UICollectionViewLayout*)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(90, 90);
+    return CGSizeMake(92, 102);
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView
                    layout:(UICollectionViewLayout*)collectionViewLayout
 minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 {
-    return 5;
+    return 3;
 }
 
 #pragma mark - Private methods

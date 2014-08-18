@@ -12,7 +12,7 @@
 
 - (BOOL)isShowingImage
 {
-    return ([self.contentView.subviews objectAtIndex:1] == _imageView);
+    return ([self.contentView.subviews objectAtIndex:1] == _imageSide);
 }
 
 - (void)flipCellToImageAnimated:(NSNumber *)animated
@@ -22,11 +22,11 @@
                           duration:0.4
                            options:UIViewAnimationOptionTransitionFlipFromRight
                         animations:^{
-                                [self.contentView bringSubviewToFront:_imageView];
+                                [self.contentView bringSubviewToFront:_imageSide];
                         } completion:^(BOOL finished) {
                         }];
     } else {
-        [self.contentView bringSubviewToFront:_imageView];
+        [self.contentView bringSubviewToFront:_imageSide];
     }
 }
 
@@ -37,11 +37,11 @@
                           duration:0.4
                            options:UIViewAnimationOptionTransitionFlipFromRight
                         animations:^{
-                            [self.contentView bringSubviewToFront:_coverView];
+                            [self.contentView bringSubviewToFront:_coverSide];
                         } completion:^(BOOL finished) {
                         }];
     } else {
-        [self.contentView bringSubviewToFront:_coverView];
+        [self.contentView bringSubviewToFront:_coverSide];
     }
 }
 

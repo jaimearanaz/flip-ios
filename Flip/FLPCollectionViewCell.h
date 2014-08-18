@@ -14,8 +14,9 @@
  */
 @interface FLPCollectionViewCell : UICollectionViewCell
 
-@property (nonatomic, weak) IBOutlet UIImageView *imageView;
-@property (nonatomic, weak) IBOutlet UIView *coverView;
+@property (nonatomic, weak) IBOutlet UIView *imageSide;
+@property (nonatomic, weak) IBOutlet UIView *coverSide;
+@property (nonatomic, weak) IBOutlet UIImageView *photoView;
 @property (nonatomic, weak) IBOutlet UILabel *coverLbl;
 
 /**

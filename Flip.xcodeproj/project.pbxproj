@@ -44,6 +44,7 @@
 		6F878308199BB14C00AA118E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F878307199BB14C00AA118E /* SystemConfiguration.framework */; };
 		6F87A771199A17B400C2303A /* FLPScoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F87A770199A17B400C2303A /* FLPScoreViewController.m */; };
 		6F87A774199A320E00C2303A /* FLPRecordsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F87A773199A320E00C2303A /* FLPRecordsViewController.m */; };
+		6F965CCB19A2250A00592690 /* FLPTitleLetterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F965CCA19A2250A00592690 /* FLPTitleLetterView.m */; };
 		6FA783E81992A26400F8B8AC /* FLPSizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA783E71992A26400F8B8AC /* FLPSizeViewController.m */; };
 		6FF58536197FC95100926DF9 /* FLPCameraPhotoSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF58535197FC95100926DF9 /* FLPCameraPhotoSource.m */; };
 		6FF58538197FCA5800926DF9 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FF58537197FCA5800926DF9 /* AssetsLibrary.framework */; };
@@ -133,6 +134,8 @@
 		6F87A770199A17B400C2303A /* FLPScoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPScoreViewController.m; sourceTree = "<group>"; };
 		6F87A772199A320E00C2303A /* FLPRecordsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPRecordsViewController.h; sourceTree = "<group>"; };
 		6F87A773199A320E00C2303A /* FLPRecordsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPRecordsViewController.m; sourceTree = "<group>"; };
+		6F965CC919A2250A00592690 /* FLPTitleLetterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPTitleLetterView.h; sourceTree = "<group>"; };
+		6F965CCA19A2250A00592690 /* FLPTitleLetterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPTitleLetterView.m; sourceTree = "<group>"; };
 		6FA783E61992A26400F8B8AC /* FLPSizeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPSizeViewController.h; sourceTree = "<group>"; };
 		6FA783E71992A26400F8B8AC /* FLPSizeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPSizeViewController.m; sourceTree = "<group>"; };
 		6FF58534197FC95100926DF9 /* FLPCameraPhotoSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPCameraPhotoSource.h; sourceTree = "<group>"; };
@@ -305,6 +308,8 @@
 			children = (
 				6F33AC7A1998C14000FBF9C4 /* FLPCollectionViewCell.h */,
 				6F33AC7B1998C14000FBF9C4 /* FLPCollectionViewCell.m */,
+				6F965CC919A2250A00592690 /* FLPTitleLetterView.h */,
+				6F965CCA19A2250A00592690 /* FLPTitleLetterView.m */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -521,6 +526,7 @@
 				6FA783E81992A26400F8B8AC /* FLPSizeViewController.m in Sources */,
 				6F14871B19A0F5E90087527C /* FLPCoverFromLeftSegue.m in Sources */,
 				6F1AA1721973EAA400101766 /* FLPMainScrenViewController.m in Sources */,
+				6F965CCB19A2250A00592690 /* FLPTitleLetterView.m in Sources */,
 				6F87A774199A320E00C2303A /* FLPRecordsViewController.m in Sources */,
 				6F87A771199A17B400C2303A /* FLPScoreViewController.m in Sources */,
 				6F5AD5C71987ABF600B65D09 /* FLPFacebookPhotoSource.m in Sources */,
