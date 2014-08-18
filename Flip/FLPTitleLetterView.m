@@ -14,7 +14,8 @@
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        UITapGestureRecognizer *singleFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
+        UITapGestureRecognizer *singleFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                          action:@selector(handleSingleTap:)];
         [self addGestureRecognizer:singleFingerTap];
     }
     return self;
@@ -55,13 +56,18 @@
     }
 }
 
-- (void)handleSingleTap:(UITapGestureRecognizer *)recognizer {
-
+- (void)flipAnimated:(NSNumber *)animated
+{
     if ([self isShowingLetter]) {
-        [self flipToCoverAnimated:[NSNumber numberWithBool:YES]];
+        [self flipToCoverAnimated:animated];
     } else {
-        [self flipToLetterAnimated:[NSNumber numberWithBool:YES]];
+        [self flipToLetterAnimated:animated];
     }
+}
+
+- (void)handleSingleTap:(UITapGestureRecognizer *)recognizer
+{
+    [self flipAnimated:[NSNumber numberWithBool:YES]];
 }
 
 @end

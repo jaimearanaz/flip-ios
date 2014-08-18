@@ -377,7 +377,8 @@
                         <outlet property="selectSourceView" destination="tAh-NM-16j" id="Y0h-NF-sAl"/>
                         <outlet property="smallBtn" destination="Mxm-dX-5Zp" id="CQz-zm-YSF"/>
                         <outlet property="sourceBtn" destination="sL0-Tf-rcq" id="1FR-TM-iXt"/>
-                        <outlet property="subtitle" destination="KXR-kt-RgZ" id="GUb-b9-p2l"/>
+                        <outlet property="subtitleView" destination="KXR-kt-RgZ" id="pEb-s4-N4i"/>
+                        <outlet property="titleView" destination="TMO-pv-HR8" id="zv0-j4-1NT"/>
                         <outlet property="twitterBtn" destination="ky9-hR-iZY" id="dEH-UG-8la"/>
                         <segue destination="2Iz-SI-UwT" kind="custom" identifier="recordsFromMainSegue" customClass="FLPCoverFromLeftSegue" id="4VQ-hx-PhO"/>
                         <segue destination="20h-2Q-q9d" kind="custom" identifier="gridFromMainSegue" customClass="FLPFlipFromRightSegue" id="ibe-Gz-0pW"/>

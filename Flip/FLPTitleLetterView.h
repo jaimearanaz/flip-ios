@@ -16,5 +16,6 @@
 - (BOOL)isShowingLetter;
 - (void)flipToLetterAnimated:(NSNumber *)animated;
 - (void)flipToCoverAnimated:(NSNumber *)animated;
+- (void)flipAnimated:(NSNumber *)animated;
 
 @end

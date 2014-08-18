@@ -15,6 +15,7 @@
 #import "FLPFacebookPhotoSource.h"
 #import "FLPTwitterPhotoSource.h"
 #import "FLPGridViewController.h"
+#import "FLPTitleLetterView.h"
 
 #import "MBProgressHUD.h"
 #import "WCAlertView.h"
@@ -29,7 +30,8 @@ typedef enum {
 
 @interface FLPMainScrenViewController () <UIActionSheetDelegate>
 
-@property (nonatomic, weak) IBOutlet UILabel *subtitle;
+@property (nonatomic, weak) IBOutlet UIView *titleView;
+@property (nonatomic, weak) IBOutlet UILabel *subtitleView;
 @property (nonatomic, weak) __block IBOutlet UIView *selectSourceView;
 @property (nonatomic, weak) __block IBOutlet UIView *selectSizeView;
 @property (nonatomic, weak) IBOutlet UILabel *selectSourceLbl;
@@ -51,6 +53,7 @@ typedef enum {
 @property (nonatomic, strong) NSArray *changeViewsConstraints;
 @property (nonatomic) GridSizeType size;
 @property (nonatomic) PhotoSourceType source;
+@property (nonatomic, strong) NSTimer *timerTitle;
 
 - (IBAction)onCameraButtonPressed:(id)sender;
 - (IBAction)onFacebookButtonPressed:(id)sender;
@@ -71,7 +74,7 @@ typedef enum {
 {
     [super viewDidLoad];
 	
-    [_subtitle setFont:[UIFont fontWithName:@"Pacifico" size:25]];
+    [_subtitleView setFont:[UIFont fontWithName:@"Pacifico" size:25]];
     
     // Select source view
     [_selectSourceLbl setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
@@ -87,8 +90,11 @@ typedef enum {
     [_recordsBtn setTitle:NSLocalizedString(@"MAIN_RECORDS", @"") forState:UIControlStateNormal];
     
     // Select grid size view
+    [_smallBtn.titleLabel setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
     [_smallBtn setTitle:NSLocalizedString(@"MAIN_SMALL", @"") forState:UIControlStateNormal];
+    [_normalBtn.titleLabel setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
     [_normalBtn setTitle:NSLocalizedString(@"MAIN_NORMAL", @"") forState:UIControlStateNormal];
+    [_bigBtn.titleLabel setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
     [_bigBtn setTitle:NSLocalizedString(@"MAIN_BIG", @"") forState:UIControlStateNormal];
     [_sourceBtn.titleLabel setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
     [_sourceBtn setTitle:NSLocalizedString(@"MAIN_SOURCE", @"") forState:UIControlStateNormal];
@@ -108,6 +114,8 @@ typedef enum {
     [banner loadRequest:[GADRequest request]];
     
     _changeViewsConstraints = [[NSArray alloc] init];
+    
+    [self startTimer];
 }
 
 - (void)didReceiveMemoryWarning
@@ -118,6 +126,8 @@ typedef enum {
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    [self endTimer];
+    
     if ([segue.identifier isEqualToString:@"gridFromMainSegue"]) {
         FLPGridViewController *gridViewController=(FLPGridViewController *)segue.destinationViewController;
         gridViewController.photos = _photos;
@@ -258,6 +268,35 @@ typedef enum {
                                               [_selectSourceLbl setAlpha:1];
                                           }];
                      }];
+}
+
+- (void)startTimer
+{
+    if (_timerTitle == nil) {
+        _timerTitle = [NSTimer scheduledTimerWithTimeInterval:3.0
+                                                       target:self
+                                                     selector:@selector(flipRandomLetter)
+                                                     userInfo:nil
+                                                      repeats:YES];
+    }
+}
+
+- (void)endTimer
+{
+    if (_timerTitle != nil) {
+        [_timerTitle invalidate];
+        _timerTitle = nil;
+    }
+}
+
+- (void)flipRandomLetter
+{
+    NSInteger random = (arc4random() % 4);
+    UIView *letter = [_titleView.subviews objectAtIndex:random];
+    
+    if ([letter isKindOfClass:[FLPTitleLetterView class]]){
+        [letter performSelector:@selector(flipAnimated:) withObject:[NSNumber numberWithBool:YES]];
+    }
 }
 
 - (void)preparePhotosFromSource
@@ -408,7 +447,6 @@ typedef enum {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         _photos = photos;
         if ((_photos != nil) && (photos.count != 0)) {
-
             [self performSegueWithIdentifier:@"gridFromMainSegue" sender:self];
         }
     };

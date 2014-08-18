@@ -11,9 +11,9 @@
 "MAIN_SELECT_GRID" = "Size for the grid";
 "MAIN_CAMERA" = "Camera";
 "MAIN_RECORDS" = "See my records";
-"MAIN_SMALL" = "Small (3x4)";
-"MAIN_NORMAL" = "Normal (3x6)";
-"MAIN_BIG" = "Big (3x8)";
+"MAIN_SMALL" = "Small";
+"MAIN_NORMAL" = "Normal";
+"MAIN_BIG" = "Big";
 "MAIN_SOURCE" = "Change source";
 "MAIN_ALERT" = "Error";
 "MAIN_ENOUGH_PHOTOS_CAMERA" = "You need at least %d photos in your Camera Roll!";
