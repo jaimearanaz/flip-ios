@@ -20,6 +20,7 @@
 @property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
 @property (nonatomic, weak) IBOutlet UILabel *timerLbl;
 @property (nonatomic, weak) IBOutlet UIView *bannerView;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *bannerConstraint;
 
 // Array with the duplicated images in grid, it represents indexes from |photos| array
 // e.g. [0, 1, 3, 0, 4, 4, 3, 5, 2, 1, 5, 2]
@@ -101,6 +102,12 @@
     banner.rootViewController = self;
     [_bannerView addSubview:banner];
     [banner loadRequest:[GADRequest request]];
+    
+    // If 3.5 inches and small grid, remove banner for better performance
+    if ((!isiPhone5) && (_gridSize == GridSizeSmall)) {
+        [self.view removeConstraint:_bannerConstraint];
+        //[self.view layoutIfNeeded];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated

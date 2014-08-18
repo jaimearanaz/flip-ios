@@ -27,7 +27,12 @@
                                                     green:189.0f/255.0f
                                                      blue:0.0f/255.0f
                                                     alpha:1.0f]];
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 518, 320, 50)];
+    UIView *view;
+    if (isiPhone5) {
+        view = [[UIView alloc] initWithFrame:CGRectMake(0, 518, 320, 50)];
+    } else {
+        view = [[UIView alloc] initWithFrame:CGRectMake(0, 430, 320, 50)];
+    }
     [view setBackgroundColor:[UIColor blackColor]];
     [self.window addSubview:view];
     
