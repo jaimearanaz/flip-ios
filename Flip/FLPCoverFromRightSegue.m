@@ -16,13 +16,21 @@
     UIViewController *destinationController = (UIViewController*)[self destinationViewController];
     
     CATransition* transition = [CATransition animation];
-    transition.duration = 0.35;
+    transition.duration = 0.25;
     transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
     transition.type = kCATransitionMoveIn;
     transition.subtype = kCATransitionFromRight;
     
-    [destinationController.view.layer addAnimation:transition forKey:kCATransition];
-    [sourceViewController presentViewController:destinationController animated:NO completion:nil];
+    [UIView animateWithDuration:0.25
+                     animations:^{
+                         CGRect frame = sourceViewController.view.frame;
+                         frame.origin.x = -320;
+                         [sourceViewController.view setFrame:frame];
+                     }
+                     completion:^(BOOL finished) {
+                         [destinationController.view.layer addAnimation:transition forKey:kCATransition];
+                         [sourceViewController presentViewController:destinationController animated:NO completion:nil];
+                     }];
 }
 
 @end
