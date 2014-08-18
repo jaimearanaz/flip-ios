@@ -279,7 +279,7 @@
                                     <constraint firstAttribute="height" constant="268" id="iLT-5p-vDg"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kxo-yw-E5g" userLabel="View - Select size">
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kxo-yw-E5g" userLabel="View - Select size">
                                 <rect key="frame" x="320" y="250" width="320" height="268"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
@@ -316,7 +316,7 @@
                                             <action selector="onBigButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="KVk-we-Lud"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sL0-Tf-rcq">
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sL0-Tf-rcq">
                                         <rect key="frame" x="35" y="238" width="250" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -336,6 +336,10 @@
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="268" id="glB-iw-iDP"/>
+                                    <constraint firstAttribute="width" constant="320" id="vG7-eb-Bgj"/>
+                                </constraints>
                             </view>
                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nvf-ly-HpF" userLabel="View - Banner">
                                 <rect key="frame" x="0.0" y="518" width="320" height="50"/>
@@ -352,6 +356,9 @@
                         <constraints>
                             <constraint firstItem="nvf-ly-HpF" firstAttribute="top" secondItem="tAh-NM-16j" secondAttribute="bottom" id="7K0-wA-pqY"/>
                             <constraint firstItem="tAh-NM-16j" firstAttribute="top" secondItem="fFt-Dt-msl" secondAttribute="bottom" constant="1" id="I9u-Ei-UvZ"/>
+                            <constraint firstItem="kxo-yw-E5g" firstAttribute="top" secondItem="tAh-NM-16j" secondAttribute="top" id="OvQ-K4-wnq"/>
+                            <constraint firstItem="kxo-yw-E5g" firstAttribute="leading" secondItem="tAh-NM-16j" secondAttribute="trailing" id="ejf-Mo-KEp"/>
+                            <constraint firstItem="nvf-ly-HpF" firstAttribute="top" secondItem="sL0-Tf-rcq" secondAttribute="bottom" id="n33-6U-JTG"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="nvf-ly-HpF" secondAttribute="bottom" id="pmi-eX-e09"/>
                         </constraints>
                     </view>

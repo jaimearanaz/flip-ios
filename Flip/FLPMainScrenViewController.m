@@ -225,7 +225,7 @@ typedef enum {
                          [self.view removeConstraints:_changeViewsConstraints];
                          UIView *selectSourceView = self.selectSourceView;
                          NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(selectSourceView);
-                         _changeViewsConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"[selectSourceView]-640-|"
+                         _changeViewsConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"[selectSourceView]-320-|"
                                                                                            options:0
                                                                                            metrics:nil
                                                                                              views:viewsDictionary];
