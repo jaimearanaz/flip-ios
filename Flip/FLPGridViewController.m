@@ -43,6 +43,8 @@
 @property (nonatomic) FLPGridItem *secondPhoto;
 // YES if game has started
 @property (nonatomic) BOOL started;
+// Play camera sound effect
+@property (nonatomic, strong) AVAudioPlayer *player;
 
 - (IBAction)backButtonPressed:(id)sender;
 
@@ -109,6 +111,11 @@
         [self.view removeConstraint:_bannerConstraint];
         //[self.view layoutIfNeeded];
     }
+    
+    // Camera sound
+    NSString *cameraSoundPath = [[NSBundle mainBundle] pathForResource:@"camera-shutter-click-01" ofType:@"wav"];
+    NSURL *cameraSoundURL = [NSURL fileURLWithPath:cameraSoundPath];
+    _player = [[AVAudioPlayer alloc] initWithContentsOfURL:cameraSoundURL error:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -220,14 +227,6 @@
             }
         }
     }
-
-    /*
-    if ([gridItem.isShowing boolValue]) {
-        [cell.contentView bringSubviewToFront:cell.imageView];
-    } else {
-        [cell.contentView bringSubviewToFront:cell.coverView];
-    }
-    */
     
     return cell;
 }
@@ -262,26 +261,30 @@
                 // Photos match, keep showing
                 if (_firstPhoto.imageIndex == _secondPhoto.imageIndex) {
                     
-                    [cell flipCellToImageAnimated:[NSNumber numberWithBool:YES] onCompletion:^{
-                        [_firstCell matchedAnimation];
-                        [_secondCell matchedAnimation];
-
-                    _firstPhoto.isMatched = [NSNumber numberWithBool:YES];
-                    _firstPhoto = nil;
-                    _secondPhoto.isMatched = [NSNumber numberWithBool:YES];
-                    _secondPhoto = nil;
-                    _numOfPhotosMatched += 2;
-                    
-                    // All photos matched, return to main view
-                    if (_numOfPhotosMatched == _numOfPhotos) {
-                        [self stopTimer];
-                        [self performSelector:@selector(endGame)
-                                   withObject:nil
-                                   afterDelay:kGridGeneralDelay
-                                      inModes:[NSArray arrayWithObject:NSRunLoopCommonModes]];
-                    }
-                        
-                    }];
+                        [cell flipCellToImageAnimated:[NSNumber numberWithBool:YES] onCompletion:^{
+                            
+                            // Flash animation
+                            [_firstCell matchedAnimation];
+                            [_secondCell matchedAnimation];
+                            
+                            // Camera sound
+                            [_player play];
+                                
+                            _firstPhoto.isMatched = [NSNumber numberWithBool:YES];
+                            _firstPhoto = nil;
+                            _secondPhoto.isMatched = [NSNumber numberWithBool:YES];
+                            _secondPhoto = nil;
+                            _numOfPhotosMatched += 2;
+                            
+                            // All photos matched, return to main view
+                            if (_numOfPhotosMatched == _numOfPhotos) {
+                                [self stopTimer];
+                                [self performSelector:@selector(endGame)
+                                           withObject:nil
+                                           afterDelay:kGridGeneralDelay
+                                              inModes:[NSArray arrayWithObject:NSRunLoopCommonModes]];
+                            }
+                        }];
                     
                 // Photos don't match, hide them
                 } else {
