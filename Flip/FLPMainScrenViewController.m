@@ -608,6 +608,7 @@ typedef enum {
 {
     [self enableButtons];
     [MBProgressHUD hideHUDForView:self.view animated:YES];
+    [self showSourceView];
     [self unsubscribeToTwitterNotifications];
 }
 

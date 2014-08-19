@@ -17,16 +17,16 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb798572336849605</string>
-			</array>
-		</dict>
-		<dict>
-			<key>CFBundleURLSchemes</key>
-			<array>
 				<string>mobioakFlip</string>
 			</array>
 			<key>CFBundleURLName</key>
 			<string>com.mobioak.flip</string>
+		</dict>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb798572336849605</string>
+			</array>
 		</dict>
 	</array>
 	<key>LSApplicationCategoryType</key>

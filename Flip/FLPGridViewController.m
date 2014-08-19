@@ -42,7 +42,7 @@
 // Second image to try match
 @property (nonatomic) FLPGridItem *secondPhoto;
 // YES if game has started
-@property (nonatomic) BOOL started;
+@property (nonatomic) NSNumber *started;
 // Play button sound effect
 @property (nonatomic, strong) AVAudioPlayer *playerButton;
 // Play camera sound effect
@@ -129,7 +129,7 @@
 {
     [super viewDidAppear:animated];
     
-    if (!_started) {
+    if (![_started boolValue]) {
         double delay;
         switch (_gridSize) {
             case GridSizeSmall:
@@ -213,7 +213,7 @@
     
 
     // Game is not started, show all images
-    if (!_started) {
+    if (![_started boolValue]) {
         [cell flipCellToImageAnimated:[NSNumber numberWithBool:NO] onCompletion:nil];
         FLPLogDebug(@"row %ld, not started", (long)indexPath.row);
         
@@ -247,7 +247,10 @@
     FLPCollectionViewCell *cell = (FLPCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
     FLPGridItem *gridItem = [_photosInGrid objectAtIndex:indexPath.row];
 
-    if ((_started) && ([gridItem.isMatched boolValue] == NO)) {
+    if (([_started boolValue]) &&
+        (_secondPhoto == nil) &&
+        ([gridItem.isMatched boolValue] == NO) &&
+        ([gridItem.isShowing boolValue] == NO)) {
 
         // It's first photo
         if (_firstPhoto == nil) {
@@ -264,8 +267,8 @@
                 
                 NSInteger firstPhotoRow = [_photosInGrid indexOfObject:_firstPhoto];
                 NSIndexPath *firstIndexPath = [NSIndexPath indexPathForItem:firstPhotoRow inSection:0];
-                FLPCollectionViewCell *_firstCell = (FLPCollectionViewCell *)[_collectionView cellForItemAtIndexPath:firstIndexPath];
-                FLPCollectionViewCell *_secondCell = cell;
+                FLPCollectionViewCell *firstCell = (FLPCollectionViewCell *)[_collectionView cellForItemAtIndexPath:firstIndexPath];
+                FLPCollectionViewCell *secondCell = cell;
                 
                 // Photos match, keep showing
                 if (_firstPhoto.imageIndex == _secondPhoto.imageIndex) {
@@ -273,8 +276,8 @@
                         [cell flipCellToImageAnimated:[NSNumber numberWithBool:YES] onCompletion:^{
                             
                             // Flash animation
-                            [_firstCell matchedAnimation];
-                            [_secondCell matchedAnimation];
+                            [firstCell matchedAnimation];
+                            [secondCell matchedAnimation];
                             
                             // Camera sound
                             [_playerCamera play];
@@ -297,22 +300,13 @@
                     
                 // Photos don't match, hide them
                 } else {
-            
                     [cell flipCellToImageAnimated:[NSNumber numberWithBool:YES] onCompletion:^{
-                        [_firstCell performSelector:@selector(flipCellToCoverAnimated:)
-                                         withObject:[NSNumber numberWithBool:YES]
-                                         afterDelay:kGridGeneralDelay
-                                            inModes:[NSArray arrayWithObject:NSRunLoopCommonModes]];
-                        [_secondCell performSelector:@selector(flipCellToCoverAnimated:)
-                                          withObject:[NSNumber numberWithBool:YES]
-                                          afterDelay:kGridGeneralDelay
-                                             inModes:[NSArray arrayWithObject:NSRunLoopCommonModes]];
-                        
+                        [firstCell flipCellToCoverAnimated:[NSNumber numberWithBool:YES]];
+                        [secondCell flipCellToCoverAnimated:[NSNumber numberWithBool:YES]];
                         _firstPhoto.isShowing = [NSNumber numberWithBool:NO];
                         _firstPhoto = nil;
                         _secondPhoto.isShowing = [NSNumber numberWithBool:NO];
                         _secondPhoto = nil;
-                        
                         _numOfErrors++;
                     }];
                 }
@@ -351,7 +345,6 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 {
     [self hideAllPhotos];
     [self startTimer];
-    _started = YES;
 }
 
 /**
@@ -422,6 +415,8 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
                           inModes:[NSArray arrayWithObject:NSRunLoopCommonModes]];
         delay += 0.1;
     }
+    
+    [self performSelector:@selector(setStarted:) withObject:[NSNumber numberWithBool:YES] afterDelay:delay];
 }
 
 /**
