@@ -29,8 +29,10 @@
 @property (nonatomic) BOOL newRecord;
 // Timer to animate new record message
 @property (nonatomic, strong) NSTimer *recordTimer;
-// Play camera sound
-@property (nonatomic, strong) AVAudioPlayer *player;
+// Play button sound effect
+@property (nonatomic, strong) AVAudioPlayer *playerButton;
+// Play camera sound effect
+@property (nonatomic, strong) AVAudioPlayer *playerCamera;
 
 - (IBAction)nextButtonPressed:(id)sender;
 - (IBAction)tryAgainButtonPressed:(id)sender;
@@ -130,8 +132,13 @@
     // Camera sound
     NSString *cameraSoundPath = [[NSBundle mainBundle] pathForResource:@"polaroid-camera-take-picture-01" ofType:@"wav"];
     NSURL *cameraSoundURL = [NSURL fileURLWithPath:cameraSoundPath];
-    _player = [[AVAudioPlayer alloc] initWithContentsOfURL:cameraSoundURL error:nil];
-    [_player play];
+    _playerCamera = [[AVAudioPlayer alloc] initWithContentsOfURL:cameraSoundURL error:nil];
+    [_playerCamera play];
+    
+    // Button sound
+    NSString *buttonSoundPath = [[NSBundle mainBundle] pathForResource:@"button-29" ofType:@"wav"];
+    NSURL *buttonSoundURL = [NSURL fileURLWithPath:buttonSoundPath];
+    _playerButton = [[AVAudioPlayer alloc] initWithContentsOfURL:buttonSoundURL error:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -154,9 +161,11 @@
 
 - (IBAction)nextButtonPressed:(id)sender
 {
-    if ([_player isPlaying]) {
-        [_player stop];
+    if ([_playerCamera isPlaying]) {
+        [_playerCamera stop];
     }
+    
+    [_playerButton play];
     
     if (_newRecord) {
         [self performSegueWithIdentifier:@"recordsFromScoreSegue" sender:self];
@@ -167,9 +176,11 @@
 
 - (IBAction)tryAgainButtonPressed:(id)sender
 {
-    if ([_player isPlaying]) {
-        [_player stop];
+    if ([_playerCamera isPlaying]) {
+        [_playerCamera stop];
     }
+    
+    [_playerButton play];
     
     [self performSegueWithIdentifier:@"gridFromScoreSegue" sender:self];
 }

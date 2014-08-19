@@ -54,6 +54,8 @@ typedef enum {
 @property (nonatomic) GridSizeType size;
 @property (nonatomic) PhotoSourceType source;
 @property (nonatomic, strong) NSTimer *timerTitle;
+// Play sounds
+@property (nonatomic, strong) AVAudioPlayer *player;
 
 - (IBAction)onCameraButtonPressed:(id)sender;
 - (IBAction)onFacebookButtonPressed:(id)sender;
@@ -113,6 +115,11 @@ typedef enum {
     [_bannerView addSubview:banner];
     [banner loadRequest:[GADRequest request]];
     
+    // Camera sound
+    NSString *buttonSoundPath = [[NSBundle mainBundle] pathForResource:@"button-29" ofType:@"wav"];
+    NSURL *buttonSoundURL = [NSURL fileURLWithPath:buttonSoundPath];
+    _player = [[AVAudioPlayer alloc] initWithContentsOfURL:buttonSoundURL error:nil];
+    
     _changeViewsConstraints = [[NSArray alloc] init];
     
     [self startTimer];
@@ -140,6 +147,7 @@ typedef enum {
 - (IBAction)onCameraButtonPressed:(id)sender
 {
     FLPLogDebug(@"camera button pressed");
+    [_player play];
     _source = PhotoSourceCamera;
     [self showSizeView];
 }
@@ -147,6 +155,7 @@ typedef enum {
 - (IBAction)onFacebookButtonPressed:(id)sender
 {
     FLPLogDebug(@"Facebook button pressed");
+    [_player play];
     _source = PhotoSourceFacebook;
     [self showSizeView];
 }
@@ -154,6 +163,7 @@ typedef enum {
 - (IBAction)onTwitterButtonPressed:(id)sender
 {
     FLPLogDebug(@"Twitter button pressed");
+    [_player play];
     _source = PhotoShourceTwitter;
     [self showSizeView];
 }
@@ -161,12 +171,14 @@ typedef enum {
 - (IBAction)onRecordsButtonPressed:(id)sender
 {
     FLPLogDebug(@"");
+    [_player play];
     [self performSegueWithIdentifier:@"recordsFromMainSegue" sender:self];
 }
 
 - (IBAction)onSmallButtonPressed:(id)sender
 {
     FLPLogDebug(@"");
+    [_player play];
     _size = GridSizeSmall;
     [self preparePhotosFromSource];
     
@@ -175,6 +187,7 @@ typedef enum {
 - (IBAction)onNormalButtonPressed:(id)sender
 {
     FLPLogDebug(@"");
+    [_player play];
     _size = GridSizeNormal;
     [self preparePhotosFromSource];
 }
@@ -182,6 +195,7 @@ typedef enum {
 - (IBAction)onBigButtonPressed:(id)sender
 {
     FLPLogDebug(@"");
+    [_player play];
     _size = GridSizeBig;
     [self preparePhotosFromSource];
 }
@@ -189,6 +203,7 @@ typedef enum {
 - (IBAction)onSourceButtonPressed:(id)sender
 {
     FLPLogDebug(@"");
+    [_player play];
     [self showSourceView];
 }
 

@@ -14,6 +14,7 @@
 		6F19F69619A39C420047F269 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6F19F69519A39C420047F269 /* Roboto-Light.ttf */; };
 		6F19F69B19A3A8870047F269 /* camera-shutter-click-01.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6F19F69A19A3A8870047F269 /* camera-shutter-click-01.wav */; };
 		6F19F69D19A3AC760047F269 /* polaroid-camera-take-picture-01.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6F19F69C19A3AC760047F269 /* polaroid-camera-take-picture-01.wav */; };
+		6F19F6A119A3AF8D0047F269 /* button-29.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6F19F6A019A3AF8D0047F269 /* button-29.wav */; };
 		6F1AA1591973EAA400101766 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F1AA1581973EAA400101766 /* Foundation.framework */; };
 		6F1AA15B1973EAA400101766 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F1AA15A1973EAA400101766 /* CoreGraphics.framework */; };
 		6F1AA15D1973EAA400101766 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F1AA15C1973EAA400101766 /* UIKit.framework */; };
@@ -76,6 +77,7 @@
 		6F19F69519A39C420047F269 /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
 		6F19F69A19A3A8870047F269 /* camera-shutter-click-01.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "camera-shutter-click-01.wav"; sourceTree = "<group>"; };
 		6F19F69C19A3AC760047F269 /* polaroid-camera-take-picture-01.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "polaroid-camera-take-picture-01.wav"; sourceTree = "<group>"; };
+		6F19F6A019A3AF8D0047F269 /* button-29.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "button-29.wav"; sourceTree = "<group>"; };
 		6F1AA1551973EAA400101766 /* Flip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F1AA1581973EAA400101766 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6F1AA15A1973EAA400101766 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -203,6 +205,7 @@
 			children = (
 				6F19F69A19A3A8870047F269 /* camera-shutter-click-01.wav */,
 				6F19F69C19A3AC760047F269 /* polaroid-camera-take-picture-01.wav */,
+				6F19F6A019A3AF8D0047F269 /* button-29.wav */,
 			);
 			name = sounds;
 			sourceTree = "<group>";
@@ -469,6 +472,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F1AA1741973EAA400101766 /* Images.xcassets in Resources */,
+				6F19F6A119A3AF8D0047F269 /* button-29.wav in Resources */,
 				6F19F69B19A3A8870047F269 /* camera-shutter-click-01.wav in Resources */,
 				6F3B3A911982571200EA4BA1 /* TwitterKeys.plist in Resources */,
 				6F55BE8E19A1618000FC60E7 /* Pacifico.ttf in Resources */,

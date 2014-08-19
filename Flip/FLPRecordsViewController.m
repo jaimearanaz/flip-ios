@@ -25,6 +25,8 @@
 @property (nonatomic, weak) IBOutlet UIButton *mainBtn;
 @property (nonatomic, weak) IBOutlet UIView *bannerView;
 @property (nonatomic, strong) NSTimer *timerTitle;
+// Play button sound effect
+@property (nonatomic, strong) AVAudioPlayer *playerButton;
 
 - (IBAction)mainButtonPressed:(id)sender;
 
@@ -85,6 +87,11 @@
     [banner loadRequest:[GADRequest request]];
     
     [self startTimer];
+    
+    // Button sound
+    NSString *buttonSoundPath = [[NSBundle mainBundle] pathForResource:@"button-29" ofType:@"wav"];
+    NSURL *buttonSoundURL = [NSURL fileURLWithPath:buttonSoundPath];
+    _playerButton = [[AVAudioPlayer alloc] initWithContentsOfURL:buttonSoundURL error:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -97,6 +104,7 @@
 
 - (IBAction)mainButtonPressed:(id)sender
 {
+    [_playerButton play];
     [self endTimer];
     [self performSegueWithIdentifier:@"mainFromRecordsSegue" sender:self];
 }
