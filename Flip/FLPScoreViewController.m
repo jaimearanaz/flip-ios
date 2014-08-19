@@ -48,9 +48,9 @@
 {
     [super viewDidLoad];
     
+    [_tryAgainBtn.titleLabel setFont:[UIFont fontWithName:@"Roboto-Light" size:17]];
     [_tryAgainBtn setTitle:NSLocalizedString(@"SCORE_AGAIN", @"") forState:UIControlStateNormal];
-    
-    
+
     [_titleLbl setFont:[UIFont fontWithName:@"Pacifico" size:25]];
     _titleLbl.text = NSLocalizedString(@"SCORE_TITLE", @"");
     
@@ -59,12 +59,12 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"mm:ss:SSS"];
     [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0.0]];
-    [_timeResultLbl setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
+    [_timeResultLbl setFont:[UIFont fontWithName:@"Roboto-Light" size:17]];
     _timeResultLbl.text = [dateFormatter stringFromDate:_time];
     
     [_errorsLbl setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
     _errorsLbl.text = NSLocalizedString(@"SCORE_ERRORS", @"");
-    [_errorsResultLbl setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
+    [_errorsResultLbl setFont:[UIFont fontWithName:@"Roboto-Light" size:17]];
     _errorsResultLbl.text = [NSString stringWithFormat:@"%ld", (long)_numOfErrors];
     
     [_penalizationLbl setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
@@ -73,7 +73,7 @@
     NSDateFormatter *penalizationDateFormatter = [[NSDateFormatter alloc] init];
     [penalizationDateFormatter setDateFormat:@"mm:ss"];
     [penalizationDateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0.0]];
-    [_penalizationResultLbl setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
+    [_penalizationResultLbl setFont:[UIFont fontWithName:@"Roboto-Light" size:17]];
     _penalizationResultLbl.text = [penalizationDateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:penalizationSeconds]];
     
     [_finalTimeLbl setFont:[UIFont fontWithName:@"Roboto-Bold" size:23]];
@@ -98,6 +98,7 @@
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSDate *record = (NSDate *)[userDefaults objectForKey:key];
     
+    [_nextBtn.titleLabel setFont:[UIFont fontWithName:@"Roboto-Light" size:17]];
     [_recordLbl setFont:[UIFont fontWithName:@"Pacifico" size:23]];
     _recordLbl.text = NSLocalizedString(@"SCORE_RECORD", @"");
     

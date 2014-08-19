@@ -11,6 +11,7 @@
 		6F14871E19A0F6640087527C /* FLPCoverFromRightSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F14871D19A0F6640087527C /* FLPCoverFromRightSegue.m */; };
 		6F14872119A0FD110087527C /* FLPFlipFromLeftSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F14872019A0FD110087527C /* FLPFlipFromLeftSegue.m */; };
 		6F14872419A0FDE90087527C /* FLPFlipFromRightSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F14872319A0FDE90087527C /* FLPFlipFromRightSegue.m */; };
+		6F19F69619A39C420047F269 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6F19F69519A39C420047F269 /* Roboto-Light.ttf */; };
 		6F1AA1591973EAA400101766 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F1AA1581973EAA400101766 /* Foundation.framework */; };
 		6F1AA15B1973EAA400101766 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F1AA15A1973EAA400101766 /* CoreGraphics.framework */; };
 		6F1AA15D1973EAA400101766 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F1AA15C1973EAA400101766 /* UIKit.framework */; };
@@ -45,7 +46,6 @@
 		6F87A771199A17B400C2303A /* FLPScoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F87A770199A17B400C2303A /* FLPScoreViewController.m */; };
 		6F87A774199A320E00C2303A /* FLPRecordsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F87A773199A320E00C2303A /* FLPRecordsViewController.m */; };
 		6F965CCB19A2250A00592690 /* FLPTitleLetterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F965CCA19A2250A00592690 /* FLPTitleLetterView.m */; };
-		6FA783E81992A26400F8B8AC /* FLPSizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA783E71992A26400F8B8AC /* FLPSizeViewController.m */; };
 		6FF58536197FC95100926DF9 /* FLPCameraPhotoSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF58535197FC95100926DF9 /* FLPCameraPhotoSource.m */; };
 		6FF58538197FCA5800926DF9 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FF58537197FCA5800926DF9 /* AssetsLibrary.framework */; };
 		6FFC51671976659800668F82 /* FLPPhotoSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFC51661976659800668F82 /* FLPPhotoSource.m */; };
@@ -71,6 +71,7 @@
 		6F14872019A0FD110087527C /* FLPFlipFromLeftSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPFlipFromLeftSegue.m; sourceTree = "<group>"; };
 		6F14872219A0FDE90087527C /* FLPFlipFromRightSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPFlipFromRightSegue.h; sourceTree = "<group>"; };
 		6F14872319A0FDE90087527C /* FLPFlipFromRightSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPFlipFromRightSegue.m; sourceTree = "<group>"; };
+		6F19F69519A39C420047F269 /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
 		6F1AA1551973EAA400101766 /* Flip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F1AA1581973EAA400101766 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6F1AA15A1973EAA400101766 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -136,8 +137,6 @@
 		6F87A773199A320E00C2303A /* FLPRecordsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPRecordsViewController.m; sourceTree = "<group>"; };
 		6F965CC919A2250A00592690 /* FLPTitleLetterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPTitleLetterView.h; sourceTree = "<group>"; };
 		6F965CCA19A2250A00592690 /* FLPTitleLetterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPTitleLetterView.m; sourceTree = "<group>"; };
-		6FA783E61992A26400F8B8AC /* FLPSizeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPSizeViewController.h; sourceTree = "<group>"; };
-		6FA783E71992A26400F8B8AC /* FLPSizeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPSizeViewController.m; sourceTree = "<group>"; };
 		6FF58534197FC95100926DF9 /* FLPCameraPhotoSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPCameraPhotoSource.h; sourceTree = "<group>"; };
 		6FF58535197FC95100926DF9 /* FLPCameraPhotoSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPCameraPhotoSource.m; sourceTree = "<group>"; };
 		6FF58537197FCA5800926DF9 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
@@ -291,8 +290,6 @@
 			children = (
 				6F1AA1701973EAA400101766 /* FLPMainScrenViewController.h */,
 				6F1AA1711973EAA400101766 /* FLPMainScrenViewController.m */,
-				6FA783E61992A26400F8B8AC /* FLPSizeViewController.h */,
-				6FA783E71992A26400F8B8AC /* FLPSizeViewController.m */,
 				6F7B2DDE1980FC9200C9FE69 /* FLPGridViewController.h */,
 				6F7B2DDF1980FC9200C9FE69 /* FLPGridViewController.m */,
 				6F87A76F199A17B400C2303A /* FLPScoreViewController.h */,
@@ -328,6 +325,7 @@
 			children = (
 				6F55BE8D19A1617C00FC60E7 /* Pacifico.ttf */,
 				6F55BE9119A166B900FC60E7 /* Roboto-Bold.ttf */,
+				6F19F69519A39C420047F269 /* Roboto-Light.ttf */,
 			);
 			name = fonts;
 			sourceTree = "<group>";
@@ -462,6 +460,7 @@
 				6F1AA1991973FE9900101766 /* Localizable.strings in Resources */,
 				6F1AA16C1973EAA400101766 /* Main_iPhone.storyboard in Resources */,
 				6F55BE9219A166B900FC60E7 /* Roboto-Bold.ttf in Resources */,
+				6F19F69619A39C420047F269 /* Roboto-Light.ttf in Resources */,
 				6F1AA1631973EAA400101766 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -523,7 +522,6 @@
 				6FF58536197FC95100926DF9 /* FLPCameraPhotoSource.m in Sources */,
 				6F1AA1651973EAA400101766 /* main.m in Sources */,
 				6F33AC7C1998C14000FBF9C4 /* FLPCollectionViewCell.m in Sources */,
-				6FA783E81992A26400F8B8AC /* FLPSizeViewController.m in Sources */,
 				6F14871B19A0F5E90087527C /* FLPCoverFromLeftSegue.m in Sources */,
 				6F1AA1721973EAA400101766 /* FLPMainScrenViewController.m in Sources */,
 				6F965CCB19A2250A00592690 /* FLPTitleLetterView.m in Sources */,

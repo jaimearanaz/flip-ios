@@ -45,9 +45,12 @@
 {
     [super viewDidLoad];
     
-    [_mainBtn setTitle:NSLocalizedString(@"OTHER_MAIN", @"") forState:UIControlStateNormal];
-    _titleLbl.text = NSLocalizedString(@"RECORDS_TITLE", @"");
     [_subtitleLbl setFont:[UIFont fontWithName:@"Pacifico" size:25]];
+    [_mainBtn.titleLabel setFont:[UIFont fontWithName:@"Roboto-Light" size:17]];
+    [_mainBtn setTitle:NSLocalizedString(@"OTHER_MAIN", @"") forState:UIControlStateNormal];
+    
+    [_titleLbl setFont:[UIFont fontWithName:@"Pacifico" size:25]];
+    _titleLbl.text = NSLocalizedString(@"RECORDS_TITLE", @"");
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     
@@ -59,13 +62,19 @@
     [dateFormatter setDateFormat:@"mm:ss:SSS"];
     [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0.0]];
     
+    [_smallLbl setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
     _smallLbl.text = NSLocalizedString(@"RECORDS_SMALL", @"");
+    [_smallResultLbl setFont:[UIFont fontWithName:@"Roboto-Light" size:17]];
     _smallResultLbl.text = (recordSmall) ? [dateFormatter stringFromDate:recordSmall] : NSLocalizedString(@"RECORDS_NONE", @"");
     
+    [_normalLbl setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
     _normalLbl.text = NSLocalizedString(@"RECORDS_NORMAL", @"");
+    [_normalResultLbl setFont:[UIFont fontWithName:@"Roboto-Light" size:17]];
     _normalResultLbl.text = (recordNormal) ? [dateFormatter stringFromDate:recordNormal] : NSLocalizedString(@"RECORDS_NONE", @"");
     
+    [_bigLbl setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
     _bigLbl.text = NSLocalizedString(@"RECORDS_BIG", @"");
+    [_bigResultLbl setFont:[UIFont fontWithName:@"Roboto-Light" size:17]];
     _bigResultLbl.text = (recordBig) ? [dateFormatter stringFromDate:recordBig] : NSLocalizedString(@"RECORDS_NONE", @"");
     
     // Banner
