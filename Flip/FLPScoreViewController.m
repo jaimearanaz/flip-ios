@@ -14,6 +14,7 @@
 
 @property (nonatomic, weak) IBOutlet UIButton *nextBtn;
 @property (nonatomic, weak) IBOutlet UIButton *tryAgainBtn;
+@property (nonatomic, weak) IBOutlet UILabel *titleLbl;
 @property (nonatomic, weak) IBOutlet UILabel *timeLbl;
 @property (nonatomic, weak) IBOutlet UILabel *timeResultLbl;
 @property (nonatomic, weak) IBOutlet UILabel *errorsLbl;
@@ -25,6 +26,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *recordLbl;
 @property (nonatomic, weak) IBOutlet UIView *bannerView;
 @property (nonatomic) BOOL newRecord;
+@property (nonatomic, strong) NSTimer *recordTimer;
 
 - (IBAction)nextButtonPressed:(id)sender;
 - (IBAction)tryAgainButtonPressed:(id)sender;
@@ -48,24 +50,36 @@
     
     [_tryAgainBtn setTitle:NSLocalizedString(@"SCORE_AGAIN", @"") forState:UIControlStateNormal];
     
+    
+    [_titleLbl setFont:[UIFont fontWithName:@"Pacifico" size:25]];
+    _titleLbl.text = NSLocalizedString(@"SCORE_TITLE", @"");
+    
+    [_timeLbl setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
     _timeLbl.text = NSLocalizedString(@"SCORE_TIME", @"");
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"mm:ss:SSS"];
     [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0.0]];
+    [_timeResultLbl setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
     _timeResultLbl.text = [dateFormatter stringFromDate:_time];
     
+    [_errorsLbl setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
     _errorsLbl.text = NSLocalizedString(@"SCORE_ERRORS", @"");
+    [_errorsResultLbl setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
     _errorsResultLbl.text = [NSString stringWithFormat:@"%ld", (long)_numOfErrors];
     
+    [_penalizationLbl setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
     _penalizationLbl.text = NSLocalizedString(@"SCORE_PENALIZATION", @"");
     NSTimeInterval penalizationSeconds = _numOfErrors * kPenalizationPerError;
     NSDateFormatter *penalizationDateFormatter = [[NSDateFormatter alloc] init];
     [penalizationDateFormatter setDateFormat:@"mm:ss"];
     [penalizationDateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0.0]];
+    [_penalizationResultLbl setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
     _penalizationResultLbl.text = [penalizationDateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:penalizationSeconds]];
     
+    [_finalTimeLbl setFont:[UIFont fontWithName:@"Roboto-Bold" size:23]];
     _finalTimeLbl.text = NSLocalizedString(@"SCORE_TIME_FINAL", @"");
     NSDate *finalTime = [NSDate dateWithTimeInterval:penalizationSeconds sinceDate:_time];
+    [_finalTimeResultLbl setFont:[UIFont fontWithName:@"Roboto-Bold" size:23]];
     _finalTimeResultLbl.text = [dateFormatter stringFromDate:finalTime];
     
     NSString *key = @"";
@@ -84,12 +98,15 @@
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSDate *record = (NSDate *)[userDefaults objectForKey:key];
     
+    [_recordLbl setFont:[UIFont fontWithName:@"Pacifico" size:23]];
     _recordLbl.text = NSLocalizedString(@"SCORE_RECORD", @"");
+    
     if (([record compare:finalTime] == NSOrderedDescending) || (record == nil)) {
         [userDefaults setObject:finalTime forKey:key];
         [_nextBtn setTitle:NSLocalizedString(@"OTHER_NEXT", @"") forState:UIControlStateNormal];
         _recordLbl.hidden = NO;
         _newRecord = YES;
+        [self startTimer];
     } else {
         [_nextBtn setTitle:NSLocalizedString(@"OTHER_MAIN", @"") forState:UIControlStateNormal];
         _recordLbl.hidden = YES;
@@ -112,6 +129,7 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    [self endTimer];
     if ([segue.identifier isEqualToString:@"gridFromScoreSegue"]) {
         FLPGridViewController *gridViewController=(FLPGridViewController *)segue.destinationViewController;
         gridViewController.photos = _photos;
@@ -133,6 +151,36 @@
 - (IBAction)tryAgainButtonPressed:(id)sender
 {
     [self performSegueWithIdentifier:@"gridFromScoreSegue" sender:self];
+}
+
+#pragma Private methods
+
+- (void)startTimer
+{
+    if (_recordTimer == nil) {
+        _recordTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
+                                                        target:self
+                                                      selector:@selector(blinkNewRecord)
+                                                      userInfo:nil
+                                                       repeats:YES];
+    }
+}
+
+- (void)endTimer
+{
+    if (_recordTimer != nil) {
+        [_recordTimer invalidate];
+        _recordTimer = nil;
+    }
+}
+
+- (void)blinkNewRecord
+{
+    if (_recordLbl.hidden) {
+        _recordLbl.hidden = NO;
+    } else {
+        _recordLbl.hidden = YES;
+    }
 }
 
 @end

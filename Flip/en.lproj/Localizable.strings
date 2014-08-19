@@ -29,11 +29,12 @@
 "GRID_EXIT_CONFIRM" = "Are you sure you want to leave?";
 
 // Score screen
+"SCORE_TITLE" = "Your score";
 "SCORE_TIME" = "Time";
 "SCORE_ERRORS" = "Errors";
 "SCORE_PENALIZATION" = "Penalization";
 "SCORE_TIME_FINAL" = "Final time";
-"SCORE_RECORD" = "Congrats, new record!";
+"SCORE_RECORD" = "Congrats, it's a new record!";
 "SCORE_AGAIN" = "Try again!";
 
 // Records screen

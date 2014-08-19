@@ -29,6 +29,7 @@
 "GRID_EXIT_CONFIRM" = "¿Seguro que quieres salir?";
 
 // Score screen
+"SCORE_TITLE" = "Puntuación";
 "SCORE_TIME" = "Tiempo";
 "SCORE_ERRORS" = "Errores";
 "SCORE_PENALIZATION" = "Penalización";

@@ -577,6 +577,13 @@
                                     <action selector="tryAgainButtonPressed:" destination="WwA-J0-4Lf" eventType="touchUpInside" id="hwp-Nl-Ck4"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Score" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="76j-8e-ngm">
+                                <rect key="frame" x="20" y="84" width="280" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xbe-aJ-Ie1">
                                 <rect key="frame" x="58" y="134" width="96" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -602,19 +609,19 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Final time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YBT-Ew-VuU">
-                                <rect key="frame" x="67" y="297" width="195" height="30"/>
+                                <rect key="frame" x="63" y="297" width="195" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Congrats, new record!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ryl-kF-g3y">
-                                <rect key="frame" x="20" y="386" width="280" height="30"/>
+                                <rect key="frame" x="20" y="383" width="280" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="00:00:000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sz8-hb-dTh">
-                                <rect key="frame" x="67" y="348" width="195" height="30"/>
+                                <rect key="frame" x="63" y="335" width="195" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
                                 <nil key="highlightedColor"/>
@@ -659,6 +666,7 @@
                         <outlet property="recordLbl" destination="ryl-kF-g3y" id="5Mw-Zc-SEf"/>
                         <outlet property="timeLbl" destination="Xbe-aJ-Ie1" id="FVg-3H-ais"/>
                         <outlet property="timeResultLbl" destination="puV-hu-PfX" id="zee-3r-psV"/>
+                        <outlet property="titleLbl" destination="76j-8e-ngm" id="5IZ-MK-BgG"/>
                         <outlet property="tryAgainBtn" destination="tfg-5J-dlH" id="4Yn-tA-PwZ"/>
                         <segue destination="20h-2Q-q9d" kind="custom" identifier="gridFromScoreSegue" customClass="FLPFlipFromRightSegue" id="bqU-UK-gYp"/>
                         <segue destination="2Iz-SI-UwT" kind="custom" identifier="recordsFromScoreSegue" customClass="FLPCoverFromRightSegue" id="Kbh-Hl-H2k"/>
@@ -953,8 +961,8 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="woI-t5-zsd"/>
-        <segue reference="4VQ-hx-PhO"/>
-        <segue reference="ibe-Gz-0pW"/>
+        <segue reference="bqU-UK-gYp"/>
+        <segue reference="Kbh-Hl-H2k"/>
+        <segue reference="uZU-Ea-4mk"/>
     </inferredMetricsTieBreakers>
 </document>
