@@ -46,7 +46,7 @@
     [super viewDidLoad];
     
     [_subtitleLbl setFont:[UIFont fontWithName:@"Pacifico" size:25]];
-    [_mainBtn.titleLabel setFont:[UIFont fontWithName:@"Roboto-Light" size:17]];
+    [_mainBtn.titleLabel setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
     [_mainBtn setTitle:NSLocalizedString(@"OTHER_MAIN", @"") forState:UIControlStateNormal];
     
     [_titleLbl setFont:[UIFont fontWithName:@"Pacifico" size:25]];

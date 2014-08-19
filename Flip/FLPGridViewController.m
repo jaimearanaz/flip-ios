@@ -80,7 +80,7 @@
     _numOfPhotosMatched = 0;
     _numOfErrors = 0;
 
-    [_backBtn.titleLabel setFont:[UIFont fontWithName:@"Roboto-Light" size:17]];
+    [_backBtn.titleLabel setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
     [_backBtn setTitle:NSLocalizedString(@"OTHER_EXIT", @"") forState:UIControlStateNormal];
     [_timerLbl setFont:[UIFont fontWithName:@"Roboto-Bold" size:20]];
     

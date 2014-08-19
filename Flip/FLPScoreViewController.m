@@ -48,7 +48,7 @@
 {
     [super viewDidLoad];
     
-    [_tryAgainBtn.titleLabel setFont:[UIFont fontWithName:@"Roboto-Light" size:17]];
+    [_tryAgainBtn.titleLabel setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
     [_tryAgainBtn setTitle:NSLocalizedString(@"SCORE_AGAIN", @"") forState:UIControlStateNormal];
 
     [_titleLbl setFont:[UIFont fontWithName:@"Pacifico" size:25]];
@@ -98,7 +98,7 @@
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSDate *record = (NSDate *)[userDefaults objectForKey:key];
     
-    [_nextBtn.titleLabel setFont:[UIFont fontWithName:@"Roboto-Light" size:17]];
+    [_nextBtn.titleLabel setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
     [_recordLbl setFont:[UIFont fontWithName:@"Pacifico" size:23]];
     _recordLbl.text = NSLocalizedString(@"SCORE_RECORD", @"");
     
