@@ -198,7 +198,7 @@
 
     // Game is not started, show all images
     if (!_started) {
-        [cell flipCellToImageAnimated:[NSNumber numberWithBool:NO]];
+        [cell flipCellToImageAnimated:[NSNumber numberWithBool:NO] onCompletion:nil];
         FLPLogDebug(@"row %ld, not started", (long)indexPath.row);
         
     // Game is started
@@ -206,12 +206,12 @@
         
         // Matched
         if ([gridItem.isMatched boolValue]) {
-            [cell flipCellToImageAnimated:[NSNumber numberWithBool:NO]];
+            [cell flipCellToImageAnimated:[NSNumber numberWithBool:NO] onCompletion:nil];
             FLPLogDebug(@"row %ld, matched", (long)indexPath.row);
         } else {
             // Selected
             if ([gridItem.isShowing boolValue]) {
-                [cell flipCellToImageAnimated:[NSNumber numberWithBool:NO]];
+                [cell flipCellToImageAnimated:[NSNumber numberWithBool:NO] onCompletion:nil];
                 FLPLogDebug(@"row %ld, is showing", (long)indexPath.row);
             // Not selected
             } else {
@@ -245,7 +245,7 @@
         if (_firstPhoto == nil) {
             gridItem.isShowing = [NSNumber numberWithBool:YES];
             _firstPhoto = gridItem;
-            [cell flipCellToImageAnimated:[NSNumber numberWithBool:YES]];
+            [cell flipCellToImageAnimated:[NSNumber numberWithBool:YES] onCompletion:nil];
             
         // It's second photo
         } else {
@@ -253,10 +253,19 @@
             if (gridItem != _firstPhoto) {
                 gridItem.isShowing = [NSNumber numberWithBool:YES];
                 _secondPhoto = gridItem;
-                [cell flipCellToImageAnimated:[NSNumber numberWithBool:YES]];
+                
+                NSInteger firstPhotoRow = [_photosInGrid indexOfObject:_firstPhoto];
+                NSIndexPath *firstIndexPath = [NSIndexPath indexPathForItem:firstPhotoRow inSection:0];
+                FLPCollectionViewCell *_firstCell = (FLPCollectionViewCell *)[_collectionView cellForItemAtIndexPath:firstIndexPath];
+                FLPCollectionViewCell *_secondCell = cell;
                 
                 // Photos match, keep showing
                 if (_firstPhoto.imageIndex == _secondPhoto.imageIndex) {
+                    
+                    [cell flipCellToImageAnimated:[NSNumber numberWithBool:YES] onCompletion:^{
+                        [_firstCell matchedAnimation];
+                        [_secondCell matchedAnimation];
+
                     _firstPhoto.isMatched = [NSNumber numberWithBool:YES];
                     _firstPhoto = nil;
                     _secondPhoto.isMatched = [NSNumber numberWithBool:YES];
@@ -271,30 +280,29 @@
                                    afterDelay:kGridGeneralDelay
                                       inModes:[NSArray arrayWithObject:NSRunLoopCommonModes]];
                     }
+                        
+                    }];
                     
                 // Photos don't match, hide them
                 } else {
-
-                    NSInteger firstPhotoRow = [_photosInGrid indexOfObject:_firstPhoto];
-                    NSIndexPath *firstIndexPath = [NSIndexPath indexPathForItem:firstPhotoRow inSection:0];
-                    FLPCollectionViewCell *_firstCell = (FLPCollectionViewCell *)[_collectionView cellForItemAtIndexPath:firstIndexPath];
-                    FLPCollectionViewCell *_secondCell = cell;
-                    
-                    [_firstCell performSelector:@selector(flipCellToCoverAnimated:)
-                                     withObject:[NSNumber numberWithBool:YES]
-                                     afterDelay:kGridGeneralDelay
-                                        inModes:[NSArray arrayWithObject:NSRunLoopCommonModes]];
-                    [_secondCell performSelector:@selector(flipCellToCoverAnimated:)
-                                      withObject:[NSNumber numberWithBool:YES]
-                                      afterDelay:kGridGeneralDelay
-                                         inModes:[NSArray arrayWithObject:NSRunLoopCommonModes]];
-                    
-                    _firstPhoto.isShowing = [NSNumber numberWithBool:NO];
-                    _firstPhoto = nil;
-                    _secondPhoto.isShowing = [NSNumber numberWithBool:NO];
-                    _secondPhoto = nil;
-                    
-                    _numOfErrors++;
+            
+                    [cell flipCellToImageAnimated:[NSNumber numberWithBool:YES] onCompletion:^{
+                        [_firstCell performSelector:@selector(flipCellToCoverAnimated:)
+                                         withObject:[NSNumber numberWithBool:YES]
+                                         afterDelay:kGridGeneralDelay
+                                            inModes:[NSArray arrayWithObject:NSRunLoopCommonModes]];
+                        [_secondCell performSelector:@selector(flipCellToCoverAnimated:)
+                                          withObject:[NSNumber numberWithBool:YES]
+                                          afterDelay:kGridGeneralDelay
+                                             inModes:[NSArray arrayWithObject:NSRunLoopCommonModes]];
+                        
+                        _firstPhoto.isShowing = [NSNumber numberWithBool:NO];
+                        _firstPhoto = nil;
+                        _secondPhoto.isShowing = [NSNumber numberWithBool:NO];
+                        _secondPhoto = nil;
+                        
+                        _numOfErrors++;
+                    }];
                 }
             }
         }

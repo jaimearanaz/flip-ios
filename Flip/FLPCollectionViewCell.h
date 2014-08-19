@@ -19,11 +19,8 @@
 @property (nonatomic, weak) IBOutlet UIImageView *photoView;
 @property (nonatomic, weak) IBOutlet UILabel *coverLbl;
 
-/**
- * Flips cell to show image
- * @param animated YES to animate transition, NO otherwise
- */
-- (void)flipCellToImageAnimated:(NSNumber *)animated;
+// TODO: comment
+- (void)flipCellToImageAnimated:(NSNumber *)animated onCompletion:(void(^)())completion;
 
 /**
  * Flips cell to show cover
@@ -36,5 +33,7 @@
  * @return YES if cell is showing image, NO otherwise
  */
 - (BOOL)isShowingImage;
+
+- (void)matchedAnimation;
 
 @end
