@@ -25,8 +25,12 @@
 @property (nonatomic, weak) IBOutlet UILabel *finalTimeResultLbl;
 @property (nonatomic, weak) IBOutlet UILabel *recordLbl;
 @property (nonatomic, weak) IBOutlet UIView *bannerView;
+// YES if it's a new record
 @property (nonatomic) BOOL newRecord;
+// Timer to animate new record message
 @property (nonatomic, strong) NSTimer *recordTimer;
+// Play camera sound
+@property (nonatomic, strong) AVAudioPlayer *player;
 
 - (IBAction)nextButtonPressed:(id)sender;
 - (IBAction)tryAgainButtonPressed:(id)sender;
@@ -95,6 +99,8 @@
             break;
     }
     
+    // New record
+    
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSDate *record = (NSDate *)[userDefaults objectForKey:key];
     
@@ -120,6 +126,12 @@
     banner.rootViewController = self;
     [_bannerView addSubview:banner];
     [banner loadRequest:[GADRequest request]];
+    
+    // Camera sound
+    NSString *cameraSoundPath = [[NSBundle mainBundle] pathForResource:@"polaroid-camera-take-picture-01" ofType:@"wav"];
+    NSURL *cameraSoundURL = [NSURL fileURLWithPath:cameraSoundPath];
+    _player = [[AVAudioPlayer alloc] initWithContentsOfURL:cameraSoundURL error:nil];
+    [_player play];
 }
 
 - (void)didReceiveMemoryWarning
@@ -142,6 +154,10 @@
 
 - (IBAction)nextButtonPressed:(id)sender
 {
+    if ([_player isPlaying]) {
+        [_player stop];
+    }
+    
     if (_newRecord) {
         [self performSegueWithIdentifier:@"recordsFromScoreSegue" sender:self];
     } else {
@@ -151,6 +167,10 @@
 
 - (IBAction)tryAgainButtonPressed:(id)sender
 {
+    if ([_player isPlaying]) {
+        [_player stop];
+    }
+    
     [self performSegueWithIdentifier:@"gridFromScoreSegue" sender:self];
 }
 
