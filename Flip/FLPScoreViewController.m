@@ -29,8 +29,6 @@
 @property (nonatomic) BOOL newRecord;
 // Timer to animate new record message
 @property (nonatomic, strong) NSTimer *recordTimer;
-// Play button sound effect
-@property (nonatomic, strong) AVAudioPlayer *playerButton;
 // Play camera sound effect
 @property (nonatomic, strong) AVAudioPlayer *playerCamera;
 
@@ -134,11 +132,6 @@
     NSURL *cameraSoundURL = [NSURL fileURLWithPath:cameraSoundPath];
     _playerCamera = [[AVAudioPlayer alloc] initWithContentsOfURL:cameraSoundURL error:nil];
     [_playerCamera play];
-    
-    // Button sound
-    NSString *buttonSoundPath = [[NSBundle mainBundle] pathForResource:@"button-29" ofType:@"wav"];
-    NSURL *buttonSoundURL = [NSURL fileURLWithPath:buttonSoundPath];
-    _playerButton = [[AVAudioPlayer alloc] initWithContentsOfURL:buttonSoundURL error:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -165,8 +158,6 @@
         [_playerCamera stop];
     }
     
-    [_playerButton play];
-    
     if (_newRecord) {
         [self performSegueWithIdentifier:@"recordsFromScoreSegue" sender:self];
     } else {
@@ -179,8 +170,6 @@
     if ([_playerCamera isPlaying]) {
         [_playerCamera stop];
     }
-    
-    [_playerButton play];
     
     [self performSegueWithIdentifier:@"gridFromScoreSegue" sender:self];
 }

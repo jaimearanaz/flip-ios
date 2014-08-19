@@ -43,8 +43,6 @@
 @property (nonatomic) FLPGridItem *secondPhoto;
 // YES if game has started
 @property (nonatomic) NSNumber *started;
-// Play button sound effect
-@property (nonatomic, strong) AVAudioPlayer *playerButton;
 // Play camera sound effect
 @property (nonatomic, strong) AVAudioPlayer *playerCamera;
 
@@ -118,11 +116,6 @@
     NSString *cameraSoundPath = [[NSBundle mainBundle] pathForResource:@"camera-shutter-click-01" ofType:@"wav"];
     NSURL *cameraSoundURL = [NSURL fileURLWithPath:cameraSoundPath];
     _playerCamera = [[AVAudioPlayer alloc] initWithContentsOfURL:cameraSoundURL error:nil];
-    
-    // Button sound
-    NSString *buttonSoundPath = [[NSBundle mainBundle] pathForResource:@"button-29" ofType:@"wav"];
-    NSURL *buttonSoundURL = [NSURL fileURLWithPath:buttonSoundPath];
-    _playerButton = [[AVAudioPlayer alloc] initWithContentsOfURL:buttonSoundURL error:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -172,8 +165,6 @@
 
 - (IBAction)backButtonPressed:(id)sender
 {
-    [_playerButton play];
-    
     [WCAlertView showAlertWithTitle:NSLocalizedString(@"GRID_EXIT", @"")
                             message:NSLocalizedString(@"GRID_EXIT_CONFIRM", @"")
                  customizationBlock:nil
