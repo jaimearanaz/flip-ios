@@ -30,7 +30,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TMO-pv-HR8" userLabel="View - Title">
-                                        <rect key="frame" x="12" y="78" width="302" height="140"/>
+                                        <rect key="frame" x="9" y="80" width="302" height="140"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qlT-Xt-ax4" userLabel="View - Letter F" customClass="FLPTitleLetterView">
