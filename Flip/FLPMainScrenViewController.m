@@ -92,11 +92,11 @@ typedef enum {
     [_recordsBtn setTitle:NSLocalizedString(@"MAIN_RECORDS", @"") forState:UIControlStateNormal];
     
     // Select grid size view
-    [_smallBtn.titleLabel setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
+    [_smallBtn.titleLabel setFont:[UIFont fontWithName:@"Pacifico" size:20]];
     [_smallBtn setTitle:NSLocalizedString(@"MAIN_SMALL", @"") forState:UIControlStateNormal];
-    [_normalBtn.titleLabel setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
+    [_normalBtn.titleLabel setFont:[UIFont fontWithName:@"Pacifico" size:20]];
     [_normalBtn setTitle:NSLocalizedString(@"MAIN_NORMAL", @"") forState:UIControlStateNormal];
-    [_bigBtn.titleLabel setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
+    [_bigBtn.titleLabel setFont:[UIFont fontWithName:@"Pacifico" size:20]];
     [_bigBtn setTitle:NSLocalizedString(@"MAIN_BIG", @"") forState:UIControlStateNormal];
     [_sourceBtn.titleLabel setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
     [_sourceBtn setTitle:NSLocalizedString(@"MAIN_SOURCE", @"") forState:UIControlStateNormal];

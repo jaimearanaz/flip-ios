@@ -228,12 +228,13 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cnf-b3-mNA">
-                                        <rect key="frame" x="60" y="65" width="200" height="35"/>
+                                        <rect key="frame" x="60" y="65" width="200" height="34"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
-                                        <state key="normal" title="Camera">
+                                        <state key="normal" title="Camera" backgroundImage="Camera_button_normal">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <state key="selected" backgroundImage="Camera_button_pressed"/>
+                                        <state key="highlighted" backgroundImage="Camera_button_pressed"/>
                                         <connections>
                                             <action selector="onCameraButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="7mz-jt-K8h"/>
                                         </connections>
@@ -251,7 +252,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ky9-hR-iZY">
-                                        <rect key="frame" x="60" y="165" width="200" height="35"/>
+                                        <rect key="frame" x="60" y="165" width="200" height="34"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Twitter" backgroundImage="Twitter_button_normal">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -288,10 +289,12 @@
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mxm-dX-5Zp">
                                         <rect key="frame" x="60" y="66" width="200" height="36"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
-                                        <state key="normal" title="Small">
+                                        <state key="normal" title="Small" backgroundImage="General_button_normal">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <state key="disabled" backgroundImage="General_button_pressed"/>
+                                        <state key="selected" backgroundImage="General_button_pressed"/>
+                                        <state key="highlighted" backgroundImage="General_button_pressed"/>
                                         <connections>
                                             <action selector="onSmallButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="F1d-Kn-7ok"/>
                                         </connections>
@@ -299,21 +302,24 @@
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mbU-cI-U4A">
                                         <rect key="frame" x="60" y="116" width="200" height="36"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
-                                        <state key="normal" title="Normal">
+                                        <state key="normal" title="Normal" backgroundImage="General_button_normal">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <state key="disabled" backgroundImage="General_button_pressed"/>
+                                        <state key="selected" backgroundImage="General_button_pressed"/>
+                                        <state key="highlighted" backgroundImage="General_button_pressed"/>
                                         <connections>
                                             <action selector="onNormalButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Vit-ez-ivB"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a24-Ag-Vns">
-                                        <rect key="frame" x="60" y="166" width="200" height="36"/>
+                                        <rect key="frame" x="60" y="166" width="200" height="34"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
-                                        <state key="normal" title="Big">
+                                        <state key="normal" title="Big" backgroundImage="General_button_normal">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <state key="disabled" backgroundImage="General_button_pressed"/>
+                                        <state key="selected" backgroundImage="General_button_pressed"/>
                                         <connections>
                                             <action selector="onBigButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="KVk-we-Lud"/>
                                         </connections>
@@ -958,8 +964,12 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Camera_button_normal" width="200" height="34"/>
+        <image name="Camera_button_pressed" width="200" height="34"/>
         <image name="Facebook_button_normal" width="200" height="34"/>
         <image name="Facebook_button_pressed" width="200" height="34"/>
+        <image name="General_button_normal" width="200" height="34"/>
+        <image name="General_button_pressed" width="200" height="34"/>
         <image name="Twitter_button_normal" width="200" height="34"/>
         <image name="Twitter_button_pressed" width="200" height="34"/>
     </resources>
