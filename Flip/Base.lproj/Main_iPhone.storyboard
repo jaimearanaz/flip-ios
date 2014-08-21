@@ -697,7 +697,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dkh-he-QHW" userLabel="View - Title">
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dkh-he-QHW" userLabel="View - Title">
                                 <rect key="frame" x="12" y="78" width="302" height="140"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
@@ -869,7 +869,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Best times" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ojt-5i-Nul">
-                                <rect key="frame" x="33" y="218" width="267" height="51"/>
+                                <rect key="frame" x="0.0" y="218" width="320" height="51"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="72" id="91p-ij-ebD"/>
@@ -938,6 +938,8 @@
                         <color key="backgroundColor" red="1" green="0.7423607257" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="XVC-1c-uZe" firstAttribute="leading" secondItem="zNz-tb-6SG" secondAttribute="leading" id="3rf-3t-I82"/>
+                            <constraint firstItem="Ojt-5i-Nul" firstAttribute="centerX" secondItem="Dkh-he-QHW" secondAttribute="centerX" constant="-3" id="FBM-0u-Cs1"/>
+                            <constraint firstItem="Ojt-5i-Nul" firstAttribute="top" secondItem="Dkh-he-QHW" secondAttribute="bottom" id="Spc-cT-6cL"/>
                             <constraint firstItem="kzb-YQ-mhU" firstAttribute="top" secondItem="XVC-1c-uZe" secondAttribute="bottom" id="ixN-gz-yOX"/>
                         </constraints>
                     </view>
@@ -979,8 +981,8 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="bh2-xp-4J2"/>
-        <segue reference="ibe-Gz-0pW"/>
+        <segue reference="woI-t5-zsd"/>
         <segue reference="4VQ-hx-PhO"/>
+        <segue reference="ibe-Gz-0pW"/>
     </inferredMetricsTieBreakers>
 </document>
