@@ -547,7 +547,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Congrats, new record!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ryl-kF-g3y">
-                                <rect key="frame" x="20" y="383" width="280" height="30"/>
+                                <rect key="frame" x="20" y="383" width="280" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <nil key="highlightedColor"/>
@@ -834,8 +834,8 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="woI-t5-zsd"/>
-        <segue reference="4VQ-hx-PhO"/>
-        <segue reference="ibe-Gz-0pW"/>
+        <segue reference="uZU-Ea-4mk"/>
+        <segue reference="bqU-UK-gYp"/>
+        <segue reference="Kbh-Hl-H2k"/>
     </inferredMetricsTieBreakers>
 </document>
