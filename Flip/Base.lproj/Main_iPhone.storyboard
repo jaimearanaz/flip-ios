@@ -423,8 +423,8 @@
                                     <action selector="backButtonPressed:" destination="20h-2Q-q9d" eventType="touchUpInside" id="5Zz-gr-LuJ"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="00:00:000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="daP-tU-OD0">
-                                <rect key="frame" x="199" y="29" width="101" height="21"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="00:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="daP-tU-OD0">
+                                <rect key="frame" x="199" y="29" width="101" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="101" id="MFZ-Ng-qUA"/>
@@ -979,8 +979,8 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="bh2-xp-4J2"/>
         <segue reference="bqU-UK-gYp"/>
         <segue reference="Kbh-Hl-H2k"/>
-        <segue reference="woI-t5-zsd"/>
     </inferredMetricsTieBreakers>
 </document>

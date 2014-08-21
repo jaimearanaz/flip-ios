@@ -282,6 +282,12 @@
                             // All photos matched, return to main view
                             if (_numOfPhotosMatched == _numOfPhotos) {
                                 [self stopTimer];
+                                
+                                // Final time
+                                NSDate *currentDate = [NSDate date];
+                                NSTimeInterval timeInterval = [currentDate timeIntervalSinceDate:_startDate];
+                                _endDate = [NSDate dateWithTimeIntervalSince1970:timeInterval];
+                                
                                 [self performSelector:@selector(endGame)
                                            withObject:nil
                                            afterDelay:kGridGeneralDelay
@@ -345,7 +351,7 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 {
     if (_timer == nil) {
         _startDate = [NSDate date];
-        _timer = [NSTimer scheduledTimerWithTimeInterval:0.001
+        _timer = [NSTimer scheduledTimerWithTimeInterval:1
                                                   target:self
                                                 selector:@selector(updateTimer)
                                                 userInfo:nil
@@ -371,7 +377,7 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
     NSTimeInterval timeInterval = [currentDate timeIntervalSinceDate:_startDate];
     _endDate = [NSDate dateWithTimeIntervalSince1970:timeInterval];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"mm:ss:SSS"];
+    [dateFormatter setDateFormat:@"mm:ss"];
     [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0.0]];
     NSString *timeString=[dateFormatter stringFromDate:_endDate];
     _timerLbl.text = timeString;
