@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F03D18719A678DE003EE79B /* FLPTitleLetterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F03D18619A678DE003EE79B /* FLPTitleLetterView.m */; };
 		6F14871B19A0F5E90087527C /* FLPCoverFromLeftSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F14871A19A0F5E90087527C /* FLPCoverFromLeftSegue.m */; };
 		6F14871E19A0F6640087527C /* FLPCoverFromRightSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F14871D19A0F6640087527C /* FLPCoverFromRightSegue.m */; };
 		6F14872119A0FD110087527C /* FLPFlipFromLeftSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F14872019A0FD110087527C /* FLPFlipFromLeftSegue.m */; };
@@ -47,7 +48,6 @@
 		6F878308199BB14C00AA118E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F878307199BB14C00AA118E /* SystemConfiguration.framework */; };
 		6F87A771199A17B400C2303A /* FLPScoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F87A770199A17B400C2303A /* FLPScoreViewController.m */; };
 		6F87A774199A320E00C2303A /* FLPRecordsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F87A773199A320E00C2303A /* FLPRecordsViewController.m */; };
-		6F965CCB19A2250A00592690 /* FLPTitleLetterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F965CCA19A2250A00592690 /* FLPTitleLetterView.m */; };
 		6FF58536197FC95100926DF9 /* FLPCameraPhotoSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF58535197FC95100926DF9 /* FLPCameraPhotoSource.m */; };
 		6FF58538197FCA5800926DF9 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FF58537197FCA5800926DF9 /* AssetsLibrary.framework */; };
 		6FFC51671976659800668F82 /* FLPPhotoSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFC51661976659800668F82 /* FLPPhotoSource.m */; };
@@ -65,6 +65,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6F03D18519A678DE003EE79B /* FLPTitleLetterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPTitleLetterView.h; sourceTree = "<group>"; };
+		6F03D18619A678DE003EE79B /* FLPTitleLetterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPTitleLetterView.m; sourceTree = "<group>"; };
 		6F14871919A0F5E90087527C /* FLPCoverFromLeftSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPCoverFromLeftSegue.h; sourceTree = "<group>"; };
 		6F14871A19A0F5E90087527C /* FLPCoverFromLeftSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPCoverFromLeftSegue.m; sourceTree = "<group>"; };
 		6F14871C19A0F6640087527C /* FLPCoverFromRightSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPCoverFromRightSegue.h; sourceTree = "<group>"; };
@@ -139,8 +141,6 @@
 		6F87A770199A17B400C2303A /* FLPScoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPScoreViewController.m; sourceTree = "<group>"; };
 		6F87A772199A320E00C2303A /* FLPRecordsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPRecordsViewController.h; sourceTree = "<group>"; };
 		6F87A773199A320E00C2303A /* FLPRecordsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPRecordsViewController.m; sourceTree = "<group>"; };
-		6F965CC919A2250A00592690 /* FLPTitleLetterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPTitleLetterView.h; sourceTree = "<group>"; };
-		6F965CCA19A2250A00592690 /* FLPTitleLetterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPTitleLetterView.m; sourceTree = "<group>"; };
 		6FF58534197FC95100926DF9 /* FLPCameraPhotoSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPCameraPhotoSource.h; sourceTree = "<group>"; };
 		6FF58535197FC95100926DF9 /* FLPCameraPhotoSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPCameraPhotoSource.m; sourceTree = "<group>"; };
 		6FF58537197FCA5800926DF9 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
@@ -319,8 +319,8 @@
 			children = (
 				6F33AC7A1998C14000FBF9C4 /* FLPCollectionViewCell.h */,
 				6F33AC7B1998C14000FBF9C4 /* FLPCollectionViewCell.m */,
-				6F965CC919A2250A00592690 /* FLPTitleLetterView.h */,
-				6F965CCA19A2250A00592690 /* FLPTitleLetterView.m */,
+				6F03D18519A678DE003EE79B /* FLPTitleLetterView.h */,
+				6F03D18619A678DE003EE79B /* FLPTitleLetterView.m */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -534,13 +534,13 @@
 				6F14872419A0FDE90087527C /* FLPFlipFromRightSegue.m in Sources */,
 				6F3B3A9419825C1C00EA4BA1 /* FLPTwitterPhotoSource.m in Sources */,
 				6F33AC841999245500FBF9C4 /* FLPGridItem.m in Sources */,
+				6F03D18719A678DE003EE79B /* FLPTitleLetterView.m in Sources */,
 				6FFC51671976659800668F82 /* FLPPhotoSource.m in Sources */,
 				6FF58536197FC95100926DF9 /* FLPCameraPhotoSource.m in Sources */,
 				6F1AA1651973EAA400101766 /* main.m in Sources */,
 				6F33AC7C1998C14000FBF9C4 /* FLPCollectionViewCell.m in Sources */,
 				6F14871B19A0F5E90087527C /* FLPCoverFromLeftSegue.m in Sources */,
 				6F1AA1721973EAA400101766 /* FLPMainScrenViewController.m in Sources */,
-				6F965CCB19A2250A00592690 /* FLPTitleLetterView.m in Sources */,
 				6F87A774199A320E00C2303A /* FLPRecordsViewController.m in Sources */,
 				6F87A771199A17B400C2303A /* FLPScoreViewController.m in Sources */,
 				6F5AD5C71987ABF600B65D09 /* FLPFacebookPhotoSource.m in Sources */,

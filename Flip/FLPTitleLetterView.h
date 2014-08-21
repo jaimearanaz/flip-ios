@@ -1,8 +1,8 @@
 //
-//  FLPTitleLetterView.h
+//  FLPTitleLetterView2.h
 //  Flip
 //
-//  Created by Jaime on 18/08/14.
+//  Created by Jaime on 21/08/14.
 //  Copyright (c) 2014 MobiOak. All rights reserved.
 //
 
@@ -10,12 +10,9 @@
 
 @interface FLPTitleLetterView : UIView
 
-@property (nonatomic, weak) IBOutlet UIView *letterSide;
-@property (nonatomic, weak) IBOutlet UIView *coverSide;
+@property (nonatomic, weak) IBOutlet UIImageView *letterSide;
+@property (nonatomic, weak) IBOutlet UIImageView *coverSide;
 
-- (BOOL)isShowingLetter;
-- (void)flipToLetterAnimated:(NSNumber *)animated;
-- (void)flipToCoverAnimated:(NSNumber *)animated;
 - (void)flipAnimated:(NSNumber *)animated;
 
 @end

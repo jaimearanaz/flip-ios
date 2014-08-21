@@ -1,14 +1,23 @@
 //
-//  FLPTitleLetterView.m
+//  FLPTitleLetterView2.m
 //  Flip
 //
-//  Created by Jaime on 18/08/14.
+//  Created by Jaime on 21/08/14.
 //  Copyright (c) 2014 MobiOak. All rights reserved.
 //
 
 #import "FLPTitleLetterView.h"
 
 @implementation FLPTitleLetterView
+
+- (id)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        // Initialization code
+    }
+    return self;
+}
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {

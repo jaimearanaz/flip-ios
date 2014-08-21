@@ -34,155 +34,79 @@
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qlT-Xt-ax4" userLabel="View - Letter F" customClass="FLPTitleLetterView">
-                                                <rect key="frame" x="6" y="11" width="72" height="82"/>
+                                                <rect key="frame" x="6" y="11" width="69" height="80"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <subviews>
-                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Uha-AP-XQr" userLabel="View - Cover F">
-                                                        <rect key="frame" x="1" y="1" width="70" height="80"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <subviews>
-                                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rCN-h5-frt">
-                                                                <rect key="frame" x="5" y="5" width="60" height="60"/>
-                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                            </view>
-                                                        </subviews>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                                    </view>
-                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xo8-l9-vuh" userLabel="View - F">
-                                                        <rect key="frame" x="1" y="1" width="70" height="80"/>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Title_letter_background" translatesAutoresizingMaskIntoConstraints="NO" id="bmZ-w5-s1d">
+                                                        <rect key="frame" x="0.0" y="0.0" width="69" height="80"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                        <subviews>
-                                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="F" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6eG-nJ-APL">
-                                                                <rect key="frame" x="5" y="5" width="60" height="60"/>
-                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                <color key="backgroundColor" red="1" green="0.7423607257" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="61"/>
-                                                                <color key="textColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                        </subviews>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                                    </view>
+                                                    </imageView>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Title_letter_F" translatesAutoresizingMaskIntoConstraints="NO" id="Xr0-X2-4zz">
+                                                        <rect key="frame" x="0.0" y="0.0" width="69" height="80"/>
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <connections>
-                                                    <outlet property="coverSide" destination="Uha-AP-XQr" id="icj-Sb-wY3"/>
-                                                    <outlet property="letterSide" destination="Xo8-l9-vuh" id="hy6-iz-H2y"/>
+                                                    <outlet property="coverSide" destination="bmZ-w5-s1d" id="lfD-6D-Ear"/>
+                                                    <outlet property="letterSide" destination="Xr0-X2-4zz" id="P7Z-5v-9Ip"/>
                                                 </connections>
                                             </view>
                                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NN2-pb-Ehe" userLabel="View - Letter L" customClass="FLPTitleLetterView">
-                                                <rect key="frame" x="79" y="11" width="72" height="82"/>
+                                                <rect key="frame" x="79" y="11" width="69" height="80"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <subviews>
-                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G1P-Oj-zY0" userLabel="View - Cover L">
-                                                        <rect key="frame" x="1" y="1" width="70" height="80"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <subviews>
-                                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MZe-h7-A8A">
-                                                                <rect key="frame" x="5" y="5" width="60" height="60"/>
-                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                            </view>
-                                                        </subviews>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                                    </view>
-                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6z5-EE-vkX" userLabel="View - L">
-                                                        <rect key="frame" x="1" y="1" width="70" height="80"/>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Title_letter_background" translatesAutoresizingMaskIntoConstraints="NO" id="79l-nw-5k6">
+                                                        <rect key="frame" x="0.0" y="0.0" width="69" height="80"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                        <subviews>
-                                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="L" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DwZ-0A-c9q">
-                                                                <rect key="frame" x="5" y="5" width="60" height="60"/>
-                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                <color key="backgroundColor" red="1" green="0.7423607257" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="61"/>
-                                                                <color key="textColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                        </subviews>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                                    </view>
+                                                    </imageView>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Title_letter_L" translatesAutoresizingMaskIntoConstraints="NO" id="LyL-l5-Siw">
+                                                        <rect key="frame" x="0.0" y="0.0" width="69" height="80"/>
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <connections>
-                                                    <outlet property="coverSide" destination="G1P-Oj-zY0" id="i3Q-eS-SwQ"/>
-                                                    <outlet property="letterSide" destination="6z5-EE-vkX" id="ECv-sh-6Az"/>
+                                                    <outlet property="coverSide" destination="79l-nw-5k6" id="QyI-lC-YXM"/>
+                                                    <outlet property="letterSide" destination="LyL-l5-Siw" id="xMX-xO-rLe"/>
                                                 </connections>
                                             </view>
                                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oMV-tf-S1Y" userLabel="View - Letter I" customClass="FLPTitleLetterView">
-                                                <rect key="frame" x="152" y="11" width="72" height="82"/>
+                                                <rect key="frame" x="152" y="11" width="69" height="80"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <subviews>
-                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="srW-v6-VHo" userLabel="View - Cover I">
-                                                        <rect key="frame" x="1" y="1" width="70" height="80"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <subviews>
-                                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dzP-Rb-Fwf">
-                                                                <rect key="frame" x="5" y="5" width="60" height="60"/>
-                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                            </view>
-                                                        </subviews>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                                    </view>
-                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ew3-hc-epD" userLabel="View - I">
-                                                        <rect key="frame" x="1" y="1" width="70" height="80"/>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Title_letter_background" translatesAutoresizingMaskIntoConstraints="NO" id="0Qn-NH-fzy">
+                                                        <rect key="frame" x="0.0" y="0.0" width="69" height="80"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                        <subviews>
-                                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="I" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8TV-9N-Z2C">
-                                                                <rect key="frame" x="5" y="5" width="60" height="60"/>
-                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                <color key="backgroundColor" red="1" green="0.7423607257" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="61"/>
-                                                                <color key="textColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                        </subviews>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                                    </view>
+                                                    </imageView>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Title_letter_I" translatesAutoresizingMaskIntoConstraints="NO" id="SEC-zW-6c1">
+                                                        <rect key="frame" x="0.0" y="0.0" width="69" height="80"/>
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <connections>
-                                                    <outlet property="coverSide" destination="srW-v6-VHo" id="XLA-54-SxM"/>
-                                                    <outlet property="letterSide" destination="ew3-hc-epD" id="b3I-a3-B8K"/>
+                                                    <outlet property="coverSide" destination="0Qn-NH-fzy" id="SW4-7a-hWA"/>
+                                                    <outlet property="letterSide" destination="SEC-zW-6c1" id="eGt-Us-Aop"/>
                                                 </connections>
                                             </view>
                                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4zb-Cv-Aox" userLabel="View - Letter P" customClass="FLPTitleLetterView">
-                                                <rect key="frame" x="225" y="11" width="72" height="82"/>
+                                                <rect key="frame" x="225" y="11" width="69" height="80"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <subviews>
-                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AmK-3J-7Vt" userLabel="View - Cover P">
-                                                        <rect key="frame" x="1" y="1" width="70" height="80"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <subviews>
-                                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D3M-gl-gYW">
-                                                                <rect key="frame" x="5" y="5" width="60" height="60"/>
-                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                            </view>
-                                                        </subviews>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                                    </view>
-                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="n3s-Ec-U0R" userLabel="View - P">
-                                                        <rect key="frame" x="1" y="1" width="70" height="80"/>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Title_letter_background" translatesAutoresizingMaskIntoConstraints="NO" id="rqf-d4-fWh">
+                                                        <rect key="frame" x="0.0" y="0.0" width="69" height="80"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                        <subviews>
-                                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="P" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nmK-Bm-0b8">
-                                                                <rect key="frame" x="5" y="5" width="60" height="60"/>
-                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                <color key="backgroundColor" red="1" green="0.7423607257" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="61"/>
-                                                                <color key="textColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                        </subviews>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                                    </view>
+                                                    </imageView>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Title_letter_P" translatesAutoresizingMaskIntoConstraints="NO" id="Bey-dL-6It">
+                                                        <rect key="frame" x="0.0" y="0.0" width="69" height="80"/>
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <connections>
-                                                    <outlet property="coverSide" destination="AmK-3J-7Vt" id="Op1-2D-iqa"/>
-                                                    <outlet property="letterSide" destination="n3s-Ec-U0R" id="ArQ-6M-WZf"/>
+                                                    <outlet property="coverSide" destination="rqf-d4-fWh" id="Vsa-Un-RM8"/>
+                                                    <outlet property="letterSide" destination="Bey-dL-6It" id="Vlf-vc-m23"/>
                                                 </connections>
                                             </view>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="your photos" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KXR-kt-RgZ" userLabel="Label - Subtitle">
@@ -697,163 +621,87 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dkh-he-QHW" userLabel="View - Title">
-                                <rect key="frame" x="12" y="78" width="302" height="140"/>
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OkT-VI-i6M" userLabel="View - Title">
+                                <rect key="frame" x="9" y="80" width="302" height="140"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Ts-OU-7FY" userLabel="View - Letter F" customClass="FLPTitleLetterView">
-                                        <rect key="frame" x="6" y="11" width="72" height="82"/>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZX3-xD-RWV" userLabel="View - Letter F" customClass="FLPTitleLetterView">
+                                        <rect key="frame" x="6" y="11" width="69" height="80"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qBz-X3-DF2" userLabel="View - Cover F">
-                                                <rect key="frame" x="1" y="1" width="70" height="80"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <subviews>
-                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qE4-TZ-5aY">
-                                                        <rect key="frame" x="5" y="5" width="60" height="60"/>
-                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </view>
-                                                </subviews>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                            </view>
-                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pNt-Hm-6Yz" userLabel="View - F">
-                                                <rect key="frame" x="1" y="1" width="70" height="80"/>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Title_letter_background" translatesAutoresizingMaskIntoConstraints="NO" id="lar-Md-7fc">
+                                                <rect key="frame" x="0.0" y="0.0" width="69" height="80"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                <subviews>
-                                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="F" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nYr-pw-1Bd">
-                                                        <rect key="frame" x="5" y="5" width="60" height="60"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <color key="backgroundColor" red="1" green="0.7423607257" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="61"/>
-                                                        <color key="textColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                </subviews>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                            </view>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Title_letter_F" translatesAutoresizingMaskIntoConstraints="NO" id="KMx-q6-EID">
+                                                <rect key="frame" x="0.0" y="0.0" width="69" height="80"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            </imageView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
-                                            <outlet property="coverSide" destination="qBz-X3-DF2" id="dQs-8w-dgv"/>
-                                            <outlet property="letterSide" destination="pNt-Hm-6Yz" id="cv7-rm-9Ud"/>
+                                            <outlet property="coverSide" destination="lar-Md-7fc" id="eWv-4r-Sbl"/>
+                                            <outlet property="letterSide" destination="KMx-q6-EID" id="DyU-l6-dHc"/>
                                         </connections>
                                     </view>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gDe-1H-REz" userLabel="View - Letter L" customClass="FLPTitleLetterView">
-                                        <rect key="frame" x="79" y="11" width="72" height="82"/>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E0E-A3-ngx" userLabel="View - Letter L" customClass="FLPTitleLetterView">
+                                        <rect key="frame" x="79" y="11" width="69" height="80"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xrh-BJ-s2D" userLabel="View - Cover L">
-                                                <rect key="frame" x="1" y="1" width="70" height="80"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <subviews>
-                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VTZ-Ra-F3U">
-                                                        <rect key="frame" x="5" y="5" width="60" height="60"/>
-                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </view>
-                                                </subviews>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                            </view>
-                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WeQ-7t-SS1" userLabel="View - L">
-                                                <rect key="frame" x="1" y="1" width="70" height="80"/>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Title_letter_background" translatesAutoresizingMaskIntoConstraints="NO" id="OI7-K7-q8E">
+                                                <rect key="frame" x="0.0" y="0.0" width="69" height="80"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                <subviews>
-                                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="L" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HQT-Ky-xjP">
-                                                        <rect key="frame" x="5" y="5" width="60" height="60"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <color key="backgroundColor" red="1" green="0.7423607257" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="61"/>
-                                                        <color key="textColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                </subviews>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                            </view>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Title_letter_L" translatesAutoresizingMaskIntoConstraints="NO" id="EfX-Fj-Rm7">
+                                                <rect key="frame" x="0.0" y="0.0" width="69" height="80"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            </imageView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
-                                            <outlet property="coverSide" destination="xrh-BJ-s2D" id="GAO-Tw-Ylx"/>
-                                            <outlet property="letterSide" destination="WeQ-7t-SS1" id="jzp-B0-bwg"/>
+                                            <outlet property="coverSide" destination="OI7-K7-q8E" id="JaI-lA-K2g"/>
+                                            <outlet property="letterSide" destination="EfX-Fj-Rm7" id="bRF-sh-ckd"/>
                                         </connections>
                                     </view>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h3t-DH-yQc" userLabel="View - Letter I" customClass="FLPTitleLetterView">
-                                        <rect key="frame" x="152" y="11" width="72" height="82"/>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sX6-Uz-jtg" userLabel="View - Letter I" customClass="FLPTitleLetterView">
+                                        <rect key="frame" x="152" y="11" width="69" height="80"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="88h-zT-cLL" userLabel="View - Cover I">
-                                                <rect key="frame" x="1" y="1" width="70" height="80"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <subviews>
-                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fUg-OV-QCq">
-                                                        <rect key="frame" x="5" y="5" width="60" height="60"/>
-                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </view>
-                                                </subviews>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                            </view>
-                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wXu-tT-QAS" userLabel="View - I">
-                                                <rect key="frame" x="1" y="1" width="70" height="80"/>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Title_letter_background" translatesAutoresizingMaskIntoConstraints="NO" id="tQU-hG-rgM">
+                                                <rect key="frame" x="0.0" y="0.0" width="69" height="80"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                <subviews>
-                                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="I" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y5H-N9-nMB">
-                                                        <rect key="frame" x="5" y="5" width="60" height="60"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <color key="backgroundColor" red="1" green="0.7423607257" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="61"/>
-                                                        <color key="textColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                </subviews>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                            </view>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Title_letter_I" translatesAutoresizingMaskIntoConstraints="NO" id="6UU-p4-reZ">
+                                                <rect key="frame" x="0.0" y="0.0" width="69" height="80"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            </imageView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
-                                            <outlet property="coverSide" destination="88h-zT-cLL" id="mFP-kT-1Sx"/>
-                                            <outlet property="letterSide" destination="wXu-tT-QAS" id="xB7-h9-fWC"/>
+                                            <outlet property="coverSide" destination="tQU-hG-rgM" id="qz2-MY-eQf"/>
+                                            <outlet property="letterSide" destination="6UU-p4-reZ" id="R90-Pj-uz0"/>
                                         </connections>
                                     </view>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HWG-WS-PwK" userLabel="View - Letter P" customClass="FLPTitleLetterView">
-                                        <rect key="frame" x="225" y="11" width="72" height="82"/>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FZL-oM-Yzi" userLabel="View - Letter P" customClass="FLPTitleLetterView">
+                                        <rect key="frame" x="225" y="11" width="69" height="80"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kTT-t2-LkS" userLabel="View - Cover P">
-                                                <rect key="frame" x="1" y="1" width="70" height="80"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <subviews>
-                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uga-tc-uuH">
-                                                        <rect key="frame" x="5" y="5" width="60" height="60"/>
-                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </view>
-                                                </subviews>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                            </view>
-                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7PP-f0-uvL" userLabel="View - P">
-                                                <rect key="frame" x="1" y="1" width="70" height="80"/>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Title_letter_background" translatesAutoresizingMaskIntoConstraints="NO" id="nae-MW-PLo">
+                                                <rect key="frame" x="0.0" y="0.0" width="69" height="80"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                <subviews>
-                                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="P" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Cm-81-veY">
-                                                        <rect key="frame" x="5" y="5" width="60" height="60"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <color key="backgroundColor" red="1" green="0.7423607257" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="61"/>
-                                                        <color key="textColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                </subviews>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                            </view>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Title_letter_P" translatesAutoresizingMaskIntoConstraints="NO" id="lNO-y6-uY6">
+                                                <rect key="frame" x="0.0" y="0.0" width="69" height="80"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            </imageView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
-                                            <outlet property="coverSide" destination="kTT-t2-LkS" id="JEx-CI-tKA"/>
-                                            <outlet property="letterSide" destination="7PP-f0-uvL" id="ISq-Av-cNX"/>
+                                            <outlet property="coverSide" destination="nae-MW-PLo" id="YCN-Dj-Vo5"/>
+                                            <outlet property="letterSide" destination="lNO-y6-uY6" id="PR5-d6-qRq"/>
                                         </connections>
                                     </view>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="your photos" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="udI-qw-qNU" userLabel="Label - Subtitle">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="your photos" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2xd-Ks-hx2" userLabel="Label - Subtitle">
                                         <rect key="frame" x="71" y="90" width="160" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <rect key="contentStretch" x="1.3877787807814457e-17" y="1.3877787807814457e-17" width="1" height="1"/>
@@ -864,8 +712,8 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="140" id="0xc-U4-4rq"/>
-                                    <constraint firstAttribute="width" constant="302" id="yaE-XU-IsA"/>
+                                    <constraint firstAttribute="height" constant="140" id="b5b-3O-VoM"/>
+                                    <constraint firstAttribute="width" constant="302" id="ymP-Pt-xHa"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Best times" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ojt-5i-Nul">
@@ -938,9 +786,9 @@
                         <color key="backgroundColor" red="1" green="0.7423607257" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="XVC-1c-uZe" firstAttribute="leading" secondItem="zNz-tb-6SG" secondAttribute="leading" id="3rf-3t-I82"/>
-                            <constraint firstItem="Ojt-5i-Nul" firstAttribute="centerX" secondItem="Dkh-he-QHW" secondAttribute="centerX" constant="-3" id="FBM-0u-Cs1"/>
-                            <constraint firstItem="Ojt-5i-Nul" firstAttribute="top" secondItem="Dkh-he-QHW" secondAttribute="bottom" id="Spc-cT-6cL"/>
+                            <constraint firstItem="2xd-Ks-hx2" firstAttribute="centerX" secondItem="Ojt-5i-Nul" secondAttribute="centerX" id="77h-gc-hOC"/>
                             <constraint firstItem="kzb-YQ-mhU" firstAttribute="top" secondItem="XVC-1c-uZe" secondAttribute="bottom" id="ixN-gz-yOX"/>
+                            <constraint firstItem="Ojt-5i-Nul" firstAttribute="top" secondItem="2xd-Ks-hx2" secondAttribute="bottom" constant="-2" id="j9a-Vi-kEb"/>
                         </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -954,9 +802,9 @@
                         <outlet property="normalResultLbl" destination="1AB-vB-sN6" id="8qJ-HH-ggd"/>
                         <outlet property="smallLbl" destination="9Mp-Gj-mwk" id="ppE-Pw-XAU"/>
                         <outlet property="smallResultLbl" destination="yhD-Xc-NzY" id="jy4-2Z-nLK"/>
-                        <outlet property="subtitleLbl" destination="udI-qw-qNU" id="KwG-Px-r94"/>
+                        <outlet property="subtitleLbl" destination="2xd-Ks-hx2" id="TFf-vU-fZx"/>
                         <outlet property="titleLbl" destination="Ojt-5i-Nul" id="1qD-X1-d5b"/>
-                        <outlet property="titleView" destination="Dkh-he-QHW" id="Bhu-YF-b7q"/>
+                        <outlet property="titleView" destination="OkT-VI-i6M" id="OGM-Q8-QIh"/>
                         <segue destination="vXZ-lx-hvc" kind="custom" identifier="mainFromRecordsSegue" customClass="FLPCoverFromRightSegue" id="woI-t5-zsd"/>
                     </connections>
                 </viewController>
@@ -972,6 +820,11 @@
         <image name="Facebook_button_pressed" width="200" height="34"/>
         <image name="General_button_normal" width="200" height="34"/>
         <image name="General_button_pressed" width="200" height="34"/>
+        <image name="Title_letter_F" width="69" height="80"/>
+        <image name="Title_letter_I" width="69" height="80"/>
+        <image name="Title_letter_L" width="69" height="80"/>
+        <image name="Title_letter_P" width="69" height="80"/>
+        <image name="Title_letter_background" width="69" height="80"/>
         <image name="Twitter_button_normal" width="200" height="34"/>
         <image name="Twitter_button_pressed" width="200" height="34"/>
     </resources>
