@@ -239,12 +239,13 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fFk-FV-fyo">
-                                        <rect key="frame" x="60" y="115" width="200" height="35"/>
+                                        <rect key="frame" x="60" y="115" width="200" height="34"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" title="Facebook">
+                                        <state key="normal" title="Facebook" backgroundImage="Facebook_button_normal">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <state key="selected" backgroundImage="Facebook_button_pressed"/>
+                                        <state key="highlighted" backgroundImage="Facebook_button_pressed"/>
                                         <connections>
                                             <action selector="onFacebookButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="yMb-CT-ZKa"/>
                                         </connections>
@@ -252,10 +253,11 @@
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ky9-hR-iZY">
                                         <rect key="frame" x="60" y="165" width="200" height="35"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.0" green="0.50196081399917603" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" title="Twitter">
+                                        <state key="normal" title="Twitter" backgroundImage="Twitter_button_normal">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <state key="selected" backgroundImage="Twitter_button_pressed"/>
+                                        <state key="highlighted" backgroundImage="Twitter_button_pressed"/>
                                         <connections>
                                             <action selector="onTwitterButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="OQC-1w-e3L"/>
                                         </connections>
@@ -955,6 +957,12 @@
             <point key="canvasLocation" x="1074" y="785"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Facebook_button_normal" width="200" height="34"/>
+        <image name="Facebook_button_pressed" width="200" height="34"/>
+        <image name="Twitter_button_normal" width="200" height="34"/>
+        <image name="Twitter_button_pressed" width="200" height="34"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
