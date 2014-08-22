@@ -1,0 +1,5 @@
+#include "Pods-CocoaLumberjack.xcconfig"
+GCC_PREPROCESSOR_DEFINITIONS = COCOAPODS=1
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/BuildHeaders" "${PODS_ROOT}/BuildHeaders/CocoaLumberjack" "${PODS_ROOT}/Headers" "${PODS_ROOT}/Headers/ABMultiton" "${PODS_ROOT}/Headers/AFNetworking" "${PODS_ROOT}/Headers/AFOAuth1Client" "${PODS_ROOT}/Headers/CocoaLumberjack" "${PODS_ROOT}/Headers/Facebook-iOS-SDK" "${PODS_ROOT}/Headers/Facebook-iOS-SDK/FacebookSDK" "${PODS_ROOT}/Headers/LVTwitterOAuthClient" "${PODS_ROOT}/Headers/MBProgressHUD" "${PODS_ROOT}/Headers/NSData+Base64" "${PODS_ROOT}/Headers/OAuthCore" "${PODS_ROOT}/Headers/PFTwitterSignOn" "${PODS_ROOT}/Headers/SCNetworkReachability" "${PODS_ROOT}/Headers/STTwitter" "${PODS_ROOT}/Headers/WCAlertView" "${PODS_ROOT}/Headers/macros_blocks"
+OTHER_LDFLAGS = -ObjC
+PODS_ROOT = ${SRCROOT}
