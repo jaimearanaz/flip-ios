@@ -30,27 +30,51 @@ typedef enum {
 
 @interface FLPMainScrenViewController () <UIActionSheetDelegate>
 
+// Main elements
 @property (nonatomic, weak) IBOutlet UIView *titleView;
 @property (nonatomic, weak) IBOutlet UILabel *subtitleLbl;
+@property (nonatomic, weak) IBOutlet UIView *stripView;
 @property (nonatomic, weak) __block IBOutlet UIView *selectSourceView;
 @property (nonatomic, weak) __block IBOutlet UIView *selectSizeView;
+@property (nonatomic, weak) __block IBOutlet UIView *recordsView;
+
+// Records view elements
+@property (nonatomic, weak) IBOutlet UILabel *recordsLbl;
+@property (nonatomic, weak) IBOutlet UILabel *smallLbl;
+@property (nonatomic, weak) IBOutlet UILabel *smallRecordLbl;
+@property (nonatomic, weak) IBOutlet UILabel *normalLbl;
+@property (nonatomic, weak) IBOutlet UILabel *normalRecordLbl;
+@property (nonatomic, weak) IBOutlet UILabel *bigLbl;
+@property (nonatomic, weak) IBOutlet UILabel *bigRecordLbl;
+@property (nonatomic, weak) IBOutlet UIButton *startGameBtn;
+
+// Source view elements
 @property (nonatomic, weak) IBOutlet UILabel *selectSourceLbl;
-@property (nonatomic, weak) IBOutlet UILabel *selectGridLbl;
 @property (nonatomic, weak) IBOutlet UIButton *cameraBtn;
 @property (nonatomic, weak) IBOutlet UIButton *facebookBtn;
 @property (nonatomic, weak) IBOutlet UIButton *twitterBtn;
 @property (nonatomic, weak) IBOutlet UIButton *recordsBtn;
+
+// Size view elements
+@property (nonatomic, weak) IBOutlet UILabel *selectGridLbl;
 @property (nonatomic, weak) IBOutlet UIButton *smallBtn;
 @property (nonatomic, weak) IBOutlet UIButton *normalBtn;
 @property (nonatomic, weak) IBOutlet UIButton *bigBtn;
 @property (nonatomic, weak) IBOutlet UIButton *sourceBtn;
+
 @property (nonatomic, weak) IBOutlet UIView *bannerView;
+
 @property (nonatomic, strong) __block NSArray *photos;
 @property (nonatomic, strong) __block FLPPhotoSource *photoSource;
 @property (nonatomic, strong) NSArray *twitterAccounts;
 @property (nonatomic, strong) __block twitterAccountCallback twitterCallback;
 @property (nonatomic) __block SCNetworkStatus networkStatus;
-@property (nonatomic, strong) NSArray *changeViewsConstraints;
+
+@property (nonatomic, strong) NSArray *showRecordsViewConstraints;
+@property (nonatomic, strong) NSArray *showSourceViewConstraints;
+@property (nonatomic, strong) NSArray *showSizeViewConstraints;
+@property (nonatomic, strong) NSArray *currentViewConstraints;
+
 @property (nonatomic) GridSizeType size;
 @property (nonatomic) PhotoSourceType source;
 @property (nonatomic, strong) NSTimer *timerTitle;
@@ -63,6 +87,7 @@ typedef enum {
 - (IBAction)onBigButtonPressed:(id)sender;
 - (IBAction)onRecordsButtonPressed:(id)sender;
 - (IBAction)onSourceButtonPressed:(id)sender;
+- (IBAction)onStartGameButtonPressed:(id)sender;
 
 @end
 
@@ -76,12 +101,40 @@ typedef enum {
 	
     [_subtitleLbl setFont:[UIFont fontWithName:@"Pacifico" size:25]];
     
+    // Records view
+    
+    [_recordsLbl setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
+    _recordsLbl.text = NSLocalizedString(@"MAIN_RECORDS_TITLE", @"");
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSDate *recordSmall = (NSDate *)[userDefaults objectForKey:@"small"];
+    NSDate *recordNormal = (NSDate *)[userDefaults objectForKey:@"normal"];
+    NSDate *recordBig = (NSDate *)[userDefaults objectForKey:@"big"];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"mm:ss:SSS"];
+    [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0.0]];
+    
+    [_smallLbl setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
+    _smallLbl.text = NSLocalizedString(@"MAIN_SMALL", @"");
+    [_smallRecordLbl setFont:[UIFont fontWithName:@"Roboto-Light" size:17]];
+    _smallRecordLbl.text = (recordSmall) ? [dateFormatter stringFromDate:recordSmall] : NSLocalizedString(@"MAIN_RECORDS_NONE", @"");
+    
+    [_normalLbl setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
+    _normalLbl.text = NSLocalizedString(@"MAIN_NORMAL", @"");
+    [_normalRecordLbl setFont:[UIFont fontWithName:@"Roboto-Light" size:17]];
+    _normalRecordLbl.text = (recordNormal) ? [dateFormatter stringFromDate:recordNormal] : NSLocalizedString(@"MAIN_RECORDS_NONE", @"");
+    
+    [_bigLbl setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
+    _bigLbl.text = NSLocalizedString(@"MAIN_BIG", @"");
+    [_bigRecordLbl setFont:[UIFont fontWithName:@"Roboto-Light" size:17]];
+    _bigRecordLbl.text = (recordBig) ? [dateFormatter stringFromDate:recordBig] : NSLocalizedString(@"MAIN_RECORDS_NONE", @"");
+    
+    [_startGameBtn.titleLabel setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
+    [_startGameBtn setTitle:NSLocalizedString(@"MAIN_START", @"") forState:UIControlStateNormal];
+    
     // Select source view
     [_selectSourceLbl setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
     _selectSourceLbl.text = NSLocalizedString(@"MAIN_SELECT_SOURCE", @"");
-    [_selectGridLbl setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
-    _selectGridLbl.text = NSLocalizedString(@"MAIN_SELECT_GRID", @"");
-    
     [_cameraBtn.titleLabel setFont:[UIFont fontWithName:@"Pacifico" size:20]];
         [_cameraBtn setTitle:NSLocalizedString(@"MAIN_CAMERA", @"") forState:UIControlStateNormal];
     [_facebookBtn.titleLabel setFont:[UIFont fontWithName:@"Pacifico" size:20]];
@@ -90,6 +143,8 @@ typedef enum {
     [_recordsBtn setTitle:NSLocalizedString(@"MAIN_RECORDS", @"") forState:UIControlStateNormal];
     
     // Select grid size view
+    [_selectGridLbl setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
+    _selectGridLbl.text = NSLocalizedString(@"MAIN_SELECT_GRID", @"");
     [_smallBtn.titleLabel setFont:[UIFont fontWithName:@"Pacifico" size:20]];
     [_smallBtn setTitle:NSLocalizedString(@"MAIN_SMALL", @"") forState:UIControlStateNormal];
     [_normalBtn.titleLabel setFont:[UIFont fontWithName:@"Pacifico" size:20]];
@@ -113,7 +168,33 @@ typedef enum {
     [_bannerView addSubview:banner];
     [banner loadRequest:[GADRequest request]];
     
-    _changeViewsConstraints = [[NSArray alloc] init];
+    // Constraints to change between records, source and size view
+    
+    UIView *stripView = self.stripView;
+    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(stripView);
+
+    _showRecordsViewConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"|-(0)-[stripView]"
+                                                                          options:0
+                                                                          metrics:nil
+                                                                            views:viewsDictionary];
+    
+    _showSourceViewConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"|-(-320)-[stripView]"
+                                                                          options:0
+                                                                          metrics:nil
+                                                                            views:viewsDictionary];
+    
+    _showSizeViewConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"|-(-640)-[stripView]"
+                                                                         options:0
+                                                                         metrics:nil
+                                                                           views:viewsDictionary];
+    
+    _startWithRecordsView = YES;
+    
+    if (_startWithRecordsView) {
+        [self.view removeConstraints:_showRecordsViewConstraints];
+        [self.view addConstraints:_showRecordsViewConstraints];
+        _currentViewConstraints = _showRecordsViewConstraints;
+    }
     
     [self startTimer];
 }
@@ -161,7 +242,8 @@ typedef enum {
 - (IBAction)onRecordsButtonPressed:(id)sender
 {
     FLPLogDebug(@"");
-    [self performSegueWithIdentifier:@"recordsFromMainSegue" sender:self];
+    [self showRecordsView];
+    //[self performSegueWithIdentifier:@"recordsFromMainSegue" sender:self];
 }
 
 - (IBAction)onSmallButtonPressed:(id)sender
@@ -187,6 +269,12 @@ typedef enum {
 }
 
 - (IBAction)onSourceButtonPressed:(id)sender
+{
+    FLPLogDebug(@"");
+    [self showSourceView];
+}
+
+- (IBAction)onStartGameButtonPressed:(id)sender
 {
     FLPLogDebug(@"");
     [self showSourceView];
@@ -226,20 +314,16 @@ typedef enum {
 
 - (void)showSizeView
 {
+    [_recordsLbl setAlpha:0];
     [_selectSourceLbl setAlpha:0];
     [_selectGridLbl setAlpha:0];
     
     // Change to select size view
     [UIView animateWithDuration:0.3
                      animations:^{
-                         [self.view removeConstraints:_changeViewsConstraints];
-                         UIView *selectSourceView = self.selectSourceView;
-                         NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(selectSourceView);
-                         _changeViewsConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"[selectSourceView]-320-|"
-                                                                                           options:0
-                                                                                           metrics:nil
-                                                                                             views:viewsDictionary];
-                         [self.view addConstraints:_changeViewsConstraints];
+                         [self.view removeConstraints:_currentViewConstraints];
+                         _currentViewConstraints = _showSizeViewConstraints;
+                         [self.view addConstraints:_showSizeViewConstraints];
                          [self.view layoutIfNeeded];
                      }
                      completion:^(BOOL finished) {
@@ -253,19 +337,44 @@ typedef enum {
 
 - (void)showSourceView
 {
+    [_recordsLbl setAlpha:0];
     [_selectSourceLbl setAlpha:0];
     [_selectGridLbl setAlpha:0];
     
     // Change to select source view
     [UIView animateWithDuration:0.3
                      animations:^{
-                         [self.view removeConstraints:_changeViewsConstraints];
+                         [self.view removeConstraints:_currentViewConstraints];
+                         _currentViewConstraints = _showSourceViewConstraints;
+                         [self.view addConstraints:_showSourceViewConstraints];
                          [self.view layoutIfNeeded];
                      }
                      completion:^(BOOL finished) {
                          [UIView animateWithDuration:0.3
                                           animations:^{
                                               [_selectSourceLbl setAlpha:1];
+                                          }];
+                     }];
+}
+
+- (void)showRecordsView
+{
+    [_recordsLbl setAlpha:0];
+    [_selectSourceLbl setAlpha:0];
+    [_selectGridLbl setAlpha:0];
+    
+    // Change to records view
+    [UIView animateWithDuration:0.3
+                     animations:^{
+                         [self.view removeConstraints:_currentViewConstraints];
+                         _currentViewConstraints = _showRecordsViewConstraints;
+                         [self.view addConstraints:_showRecordsViewConstraints];
+                         [self.view layoutIfNeeded];
+                     }
+                     completion:^(BOOL finished) {
+                         [UIView animateWithDuration:0.3
+                                          animations:^{
+                                              [_recordsLbl setAlpha:1];
                                           }];
                      }];
 }

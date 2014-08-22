@@ -23,6 +23,9 @@
 "MAIN_SELECT_TWITTER" = "Select one Twitter account";
 "MAIN_GENERIC_ERROR" = "There was an error getting your photos from selected source. Please try again.";
 "MAIN_INERNET_CONNECTION" = "You need an internet connection to download photos from this source.";
+"MAIN_RECORDS_TITLE" = "My Records";
+"MAIN_RECORDS_NONE" = "--:--:---";
+"MAIN_START" = "Start new game";
 
 // Grid screen
 "GRID_EXIT" = "Exit";
@@ -36,13 +39,6 @@
 "SCORE_TIME_FINAL" = "Final time";
 "SCORE_RECORD" = "Congrats, it's a new record!";
 "SCORE_AGAIN" = "Try again!";
-
-// Records screen
-"RECORDS_TITLE" = "Best times";
-"RECORDS_SMALL" = "Small";
-"RECORDS_NORMAL" = "Normal";
-"RECORDS_BIG" = "Big";
-"RECORDS_NONE" = "--:--:---";
 
 // Other
 "OTHER_BACK" = "Back";

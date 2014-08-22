@@ -12,4 +12,7 @@
 
 @interface FLPMainScrenViewController : UIViewController
 
+// YES if controller must start showing records view, FALSE if source view instead
+@property (nonatomic) BOOL startWithRecordsView;
+
 @end
