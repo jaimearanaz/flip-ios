@@ -99,9 +99,12 @@
     // Sort the array randomly
     _photosInGrid = [self sortRandomlyArray:_photosInGrid];
     
-    // Banner
+    // Configure banner
     GADBannerView *banner = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner];
-    banner.adUnitID = kAddMobID;
+    // AdMob key is stored in a plist file, not tracked in git repository
+    NSString *adMobPlist = [[NSBundle mainBundle] pathForResource:@"AdMobKey" ofType:@"plist"];
+    NSDictionary *adMobKey = [[NSDictionary alloc] initWithContentsOfFile:adMobPlist];
+    banner.adUnitID = [adMobKey objectForKey:@"key"];
     banner.rootViewController = self;
     [_bannerView addSubview:banner];
     [banner loadRequest:[GADRequest request]];

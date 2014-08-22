@@ -16,5 +16,6 @@ DerivedData
 .idea/
 *.hmap
 Flip/TwitterKeys.plist
+Flip/AdMobKey.plist
 #CocoaPods
 Pods
