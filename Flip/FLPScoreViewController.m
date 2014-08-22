@@ -97,7 +97,7 @@
         case GridSizeSmall:
             key = @"small";
             break;
-        case GridSizeNormal:
+        case GridSizeMedium:
             key = @"normal";
             break;
         case GridSizeBig:

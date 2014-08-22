@@ -42,8 +42,8 @@ typedef enum {
 @property (nonatomic, weak) IBOutlet UILabel *recordsLbl;
 @property (nonatomic, weak) IBOutlet UILabel *smallLbl;
 @property (nonatomic, weak) IBOutlet UILabel *smallRecordLbl;
-@property (nonatomic, weak) IBOutlet UILabel *normalLbl;
-@property (nonatomic, weak) IBOutlet UILabel *normalRecordLbl;
+@property (nonatomic, weak) IBOutlet UILabel *mediumLbl;
+@property (nonatomic, weak) IBOutlet UILabel *mediumRecordLbl;
 @property (nonatomic, weak) IBOutlet UILabel *bigLbl;
 @property (nonatomic, weak) IBOutlet UILabel *bigRecordLbl;
 @property (nonatomic, weak) IBOutlet UIButton *startGameBtn;
@@ -58,8 +58,11 @@ typedef enum {
 // Size view elements
 @property (nonatomic, weak) IBOutlet UILabel *selectGridLbl;
 @property (nonatomic, weak) IBOutlet UIButton *smallBtn;
-@property (nonatomic, weak) IBOutlet UIButton *normalBtn;
+@property (nonatomic, weak) IBOutlet UILabel *smallButtonLbl;
+@property (nonatomic, weak) IBOutlet UIButton *mediumBtn;
+@property (nonatomic, weak) IBOutlet UILabel *mediumButtonLbl;
 @property (nonatomic, weak) IBOutlet UIButton *bigBtn;
+@property (nonatomic, weak) IBOutlet UILabel *bigButtonLbl;
 @property (nonatomic, weak) IBOutlet UIButton *sourceBtn;
 
 @property (nonatomic, weak) IBOutlet UIView *bannerView;
@@ -83,7 +86,7 @@ typedef enum {
 - (IBAction)onFacebookButtonPressed:(id)sender;
 - (IBAction)onTwitterButtonPressed:(id)sender;
 - (IBAction)onSmallButtonPressed:(id)sender;
-- (IBAction)onNormalButtonPressed:(id)sender;
+- (IBAction)onMediumButtonPressed:(id)sender;
 - (IBAction)onBigButtonPressed:(id)sender;
 - (IBAction)onRecordsButtonPressed:(id)sender;
 - (IBAction)onSourceButtonPressed:(id)sender;
@@ -119,10 +122,10 @@ typedef enum {
     [_smallRecordLbl setFont:[UIFont fontWithName:@"Roboto-Light" size:17]];
     _smallRecordLbl.text = (recordSmall) ? [dateFormatter stringFromDate:recordSmall] : NSLocalizedString(@"MAIN_RECORDS_NONE", @"");
     
-    [_normalLbl setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
-    _normalLbl.text = NSLocalizedString(@"MAIN_NORMAL", @"");
-    [_normalRecordLbl setFont:[UIFont fontWithName:@"Roboto-Light" size:17]];
-    _normalRecordLbl.text = (recordNormal) ? [dateFormatter stringFromDate:recordNormal] : NSLocalizedString(@"MAIN_RECORDS_NONE", @"");
+    [_mediumLbl setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
+    _mediumLbl.text = NSLocalizedString(@"MAIN_NORMAL", @"");
+    [_mediumRecordLbl setFont:[UIFont fontWithName:@"Roboto-Light" size:17]];
+    _mediumRecordLbl.text = (recordNormal) ? [dateFormatter stringFromDate:recordNormal] : NSLocalizedString(@"MAIN_RECORDS_NONE", @"");
     
     [_bigLbl setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
     _bigLbl.text = NSLocalizedString(@"MAIN_BIG", @"");
@@ -145,12 +148,14 @@ typedef enum {
     // Select grid size view
     [_selectGridLbl setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
     _selectGridLbl.text = NSLocalizedString(@"MAIN_SELECT_GRID", @"");
-    [_smallBtn.titleLabel setFont:[UIFont fontWithName:@"Pacifico" size:20]];
-    [_smallBtn setTitle:NSLocalizedString(@"MAIN_SMALL", @"") forState:UIControlStateNormal];
-    [_normalBtn.titleLabel setFont:[UIFont fontWithName:@"Pacifico" size:20]];
-    [_normalBtn setTitle:NSLocalizedString(@"MAIN_NORMAL", @"") forState:UIControlStateNormal];
-    [_bigBtn.titleLabel setFont:[UIFont fontWithName:@"Pacifico" size:20]];
-    [_bigBtn setTitle:NSLocalizedString(@"MAIN_BIG", @"") forState:UIControlStateNormal];
+    // Use labels because button's label don't fit well with this font
+    [_smallButtonLbl setFont:[UIFont fontWithName:@"Pacifico" size:20]];
+    [_smallButtonLbl setText:NSLocalizedString(@"MAIN_SMALL", @"")];
+    [_mediumButtonLbl setFont:[UIFont fontWithName:@"Pacifico" size:20]];
+    [_mediumButtonLbl setText:NSLocalizedString(@"MAIN_MEDIUM", @"")];
+    [_bigButtonLbl setFont:[UIFont fontWithName:@"Pacifico" size:20]];
+    [_bigButtonLbl setText:NSLocalizedString(@"MAIN_BIG", @"")];
+    
     [_sourceBtn.titleLabel setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
     [_sourceBtn setTitle:NSLocalizedString(@"MAIN_SOURCE", @"") forState:UIControlStateNormal];
     
@@ -253,10 +258,10 @@ typedef enum {
     
 }
 
-- (IBAction)onNormalButtonPressed:(id)sender
+- (IBAction)onMediumButtonPressed:(id)sender
 {
     FLPLogDebug(@"");
-    _size = GridSizeNormal;
+    _size = GridSizeMedium;
     [self preparePhotosFromSource];
 }
 
@@ -300,15 +305,17 @@ typedef enum {
 - (void)enableButtons
 {
     _smallBtn.enabled = YES;
-    _normalBtn.enabled = YES;
+    _mediumBtn.enabled = YES;
     _bigBtn.enabled = YES;
+    _sourceBtn.enabled = YES;
 }
 
 - (void)disableButtons
 {
     _smallBtn.enabled = NO;
-    _normalBtn.enabled = NO;
+    _mediumBtn.enabled = NO;
     _bigBtn.enabled = NO;
+    _sourceBtn.enabled = NO;
 }
 
 - (void)showSizeView

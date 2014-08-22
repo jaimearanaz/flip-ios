@@ -16,7 +16,7 @@
 
 // Seconds of delay in grid animation
 #define kGridSmallDelay 2
-#define kGridNormalDelay 4
+#define kGridMediumDelay 4
 #define kGridBigDelay 6
 #define kGridGeneralDelay 1
 

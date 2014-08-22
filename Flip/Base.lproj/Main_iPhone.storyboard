@@ -149,14 +149,14 @@
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Normal" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OfV-LC-fq5">
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Medium" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OfV-LC-fq5">
                                                 <rect key="frame" x="60" y="90" width="91" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Normal" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z5o-2u-Tu8">
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Big" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z5o-2u-Tu8">
                                                 <rect key="frame" x="60" y="130" width="91" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -231,10 +231,10 @@
                                         <rect key="frame" x="640" y="0.0" width="320" height="205"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mxm-dX-5Zp">
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mxm-dX-5Zp" userLabel="Button - Small">
                                                 <rect key="frame" x="60" y="51" width="200" height="36"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" title="Small" backgroundImage="General_button_normal">
+                                                <state key="normal" backgroundImage="General_button_normal">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <state key="disabled" backgroundImage="General_button_pressed"/>
@@ -244,23 +244,37 @@
                                                     <action selector="onSmallButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="F1d-Kn-7ok"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mbU-cI-U4A">
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Small" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ogx-bs-rTM">
+                                                <rect key="frame" x="60" y="51" width="200" height="36"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mbU-cI-U4A" userLabel="Button - Medium">
                                                 <rect key="frame" x="60" y="101" width="200" height="36"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" title="Normal" backgroundImage="General_button_normal">
+                                                <state key="normal" backgroundImage="General_button_normal">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <state key="disabled" backgroundImage="General_button_pressed"/>
                                                 <state key="selected" backgroundImage="General_button_pressed"/>
                                                 <state key="highlighted" backgroundImage="General_button_pressed"/>
                                                 <connections>
-                                                    <action selector="onNormalButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Vit-ez-ivB"/>
+                                                    <action selector="onMediumButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="BZt-ZO-anH"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a24-Ag-Vns">
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Medium" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PRX-Nw-OQ9">
+                                                <rect key="frame" x="60" y="101" width="200" height="36"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a24-Ag-Vns" userLabel="Button - Big">
                                                 <rect key="frame" x="60" y="151" width="200" height="34"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" title="Big" backgroundImage="General_button_normal">
+                                                <state key="normal" backgroundImage="General_button_normal">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <state key="disabled" backgroundImage="General_button_pressed"/>
@@ -269,6 +283,13 @@
                                                     <action selector="onBigButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="KVk-we-Lud"/>
                                                 </connections>
                                             </button>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Big" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sEk-AI-VUM">
+                                                <rect key="frame" x="60" y="151" width="200" height="36"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Select a size for the grid" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="56S-Qh-nKd">
                                                 <rect key="frame" x="20" y="0.0" width="280" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -348,13 +369,15 @@
                     <connections>
                         <outlet property="bannerView" destination="nvf-ly-HpF" id="GOX-fD-GFV"/>
                         <outlet property="bigBtn" destination="a24-Ag-Vns" id="6Hi-Tw-YqN"/>
+                        <outlet property="bigButtonLbl" destination="sEk-AI-VUM" id="AjB-DM-32B"/>
                         <outlet property="bigLbl" destination="Z5o-2u-Tu8" id="0dJ-0s-955"/>
                         <outlet property="bigRecordLbl" destination="hTA-B4-DwB" id="c6h-rS-QjN"/>
                         <outlet property="cameraBtn" destination="Cnf-b3-mNA" id="qkm-nm-WuT"/>
                         <outlet property="facebookBtn" destination="fFk-FV-fyo" id="gu3-On-Dpy"/>
-                        <outlet property="normalBtn" destination="mbU-cI-U4A" id="qRV-Bx-Rlh"/>
-                        <outlet property="normalLbl" destination="OfV-LC-fq5" id="XQN-CF-uDU"/>
-                        <outlet property="normalRecordLbl" destination="Nbt-Nv-D5T" id="Qj4-w9-G0t"/>
+                        <outlet property="mediumBtn" destination="mbU-cI-U4A" id="4lu-4n-5af"/>
+                        <outlet property="mediumButtonLbl" destination="PRX-Nw-OQ9" id="UQ6-6h-8uS"/>
+                        <outlet property="mediumLbl" destination="OfV-LC-fq5" id="dvZ-AA-ZOe"/>
+                        <outlet property="mediumRecordLbl" destination="Nbt-Nv-D5T" id="jip-9Q-hag"/>
                         <outlet property="recordsBtn" destination="iUh-rM-8BA" id="Quk-xp-jQe"/>
                         <outlet property="recordsLbl" destination="EEp-FG-Pfz" id="ac5-yJ-ffX"/>
                         <outlet property="recordsView" destination="hIp-0g-TYT" id="eeN-Km-nSU"/>
@@ -363,6 +386,7 @@
                         <outlet property="selectSourceLbl" destination="rLb-7Q-WyZ" id="tNv-Vg-mhe"/>
                         <outlet property="selectSourceView" destination="tAh-NM-16j" id="Y0h-NF-sAl"/>
                         <outlet property="smallBtn" destination="Mxm-dX-5Zp" id="CQz-zm-YSF"/>
+                        <outlet property="smallButtonLbl" destination="ogx-bs-rTM" id="5Gz-le-C1W"/>
                         <outlet property="smallLbl" destination="Wz1-1O-GsM" id="BqY-Oe-opX"/>
                         <outlet property="smallRecordLbl" destination="gLZ-dj-Qex" id="0Xp-vd-Tie"/>
                         <outlet property="sourceBtn" destination="sL0-Tf-rcq" id="1FR-TM-iXt"/>
@@ -691,6 +715,6 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="uZU-Ea-4mk"/>
-        <segue reference="bqU-UK-gYp"/>
+        <segue reference="ibe-Gz-0pW"/>
     </inferredMetricsTieBreakers>
 </document>

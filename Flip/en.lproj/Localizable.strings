@@ -12,7 +12,7 @@
 "MAIN_CAMERA" = "Camera";
 "MAIN_RECORDS" = "See my records";
 "MAIN_SMALL" = "Small";
-"MAIN_NORMAL" = "Normal";
+"MAIN_MEDIUM" = "Medium";
 "MAIN_BIG" = "Big";
 "MAIN_SOURCE" = "Change source";
 "MAIN_ALERT" = "Error";

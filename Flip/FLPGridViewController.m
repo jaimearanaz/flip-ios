@@ -69,7 +69,7 @@
         case GridSizeSmall:
             _numOfPhotos = kGridSmallPhotos;
             break;
-        case GridSizeNormal:
+        case GridSizeMedium:
             _numOfPhotos = kGridNormalPhotos;
             break;
         case GridSizeBig:
@@ -128,8 +128,8 @@
             case GridSizeSmall:
                 delay = kGridSmallDelay;
                 break;
-            case GridSizeNormal:
-                delay = kGridNormalDelay;
+            case GridSizeMedium:
+                delay = kGridMediumDelay;
                 break;
             case GridSizeBig:
                 delay = kGridBigDelay;

@@ -10,7 +10,7 @@
 
 typedef enum {
     GridSizeSmall,
-    GridSizeNormal,
+    GridSizeMedium,
     GridSizeBig
 } GridSizeType;
 

@@ -12,7 +12,7 @@
 "MAIN_CAMERA" = "Cámara";
 "MAIN_RECORDS" = "Ver mis records";
 "MAIN_SMALL" = "Pequeño";
-"MAIN_NORMAL" = "Normal";
+"MAIN_MEDIUM" = "Medio";
 "MAIN_BIG" = "Grande";
 "MAIN_SOURCE" = "Cambiar origen de las fotos";
 "MAIN_ALERT" = "Error";
