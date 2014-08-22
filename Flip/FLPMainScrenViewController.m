@@ -187,9 +187,7 @@ typedef enum {
                                                                          options:0
                                                                          metrics:nil
                                                                            views:viewsDictionary];
-    
-    _startWithRecordsView = NO;
-    
+
     if (_startWithRecordsView) {
         _currentViewConstraints = _showRecordsViewConstraints;
     } else {
