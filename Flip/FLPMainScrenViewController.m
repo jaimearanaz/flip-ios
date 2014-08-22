@@ -196,9 +196,15 @@ typedef enum {
                                                                          metrics:nil
                                                                            views:viewsDictionary];
 
+    // Show records view
     if (_startWithRecordsView) {
         _currentViewConstraints = _showRecordsViewConstraints;
+        
+    // Show source view
     } else {
+        // Hide records view to avoid ugly effect when comes from score screen
+        self.recordsView.hidden = YES;
+        
         [self.view addConstraints:_showSourceViewConstraints];
         _currentViewConstraints = _showSourceViewConstraints;
     }
@@ -371,6 +377,9 @@ typedef enum {
     [_recordsLbl setAlpha:0];
     [_selectSourceLbl setAlpha:0];
     [_selectGridLbl setAlpha:0];
+    
+    // Records view was hidden to avoid ugly effect when comes from score screen
+    self.recordsView.hidden = NO;
     
     // Change to records view
     [UIView animateWithDuration:0.3
