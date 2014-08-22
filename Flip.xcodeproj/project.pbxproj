@@ -32,10 +32,10 @@
 		6F1AA1991973FE9900101766 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F1AA19B1973FE9900101766 /* Localizable.strings */; };
 		6F33AC7C1998C14000FBF9C4 /* FLPCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F33AC7B1998C14000FBF9C4 /* FLPCollectionViewCell.m */; };
 		6F33AC841999245500FBF9C4 /* FLPGridItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F33AC831999245500FBF9C4 /* FLPGridItem.m */; };
-		6F3B3A911982571200EA4BA1 /* TwitterKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6F3B3A901982571200EA4BA1 /* TwitterKeys.plist */; };
 		6F3B3A9419825C1C00EA4BA1 /* FLPTwitterPhotoSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3B3A9319825C1C00EA4BA1 /* FLPTwitterPhotoSource.m */; };
 		6F4CF17619A783FA009F4F31 /* CantoraOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6F4CF17519A7828F009F4F31 /* CantoraOne-Regular.ttf */; };
-		6F4CF17819A78C46009F4F31 /* AdMobKey.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6F4CF17719A78C46009F4F31 /* AdMobKey.plist */; };
+		6F4CF17A19A79185009F4F31 /* TwitterKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6F4CF17919A79185009F4F31 /* TwitterKeys.plist */; };
+		6F4CF17C19A7928D009F4F31 /* AdMobKey.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6F4CF17B19A7928D009F4F31 /* AdMobKey.plist */; };
 		6F55BE8E19A1618000FC60E7 /* Pacifico.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6F55BE8D19A1617C00FC60E7 /* Pacifico.ttf */; };
 		6F55BE9219A166B900FC60E7 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6F55BE9119A166B900FC60E7 /* Roboto-Bold.ttf */; };
 		6F5AD5C71987ABF600B65D09 /* FLPFacebookPhotoSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5AD5C61987ABF600B65D09 /* FLPFacebookPhotoSource.m */; };
@@ -107,11 +107,11 @@
 		6F33AC7B1998C14000FBF9C4 /* FLPCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPCollectionViewCell.m; sourceTree = "<group>"; };
 		6F33AC821999245500FBF9C4 /* FLPGridItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPGridItem.h; sourceTree = "<group>"; };
 		6F33AC831999245500FBF9C4 /* FLPGridItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPGridItem.m; sourceTree = "<group>"; };
-		6F3B3A901982571200EA4BA1 /* TwitterKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TwitterKeys.plist; sourceTree = "<group>"; };
 		6F3B3A9219825C1C00EA4BA1 /* FLPTwitterPhotoSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPTwitterPhotoSource.h; sourceTree = "<group>"; };
 		6F3B3A9319825C1C00EA4BA1 /* FLPTwitterPhotoSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPTwitterPhotoSource.m; sourceTree = "<group>"; };
 		6F4CF17519A7828F009F4F31 /* CantoraOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CantoraOne-Regular.ttf"; sourceTree = "<group>"; };
-		6F4CF17719A78C46009F4F31 /* AdMobKey.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AdMobKey.plist; sourceTree = "<group>"; };
+		6F4CF17919A79185009F4F31 /* TwitterKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TwitterKeys.plist; sourceTree = "<group>"; };
+		6F4CF17B19A7928D009F4F31 /* AdMobKey.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AdMobKey.plist; sourceTree = "<group>"; };
 		6F55BE8D19A1617C00FC60E7 /* Pacifico.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Pacifico.ttf; sourceTree = "<group>"; };
 		6F55BE9119A166B900FC60E7 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		6F5AD5C51987ABF600B65D09 /* FLPFacebookPhotoSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPFacebookPhotoSource.h; sourceTree = "<group>"; };
@@ -277,8 +277,8 @@
 				6F1AA1641973EAA400101766 /* main.m */,
 				6F1AA1661973EAA400101766 /* Flip-Prefix.pch */,
 				6F1AA19B1973FE9900101766 /* Localizable.strings */,
-				6F3B3A901982571200EA4BA1 /* TwitterKeys.plist */,
-				6F4CF17719A78C46009F4F31 /* AdMobKey.plist */,
+				6F4CF17919A79185009F4F31 /* TwitterKeys.plist */,
+				6F4CF17B19A7928D009F4F31 /* AdMobKey.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -469,11 +469,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F4CF17819A78C46009F4F31 /* AdMobKey.plist in Resources */,
+				6F4CF17C19A7928D009F4F31 /* AdMobKey.plist in Resources */,
 				6F4CF17619A783FA009F4F31 /* CantoraOne-Regular.ttf in Resources */,
+				6F4CF17A19A79185009F4F31 /* TwitterKeys.plist in Resources */,
 				6F1AA1741973EAA400101766 /* Images.xcassets in Resources */,
 				6F19F69B19A3A8870047F269 /* camera-shutter-click-01.wav in Resources */,
-				6F3B3A911982571200EA4BA1 /* TwitterKeys.plist in Resources */,
 				6F55BE8E19A1618000FC60E7 /* Pacifico.ttf in Resources */,
 				6F1AA1991973FE9900101766 /* Localizable.strings in Resources */,
 				6F1AA16C1973EAA400101766 /* Main_iPhone.storyboard in Resources */,
