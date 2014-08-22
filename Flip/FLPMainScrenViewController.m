@@ -188,12 +188,13 @@ typedef enum {
                                                                          metrics:nil
                                                                            views:viewsDictionary];
     
-    _startWithRecordsView = YES;
+    _startWithRecordsView = NO;
     
     if (_startWithRecordsView) {
-        [self.view removeConstraints:_showRecordsViewConstraints];
-        [self.view addConstraints:_showRecordsViewConstraints];
         _currentViewConstraints = _showRecordsViewConstraints;
+    } else {
+        [self.view addConstraints:_showSourceViewConstraints];
+        _currentViewConstraints = _showSourceViewConstraints;
     }
     
     [self startTimer];

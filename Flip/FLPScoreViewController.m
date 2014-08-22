@@ -7,12 +7,13 @@
 //
 
 #import "FLPScoreViewController.h"
+#import "FLPMainScrenViewController.h"
 
 #import "GADBannerView.h"
 
 @interface FLPScoreViewController ()
 
-@property (nonatomic, weak) IBOutlet UIButton *nextBtn;
+@property (nonatomic, weak) IBOutlet UIButton *mainBtn;
 @property (nonatomic, weak) IBOutlet UIButton *tryAgainBtn;
 @property (nonatomic, weak) IBOutlet UILabel *titleLbl;
 @property (nonatomic, weak) IBOutlet UILabel *timeLbl;
@@ -32,8 +33,8 @@
 // Play camera sound effect
 @property (nonatomic, strong) AVAudioPlayer *playerCamera;
 
-- (IBAction)nextButtonPressed:(id)sender;
-- (IBAction)tryAgainButtonPressed:(id)sender;
+- (IBAction)onMainButtonPressed:(id)sender;
+- (IBAction)onTryAgainButtonPressed:(id)sender;
 
 @end
 
@@ -54,6 +55,9 @@
     
     [_tryAgainBtn.titleLabel setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
     [_tryAgainBtn setTitle:NSLocalizedString(@"SCORE_AGAIN", @"") forState:UIControlStateNormal];
+    
+    [_mainBtn.titleLabel setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
+    [_mainBtn setTitle:NSLocalizedString(@"OTHER_MAIN", @"") forState:UIControlStateNormal];
 
     [_titleLbl setFont:[UIFont fontWithName:@"Pacifico" size:25]];
     _titleLbl.text = NSLocalizedString(@"SCORE_TITLE", @"");
@@ -104,18 +108,17 @@
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSDate *record = (NSDate *)[userDefaults objectForKey:key];
     
-    [_nextBtn.titleLabel setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
+    
+    
     [_recordLbl setFont:[UIFont fontWithName:@"Pacifico" size:23]];
     _recordLbl.text = NSLocalizedString(@"SCORE_RECORD", @"");
     
     if (([record compare:finalTime] == NSOrderedDescending) || (record == nil)) {
         [userDefaults setObject:finalTime forKey:key];
-        [_nextBtn setTitle:NSLocalizedString(@"OTHER_NEXT", @"") forState:UIControlStateNormal];
         _recordLbl.hidden = NO;
         _newRecord = YES;
         [self startTimer];
     } else {
-        [_nextBtn setTitle:NSLocalizedString(@"OTHER_MAIN", @"") forState:UIControlStateNormal];
         _recordLbl.hidden = YES;
         _newRecord = NO;
     }
@@ -144,28 +147,27 @@
 {
     [self endTimer];
     if ([segue.identifier isEqualToString:@"gridFromScoreSegue"]) {
-        FLPGridViewController *gridViewController=(FLPGridViewController *)segue.destinationViewController;
+        FLPGridViewController *gridViewController = (FLPGridViewController *)segue.destinationViewController;
         gridViewController.photos = _photos;
         gridViewController.gridSize = _gridSize;
+    } else if (([segue.identifier isEqualToString:@"mainFromScoreSegue"]) && (_newRecord)) {
+        FLPMainScrenViewController *mainViewController = (FLPMainScrenViewController *)segue.destinationViewController;
+        mainViewController.startWithRecordsView = YES;
     }
 }
 
 #pragma mark - IBAction methods
 
-- (IBAction)nextButtonPressed:(id)sender
+- (IBAction)onMainButtonPressed:(id)sender
 {
     if ([_playerCamera isPlaying]) {
         [_playerCamera stop];
     }
     
-    if (_newRecord) {
-        [self performSegueWithIdentifier:@"recordsFromScoreSegue" sender:self];
-    } else {
-        [self performSegueWithIdentifier:@"mainFromScoreSegue" sender:self];
-    }
+    [self performSegueWithIdentifier:@"mainFromScoreSegue" sender:self];
 }
 
-- (IBAction)tryAgainButtonPressed:(id)sender
+- (IBAction)onTryAgainButtonPressed:(id)sender
 {
     if ([_playerCamera isPlaying]) {
         [_playerCamera stop];
