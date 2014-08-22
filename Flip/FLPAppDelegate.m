@@ -22,19 +22,21 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [self setLogLevels];
-    
-    [self.window setBackgroundColor:[UIColor colorWithRed:255.0f/255.0f
-                                                    green:189.0f/255.0f
-                                                     blue:0.0f/255.0f
-                                                    alpha:1.0f]];
-    UIView *view;
+
+    UIImageView *imageView;
+    UIView *bannerView;
     if (isiPhone5) {
-        view = [[UIView alloc] initWithFrame:CGRectMake(0, 518, 320, 50)];
+        imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 568)];
+        bannerView = [[UIView alloc] initWithFrame:CGRectMake(0, 518, 320, 50)];
     } else {
-        view = [[UIView alloc] initWithFrame:CGRectMake(0, 430, 320, 50)];
+        imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+        bannerView = [[UIView alloc] initWithFrame:CGRectMake(0, 430, 320, 50)];
     }
-    [view setBackgroundColor:[UIColor blackColor]];
-    [self.window addSubview:view];
+    [bannerView setBackgroundColor:[UIColor blackColor]];
+    [imageView setImage:[UIImage imageNamed:@"Background"]];
+    [self.window addSubview:imageView];
+    [self.window addSubview:bannerView];
+    [self.window layoutIfNeeded];
     
     return YES;
 }
