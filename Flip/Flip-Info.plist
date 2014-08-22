@@ -4,6 +4,7 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
+		<string>CantoraOne-Regular.ttf</string>
 		<string>Roboto-Light.ttf</string>
 		<string>Roboto-Bold.ttf</string>
 		<string>Pacifico.ttf</string>

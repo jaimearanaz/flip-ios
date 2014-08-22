@@ -106,7 +106,7 @@ typedef enum {
     
     // Records view
     
-    [_recordsLbl setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
+    [_recordsLbl setFont:[UIFont fontWithName:@"Pacifico" size:20]];
     _recordsLbl.text = NSLocalizedString(@"MAIN_RECORDS_TITLE", @"");
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -119,17 +119,17 @@ typedef enum {
     
     [_smallLbl setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
     _smallLbl.text = NSLocalizedString(@"MAIN_SMALL", @"");
-    [_smallRecordLbl setFont:[UIFont fontWithName:@"Roboto-Light" size:17]];
+    [_smallRecordLbl setFont:[UIFont fontWithName:@"CantoraOne-Regular" size:17]];
     _smallRecordLbl.text = (recordSmall) ? [dateFormatter stringFromDate:recordSmall] : NSLocalizedString(@"MAIN_RECORDS_NONE", @"");
     
     [_mediumLbl setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
-    _mediumLbl.text = NSLocalizedString(@"MAIN_NORMAL", @"");
-    [_mediumRecordLbl setFont:[UIFont fontWithName:@"Roboto-Light" size:17]];
+    _mediumLbl.text = NSLocalizedString(@"MAIN_MEDIUM", @"");
+    [_mediumRecordLbl setFont:[UIFont fontWithName:@"CantoraOne-Regular" size:17]];
     _mediumRecordLbl.text = (recordNormal) ? [dateFormatter stringFromDate:recordNormal] : NSLocalizedString(@"MAIN_RECORDS_NONE", @"");
     
     [_bigLbl setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
     _bigLbl.text = NSLocalizedString(@"MAIN_BIG", @"");
-    [_bigRecordLbl setFont:[UIFont fontWithName:@"Roboto-Light" size:17]];
+    [_bigRecordLbl setFont:[UIFont fontWithName:@"CantoraOne-Regular" size:17]];
     _bigRecordLbl.text = (recordBig) ? [dateFormatter stringFromDate:recordBig] : NSLocalizedString(@"MAIN_RECORDS_NONE", @"");
     
     [_startGameBtn.titleLabel setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];

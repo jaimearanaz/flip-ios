@@ -84,7 +84,7 @@
 
     [_backBtn.titleLabel setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
     [_backBtn setTitle:NSLocalizedString(@"OTHER_EXIT", @"") forState:UIControlStateNormal];
-    [_timerLbl setFont:[UIFont fontWithName:@"Roboto-Bold" size:20]];
+    [_timerLbl setFont:[UIFont fontWithName:@"CantoraOne-Regular" size:20]];
     
     // Configure |photosInGrid|, for example [0, 1, 3, 0, 4, 4, 3, 5, 2, 1, 5, 2]
     _photosInGrid = [[NSMutableArray alloc] init];
@@ -200,6 +200,7 @@
     } else {
         [cell.photoView setImage:image];
     }
+    [cell.coverLbl setFont:[UIFont fontWithName:@"CantoraOne-Regular" size:40]];
     cell.coverLbl.text = [NSString stringWithFormat:@"%ld", (indexPath.row + 1)];
     
 
