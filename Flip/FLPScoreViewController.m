@@ -28,8 +28,10 @@
 @property (nonatomic, weak) IBOutlet UIView *bannerView;
 // YES if it's a new record
 @property (nonatomic) BOOL newRecord;
-// Timer to animate new record message
+// Timer to animate new record
 @property (nonatomic, strong) NSTimer *recordTimer;
+// Flag to count new record blinks
+@property (nonatomic) NSInteger numberBlinks;
 // Play camera sound effect
 @property (nonatomic, strong) AVAudioPlayer *playerCamera;
 
@@ -107,9 +109,7 @@
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSDate *record = (NSDate *)[userDefaults objectForKey:key];
-    
-    
-    
+
     [_recordLbl setFont:[UIFont fontWithName:@"Pacifico" size:23]];
     _recordLbl.text = NSLocalizedString(@"SCORE_RECORD", @"");
     
@@ -117,6 +117,7 @@
         [userDefaults setObject:finalTime forKey:key];
         _recordLbl.hidden = NO;
         _newRecord = YES;
+        _numberBlinks = 0;
         [self startTimer];
     } else {
         _recordLbl.hidden = YES;
@@ -181,7 +182,7 @@
 - (void)startTimer
 {
     if (_recordTimer == nil) {
-        _recordTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
+        _recordTimer = [NSTimer scheduledTimerWithTimeInterval:0.5
                                                         target:self
                                                       selector:@selector(blinkNewRecord)
                                                       userInfo:nil
@@ -199,10 +200,16 @@
 
 - (void)blinkNewRecord
 {
-    if (_recordLbl.hidden) {
-        _recordLbl.hidden = NO;
+    if (_finalTimeResultLbl.hidden) {
+        _finalTimeResultLbl.hidden = NO;
     } else {
-        _recordLbl.hidden = YES;
+        _numberBlinks++;
+        _finalTimeResultLbl.hidden = YES;
+    }
+    
+    if (_numberBlinks == 4) {
+        [self endTimer];
+        _finalTimeResultLbl.hidden = NO;
     }
 }
 
