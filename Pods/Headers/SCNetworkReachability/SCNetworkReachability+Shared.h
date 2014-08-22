@@ -1,1 +1,0 @@
-../../SCNetworkReachability/Classes/Subspecs/Shared/SCNetworkReachability+Shared.h
