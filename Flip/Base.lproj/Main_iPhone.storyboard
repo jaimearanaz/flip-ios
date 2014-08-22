@@ -20,7 +20,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TMO-pv-HR8" userLabel="View - Title">
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TMO-pv-HR8" userLabel="View - Title">
                                 <rect key="frame" x="0.0" y="80" width="320" height="140"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
@@ -111,11 +111,11 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gbR-1e-IA4" userLabel="View - Strip view">
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gbR-1e-IA4" userLabel="View - Strip view">
                                 <rect key="frame" x="0.0" y="264" width="960" height="205"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hIp-0g-TYT" userLabel="View - Records">
+                                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hIp-0g-TYT" userLabel="View - Records">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="205"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
@@ -183,7 +183,7 @@
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
-                                    <view contentMode="scaleAspectFit" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tAh-NM-16j" userLabel="View - Select source">
+                                    <view contentMode="scaleAspectFit" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tAh-NM-16j" userLabel="View - Select source">
                                         <rect key="frame" x="320" y="0.0" width="320" height="205"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
@@ -232,7 +232,7 @@
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kxo-yw-E5g" userLabel="View - Select size">
+                                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kxo-yw-E5g" userLabel="View - Select size">
                                         <rect key="frame" x="640" y="0.0" width="320" height="205"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
@@ -311,7 +311,7 @@
                                     <constraint firstAttribute="width" constant="960" placeholder="YES" id="lq0-CN-w84"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cya-Zk-Guq">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cya-Zk-Guq">
                                 <rect key="frame" x="60" y="488" width="200" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -324,7 +324,7 @@
                                     <action selector="onStartGameButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="ME8-2r-5Hl"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iUh-rM-8BA">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iUh-rM-8BA">
                                 <rect key="frame" x="380" y="488" width="200" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -337,7 +337,7 @@
                                     <action selector="onRecordsButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="LSy-XF-rs4"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sL0-Tf-rcq">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sL0-Tf-rcq">
                                 <rect key="frame" x="675" y="488" width="250" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -360,13 +360,26 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="0.7423607257" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstItem="nvf-ly-HpF" firstAttribute="top" secondItem="sL0-Tf-rcq" secondAttribute="bottom" id="2Wa-OM-Kpv"/>
+                            <constraint firstItem="nvf-ly-HpF" firstAttribute="top" secondItem="iUh-rM-8BA" secondAttribute="bottom" id="6iA-bL-gjQ"/>
+                            <constraint firstItem="kxo-yw-E5g" firstAttribute="centerX" secondItem="sL0-Tf-rcq" secondAttribute="centerX" id="7Wo-Qw-k9B"/>
                             <constraint firstItem="gbR-1e-IA4" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" placeholder="YES" id="G0a-OK-TXU"/>
+                            <constraint firstItem="kxo-yw-E5g" firstAttribute="top" relation="greaterThanOrEqual" secondItem="TMO-pv-HR8" secondAttribute="bottom" constant="10" id="MIb-mc-JVW"/>
                             <constraint firstItem="gbR-1e-IA4" firstAttribute="leading" secondItem="sL0-Tf-rcq" secondAttribute="leading" constant="-675" id="OhO-w4-YnN"/>
+                            <constraint firstItem="hIp-0g-TYT" firstAttribute="centerX" secondItem="cya-Zk-Guq" secondAttribute="centerX" id="WUq-PA-Azq"/>
+                            <constraint firstItem="cya-Zk-Guq" firstAttribute="top" relation="greaterThanOrEqual" secondItem="hIp-0g-TYT" secondAttribute="bottom" constant="-5" id="a7r-TM-t5U"/>
+                            <constraint firstItem="tAh-NM-16j" firstAttribute="centerX" secondItem="iUh-rM-8BA" secondAttribute="centerX" id="bk4-mE-chZ"/>
+                            <constraint firstItem="nvf-ly-HpF" firstAttribute="top" secondItem="cya-Zk-Guq" secondAttribute="bottom" id="efy-Gn-Hf1"/>
+                            <constraint firstItem="tAh-NM-16j" firstAttribute="top" relation="greaterThanOrEqual" secondItem="TMO-pv-HR8" secondAttribute="bottom" constant="10" id="fNX-1r-Zwb"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="nvf-ly-HpF" secondAttribute="bottom" id="isZ-yB-LQQ"/>
+                            <constraint firstItem="sL0-Tf-rcq" firstAttribute="top" relation="greaterThanOrEqual" secondItem="kxo-yw-E5g" secondAttribute="bottom" constant="-5" id="jGL-uX-8ya"/>
                             <constraint firstItem="iUh-rM-8BA" firstAttribute="leading" secondItem="gbR-1e-IA4" secondAttribute="leading" constant="380" id="mLy-AT-LCG"/>
                             <constraint firstItem="gbR-1e-IA4" firstAttribute="leading" secondItem="cya-Zk-Guq" secondAttribute="leading" constant="-60" id="odj-LL-Ysx"/>
+                            <constraint firstItem="iUh-rM-8BA" firstAttribute="top" relation="greaterThanOrEqual" secondItem="tAh-NM-16j" secondAttribute="bottom" constant="-5" id="qNx-Nj-Yz0"/>
+                            <constraint firstItem="hIp-0g-TYT" firstAttribute="top" relation="greaterThanOrEqual" secondItem="TMO-pv-HR8" secondAttribute="bottom" constant="10" id="tKy-9z-BC2"/>
                         </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
