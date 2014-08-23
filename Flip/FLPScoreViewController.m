@@ -115,7 +115,7 @@
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSDate *record = (NSDate *)[userDefaults objectForKey:key];
 
-    [_recordLbl setFont:[UIFont fontWithName:@"Pacifico" size:23]];
+    [_recordLbl setFont:[UIFont fontWithName:@"CantoraOne-Regular" size:23]];
     _recordLbl.text = NSLocalizedString(@"SCORE_RECORD", @"");
     
     // It's a record, save it
