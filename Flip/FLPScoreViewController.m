@@ -26,6 +26,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *finalTimeResultLbl;
 @property (nonatomic, weak) IBOutlet UILabel *recordLbl;
 @property (nonatomic, weak) IBOutlet UIView *bannerView;
+
 // YES if it's a new record
 @property (nonatomic) BOOL newRecord;
 // Timer to animate new record
@@ -64,6 +65,8 @@
     [_titleLbl setFont:[UIFont fontWithName:@"CantoraOne-Regular" size:25]];
     _titleLbl.text = NSLocalizedString(@"SCORE_TITLE", @"");
     
+    // User scores
+    
     [_timeLbl setFont:[UIFont fontWithName:@"CantoraOne-Regular" size:17]];
     _timeLbl.text = NSLocalizedString(@"SCORE_TIME", @"");
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -86,11 +89,15 @@
     [_penalizationResultLbl setFont:[UIFont fontWithName:@"CantoraOne-Regular" size:17]];
     _penalizationResultLbl.text = [penalizationDateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:penalizationSeconds]];
     
+    // Final time
+    
     [_finalTimeLbl setFont:[UIFont fontWithName:@"CantoraOne-Regular" size:23]];
     _finalTimeLbl.text = NSLocalizedString(@"SCORE_TIME_FINAL", @"");
     NSDate *finalTime = [NSDate dateWithTimeInterval:penalizationSeconds sinceDate:_time];
     [_finalTimeResultLbl setFont:[UIFont fontWithName:@"CantoraOne-Regular" size:23]];
     _finalTimeResultLbl.text = [dateFormatter stringFromDate:finalTime];
+    
+    // It's a new record ?
     
     NSString *key = @"";
     switch (_gridSize) {
@@ -105,20 +112,21 @@
             break;
     }
     
-    // New record
-    
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSDate *record = (NSDate *)[userDefaults objectForKey:key];
 
     [_recordLbl setFont:[UIFont fontWithName:@"Pacifico" size:23]];
     _recordLbl.text = NSLocalizedString(@"SCORE_RECORD", @"");
     
+    // It's a record, save it
     if (([record compare:finalTime] == NSOrderedDescending) || (record == nil)) {
         [userDefaults setObject:finalTime forKey:key];
         _recordLbl.hidden = NO;
         _newRecord = YES;
         _numberBlinks = 0;
         [self startTimer];
+        
+    // No record
     } else {
         _recordLbl.hidden = YES;
         _newRecord = NO;
@@ -150,10 +158,14 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     [self endTimer];
+    
+    // User tries again
     if ([segue.identifier isEqualToString:@"gridFromScoreSegue"]) {
         FLPGridViewController *gridViewController = (FLPGridViewController *)segue.destinationViewController;
         gridViewController.photos = _photos;
         gridViewController.gridSize = _gridSize;
+        
+    // User continues to main screen
     } else if (([segue.identifier isEqualToString:@"mainFromScoreSegue"]) && (_newRecord)) {
         FLPMainScrenViewController *mainViewController = (FLPMainScrenViewController *)segue.destinationViewController;
         mainViewController.startWithRecordsView = YES;
@@ -182,6 +194,9 @@
 
 #pragma Private methods
 
+/**
+ * Starts timer to animate new record
+ */
 - (void)startTimer
 {
     if (_recordTimer == nil) {
@@ -193,6 +208,9 @@
     }
 }
 
+/**
+ * Ends timer used to animate new record
+ */
 - (void)endTimer
 {
     if (_recordTimer != nil) {
@@ -201,6 +219,9 @@
     }
 }
 
+/**
+ * Blink new record effect
+ */
 - (void)blinkNewRecord
 {
     if (_finalTimeResultLbl.hidden) {

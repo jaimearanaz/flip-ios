@@ -17,9 +17,11 @@
 @interface FLPGridViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, weak) IBOutlet UIButton *backBtn;
-@property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
 @property (nonatomic, weak) IBOutlet UILabel *timerLbl;
+@property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
 @property (nonatomic, weak) IBOutlet UIView *bannerView;
+
+// Constraint used to remove banner when iPhone is 3.5 inchs and grid size is small
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *bannerConstraint;
 
 // Array with the duplicated images in grid, it represents indexes from |photos| array
@@ -35,15 +37,15 @@
 @property (nonatomic) NSDate *startDate;
 // Ending game time
 @property (nonatomic) NSDate *endDate;
-// Time to update game timing
+// Timer to update game timing
 @property (nonatomic, strong) NSTimer *timer;
 // First image to try match
 @property (nonatomic) FLPGridItem *firstPhoto;
 // Second image to try match
 @property (nonatomic) FLPGridItem *secondPhoto;
-// YES if game has started
+// YES if game has started, NO if photos are being showed to user
 @property (nonatomic) NSNumber *started;
-// Play camera sound effect
+// Play camera sound effect when photos are matched
 @property (nonatomic, strong) AVAudioPlayer *playerCamera;
 
 - (IBAction)backButtonPressed:(id)sender;
@@ -112,7 +114,6 @@
     // If 3.5 inches and small grid, remove banner for better performance
     if ((!isiPhone5) && (_gridSize == GridSizeSmall)) {
         [self.view removeConstraint:_bannerConstraint];
-        //[self.view layoutIfNeeded];
     }
     
     // Camera sound
@@ -197,6 +198,7 @@
     FLPCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"gridCell" forIndexPath:indexPath];
     FLPGridItem *gridItem = [_photosInGrid objectAtIndex:indexPath.row];
     
+    // Configure cell
     UIImage *image = (UIImage *)[_photos objectAtIndex:gridItem.imageIndex];
     if (image.size.height != image.size.width) {
         [cell.photoView setImage:[self imageCrop:image]];
@@ -206,7 +208,7 @@
     [cell.coverLbl setFont:[UIFont fontWithName:@"CantoraOne-Regular" size:40]];
     cell.coverLbl.text = [NSString stringWithFormat:@"%ld", (indexPath.row + 1)];
 
-    // Game is not started, show all images
+    // Game is not started yet, show all images
     if ((![_started boolValue]) && ([gridItem.isShowing boolValue])) {
         [cell flipCellToImageAnimated:[NSNumber numberWithBool:NO] onCompletion:nil];
         FLPLogDebug(@"row %ld, not started", (long)indexPath.row);
@@ -241,6 +243,7 @@
     FLPCollectionViewCell *cell = (FLPCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
     FLPGridItem *gridItem = [_photosInGrid objectAtIndex:indexPath.row];
 
+    // Game is running and new photo has been selected
     if (([_started boolValue]) &&
         (_secondPhoto == nil) &&
         ([gridItem.isMatched boolValue] == NO) &&
@@ -315,11 +318,6 @@
     }
 }
 
-- (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
-{
-
-}
-
 #pragma mark - UICollectionViewDelegateFlowLayout methods
 
 - (CGSize)collectionView:(UICollectionView *)collectionView
@@ -339,7 +337,7 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 #pragma mark - Private methods
 
 /**
- *  Starts game
+ *  Starts game hidding photos and starting timer
  */
 - (void)startGame
 {
@@ -374,6 +372,9 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
     _timer = nil;
 }
 
+/**
+ * Updates time label
+ */
 - (void)updateTimer
 {
     NSDate *currentDate = [NSDate date];
@@ -386,19 +387,25 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
     _timerLbl.text = timeString;
 }
 
+/**
+ * Called when user exits game before ending
+ */
 - (void)exitGame
 {
     [self stopTimer];
     [self performSegueWithIdentifier:@"mainFromGridSegue" sender:self];
 }
 
+/**
+ * Called when user completes game
+ */
 - (void)endGame
 {
     [self performSegueWithIdentifier:@"scoreFromGridSegue" sender:self];
 }
 
 /**
- * Hides all photos in grid
+ * Hides all photos in grid, used when game starts
  */
 - (void)hideAllPhotos
 {

@@ -10,11 +10,18 @@
 
 #import "FLPGridViewController.h"
 
+/**
+ * This controller represent the score screen after game is completed
+ */
 @interface FLPScoreViewController : UIViewController
 
+// Photos in grid, used when user tries again
 @property (nonatomic, strong) NSArray *photos;
-@property (nonatomic, strong) NSDate *time;
-@property (nonatomic) NSInteger numOfErrors;
+// Size of grid, used when user tries again
 @property (nonatomic) GridSizeType gridSize;
+// Time spent by user in the game
+@property (nonatomic, strong) NSDate *time;
+// Number of errors in the game
+@property (nonatomic) NSInteger numOfErrors;
 
 @end

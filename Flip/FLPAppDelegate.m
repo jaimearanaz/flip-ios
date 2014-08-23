@@ -23,6 +23,7 @@
 {
     [self setLogLevels];
 
+    // Add background and banner view to window to show in lateral transitions
     UIImageView *imageView;
     UIView *bannerView;
     if (isiPhone5) {
