@@ -206,7 +206,7 @@
         [cell.photoView setImage:image];
     }
     [cell.coverLbl setFont:[UIFont fontWithName:@"CantoraOne-Regular" size:40]];
-    cell.coverLbl.text = [NSString stringWithFormat:@"%d", (indexPath.row + 1)];
+    cell.coverLbl.text = [NSString stringWithFormat:@"%ld", (indexPath.row + 1)];
 
     // Game is not started yet, show all images
     if ((![_started boolValue]) && ([gridItem.isShowing boolValue])) {
