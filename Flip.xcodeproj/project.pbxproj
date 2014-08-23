@@ -12,7 +12,6 @@
 		6F14871E19A0F6640087527C /* FLPCoverFromRightSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F14871D19A0F6640087527C /* FLPCoverFromRightSegue.m */; };
 		6F14872119A0FD110087527C /* FLPFlipFromLeftSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F14872019A0FD110087527C /* FLPFlipFromLeftSegue.m */; };
 		6F14872419A0FDE90087527C /* FLPFlipFromRightSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F14872319A0FDE90087527C /* FLPFlipFromRightSegue.m */; };
-		6F19F69619A39C420047F269 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6F19F69519A39C420047F269 /* Roboto-Light.ttf */; };
 		6F19F69B19A3A8870047F269 /* camera-shutter-click-01.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6F19F69A19A3A8870047F269 /* camera-shutter-click-01.wav */; };
 		6F19F69D19A3AC760047F269 /* polaroid-camera-take-picture-01.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6F19F69C19A3AC760047F269 /* polaroid-camera-take-picture-01.wav */; };
 		6F1AA1591973EAA400101766 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F1AA1581973EAA400101766 /* Foundation.framework */; };
@@ -76,7 +75,6 @@
 		6F14872019A0FD110087527C /* FLPFlipFromLeftSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPFlipFromLeftSegue.m; sourceTree = "<group>"; };
 		6F14872219A0FDE90087527C /* FLPFlipFromRightSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPFlipFromRightSegue.h; sourceTree = "<group>"; };
 		6F14872319A0FDE90087527C /* FLPFlipFromRightSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPFlipFromRightSegue.m; sourceTree = "<group>"; };
-		6F19F69519A39C420047F269 /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
 		6F19F69A19A3A8870047F269 /* camera-shutter-click-01.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "camera-shutter-click-01.wav"; sourceTree = "<group>"; };
 		6F19F69C19A3AC760047F269 /* polaroid-camera-take-picture-01.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "polaroid-camera-take-picture-01.wav"; sourceTree = "<group>"; };
 		6F1AA1551973EAA400101766 /* Flip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flip.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -339,7 +337,6 @@
 			children = (
 				6F55BE8D19A1617C00FC60E7 /* Pacifico.ttf */,
 				6F55BE9119A166B900FC60E7 /* Roboto-Bold.ttf */,
-				6F19F69519A39C420047F269 /* Roboto-Light.ttf */,
 				6F4CF17519A7828F009F4F31 /* CantoraOne-Regular.ttf */,
 			);
 			name = fonts;
@@ -478,7 +475,6 @@
 				6F1AA1991973FE9900101766 /* Localizable.strings in Resources */,
 				6F1AA16C1973EAA400101766 /* Main_iPhone.storyboard in Resources */,
 				6F55BE9219A166B900FC60E7 /* Roboto-Bold.ttf in Resources */,
-				6F19F69619A39C420047F269 /* Roboto-Light.ttf in Resources */,
 				6F19F69D19A3AC760047F269 /* polaroid-camera-take-picture-01.wav in Resources */,
 				6F1AA1631973EAA400101766 /* InfoPlist.strings in Resources */,
 			);
