@@ -211,7 +211,6 @@
     // Game is not started yet, show all images
     if ((![_started boolValue]) && ([gridItem.isShowing boolValue])) {
         [cell flipCellToImageAnimated:[NSNumber numberWithBool:NO] onCompletion:nil];
-        FLPLogDebug(@"row %ld, not started", (long)indexPath.row);
         
     // Game is started
     } else {
@@ -219,16 +218,13 @@
         // Matched
         if ([gridItem.isMatched boolValue]) {
             [cell flipCellToImageAnimated:[NSNumber numberWithBool:NO] onCompletion:nil];
-            FLPLogDebug(@"row %ld, matched", (long)indexPath.row);
         } else {
             // Selected
             if ([gridItem.isShowing boolValue]) {
                 [cell flipCellToImageAnimated:[NSNumber numberWithBool:NO] onCompletion:nil];
-                FLPLogDebug(@"row %ld, is showing", (long)indexPath.row);
             // Not selected
             } else {
                 [cell flipCellToCoverAnimated:[NSNumber numberWithBool:NO]];
-                FLPLogDebug(@"row %ld, not showing", (long)indexPath.row);
             }
         }
     }

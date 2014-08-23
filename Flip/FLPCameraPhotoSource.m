@@ -24,7 +24,6 @@
                 succesBlock:(void(^)(NSArray* photos))success
                failureBlock:(void(^)(NSError *error))failure
 {
-    FLPLogDebug(@"number: %ld", number);
     NSMutableArray __block *photos = [[NSMutableArray alloc] init];
     ALAssetsLibrary *assetsLibrary = [[ALAssetsLibrary alloc] init];
 
@@ -36,10 +35,8 @@
                                          [group setAssetsFilter:[ALAssetsFilter allPhotos]];
                                          FLPLogDebug(@"photos in group: %ld", group.numberOfAssets);
                                        
-
                                          if (group.numberOfAssets >= number) {
                                              NSRange range = [self randomRangeFrom:0 to:group.numberOfAssets with:number];
-                                             FLPLogDebug(@"range starts %d length %d", (int)range.location, (int)range.length);
                                              
                                              // Enumerate all photos in current group
                                              [group enumerateAssetsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:range]
@@ -49,11 +46,11 @@
                                                                           UIImage *image = [UIImage imageWithCGImage:[result thumbnail]];
                                                                           // Add image
                                                                           [photos addObject:image];
-                                                                          FLPLogDebug(@"add image: %ld", photos.count);
                                                                       }
                                                                   }];
                                              success(photos);
                                          } else {
+                                             FLPLogError(@"not enough photos in group: %ld", group.numberOfAssets);
                                              failure([NSError errorWithDomain:@""
                                                                          code:KErrorEnoughPhotos
                                                                      userInfo:nil]);
@@ -82,8 +79,6 @@
  */
 - (NSRange)randomRangeFrom:(NSInteger)min to:(NSInteger)max with:(NSInteger)number
 {
-    FLPLogDebug(@"random range between %d and %d with %d elements", (int)min, (int)max, (int)number);
-    
     NSInteger startRange, lengthRange;
     if ((max <= min) || ((max - min) < number)) {
         startRange = 0;

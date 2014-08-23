@@ -54,8 +54,6 @@
         failure([NSError errorWithDomain:@"" code:0 userInfo:nil]);
         return;
     }
-    
-    FLPLogDebug(@"number: %ld", number);
 
     _twitterApi = [STTwitterAPI twitterAPIWithOAuthConsumerKey:_consumerKey
                                                             consumerSecret:_secretKey
@@ -97,7 +95,7 @@
                         for (NSDictionary* user in usersDescription) {
                             BOOL defaultProfile = [[user objectForKey:@"default_profile_image"] boolValue];
                             if (defaultProfile) {
-                                FLPLogDebug(@"egg image, skip user");
+                                FLPLogWarn(@"egg image, skip user");
                                 continue;
                             } else {
                                 [completeUsers addObject:user];
@@ -118,6 +116,7 @@
                                 
                             // Error downloading some photos
                             } else {
+                                FLPLogError(@"not enough downloaded photos");
                                 failure([NSError errorWithDomain:@""
                                                             code:kErrorDownloadingPhotos
                                                         userInfo:nil]);
@@ -125,6 +124,7 @@
                             
                         // Not enough complete users
                         } else {
+                            FLPLogError(@"not enough complete users");
                             failure([NSError errorWithDomain:@""
                                                         code:KErrorEnoughPhotos
                                                     userInfo:nil]);
@@ -132,21 +132,21 @@
                         
                         
     } failureBlock:^(NSError *error) {
-        FLPLogDebug(@"error: %@", [error localizedDescription]);
+        FLPLogError(@"error: %@", [error localizedDescription]);
         failure([NSError errorWithDomain:@""
                                     code:kErrorDownloadingPhotos
                                 userInfo:nil]);
     }];
 
     } errorBlock:^(NSError *error) {
-        FLPLogDebug(@"error: %@", [error localizedDescription]);
+        FLPLogError(@"error: %@", [error localizedDescription]);
         failure([NSError errorWithDomain:@""
                                     code:kErrorDownloadingPhotos
                                 userInfo:nil]);
         }];
                                   
     } errorBlock:^(NSError *error) {
-        FLPLogDebug(@"error: %@", [error localizedDescription]);
+        FLPLogError(@"error: %@", [error localizedDescription]);
         failure([NSError errorWithDomain:@""
                                     code:kErrorDownloadingPhotos
                                 userInfo:nil]);
@@ -169,14 +169,12 @@
     // Users aren't enough, return all of them
     if (users.count < number) {
         [result addObjectsFromArray:users];
-        FLPLogDebug(@"not enough users, return all");
         
     // Select randomly users
     } else {
         for (int i = 0; i < number; i++) {
             NSInteger randomIndex = arc4random() % users.count;
             [result addObject:[users objectAtIndex:randomIndex]];
-            FLPLogDebug(@"add user id %@", [users objectAtIndex:randomIndex]);
             [users removeObjectAtIndex:randomIndex];
         }
     }
@@ -213,10 +211,10 @@
             if (image) {
                 [photos addObject:image];
             } else {
-                FLPLogDebug(@"error generating image");
+                FLPLogError(@"error generating image %@", imageUrl);
             }
         } else {
-            FLPLogDebug(@"error downloading: %@", [error localizedDescription]);
+            FLPLogError(@"error downloading image %@, error: %@", imageUrl, [error localizedDescription]);
         }
     }
     
@@ -241,7 +239,6 @@
                                     orUserID:allUsers
                              includeEntities:0
                                 successBlock:^(NSArray *usersLookup) {
-                                    FLPLogDebug(@"number of complete users: %ld", usersLookup.count);
                                     success(usersLookup);
                                     
                                 } errorBlock:^(NSError *error) {

@@ -33,7 +33,6 @@
 
 - (void)savePhotosToCache:(NSArray *)photos
 {
-    FLPLogDebug(@"");
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSInteger index = 0;
     for (UIImage *image in photos) {
@@ -47,7 +46,6 @@
 
 - (BOOL)hasPhotosInCache
 {
-    FLPLogDebug(@"");
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *fileName = [NSString stringWithFormat:@"%@_0", _cacheFileName];
     NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:fileName];
@@ -58,7 +56,6 @@
 
 - (void)getPhotosFromCacheFinishBlock:(void(^)(NSArray* photos))finish
 {
-    FLPLogDebug(@"");
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSMutableArray *photos = [[NSMutableArray alloc] init];
     
@@ -83,7 +80,6 @@
 
 - (void)deleteCache;
 {
-    FLPLogDebug(@"");
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     

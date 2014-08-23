@@ -246,34 +246,29 @@ typedef enum {
 
 - (IBAction)onCameraButtonPressed:(id)sender
 {
-    FLPLogDebug(@"camera button pressed");
     _source = PhotoSourceCamera;
     [self showSizeView];
 }
 
 - (IBAction)onFacebookButtonPressed:(id)sender
 {
-    FLPLogDebug(@"Facebook button pressed");
     _source = PhotoSourceFacebook;
     [self showSizeView];
 }
 
 - (IBAction)onTwitterButtonPressed:(id)sender
 {
-    FLPLogDebug(@"Twitter button pressed");
     _source = PhotoShourceTwitter;
     [self showSizeView];
 }
 
 - (IBAction)onRecordsButtonPressed:(id)sender
 {
-    FLPLogDebug(@"");
     [self showRecordsView];
 }
 
 - (IBAction)onSmallButtonPressed:(id)sender
 {
-    FLPLogDebug(@"");
     _size = GridSizeSmall;
     [self preparePhotosFromSource];
     
@@ -281,27 +276,23 @@ typedef enum {
 
 - (IBAction)onMediumButtonPressed:(id)sender
 {
-    FLPLogDebug(@"");
     _size = GridSizeMedium;
     [self preparePhotosFromSource];
 }
 
 - (IBAction)onBigButtonPressed:(id)sender
 {
-    FLPLogDebug(@"");
     _size = GridSizeBig;
     [self preparePhotosFromSource];
 }
 
 - (IBAction)onSourceButtonPressed:(id)sender
 {
-    FLPLogDebug(@"");
     [self showSourceView];
 }
 
 - (IBAction)onStartGameButtonPressed:(id)sender
 {
-    FLPLogDebug(@"");
     [self showSourceView];
 }
 
@@ -313,7 +304,6 @@ typedef enum {
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex != actionSheet.cancelButtonIndex) {
-        FLPLogDebug(@"Twitter account selected");
         _twitterCallback([_twitterAccounts objectAtIndex:buttonIndex]);
     } else {
         [self enableButtons];
@@ -513,18 +503,18 @@ typedef enum {
                                       [MBProgressHUD hideHUDForView:self.view animated:YES];
                                       
                                       if (state == FBSessionStateOpen) {
-                                          FLPLogDebug(@"Facebook session opened");
+                                          FLPLogWarn(@"Facebook session opened");
                                           _photoSource = [[FLPFacebookPhotoSource alloc] init];
                                           [FBSession setActiveSession:session];
                                           [self checkReachabilityAndPreparePhotos];
                                           
                                           
                                       } else if (state == FBSessionStateClosed || state==FBSessionStateClosedLoginFailed) {
-                                          FLPLogDebug(@"Facebook session closed or failed");
+                                          FLPLogWarn(@"Facebook session closed or failed");
                                       }
                                       
                                       if (error) {
-                                          FLPLogDebug(@"Facebook session error: %@", [error localizedDescription]);
+                                          FLPLogError(@"Facebook session error: %@", [error localizedDescription]);
                                       }
                                   }];
 }
@@ -551,7 +541,7 @@ typedef enum {
     // b) with Twitter login web view, through |application:openURL:sourceApplication:annotation:| method in app delegate
     
     [PFTwitterSignOn requestAuthenticationWithSelectCallback:^(NSArray *accounts, twitterAccountCallback callback) {
-        FLPLogDebug(@"more than one Twitter account");
+        FLPLogWarn(@"more than one Twitter account");
         
         // User has Twitter accounts on device, use action sheet
         
@@ -581,9 +571,14 @@ typedef enum {
         
     } andCompletion:^(NSDictionary *accountInfo, NSError *error) {
         
-        // Logged via web or via local account, at this point we have NSDictionary with user data
-        FLPLogDebug(@"login with Twitter successful");
+        if (error) {
+            FLPLogError(@"error: %@", [error localizedDescription]);
+        } else {
+            FLPLogWarn(@"login with Twitter successful");
+        }
         
+        // Logged via web or via local account, at this point we have NSDictionary with user data
+
         [self unsubscribeToTwitterNotifications];
         
         _photoSource = [[FLPTwitterPhotoSource alloc] initWithOAuthConsumerKey:[twitterKeys objectForKey:@"consumerKey"]
@@ -604,6 +599,7 @@ typedef enum {
     // Check internet connection
     [SCNetworkReachability host:@"www.google.es" reachabilityStatus:^(SCNetworkStatus status)
      {
+         FLPLogWarn(@"network status %ld", (long)status);
          // Internet status is known, prepare photos
          _networkStatus = status;
          [self preparePhotos];
@@ -635,7 +631,7 @@ typedef enum {
     // Declare block to execute when getting photos fails
     void (^failureBlock)(NSError *);
     failureBlock = ^(NSError *error) {
-        FLPLogDebug(@"failure");
+        FLPLogError(@"failure %@", [error localizedDescription]);
         [self enableButtons];
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         [self showSourceView];
@@ -672,12 +668,12 @@ typedef enum {
                 FLPLogDebug(@"no internet connection");
                 
                 if ([_photoSource hasPhotosInCache]) {
-                    FLPLogDebug(@"load photos from cache");
+                    FLPLogWarn(@"desconnected, load photos from cache");
                     [_photoSource getPhotosFromCacheFinishBlock:^(NSArray *photos) {
                         successBlock(photos);
                     }];
                 } else {
-                    FLPLogDebug(@"no cache available");
+                    FLPLogWarn(@"desconnected, no cache available");
                     [self enableButtons];
                     [MBProgressHUD hideHUDForView:self.view animated:YES];
                     [WCAlertView showAlertWithTitle:NSLocalizedString(@"MAIN_ALERT", nil)
@@ -690,7 +686,7 @@ typedef enum {
                 
             // WiFi connection available, download photos from source and save them to cache
             } else if (_networkStatus == SCNetworkStatusReachableViaWiFi) {
-                FLPLogDebug(@"internet connection via WiFi");
+                FLPLogWarn(@"internet connection via WiFi");
                 
                 [_photoSource deleteCache];
                 [_photoSource getPhotosFromSource:kMinimunPhotos
@@ -707,12 +703,12 @@ typedef enum {
                 FLPLogDebug(@"internet connection via cellular");
                 
                 if ([_photoSource hasPhotosInCache]) {
-                    FLPLogDebug(@"load photos from cache");
+                    FLPLogWarn(@"cellular, load photos from cache");
                     [_photoSource getPhotosFromCacheFinishBlock:^(NSArray *photos) {
                         successBlock(photos);
                     }];
                 } else {
-                    FLPLogDebug(@"download photos from source");
+                    FLPLogWarn(@"cellular, download photos from source");
                     [_photoSource deleteCache];
                     [_photoSource getPhotosFromSource:kMinimunPhotos
                                           succesBlock:^(NSArray *photos) {
@@ -727,7 +723,7 @@ typedef enum {
             
         // Source doesn't need an internet connection
         } else {
-            FLPLogDebug(@"no internet connection is needed");
+            FLPLogWarn(@"no internet connection is needed");
             [_photoSource getPhotosFromSource:kMinimunPhotos
                                   succesBlock:^(NSArray *photos) {
                                       successBlock(photos);

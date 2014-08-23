@@ -26,8 +26,6 @@
                 succesBlock:(void(^)(NSArray* photos))success
                failureBlock:(void(^)(NSError *error))failure
 {
-    FLPLogDebug(@"");
-    
     // Steps:
     // 1. get all photo URLs where user is tagged
     // 2. get all photos URLs uploaded by user
@@ -58,6 +56,7 @@
                                                                    NSArray *downloadedPhotos = [self downloadPhotosFromUrls:randomPhotos];
                                                                    
                                                                    if (downloadedPhotos.count < number) {
+                                                                       FLPLogError(@"downloaded photos not enough");
                                                                        failure([NSError errorWithDomain:@""
                                                                                                    code:kErrorDownloadingPhotos
                                                                                                userInfo:nil]);
@@ -67,20 +66,21 @@
                                                                    
                                                                // There are no enough photos on Facebook
                                                                } else {
+                                                                   FLPLogError(@"tagged and uploaded photos not enough");
                                                                    failure([NSError errorWithDomain:@""
                                                                                                code:KErrorEnoughPhotos
                                                                                            userInfo:nil]);
                                                                }
                                                            }
                                                           failureBlock:^(NSError *error) {
-                                                              FLPLogDebug(@"error: %@", [error localizedDescription]);
+                                                              FLPLogError(@"error: %@", [error localizedDescription]);
                                                               failure([NSError errorWithDomain:@""
                                                                                           code:kErrorDownloadingPhotos
                                                                                       userInfo:nil]);
                                                           }];
                                 }
                                failureBlock:^(NSError *error) {
-                                   FLPLogDebug(@"error: %@", [error localizedDescription]);
+                                   FLPLogError(@"error: %@", [error localizedDescription]);
                                    failure([NSError errorWithDomain:@""
                                                                code:kErrorDownloadingPhotos
                                                            userInfo:nil]);
@@ -105,7 +105,6 @@
 {
     NSMutableDictionary *paginatedPhotos = [[NSMutableDictionary alloc] init];
     NSString *requestPath = [NSString stringWithFormat:@"%@?limit=%ld&offset=%ld", path, (long)limit, (long)offset];
-    FLPLogDebug(@"calling Facebook API %@", requestPath);
     
     // Launch request
     [[FBRequest requestForGraphPath:requestPath] startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
@@ -123,10 +122,7 @@
                 
                     // Add immages with width between 300 and 600 pixels
                     if ((300 < [width integerValue]) && ([width integerValue] < 600)) {
-                        FLPLogDebug(@"add photo id %@ width %@ source %@",
-                                    [graphObject objectForKey:@"id"],
-                                    width,
-                                    [imageObject objectForKey:@"source"]);
+                        FLPLogDebug(@"add photo %@", [imageObject objectForKey:@"source"]);
                         [paginatedPhotos setValue:[imageObject objectForKey:@"source"] forKey:[graphObject objectForKey:@"id"]];
                         break;
                     }
@@ -135,6 +131,7 @@
         
         // More result pending, call itself again and add current photos
         if (result[@"paging"][@"next"] != nil) {
+            FLPLogWarn(@"more photos pending, call again");
             [self getPhotosUrlFromFacebookPath:path
                                          limit:limit
                                         offset:(offset + limit)
@@ -211,7 +208,7 @@
             UIImage *image = [UIImage imageWithData:data];
             [photos addObject:image];
         } else {
-            FLPLogDebug(@"error downloading: %@", [error localizedDescription]);
+            FLPLogError(@"error downloading: %@", url);
         }
     }
     
