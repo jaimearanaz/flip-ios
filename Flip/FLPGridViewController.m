@@ -205,10 +205,9 @@
     }
     [cell.coverLbl setFont:[UIFont fontWithName:@"CantoraOne-Regular" size:40]];
     cell.coverLbl.text = [NSString stringWithFormat:@"%ld", (indexPath.row + 1)];
-    
 
     // Game is not started, show all images
-    if (![_started boolValue]) {
+    if ((![_started boolValue]) && ([gridItem.isShowing boolValue])) {
         [cell flipCellToImageAnimated:[NSNumber numberWithBool:NO] onCompletion:nil];
         FLPLogDebug(@"row %ld, not started", (long)indexPath.row);
         
