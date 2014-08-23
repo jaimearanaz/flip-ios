@@ -460,7 +460,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7N5-Ms-QXi">
-                                <rect key="frame" x="20" y="55" width="280" height="455"/>
+                                <rect key="frame" x="20" y="60" width="280" height="455"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="MeS-pE-vAi">
@@ -564,7 +564,7 @@
                         <constraints>
                             <constraint firstItem="WaP-N1-zeL" firstAttribute="top" secondItem="7N5-Ms-QXi" secondAttribute="bottom" constant="8" id="DP5-Dq-fyw"/>
                             <constraint firstItem="7N5-Ms-QXi" firstAttribute="leading" secondItem="1lZ-5K-Ze7" secondAttribute="leading" constant="20" id="eAI-mV-Cik"/>
-                            <constraint firstItem="7N5-Ms-QXi" firstAttribute="top" secondItem="ItF-vR-tcH" secondAttribute="bottom" constant="35" id="gu6-Vw-346"/>
+                            <constraint firstItem="7N5-Ms-QXi" firstAttribute="top" secondItem="ItF-vR-tcH" secondAttribute="bottom" constant="40" id="gu6-Vw-346"/>
                             <constraint firstItem="cRi-gt-hXD" firstAttribute="top" secondItem="WaP-N1-zeL" secondAttribute="bottom" id="vf7-fn-jNZ"/>
                         </constraints>
                     </view>

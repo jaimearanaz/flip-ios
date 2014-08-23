@@ -106,7 +106,7 @@ typedef enum {
     
     // Records view
     
-    [_recordsLbl setFont:[UIFont fontWithName:@"Pacifico" size:20]];
+    [_recordsLbl setFont:[UIFont fontWithName:@"CantoraOne-Regular" size:20]];
     _recordsLbl.text = NSLocalizedString(@"MAIN_RECORDS_TITLE", @"");
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -117,36 +117,36 @@ typedef enum {
     [dateFormatter setDateFormat:@"mm:ss:SSS"];
     [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0.0]];
     
-    [_smallLbl setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
+    [_smallLbl setFont:[UIFont fontWithName:@"CantoraOne-Regular" size:17]];
     _smallLbl.text = NSLocalizedString(@"MAIN_SMALL", @"");
     [_smallRecordLbl setFont:[UIFont fontWithName:@"CantoraOne-Regular" size:17]];
     _smallRecordLbl.text = (recordSmall) ? [dateFormatter stringFromDate:recordSmall] : NSLocalizedString(@"MAIN_RECORDS_NONE", @"");
     
-    [_mediumLbl setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
+    [_mediumLbl setFont:[UIFont fontWithName:@"CantoraOne-Regular" size:17]];
     _mediumLbl.text = NSLocalizedString(@"MAIN_MEDIUM", @"");
     [_mediumRecordLbl setFont:[UIFont fontWithName:@"CantoraOne-Regular" size:17]];
     _mediumRecordLbl.text = (recordNormal) ? [dateFormatter stringFromDate:recordNormal] : NSLocalizedString(@"MAIN_RECORDS_NONE", @"");
     
-    [_bigLbl setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
+    [_bigLbl setFont:[UIFont fontWithName:@"CantoraOne-Regular" size:17]];
     _bigLbl.text = NSLocalizedString(@"MAIN_BIG", @"");
     [_bigRecordLbl setFont:[UIFont fontWithName:@"CantoraOne-Regular" size:17]];
     _bigRecordLbl.text = (recordBig) ? [dateFormatter stringFromDate:recordBig] : NSLocalizedString(@"MAIN_RECORDS_NONE", @"");
     
-    [_startGameBtn.titleLabel setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
+    [_startGameBtn.titleLabel setFont:[UIFont fontWithName:@"CantoraOne-Regular" size:17]];
     [_startGameBtn setTitle:NSLocalizedString(@"MAIN_START", @"") forState:UIControlStateNormal];
     
     // Select source view
-    [_selectSourceLbl setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
+    [_selectSourceLbl setFont:[UIFont fontWithName:@"CantoraOne-Regular" size:17]];
     _selectSourceLbl.text = NSLocalizedString(@"MAIN_SELECT_SOURCE", @"");
     [_cameraBtn.titleLabel setFont:[UIFont fontWithName:@"Pacifico" size:20]];
         [_cameraBtn setTitle:NSLocalizedString(@"MAIN_CAMERA", @"") forState:UIControlStateNormal];
     [_facebookBtn.titleLabel setFont:[UIFont fontWithName:@"Pacifico" size:20]];
     [_twitterBtn.titleLabel setFont:[UIFont fontWithName:@"Pacifico" size:20]];
-    [_recordsBtn.titleLabel setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
+    [_recordsBtn.titleLabel setFont:[UIFont fontWithName:@"CantoraOne-Regular" size:17]];
     [_recordsBtn setTitle:NSLocalizedString(@"MAIN_RECORDS", @"") forState:UIControlStateNormal];
     
     // Select grid size view
-    [_selectGridLbl setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
+    [_selectGridLbl setFont:[UIFont fontWithName:@"CantoraOne-Regular" size:17]];
     _selectGridLbl.text = NSLocalizedString(@"MAIN_SELECT_GRID", @"");
     // Use labels because button's label don't fit well with this font
     [_smallButtonLbl setFont:[UIFont fontWithName:@"Pacifico" size:20]];
@@ -156,7 +156,7 @@ typedef enum {
     [_bigButtonLbl setFont:[UIFont fontWithName:@"Pacifico" size:20]];
     [_bigButtonLbl setText:NSLocalizedString(@"MAIN_BIG", @"")];
     
-    [_sourceBtn.titleLabel setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
+    [_sourceBtn.titleLabel setFont:[UIFont fontWithName:@"CantoraOne-Regular" size:17]];
     [_sourceBtn setTitle:NSLocalizedString(@"MAIN_SOURCE", @"") forState:UIControlStateNormal];
     
     // Check internet connection
