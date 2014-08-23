@@ -34,7 +34,7 @@
         bannerView = [[UIView alloc] initWithFrame:CGRectMake(0, 430, 320, 50)];
     }
     [bannerView setBackgroundColor:[UIColor blackColor]];
-    [imageView setImage:[UIImage imageNamed:@"Background"]];
+    [imageView setImage:[UIImage imageNamed:@"Background_image"]];
     [self.window addSubview:imageView];
     [self.window addSubview:bannerView];
     [self.window layoutIfNeeded];
