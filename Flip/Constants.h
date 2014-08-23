@@ -2,7 +2,7 @@
 //  Constants.h
 //  Flip
 //
-//  Created by Jaime on 24/07/14.
+//  Created by Jaime Aranaz on 24/07/14.
 //  Copyright (c) 2014 MobiOak. All rights reserved.
 //
 

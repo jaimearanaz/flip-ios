@@ -38,25 +38,24 @@
 
 /**
  * Returns all the available photos saved in cache.
- * Photos must be previously saved from original source.
  * @param finish Block to execute when operation is finished, it contains an array of UIImages
  */
 - (void)getPhotosFromCacheFinishBlock:(void(^)(NSArray* photos))finish;
 
 /**
- *  Checks if there are photos saved in cache; NO otherwise
+ *  Checks if there are photos saved in cache
  *  @return YES if there are photos saved in cache; NO otherwise
  */
 - (BOOL)hasPhotosInCache;
 
 /**
- * Saves the given photos to cache, in device disk storage.
- * @param photos Array of photos to be saved in cache
+ * Saves the given photos in device disk storage.
+ * @param photos Array of photos to be saved in device disk
  */
 - (void)savePhotosToCache:(NSArray *)photos;
 
 /**
- * Deletes all the saved photos in cache.
+ * Deletes all the saved photos in device disk.
  */
 - (void)deleteCache;
 

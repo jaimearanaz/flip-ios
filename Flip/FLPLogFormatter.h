@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 /**
- *  Gives format to log messages, includig:
+ *  This class gives format to log messages, includig:
  * - timestamp
  * - app name
  * - process id

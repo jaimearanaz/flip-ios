@@ -2,7 +2,7 @@
 //  FLPViewController.m
 //  Flip
 //
-//  Created by Jaime on 14/07/14.
+//  Created by Jaime Aranaz on 14/07/14.
 //  Copyright (c) 2014 MobiOak. All rights reserved.
 //
 
@@ -22,6 +22,7 @@
 #import "SCNetworkReachability.h"
 #import "GADBannerView.h"
 
+// Types of sources available
 typedef enum {
     PhotoSourceCamera,
     PhotoSourceFacebook,
@@ -30,7 +31,7 @@ typedef enum {
 
 @interface FLPMainScrenViewController () <UIActionSheetDelegate>
 
-// Main elements
+// Main view elements
 @property (nonatomic, weak) IBOutlet UIView *titleView;
 @property (nonatomic, weak) IBOutlet UILabel *subtitleLbl;
 @property (nonatomic, weak) IBOutlet UIView *stripView;
@@ -67,19 +68,27 @@ typedef enum {
 
 @property (nonatomic, weak) IBOutlet UIView *bannerView;
 
-@property (nonatomic, strong) __block NSArray *photos;
-@property (nonatomic, strong) __block FLPPhotoSource *photoSource;
-@property (nonatomic, strong) NSArray *twitterAccounts;
-@property (nonatomic, strong) __block twitterAccountCallback twitterCallback;
-@property (nonatomic) __block SCNetworkStatus networkStatus;
-
+// Constraints used to animate between main views
 @property (nonatomic, strong) NSArray *showRecordsViewConstraints;
 @property (nonatomic, strong) NSArray *showSourceViewConstraints;
 @property (nonatomic, strong) NSArray *showSizeViewConstraints;
 @property (nonatomic, strong) NSArray *currentViewConstraints;
 
+// Photos to use in grid
+@property (nonatomic, strong) __block NSArray *photos;
+// Source of photos
+@property (nonatomic, strong) __block FLPPhotoSource *photoSource;
+// List of Twitter accounts configured in device
+@property (nonatomic, strong) NSArray *twitterAccounts;
+// Callback used when login with Twitter API
+@property (nonatomic, strong) __block twitterAccountCallback twitterCallback;
+// Status of network connection
+@property (nonatomic) __block SCNetworkStatus networkStatus;
+// Size selected for grid
 @property (nonatomic) GridSizeType size;
+// Type of photo source
 @property (nonatomic) PhotoSourceType source;
+// Timer used to animate header logo
 @property (nonatomic, strong) NSTimer *timerTitle;
 
 - (IBAction)onCameraButtonPressed:(id)sender;
@@ -136,18 +145,22 @@ typedef enum {
     [_startGameBtn setTitle:NSLocalizedString(@"MAIN_START", @"") forState:UIControlStateNormal];
     
     // Select source view
+    
     [_selectSourceLbl setFont:[UIFont fontWithName:@"CantoraOne-Regular" size:17]];
     _selectSourceLbl.text = NSLocalizedString(@"MAIN_SELECT_SOURCE", @"");
+    
     [_cameraBtn.titleLabel setFont:[UIFont fontWithName:@"Pacifico" size:20]];
-        [_cameraBtn setTitle:NSLocalizedString(@"MAIN_CAMERA", @"") forState:UIControlStateNormal];
+    [_cameraBtn setTitle:NSLocalizedString(@"MAIN_CAMERA", @"") forState:UIControlStateNormal];
     [_facebookBtn.titleLabel setFont:[UIFont fontWithName:@"Pacifico" size:20]];
     [_twitterBtn.titleLabel setFont:[UIFont fontWithName:@"Pacifico" size:20]];
     [_recordsBtn.titleLabel setFont:[UIFont fontWithName:@"CantoraOne-Regular" size:17]];
     [_recordsBtn setTitle:NSLocalizedString(@"MAIN_RECORDS", @"") forState:UIControlStateNormal];
     
     // Select grid size view
+    
     [_selectGridLbl setFont:[UIFont fontWithName:@"CantoraOne-Regular" size:17]];
     _selectGridLbl.text = NSLocalizedString(@"MAIN_SELECT_GRID", @"");
+    
     // Use labels because button's label don't fit well with this font
     [_smallButtonLbl setFont:[UIFont fontWithName:@"Pacifico" size:20]];
     [_smallButtonLbl setText:NSLocalizedString(@"MAIN_SMALL", @"")];
@@ -176,7 +189,7 @@ typedef enum {
     [_bannerView addSubview:banner];
     [banner loadRequest:[GADRequest request]];
     
-    // Constraints to change between records, source and size view
+    // Configure constraints to change between records, source and size view
     
     UIView *stripView = self.stripView;
     NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(stripView);
@@ -196,11 +209,11 @@ typedef enum {
                                                                          metrics:nil
                                                                            views:viewsDictionary];
 
-    // Show records view
+    // Start controller showing records view
     if (_startWithRecordsView) {
         _currentViewConstraints = _showRecordsViewConstraints;
         
-    // Show source view
+    // Start controller showing source view
     } else {
         // Hide records view to avoid ugly effect when comes from score screen
         self.recordsView.hidden = YES;
@@ -256,7 +269,6 @@ typedef enum {
 {
     FLPLogDebug(@"");
     [self showRecordsView];
-    //[self performSegueWithIdentifier:@"recordsFromMainSegue" sender:self];
 }
 
 - (IBAction)onSmallButtonPressed:(id)sender
@@ -293,7 +305,7 @@ typedef enum {
     [self showSourceView];
 }
 
-# pragma mark - UIActionSheetDelegate methods
+#pragma mark - UIActionSheetDelegate methods
 
 /**
  *  Called when user selects a Twitter account or cancels action sheet
@@ -311,6 +323,9 @@ typedef enum {
 
 #pragma mark - Private methods
 
+/**
+ * Enables size view buttons
+ */
 - (void)enableButtons
 {
     _smallBtn.enabled = YES;
@@ -319,6 +334,9 @@ typedef enum {
     _sourceBtn.enabled = YES;
 }
 
+/**
+ * Disables size view buttons
+ */
 - (void)disableButtons
 {
     _smallBtn.enabled = NO;
@@ -327,6 +345,9 @@ typedef enum {
     _sourceBtn.enabled = NO;
 }
 
+/**
+ * Animates to show size view
+ */
 - (void)showSizeView
 {
     [_recordsLbl setAlpha:0];
@@ -350,6 +371,9 @@ typedef enum {
                      }];
 }
 
+/**
+ * Animates to show source view
+ */
 - (void)showSourceView
 {
     [_recordsLbl setAlpha:0];
@@ -372,6 +396,9 @@ typedef enum {
                      }];
 }
 
+/**
+ * Animates to show records view
+ */
 - (void)showRecordsView
 {
     [_recordsLbl setAlpha:0];
@@ -397,6 +424,9 @@ typedef enum {
                      }];
 }
 
+/**
+ * Starts timer to animate header with logo
+ */
 - (void)startTimer
 {
     if (_timerTitle == nil) {
@@ -408,6 +438,9 @@ typedef enum {
     }
 }
 
+/**
+ * Ends timer used to animate header with logo
+ */
 - (void)endTimer
 {
     if (_timerTitle != nil) {
@@ -416,6 +449,9 @@ typedef enum {
     }
 }
 
+/**
+ * Flips a letter in header logo randomly. Fired by a timer.
+ */
 - (void)flipRandomLetter
 {
     NSInteger random = (arc4random() % 4);
@@ -426,6 +462,15 @@ typedef enum {
     }
 }
 
+/**
+ * Starts getting photos process from selected source
+ * The steps are:
+ * - user selects source
+ * - user selects grid size
+ * - photo source object is configured
+ * - network connection is checked
+ * - photos are get form origin or cache, depending on network and source
+ */
 - (void)preparePhotosFromSource
 {
     switch (_source) {
@@ -443,12 +488,18 @@ typedef enum {
     }
 }
 
+/**
+ * Starts getting photos process from Camera source
+ */
 - (void)preparePhotosFromCamera
 {
     _photoSource = [[FLPCameraPhotoSource alloc] init];
     [self checkReachabilityAndPreparePhotos];
 }
 
+/**
+ * Starts getting photos process from Facebook source
+ */
 - (void)preparePhotosFromFacebook
 {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -478,6 +529,9 @@ typedef enum {
                                   }];
 }
 
+/**
+ * Starts getting photos process from Twitter source
+ */
 - (void)preparePhotosFromTwitter
 {
     [self subscribeToTwitterNotifications];
@@ -557,7 +611,7 @@ typedef enum {
 }
 
 /**
- * Prepares photos from source and runs segue to next view controller.
+ * Prepares photos from source and then runs segue to next view controller.
  * Photos may be downloaded from source or loaded from cache, depending on network status and the photo source
  */
 - (void)preparePhotos
@@ -688,7 +742,7 @@ typedef enum {
 }
 
 /**
- *  Customizes the error message where there is not enough photos in the selected source
+ *  Customizes the error message when there is not enough photos in the selected source
  *  @param photoSource Source where the photos are located
  *  @return Customized error message
  */
@@ -716,6 +770,9 @@ typedef enum {
     return message;
 }
 
+/**
+ * Called when users cancels Twitter web login
+ */
 - (void)twitterLoginCanceledNotification
 {
     [self enableButtons];
@@ -724,6 +781,9 @@ typedef enum {
     [self unsubscribeToTwitterNotifications];
 }
 
+/**
+ * Subscribes to Twitter cancel notification, to know if users cancels Twitter web login
+ */
 - (void)subscribeToTwitterNotifications
 {
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -732,6 +792,9 @@ typedef enum {
                                                object:nil];
 }
 
+/**
+ * Unsubscribes to Twitter cancel notification
+ */
 - (void)unsubscribeToTwitterNotifications
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self

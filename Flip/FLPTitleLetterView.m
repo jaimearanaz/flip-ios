@@ -2,7 +2,7 @@
 //  FLPTitleLetterView2.m
 //  Flip
 //
-//  Created by Jaime on 21/08/14.
+//  Created by Jaime Aranaz on 21/08/14.
 //  Copyright (c) 2014 MobiOak. All rights reserved.
 //
 

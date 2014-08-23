@@ -2,7 +2,7 @@
 //  FLPFacebookPhotoSource.m
 //  Flip
 //
-//  Created by Jaime on 29/07/14.
+//  Created by Jaime Aranaz on 29/07/14.
 //  Copyright (c) 2014 MobiOak. All rights reserved.
 //
 
@@ -31,7 +31,7 @@
     // Steps:
     // 1. get all photo URLs where user is tagged
     // 2. get all photos URLs uploaded by user
-    // 3. get random photo URLs betweeb tagged and uploaded
+    // 3. get random photo URLs between tagged and uploaded
     // 4. download photos
 
     // 1. get all photo URLs where user is tagged
@@ -89,6 +89,14 @@
 
 #pragma mark - Private methods
 
+/**
+ *  Gets user's photos URLs from Facebook API, uses recursive calls to get all of them
+ *  @param path    Path to use in Facebook API
+ *  @param limit   Max number of photos in Facebook API response
+ *  @param offset  Offset used in request to Facebook API
+ *  @param success Block to execute if success, it contains a dictionary with photos URLs
+ *  @param failure Block to execute if fails
+ */
 - (void)getPhotosUrlFromFacebookPath:(NSString *)path
                                limit:(NSInteger)limit
                               offset:(NSInteger)offset
@@ -147,8 +155,8 @@
 /**
  *  Selects random photos between given tagged and uploaded ones.
  *  @param number   Number of photos to select. If tagged and uploaded aren't enough, returns all of them.
- *  @param tagged   List of tagged
- *  @param uploaded List of uploaded photos
+ *  @param tagged   List of user's tagged photos
+ *  @param uploaded List of user's uploaded photos
  *  @return Selected random photos between tagged and uploaded
  */
 - (NSArray *)selectPhotos:(NSInteger)number fromTagged:(NSDictionary *)tagged andUploaded:(NSDictionary *)uploaded

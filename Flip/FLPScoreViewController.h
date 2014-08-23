@@ -2,7 +2,7 @@
 //  FLPScoreViewController.h
 //  Flip
 //
-//  Created by Jaime on 12/08/14.
+//  Created by Jaime Aranaz on 12/08/14.
 //  Copyright (c) 2014 MobiOak. All rights reserved.
 //
 

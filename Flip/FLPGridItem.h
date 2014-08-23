@@ -2,14 +2,14 @@
 //  FLPGridItem.h
 //  Flip
 //
-//  Created by Jaime on 11/08/14.
+//  Created by Jaime Aranaz on 11/08/14.
 //  Copyright (c) 2014 MobiOak. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
 /**
- * This class represents a model objet for each item (cell) in grid
+ * This class represents the data model and state for each item (cell) in grid
  */
 @interface FLPGridItem : NSObject
 
