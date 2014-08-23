@@ -33,7 +33,7 @@
                                          
                                          // Get photos only
                                          [group setAssetsFilter:[ALAssetsFilter allPhotos]];
-                                         FLPLogDebug(@"photos in group: %ld", group.numberOfAssets);
+                                         FLPLogDebug(@"photos in group: %ld", (long)group.numberOfAssets);
                                        
                                          if (group.numberOfAssets >= number) {
                                              NSRange range = [self randomRangeFrom:0 to:group.numberOfAssets with:number];
@@ -50,7 +50,7 @@
                                                                   }];
                                              success(photos);
                                          } else {
-                                             FLPLogError(@"not enough photos in group: %ld", group.numberOfAssets);
+                                             FLPLogError(@"not enough photos in group: %ld", (long)group.numberOfAssets);
                                              failure([NSError errorWithDomain:@""
                                                                          code:KErrorEnoughPhotos
                                                                      userInfo:nil]);

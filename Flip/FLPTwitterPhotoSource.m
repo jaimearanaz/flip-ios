@@ -73,12 +73,12 @@
     // 1. get friends from Twitter
     [_twitterApi getFriendsIDsForScreenName:_screenName
                               successBlock:^(NSArray *friends) {
-                                  FLPLogDebug(@"number of friends: %ld", friends.count);
+                                  FLPLogDebug(@"number of friends: %ld", (unsigned long)friends.count);
                                   
     // 2. get followers from Twitter
     [_twitterApi getFollowersIDsForScreenName:_screenName
                                  successBlock:^(NSArray *followers) {
-                                     FLPLogDebug(@"number of followers: %ld", followers.count);
+                                     FLPLogDebug(@"number of followers: %ld", (unsigned long)followers.count);
                                      
     // 3. get complete description for friends and followers from Twitter
                                      

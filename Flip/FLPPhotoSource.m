@@ -36,7 +36,7 @@
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSInteger index = 0;
     for (UIImage *image in photos) {
-        NSString *fileName = [NSString stringWithFormat:@"%@_%ld", _cacheFileName, index];
+        NSString *fileName = [NSString stringWithFormat:@"%@_%ld", _cacheFileName, (long)index];
         NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:fileName];
         FLPLogDebug(@"saving to disk %@", fileName);
         [UIImagePNGRepresentation(image) writeToFile:filePath atomically:YES];
@@ -69,7 +69,7 @@
         FLPLogDebug(@"loading from disk %@", fileName);
         [photos addObject:image];
         index++;
-        fileName = [NSString stringWithFormat:@"%@_%ld", _cacheFileName, index];
+        fileName = [NSString stringWithFormat:@"%@_%ld", _cacheFileName, (long)index];
         filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:fileName];
         image = [UIImage imageWithContentsOfFile:filePath];
     }
@@ -87,7 +87,7 @@
     NSInteger index = 0;
     NSError *error;
     while (success) {
-        NSString *fileName = [NSString stringWithFormat:@"%@_%ld", _cacheFileName, index];
+        NSString *fileName = [NSString stringWithFormat:@"%@_%ld", _cacheFileName, (long)index];
         NSString *filePath = [documentsPath stringByAppendingPathComponent:fileName];
         success = [fileManager removeItemAtPath:filePath error:&error];
         if (success) {
