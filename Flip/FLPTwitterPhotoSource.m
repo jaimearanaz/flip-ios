@@ -25,21 +25,23 @@
 
 @implementation FLPTwitterPhotoSource
 
-- (id)initWithOAuthConsumerKey:(NSString *)consumerKey
-                consumerSecret:(NSString *)consumerSecret
-                    oauthToken:(NSString *)oauthToken
-              oauthTokenSecret:(NSString *)oauthTokenSecret
-                     screeName:(NSString *)screenName
+- (id)init
 {
     self = [super initInternetRequired:YES cacheName:@"twitter"];
-    if (self) {
-        self.secretKey = consumerSecret;
-        self.consumerKey = consumerKey;
-        self.oauthToken = oauthToken;
-        self.oauthTokenSecret = oauthTokenSecret;
-        self.screenName = screenName;
-    }
     return self;
+}
+
+- (void)setOauthConsumerKey:(NSString *)consumerKey
+             consumerSecret:(NSString *)consumerSecret
+                 oauthToken:(NSString *)oauthToken
+           oauthTokenSecret:(NSString *)oauthTokenSecret
+                  screeName:(NSString *)screenName
+{
+    self.secretKey = consumerSecret;
+    self.consumerKey = consumerKey;
+    self.oauthToken = oauthToken;
+    self.oauthTokenSecret = oauthTokenSecret;
+    self.screenName = screenName;
 }
 
 #pragma mark - FLPPhotoSource superclass methods
@@ -50,7 +52,7 @@
 {
  
     if ((!_consumerKey) || (!_secretKey) || (!_oauthToken) || (!_oauthTokenSecret) || (!_screenName)) {
-        FLPLogError(@"some field is missing, use custom init method");
+        FLPLogError(@"some field is missing, call setOAuthConsumerKey:consumerSecret:oauthToken:oauthTokenSecret:screeName: method first!");
         failure([NSError errorWithDomain:@"" code:0 userInfo:nil]);
         return;
     }

@@ -20,6 +20,7 @@
 // Error codes
 #define kErrorDownloadingPhotos 1
 #define KErrorEnoughPhotos 2
+#define KErrorLogin 3
 
 // Others
 #define kPenalizationPerError 2

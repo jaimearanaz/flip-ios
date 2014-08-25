@@ -17,7 +17,7 @@
 "MAIN_SOURCE" = "Cambiar origen de las fotos";
 "MAIN_ALERT" = "Error";
 "MAIN_ENOUGH_PHOTOS_CAMERA" = "¡Necesitas tener al menos %d fotos en tu Carrete!";
-"MAIN_ENOUGH_PHOTOS_TWITTER" = "¡Necesitas tener al menos %d friends y followers con una imagen de perfil válida en Twitter!";
+"MAIN_ENOUGH_PHOTOS_TWITTER" = "¡Necesitas tener al menos %d followers y following con una imagen de perfil válida en Twitter!";
 "MAIN_ENOUGH_PHOTOS_FACEBOOK" = "¡Necesitas tener al menos %d fotos en Facebook!";
 "MAIN_ENOUGH_PHOTOS_OTHER" = "¡Necesitas tener al menos %d fotos!";
 "MAIN_SELECT_TWITTER" = "Selecciona una cuenta de Twitter";
@@ -26,6 +26,8 @@
 "MAIN_RECORDS_TITLE" = "Mis Récords";
 "MAIN_RECORDS_NONE" = "--:--:---";
 "MAIN_START" = "Empezar nuevo juego";
+"MAIN_LOGIN_ERROR_FACEBOOK" = "Ha habido un error haciendo login con Facebook. Por favor, inténtalo de nuevo.";
+"MAIN_LOGIN_ERROR_TWITTER" = "Ha habido un error haciendo login con Twitter. Por favor, inténtalo de nuevo.";
 
 // Grid screen
 "GRID_EXIT" = "Salir";

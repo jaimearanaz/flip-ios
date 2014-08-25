@@ -270,20 +270,20 @@ typedef enum {
 - (IBAction)onSmallButtonPressed:(id)sender
 {
     _size = GridSizeSmall;
-    [self preparePhotosFromSource];
+    [self checkReachabilityAndPreparePhotos];
     
 }
 
 - (IBAction)onMediumButtonPressed:(id)sender
 {
     _size = GridSizeMedium;
-    [self preparePhotosFromSource];
+    [self checkReachabilityAndPreparePhotos];
 }
 
 - (IBAction)onBigButtonPressed:(id)sender
 {
     _size = GridSizeBig;
-    [self preparePhotosFromSource];
+    [self checkReachabilityAndPreparePhotos];
 }
 
 - (IBAction)onSourceButtonPressed:(id)sender
@@ -453,61 +453,58 @@ typedef enum {
 }
 
 /**
- * Starts getting photos process from selected source
- * The steps are:
- * - user selects source
- * - user selects grid size
- * - photo source object is configured
- * - network connection is checked
- * - photos are get form origin or cache, depending on network and source
+ * Checks internet connection and prepares photos from source
+ * The complete process steps are:
+ * 1. user selects source (done at this point)
+ * 2. user selects grid size (done at this point)
+ * 3. network connection is checked (here)
+ * 4. photo source object is configured (here)
+ * 5. photos are get form origin or cache, depending on network and source (method |preparePhotos|)
+ * 6. next view controller to start game
  */
-- (void)preparePhotosFromSource
+- (void)checkReachabilityAndPreparePhotos
 {
-    switch (_source) {
-        case PhotoSourceCamera:
-            [self preparePhotosFromCamera];
-            break;
-        case PhotoSourceFacebook:
-            [self preparePhotosFromFacebook];
-            break;
-        case PhotoShourceTwitter:
-            [self preparePhotosFromTwitter];
-            break;
-        default:
-            break;
-    }
-}
-
-/**
- * Starts getting photos process from Camera source
- */
-- (void)preparePhotosFromCamera
-{
-    _photoSource = [[FLPCameraPhotoSource alloc] init];
-    [self checkReachabilityAndPreparePhotos];
+    // Check internet connection
+    [SCNetworkReachability host:@"www.google.es" reachabilityStatus:^(SCNetworkStatus status)
+     {
+         FLPLogWarn(@"network status %ld", (long)status);
+         // Internet status is known, prepare photos
+         _networkStatus = status;
+         
+         switch (_source) {
+             case PhotoSourceCamera:
+                 _photoSource = [[FLPCameraPhotoSource alloc] init];
+                 break;
+             case PhotoSourceFacebook:
+                 _photoSource = [[FLPFacebookPhotoSource alloc] init];
+                 break;
+             case PhotoShourceTwitter:
+                 _photoSource = [[FLPTwitterPhotoSource alloc] init];
+                 break;
+             default:
+                 _photoSource = nil;
+                 break;
+         }
+         
+         [self preparePhotos];
+     }];
 }
 
 /**
  * Starts getting photos process from Facebook source
  */
-- (void)preparePhotosFromFacebook
+- (void)loginInFacebookAndPreparePhotosOnSuccess:(void(^)())success onFail:(void(^)(NSError *error))fail
 {
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [self disableButtons];
-    
     [FBSession openActiveSessionWithReadPermissions:kFacebookPermissions
                                        allowLoginUI:YES
                                   completionHandler:^(FBSession *session, FBSessionState state, NSError *error) {
-                                      
-                                      [self enableButtons];
-                                      [MBProgressHUD hideHUDForView:self.view animated:YES];
                                       
                                       if (state == FBSessionStateOpen) {
                                           FLPLogWarn(@"Facebook session opened");
                                           _photoSource = [[FLPFacebookPhotoSource alloc] init];
                                           [FBSession setActiveSession:session];
-                                          [self checkReachabilityAndPreparePhotos];
                                           
+                                          success();
                                           
                                       } else if (state == FBSessionStateClosed || state==FBSessionStateClosedLoginFailed) {
                                           FLPLogWarn(@"Facebook session closed or failed");
@@ -515,6 +512,9 @@ typedef enum {
                                       
                                       if (error) {
                                           FLPLogError(@"Facebook session error: %@", [error localizedDescription]);
+                                          fail([NSError errorWithDomain:@""
+                                                                   code:KErrorLogin
+                                                               userInfo:nil]);
                                       }
                                   }];
 }
@@ -522,11 +522,9 @@ typedef enum {
 /**
  * Starts getting photos process from Twitter source
  */
-- (void)preparePhotosFromTwitter
+- (void)loginInTwitterAndPreparePhotosOnSuccess:(void(^)())success onFail:(void(^)(NSError *error))fail
 {
     [self subscribeToTwitterNotifications];
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [self disableButtons];
     
     // Twitter keys are stored in a plist file, not tracked in git repository
     NSString *twitterPlist = [[NSBundle mainBundle] pathForResource:@"TwitterKeys" ofType:@"plist"];
@@ -573,37 +571,37 @@ typedef enum {
         
         if (error) {
             FLPLogError(@"error: %@", [error localizedDescription]);
+            fail([NSError errorWithDomain:@""
+                                     code:KErrorLogin
+                                 userInfo:nil]);
         } else {
             FLPLogWarn(@"login with Twitter successful");
-        }
         
-        // Logged via web or via local account, at this point we have NSDictionary with user data
+            // Logged via web or via local account, at this point we have NSDictionary with user data
 
-        [self unsubscribeToTwitterNotifications];
-        
-        _photoSource = [[FLPTwitterPhotoSource alloc] initWithOAuthConsumerKey:[twitterKeys objectForKey:@"consumerKey"]
-                                                                consumerSecret:[twitterKeys objectForKey:@"secretKey"]
-                                                                    oauthToken:accountInfo[@"accessToken"]
-                                                              oauthTokenSecret:accountInfo[@"tokenSecret"]
-                                                                     screeName:accountInfo[@"screen_name"]];
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-        [self checkReachabilityAndPreparePhotos];
+            [self unsubscribeToTwitterNotifications];
+            
+            [(FLPTwitterPhotoSource *)_photoSource setOauthConsumerKey:[twitterKeys objectForKey:@"consumerKey"]
+                                                        consumerSecret:[twitterKeys objectForKey:@"secretKey"]
+                                                            oauthToken:accountInfo[@"accessToken"]
+                                                      oauthTokenSecret:accountInfo[@"tokenSecret"]
+                                                             screeName:accountInfo[@"screen_name"]];
+            
+            success();
+        }
     }];
 }
 
-/**
- * Checks internet connection and prepares photos from source
- */
-- (void)checkReachabilityAndPreparePhotos
+- (void)loginInPhotoSourceAndPreparePhotosOnSuccess:(void(^)())success onFail:(void(^)(NSError *error))fail
 {
-    // Check internet connection
-    [SCNetworkReachability host:@"www.google.es" reachabilityStatus:^(SCNetworkStatus status)
-     {
-         FLPLogWarn(@"network status %ld", (long)status);
-         // Internet status is known, prepare photos
-         _networkStatus = status;
-         [self preparePhotos];
-     }];
+    // Login in Facebook and get photos
+    if ([_photoSource isKindOfClass:[FLPFacebookPhotoSource class]]) {
+        [self loginInFacebookAndPreparePhotosOnSuccess:success onFail:fail];
+        
+    // Login in Twitter and get photos
+    } else if ([_photoSource isKindOfClass:[FLPTwitterPhotoSource class]]) {
+        [self loginInTwitterAndPreparePhotosOnSuccess:success onFail:fail];
+    }
 }
 
 /**
@@ -629,6 +627,7 @@ typedef enum {
     };
     
     // Declare block to execute when getting photos fails
+    // Shows error message
     void (^failureBlock)(NSError *);
     failureBlock = ^(NSError *error) {
         FLPLogError(@"failure %@", [error localizedDescription]);
@@ -636,8 +635,18 @@ typedef enum {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         [self showSourceView];
         
+        // Show error message
+        
         if (error.code == KErrorEnoughPhotos) {
             NSString *message = [self customNoPhotosMessageForSource:_photoSource];
+            [WCAlertView showAlertWithTitle:NSLocalizedString(@"MAIN_ALERT", nil)
+                                    message:message
+                         customizationBlock:nil
+                            completionBlock:nil
+                          cancelButtonTitle:NSLocalizedString(@"OTHER_OK", nil)
+                          otherButtonTitles:nil];
+        } else if (error.code == KErrorLogin) {
+            NSString *message = [self customLoginErrorForSource:_photoSource];
             [WCAlertView showAlertWithTitle:NSLocalizedString(@"MAIN_ALERT", nil)
                                     message:message
                          customizationBlock:nil
@@ -652,8 +661,6 @@ typedef enum {
                           cancelButtonTitle:NSLocalizedString(@"OTHER_OK", nil)
                           otherButtonTitles:nil];
         }
-        
-
     };
 
     
@@ -687,16 +694,23 @@ typedef enum {
             // WiFi connection available, download photos from source and save them to cache
             } else if (_networkStatus == SCNetworkStatusReachableViaWiFi) {
                 FLPLogWarn(@"internet connection via WiFi");
+
+                // Login in photo source and go on
+                [self loginInPhotoSourceAndPreparePhotosOnSuccess:^{
+                    [_photoSource deleteCache];
+                    [_photoSource getPhotosFromSource:kMinimunPhotos
+                                          succesBlock:^(NSArray *photos) {
+                                              [_photoSource savePhotosToCache:photos];
+                                              successBlock(photos);
+                                          }
+                                         failureBlock:^(NSError *error) {
+                                             failureBlock(error);
+                                         }];
+                } onFail:^(NSError *error){
+                    failureBlock(error);
+                }];
                 
-                [_photoSource deleteCache];
-                [_photoSource getPhotosFromSource:kMinimunPhotos
-                                      succesBlock:^(NSArray *photos) {
-                                          [_photoSource savePhotosToCache:photos];
-                                          successBlock(photos);
-                                      }
-                                     failureBlock:^(NSError *error) {
-                                         failureBlock(error);
-                                     }];
+                
                 
             // Cellular connection available, try to use cache or download photos from source
             } else if (_networkStatus == SCNetworkStatusReachableViaCellular) {
@@ -709,15 +723,21 @@ typedef enum {
                     }];
                 } else {
                     FLPLogWarn(@"cellular, download photos from source");
-                    [_photoSource deleteCache];
-                    [_photoSource getPhotosFromSource:kMinimunPhotos
-                                          succesBlock:^(NSArray *photos) {
-                                              [_photoSource savePhotosToCache:photos];
-                                              successBlock(photos);
-                                          }
-                                         failureBlock:^(NSError *error) {
-                                             failureBlock(error);
-                                         }];
+                    
+                    // Login in photo source and go on
+                    [self loginInPhotoSourceAndPreparePhotosOnSuccess:^{
+                        [_photoSource deleteCache];
+                        [_photoSource getPhotosFromSource:kMinimunPhotos
+                                              succesBlock:^(NSArray *photos) {
+                                                  [_photoSource savePhotosToCache:photos];
+                                                  successBlock(photos);
+                                              }
+                                             failureBlock:^(NSError *error) {
+                                                 failureBlock(error);
+                                             }];
+                    } onFail:^(NSError *error){
+                        failureBlock(error);
+                    }];
                 }
             }
             
@@ -767,6 +787,27 @@ typedef enum {
 }
 
 /**
+ *  Customizes the error message when the login process fails for a photo source
+ *  @param photoSource Source where the login was failed
+ *  @return Customized error message
+ */
+- (NSString *)customLoginErrorForSource:(FLPPhotoSource *)photoSource
+{
+    NSString *message = nil;
+    
+    // Facebook
+    if ([photoSource isKindOfClass:[FLPFacebookPhotoSource class]]) {
+        message = [NSString stringWithFormat:NSLocalizedString(@"MAIN_LOGIN_ERROR_FACEBOOK", nil)];
+        
+    // Twitter
+    }else if ([photoSource isKindOfClass:[FLPTwitterPhotoSource class]]) {
+        message = [NSString stringWithFormat:NSLocalizedString(@"MAIN_LOGIN_ERROR_TWITTER", nil)];
+    }
+    
+    return message;
+}
+
+/**
  * Called when users cancels Twitter web login
  */
 - (void)twitterLoginCanceledNotification
@@ -775,6 +816,13 @@ typedef enum {
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     [self showSourceView];
     [self unsubscribeToTwitterNotifications];
+    
+    [WCAlertView showAlertWithTitle:NSLocalizedString(@"MAIN_ALERT", nil)
+                            message:NSLocalizedString(@"MAIN_LOGIN_ERROR_TWITTER", nil)
+                 customizationBlock:nil
+                    completionBlock:nil
+                  cancelButtonTitle:NSLocalizedString(@"OTHER_OK", nil)
+                  otherButtonTitles:nil];
 }
 
 /**
