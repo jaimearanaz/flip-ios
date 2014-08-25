@@ -495,28 +495,39 @@ typedef enum {
  */
 - (void)loginInFacebookAndPreparePhotosOnSuccess:(void(^)())success onFail:(void(^)(NSError *error))fail
 {
-    [FBSession openActiveSessionWithReadPermissions:kFacebookPermissions
-                                       allowLoginUI:YES
-                                  completionHandler:^(FBSession *session, FBSessionState state, NSError *error) {
-                                      
-                                      if (state == FBSessionStateOpen) {
-                                          FLPLogWarn(@"Facebook session opened");
-                                          _photoSource = [[FLPFacebookPhotoSource alloc] init];
-                                          [FBSession setActiveSession:session];
+    BOOL openedWithCachedToken = [FBSession openActiveSessionWithAllowLoginUI:NO];
+    FLPLogDebug(@"Facebook cached token %d", openedWithCachedToken);
+    
+    // Facebook session is open
+    if (openedWithCachedToken) {
+                _photoSource = [[FLPFacebookPhotoSource alloc] init];
+                success();
+
+    // No Facebook session, login
+    } else {
+        [FBSession openActiveSessionWithReadPermissions:kFacebookPermissions
+                                           allowLoginUI:YES
+                                      completionHandler:^(FBSession *session, FBSessionState state, NSError *error) {
                                           
-                                          success();
+                                          if (state == FBSessionStateOpen) {
+                                              FLPLogWarn(@"Facebook session opened");
+                                              _photoSource = [[FLPFacebookPhotoSource alloc] init];
+                                              [FBSession setActiveSession:session];
+                                              
+                                              success();
+                                              
+                                          } else if (state == FBSessionStateClosed || state==FBSessionStateClosedLoginFailed) {
+                                              FLPLogWarn(@"Facebook session closed or failed");
+                                          }
                                           
-                                      } else if (state == FBSessionStateClosed || state==FBSessionStateClosedLoginFailed) {
-                                          FLPLogWarn(@"Facebook session closed or failed");
-                                      }
-                                      
-                                      if (error) {
-                                          FLPLogError(@"Facebook session error: %@", [error localizedDescription]);
-                                          fail([NSError errorWithDomain:@""
-                                                                   code:KErrorLogin
-                                                               userInfo:nil]);
-                                      }
-                                  }];
+                                          if (error) {
+                                              FLPLogError(@"Facebook session error: %@", [error localizedDescription]);
+                                              fail([NSError errorWithDomain:@""
+                                                                       code:KErrorLogin
+                                                                   userInfo:nil]);
+                                          }
+                                      }];
+    }
 }
 
 /**

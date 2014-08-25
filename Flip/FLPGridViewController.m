@@ -116,10 +116,10 @@
         [self.view removeConstraint:_bannerConstraint];
     }
     
-    // Camera sound
+    // Camera sound, play only if no other sound is playing (i.e. music player)
     NSString *cameraSoundPath = [[NSBundle mainBundle] pathForResource:@"camera-shutter-click-01" ofType:@"wav"];
     NSURL *cameraSoundURL = [NSURL fileURLWithPath:cameraSoundPath];
-    _playerCamera = [[AVAudioPlayer alloc] initWithContentsOfURL:cameraSoundURL error:nil];
+    _playerCamera = [[AVAudioSession sharedInstance] isOtherAudioPlaying] ? nil : [[AVAudioPlayer alloc] initWithContentsOfURL:cameraSoundURL error:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -273,8 +273,10 @@
                             [secondCell matchedAnimation];
                             
                             // Camera sound
-                            [_playerCamera play];
-                                
+                            if (_playerCamera) {
+                                [_playerCamera play];
+                            }
+                            
                             _firstPhoto.isMatched = [NSNumber numberWithBool:YES];
                             _firstPhoto = nil;
                             _secondPhoto.isMatched = [NSNumber numberWithBool:YES];
