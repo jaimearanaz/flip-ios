@@ -141,6 +141,11 @@
     banner.rootViewController = self;
     [_bannerView addSubview:banner];
     [banner loadRequest:[GADRequest request]];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     
     // Camera sound, play only if no other sound is playing (i.e. music player)
     NSString *cameraSoundPath = [[NSBundle mainBundle] pathForResource:@"polaroid-camera-take-picture-01" ofType:@"wav"];
@@ -149,6 +154,16 @@
     if (![[AVAudioSession sharedInstance] isOtherAudioPlaying]) {
         [_playerCamera play];
     }
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    // Free player
+    if (_playerCamera) {
+        [_playerCamera stop];
+    }
+    
+    [super viewWillDisappear:animated];
 }
 
 - (void)didReceiveMemoryWarning
@@ -160,6 +175,10 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     [self endTimer];
+    
+    if (_playerCamera) {
+        [_playerCamera stop];
+    }
     
     // User tries again
     if ([segue.identifier isEqualToString:@"gridFromScoreSegue"]) {

@@ -115,11 +115,26 @@
     if ((!isiPhone5) && (_gridSize == GridSizeSmall)) {
         [self.view removeConstraint:_bannerConstraint];
     }
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     
     // Camera sound, play only if no other sound is playing (i.e. music player)
     NSString *cameraSoundPath = [[NSBundle mainBundle] pathForResource:@"camera-shutter-click-01" ofType:@"wav"];
     NSURL *cameraSoundURL = [NSURL fileURLWithPath:cameraSoundPath];
     _playerCamera = [[AVAudioSession sharedInstance] isOtherAudioPlaying] ? nil : [[AVAudioPlayer alloc] initWithContentsOfURL:cameraSoundURL error:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    // Free player
+    if (_playerCamera) {
+        [_playerCamera stop];
+    }
+    
+    [super viewWillDisappear:animated];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -156,6 +171,10 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    if (_playerCamera) {
+        [_playerCamera stop];
+    }
+    
     if ([segue.identifier isEqualToString:@"scoreFromGridSegue"]) {
         FLPScoreViewController *scoreViewController=(FLPScoreViewController *)segue.destinationViewController;
         scoreViewController.time = _endDate;
