@@ -115,26 +115,13 @@
     if ((!isiPhone5) && (_gridSize == GridSizeSmall)) {
         [self.view removeConstraint:_bannerConstraint];
     }
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
     
     // Camera sound, play only if no other sound is playing (i.e. music player)
-    NSString *cameraSoundPath = [[NSBundle mainBundle] pathForResource:@"camera-shutter-click-01" ofType:@"wav"];
-    NSURL *cameraSoundURL = [NSURL fileURLWithPath:cameraSoundPath];
-    _playerCamera = [[AVAudioSession sharedInstance] isOtherAudioPlaying] ? nil : [[AVAudioPlayer alloc] initWithContentsOfURL:cameraSoundURL error:nil];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    // Free player
-    if (_playerCamera) {
-        [_playerCamera stop];
+    if (![[AVAudioSession sharedInstance] isOtherAudioPlaying]) {
+        NSString *cameraSoundPath = [[NSBundle mainBundle] pathForResource:@"camera-shutter-click-01" ofType:@"wav"];
+        NSURL *cameraSoundURL = [NSURL fileURLWithPath:cameraSoundPath];
+        _playerCamera = [[AVAudioPlayer alloc] initWithContentsOfURL:cameraSoundURL error:nil];
     }
-    
-    [super viewWillDisappear:animated];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -173,6 +160,7 @@
 {
     if (_playerCamera) {
         [_playerCamera stop];
+        _playerCamera = nil;
     }
     
     if ([segue.identifier isEqualToString:@"scoreFromGridSegue"]) {
@@ -292,7 +280,7 @@
                             [secondCell matchedAnimation];
                             
                             // Camera sound
-                            if (_playerCamera) {
+                            if ((_playerCamera) && (![[AVAudioSession sharedInstance] isOtherAudioPlaying])) {
                                 [_playerCamera play];
                             }
                             

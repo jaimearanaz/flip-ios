@@ -141,29 +141,14 @@
     banner.rootViewController = self;
     [_bannerView addSubview:banner];
     [banner loadRequest:[GADRequest request]];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
     
     // Camera sound, play only if no other sound is playing (i.e. music player)
-    NSString *cameraSoundPath = [[NSBundle mainBundle] pathForResource:@"polaroid-camera-take-picture-01" ofType:@"wav"];
-    NSURL *cameraSoundURL = [NSURL fileURLWithPath:cameraSoundPath];
-    _playerCamera = [[AVAudioPlayer alloc] initWithContentsOfURL:cameraSoundURL error:nil];
     if (![[AVAudioSession sharedInstance] isOtherAudioPlaying]) {
+        NSString *cameraSoundPath = [[NSBundle mainBundle] pathForResource:@"polaroid-camera-take-picture-01" ofType:@"wav"];
+        NSURL *cameraSoundURL = [NSURL fileURLWithPath:cameraSoundPath];
+        _playerCamera = [[AVAudioPlayer alloc] initWithContentsOfURL:cameraSoundURL error:nil];
         [_playerCamera play];
     }
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    // Free player
-    if (_playerCamera) {
-        [_playerCamera stop];
-    }
-    
-    [super viewWillDisappear:animated];
 }
 
 - (void)didReceiveMemoryWarning
@@ -178,6 +163,7 @@
     
     if (_playerCamera) {
         [_playerCamera stop];
+        _playerCamera = nil;
     }
     
     // User tries again
