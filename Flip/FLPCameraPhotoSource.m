@@ -84,10 +84,10 @@
         startRange = 0;
         lengthRange = 0;
     } else {
-        startRange = (arc4random() % (max - number));
+        startRange = (number == max) ? 0 : (arc4random() % (max - number));
         lengthRange = number;
     }
-
+    
     return NSMakeRange(startRange, lengthRange);
 }
 
