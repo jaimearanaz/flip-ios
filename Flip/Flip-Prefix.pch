@@ -24,6 +24,7 @@ static const int ddLogLevel = LOG_LEVEL_ERROR;
 #endif
 
 // Redefine DDLog to add class name and method in log message
+// Do somehting
 #define FLPLogError(...) DDLogError(@"%s %@", __PRETTY_FUNCTION__, [NSString stringWithFormat:__VA_ARGS__])
 #define FLPLogWarn(...) DDLogWarn(@"%s %@", __PRETTY_FUNCTION__, [NSString stringWithFormat:__VA_ARGS__])
 #define FLPLogInfo(...) DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, [NSString stringWithFormat:__VA_ARGS__])
