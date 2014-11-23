@@ -107,29 +107,42 @@ typedef enum {
 
 #pragma mark - UIViewController methods
 
-- (void)viewDidLoad
+
+- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection
 {
-    [super viewDidLoad];
-    CGFloat screenWidth = self.view.bounds.size.width;
-    NSNumber *offset = [NSNumber numberWithFloat:(screenWidth - 320) / 2];
-    NSNumber *doubleOffset = [NSNumber numberWithFloat:([offset floatValue] * 2)];
+    FLPLogDebug(@"traitCollectionDidChange");
+}
+
+- (void)viewWillTransitionToSize:(CGSize)size
+       withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    FLPLogDebug(@"viewWillTransitionToSize");
+}
+
+- (void)willTransitionToTraitCollection:(UITraitCollection *)newCollection
+              withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    FLPLogDebug(@"willTransitionToTraitCollection");
+}
+
+- (void)updateViewConstraints
+{
+    [super updateViewConstraints];
+    FLPLogDebug(@"updateViewConstraints");
     
-    //**
-     
+    if (self.stripView) {
+        [self.stripView removeFromSuperview];
+    }
+    
+    // First, configure strip view, where buttons views are allocated
+    
     self.stripView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
     self.stripView.backgroundColor = [UIColor blueColor];
     self.stripView.translatesAutoresizingMaskIntoConstraints = NO;
     
     [self.view addSubview:self.stripView];
     
-    [self.recordsView removeFromSuperview];
-    [self.selectSourceView removeFromSuperview];
-    [self.selectSizeView removeFromSuperview];
-    
-    [self.stripView addSubview:self.recordsView];
-    [self.stripView addSubview:self.selectSourceView];
-    [self.stripView addSubview:self.selectSizeView];
-    
+    // Views used in constraints
     UIView *recordsView = self.recordsView;
     UIView *selectSourceView = self.selectSourceView;
     UIView *selectSizeView = self.selectSizeView;
@@ -141,82 +154,90 @@ typedef enum {
                                                                    selectSourceView,
                                                                    selectSizeView);
     
-    NSString *constraintFormat = @"H:|-offset-[recordsView]-doubleOffset-[selectSourceView]-doubleOffset-[selectSizeView]-offset-|";
+    // top space constraint from title
+    NSArray *topConstraint = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[titleView]-10-[stripView]"
+                                                                     options:0
+                                                                     metrics:nil
+                                                                       views:viewsDictionary];
+    // height fixed constraint
+    NSArray *heightConstraint = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[stripView(200)]"
+                                                                        options:0
+                                                                        metrics:nil
+                                                                          views:viewsDictionary];
+    // witdh constraint depending on screen width
+    NSNumber *width = [NSNumber numberWithFloat:(self.view.bounds.size.width + 320 + 320)];
+    NSArray *widthConstraint = [NSLayoutConstraint constraintsWithVisualFormat:@"H:[stripView(width)]"
+                                                                       options:0
+                                                                       metrics:@{@"width": width}
+                                                                         views:viewsDictionary];
+    // leading space constraint of -320
+    NSNumber *leading = [NSNumber numberWithFloat:(320 * -1)];
+    NSArray *leadingConstraint = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(leading)-[stripView]"
+                                                                         options:0
+                                                                         metrics:@{@"leading": leading}
+                                                                           views:viewsDictionary];
+
+    [self.view addConstraints:topConstraint];
+    [self.view addConstraints:heightConstraint];
+    [self.view addConstraints:widthConstraint];
+    [self.view addConstraints:leadingConstraint];
+    
+    // Second, configure views inside strip view
+    
+    [self.recordsView removeFromSuperview];
+    [self.selectSourceView removeFromSuperview];
+    [self.selectSizeView removeFromSuperview];
+    
+    [self.stripView addSubview:self.recordsView];
+    [self.stripView addSubview:self.selectSourceView];
+    [self.stripView addSubview:self.selectSizeView];
+    
+    CGFloat screenWidth = self.view.bounds.size.width;
+    NSNumber *offset = [NSNumber numberWithFloat:(screenWidth - 320) / 2];
+    
+    // horizontal space between views
+    NSString *constraintFormat = @"H:|-0-[recordsView]-offset-[selectSourceView]-offset-[selectSizeView]-0-|";
     
     NSArray *spacingConstraints = [NSLayoutConstraint constraintsWithVisualFormat:constraintFormat
                                                                           options:0
-                                                                          metrics:@{@"offset": offset, @"doubleOffset": doubleOffset}
+                                                                          metrics:@{@"offset": offset}
                                                                             views:viewsDictionary];
-/*
-    NSLayoutConstraint *centerSourceXConstraint = [NSLayoutConstraint constraintWithItem:self.selectSourceView
-                                                                        attribute:NSLayoutAttributeCenterX
-                                                                        relatedBy:NSLayoutRelationEqual
-                                                                           toItem:self.stripView
-                                                                        attribute:NSLayoutAttributeCenterX
-                                                                       multiplier:1.0
-                                                                         constant:0.0];
-*/
+    
+    // center vertical constraint for source view
     NSLayoutConstraint *centerSourceYConstraint = [NSLayoutConstraint constraintWithItem:self.selectSourceView
-                                                                        attribute:NSLayoutAttributeCenterY
-                                                                        relatedBy:NSLayoutRelationEqual
-                                                                           toItem:self.stripView
-                                                                        attribute:NSLayoutAttributeCenterY
-                                                                       multiplier:1.0
-                                                                         constant:0.0];
-
-    NSLayoutConstraint *centerRecordsYConstraint = [NSLayoutConstraint constraintWithItem:self.recordsView
                                                                                attribute:NSLayoutAttributeCenterY
                                                                                relatedBy:NSLayoutRelationEqual
                                                                                   toItem:self.stripView
                                                                                attribute:NSLayoutAttributeCenterY
                                                                               multiplier:1.0
                                                                                 constant:0.0];
-                                                        
-    NSLayoutConstraint *centerSizeYConstraint = [NSLayoutConstraint constraintWithItem:self.selectSizeView
+    // center vertical constraint for records view
+    NSLayoutConstraint *centerRecordsYConstraint = [NSLayoutConstraint constraintWithItem:self.recordsView
                                                                                 attribute:NSLayoutAttributeCenterY
                                                                                 relatedBy:NSLayoutRelationEqual
                                                                                    toItem:self.stripView
                                                                                 attribute:NSLayoutAttributeCenterY
                                                                                multiplier:1.0
                                                                                  constant:0.0];
+    // center vertical constraint for size view
+    NSLayoutConstraint *centerSizeYConstraint = [NSLayoutConstraint constraintWithItem:self.selectSizeView
+                                                                             attribute:NSLayoutAttributeCenterY
+                                                                             relatedBy:NSLayoutRelationEqual
+                                                                                toItem:self.stripView
+                                                                             attribute:NSLayoutAttributeCenterY
+                                                                            multiplier:1.0
+                                                                              constant:0.0];
     
     [self.stripView addConstraints:spacingConstraints];
     [self.stripView addConstraint:centerRecordsYConstraint];
     [self.stripView addConstraint:centerSourceYConstraint];
     [self.stripView addConstraint:centerSizeYConstraint];
     
-    // add constraints
+}
 
-    // top space from title of 10
-    NSArray *topConstraint = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[titleView]-10-[stripView]"
-                                                                     options:0
-                                                                     metrics:nil
-                                                                       views:viewsDictionary];
-    // height fixed to 200
-    NSArray *heightConstraint = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[stripView(200)]"
-                                                                        options:0
-                                                                        metrics:nil
-                                                                          views:viewsDictionary];
-    // witdh equal to 3*width
-    NSNumber *width = [NSNumber numberWithFloat:(self.view.bounds.size.width * 3)];
-    NSArray *widthConstraint = [NSLayoutConstraint constraintsWithVisualFormat:@"H:[stripView(width)]"
-                                                                       options:0
-                                                                       metrics:@{@"width": width}
-                                                                         views:viewsDictionary];
-    // leading space of -width
-    NSNumber *leading = [NSNumber numberWithFloat:(self.view.bounds.size.width * -1)];
-    NSArray *leadingConstraint = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(leading)-[stripView]"
-                                                                         options:0
-                                                                         metrics:@{@"leading": leading}
-                                                                           views:viewsDictionary];
-    
-    
-    [self.view addConstraints:topConstraint];
-    [self.view addConstraints:heightConstraint];
-    [self.view addConstraints:widthConstraint];
-    [self.view addConstraints:leadingConstraint];
-     
-    //**
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
 	
     [_subtitleLbl setFont:[UIFont fontWithName:@"Pacifico" size:25]];
     
