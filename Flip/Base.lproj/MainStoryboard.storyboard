@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
@@ -15,14 +15,14 @@
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background_image" translatesAutoresizingMaskIntoConstraints="NO" id="yvu-0x-FrI">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TMO-pv-HR8" userLabel="View - Title">
-                                <rect key="frame" x="0.0" y="80" width="320" height="140"/>
+                                <rect key="frame" x="140" y="96" width="320" height="140"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qlT-Xt-ax4" userLabel="View - Letter F" customClass="FLPTitleLetterView">
                                         <rect key="frame" x="15" y="11" width="69" height="80"/>
@@ -316,7 +316,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nvf-ly-HpF" userLabel="View - Banner">
-                                <rect key="frame" x="0.0" y="518" width="320" height="50"/>
+                                <rect key="frame" x="0.0" y="550" width="600" height="50"/>
                                 <color key="backgroundColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="SXd-Ab-VBq"/>
@@ -337,8 +337,6 @@
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="nvf-ly-HpF" secondAttribute="bottom" id="zg3-Al-2WH"/>
                         </constraints>
                     </view>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="320" height="568"/>
                     <connections>
                         <outlet property="bannerView" destination="nvf-ly-HpF" id="GOX-fD-GFV"/>
                         <outlet property="bigBtn" destination="a24-Ag-Vns" id="6Hi-Tw-YqN"/>
@@ -372,7 +370,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-157" y="53"/>
+            <point key="canvasLocation" x="-294.375" y="55.985915492957744"/>
         </scene>
         <!--Grid View Controller-->
         <scene sceneID="V5j-Bj-KSs">
@@ -526,7 +524,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z5p-ZD-NNr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1084" y="59"/>
+            <point key="canvasLocation" x="2032.5" y="62.323943661971825"/>
         </scene>
         <!--Score View Controller-->
         <scene sceneID="3Ge-9W-q7C">
@@ -537,7 +535,7 @@
                         <viewControllerLayoutGuide type="bottom" id="OHY-cX-HbO"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Xry-op-pmP">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Background_image" translatesAutoresizingMaskIntoConstraints="NO" id="AAa-bn-5DQ">
@@ -623,7 +621,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vmx-15-tnM" userLabel="View - banner">
-                                <rect key="frame" x="0.0" y="518" width="320" height="50"/>
+                                <rect key="frame" x="0.0" y="550" width="320" height="50"/>
                                 <color key="backgroundColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="320" id="QDY-SF-VvT"/>
@@ -658,7 +656,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1dO-TB-MvT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="560" y="785"/>
+            <point key="canvasLocation" x="1050" y="829.22535211267598"/>
         </scene>
     </scenes>
     <resources>
@@ -679,13 +677,8 @@
         <image name="Twitter_button_pressed" width="200" height="34"/>
         <image name="Watch" width="25" height="25"/>
     </resources>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
-    </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="uZU-Ea-4mk"/>
         <segue reference="ibe-Gz-0pW"/>
+        <segue reference="bh2-xp-4J2"/>
     </inferredMetricsTieBreakers>
 </document>

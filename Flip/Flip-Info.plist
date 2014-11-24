@@ -2,35 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UIAppFonts</key>
-	<array>
-		<string>CantoraOne-Regular.ttf</string>
-		<string>Roboto-Bold.ttf</string>
-		<string>Pacifico.ttf</string>
-	</array>
-	<key>FacebookDisplayName</key>
-	<string>Flip Your Photos</string>
-	<key>FacebookAppID</key>
-	<string>798572336849605</string>
-	<key>CFBundleURLTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>mobioakFlip</string>
-			</array>
-			<key>CFBundleURLName</key>
-			<string>com.mobioak.flip</string>
-		</dict>
-		<dict>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>fb798572336849605</string>
-			</array>
-		</dict>
-	</array>
-	<key>LSApplicationCategoryType</key>
-	<string></string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -49,12 +20,43 @@
 	<string>1.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>com.mobioak.flip</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>mobioakFlip</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb798572336849605</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
+	<key>FacebookAppID</key>
+	<string>798572336849605</string>
+	<key>FacebookDisplayName</key>
+	<string>Flip Your Photos</string>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>UIAppFonts</key>
+	<array>
+		<string>CantoraOne-Regular.ttf</string>
+		<string>Roboto-Bold.ttf</string>
+		<string>Pacifico.ttf</string>
+	</array>
+	<key>UILaunchStoryboardName</key>
+	<string>MainStoryboard</string>
 	<key>UIMainStoryboardFile</key>
-	<string>Main_iPhone</string>
+	<string>MainStoryboard</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
@@ -62,6 +64,8 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
