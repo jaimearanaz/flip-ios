@@ -26,3 +26,5 @@
 #define kPenalizationPerError 2
 #define kMinimunPhotos 12
 #define kFacebookPermissions @[@"public_profile", @"user_photos"]
+#define kMainViewsWidth 320
+#define kiPhone6PlusHeight 736

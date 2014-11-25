@@ -34,10 +34,10 @@ typedef enum {
 // Main view elements
 @property (nonatomic, weak) IBOutlet UIView *titleView;
 @property (nonatomic, weak) IBOutlet UILabel *subtitleLbl;
-@property (nonatomic, strong) UIView *stripView;
 @property (nonatomic, weak) __block IBOutlet UIView *selectSourceView;
 @property (nonatomic, weak) __block IBOutlet UIView *selectSizeView;
 @property (nonatomic, weak) __block IBOutlet UIView *recordsView;
+@property (nonatomic, weak) IBOutlet UIView *bannerView;
 
 // Records view elements
 @property (nonatomic, weak) IBOutlet UILabel *recordsLbl;
@@ -66,13 +66,17 @@ typedef enum {
 @property (nonatomic, weak) IBOutlet UILabel *bigButtonLbl;
 @property (nonatomic, weak) IBOutlet UIButton *sourceBtn;
 
-@property (nonatomic, weak) IBOutlet UIView *bannerView;
-
 // Constraints used to animate between main views
 @property (nonatomic, strong) NSArray *showRecordsViewConstraints;
 @property (nonatomic, strong) NSArray *showSourceViewConstraints;
 @property (nonatomic, strong) NSArray *showSizeViewConstraints;
+// Current constraint applying
 @property (nonatomic, strong) NSArray *currentViewConstraints;
+
+// Flag for current view showing
+@property (nonatomic) BOOL showingRecordsView;
+@property (nonatomic) BOOL showingSourceiew;
+@property (nonatomic) BOOL showingSizeView;
 
 // Photos to use in grid
 @property (nonatomic, strong) __block NSArray *photos;
@@ -107,22 +111,24 @@ typedef enum {
 
 #pragma mark - UIViewController methods
 
-
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection
 {
-    FLPLogDebug(@"traitCollectionDidChange");
+    
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size
        withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
-    FLPLogDebug(@"viewWillTransitionToSize");
+    // Size has changed, invalidate current constraints
+    if (self.currentViewConstraints) {
+        [self.view removeConstraints:_currentViewConstraints];
+    }
 }
 
 - (void)willTransitionToTraitCollection:(UITraitCollection *)newCollection
               withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
-    FLPLogDebug(@"willTransitionToTraitCollection");
+    
 }
 
 - (NSUInteger)supportedInterfaceOrientations
@@ -138,7 +144,7 @@ typedef enum {
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad){
         return UIInterfaceOrientationMaskAll;
     // It's an iPhone 6 Plus
-    } else if (height == 736) {
+    } else if (height == kiPhone6PlusHeight) {
         return UIInterfaceOrientationMaskAllButUpsideDown;
     // It's other iPhone
     } else {
@@ -149,111 +155,55 @@ typedef enum {
 - (void)updateViewConstraints
 {
     [super updateViewConstraints];
-    FLPLogDebug(@"updateViewConstraints");
-    
-    if (self.stripView) {
-        [self.stripView removeFromSuperview];
-    }
-    
-    // First, configure strip view, where buttons views are allocated
-    
-    self.stripView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
-    self.stripView.backgroundColor = [UIColor blueColor];
-    self.stripView.translatesAutoresizingMaskIntoConstraints = NO;
-    
-    [self.view addSubview:self.stripView];
     
     // Views used in constraints
     UIView *recordsView = self.recordsView;
     UIView *selectSourceView = self.selectSourceView;
     UIView *selectSizeView = self.selectSizeView;
-    UIView *stripView = self.stripView;
-    UIView *titleView = self.titleView;
-    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(titleView,
-                                                                   stripView,
-                                                                   recordsView,
+    
+    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(recordsView,
                                                                    selectSourceView,
                                                                    selectSizeView);
     
-    // top space constraint from title
-    NSArray *topConstraint = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[titleView]-10-[stripView]"
-                                                                     options:0
-                                                                     metrics:nil
-                                                                       views:viewsDictionary];
-    // height fixed constraint
-    NSArray *heightConstraint = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[stripView(200)]"
-                                                                        options:0
-                                                                        metrics:nil
-                                                                          views:viewsDictionary];
-    // witdh constraint depending on screen width
-    NSNumber *width = [NSNumber numberWithFloat:(self.view.bounds.size.width + 320 + 320)];
-    NSArray *widthConstraint = [NSLayoutConstraint constraintsWithVisualFormat:@"H:[stripView(width)]"
-                                                                       options:0
-                                                                       metrics:@{@"width": width}
-                                                                         views:viewsDictionary];
-    // leading space constraint of -320
-    NSNumber *leading = [NSNumber numberWithFloat:(320 * -1)];
-    NSArray *leadingConstraint = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(leading)-[stripView]"
-                                                                         options:0
-                                                                         metrics:@{@"leading": leading}
-                                                                           views:viewsDictionary];
-
-    [self.view addConstraints:topConstraint];
-    [self.view addConstraints:heightConstraint];
-    [self.view addConstraints:widthConstraint];
-    [self.view addConstraints:leadingConstraint];
+    // Calculate offsets to animate views
+    NSNumber *offset = [NSNumber numberWithFloat:(self.view.bounds.size.width - kMainViewsWidth) / 2];
+    NSNumber *recordOffset = [NSNumber numberWithFloat:[offset floatValue]];
+    NSNumber *sourceOffset = [NSNumber numberWithFloat:(kMainViewsWidth) * (-1)];
+    NSNumber *sizeOffset = [NSNumber numberWithFloat:(([offset floatValue] + kMainViewsWidth + kMainViewsWidth) * (-1))];
     
-    // Second, configure views inside strip view
-    
-    [self.recordsView removeFromSuperview];
-    [self.selectSourceView removeFromSuperview];
-    [self.selectSizeView removeFromSuperview];
-    
-    [self.stripView addSubview:self.recordsView];
-    [self.stripView addSubview:self.selectSourceView];
-    [self.stripView addSubview:self.selectSizeView];
-    
-    CGFloat screenWidth = self.view.bounds.size.width;
-    NSNumber *offset = [NSNumber numberWithFloat:(screenWidth - 320) / 2];
-    
-    // horizontal space between views
-    NSString *constraintFormat = @"H:|-0-[recordsView]-offset-[selectSourceView]-offset-[selectSizeView]-0-|";
-    
-    NSArray *spacingConstraints = [NSLayoutConstraint constraintsWithVisualFormat:constraintFormat
+    NSString *offsetConstraint = @"H:|-leadingOffset-[recordsView]-offset-[selectSourceView]-offset-[selectSizeView]";
+   
+    // Set constraints for animations
+    self.showRecordsViewConstraints = [NSLayoutConstraint constraintsWithVisualFormat:offsetConstraint
                                                                           options:0
-                                                                          metrics:@{@"offset": offset}
+                                                                          metrics:@{@"leadingOffset":recordOffset, @"offset":offset}
                                                                             views:viewsDictionary];
     
-    // center vertical constraint for source view
-    NSLayoutConstraint *centerSourceYConstraint = [NSLayoutConstraint constraintWithItem:self.selectSourceView
-                                                                               attribute:NSLayoutAttributeCenterY
-                                                                               relatedBy:NSLayoutRelationEqual
-                                                                                  toItem:self.stripView
-                                                                               attribute:NSLayoutAttributeCenterY
-                                                                              multiplier:1.0
-                                                                                constant:0.0];
-    // center vertical constraint for records view
-    NSLayoutConstraint *centerRecordsYConstraint = [NSLayoutConstraint constraintWithItem:self.recordsView
-                                                                                attribute:NSLayoutAttributeCenterY
-                                                                                relatedBy:NSLayoutRelationEqual
-                                                                                   toItem:self.stripView
-                                                                                attribute:NSLayoutAttributeCenterY
-                                                                               multiplier:1.0
-                                                                                 constant:0.0];
-    // center vertical constraint for size view
-    NSLayoutConstraint *centerSizeYConstraint = [NSLayoutConstraint constraintWithItem:self.selectSizeView
-                                                                             attribute:NSLayoutAttributeCenterY
-                                                                             relatedBy:NSLayoutRelationEqual
-                                                                                toItem:self.stripView
-                                                                             attribute:NSLayoutAttributeCenterY
-                                                                            multiplier:1.0
-                                                                              constant:0.0];
+    self.showSourceViewConstraints = [NSLayoutConstraint constraintsWithVisualFormat:offsetConstraint
+                                                                         options:0
+                                                                         metrics:@{@"leadingOffset":sourceOffset, @"offset":offset}
+                                                                           views:viewsDictionary];
     
-    [self.stripView addConstraints:spacingConstraints];
-    [self.stripView addConstraint:centerRecordsYConstraint];
-    [self.stripView addConstraint:centerSourceYConstraint];
-    [self.stripView addConstraint:centerSizeYConstraint];
+    self.showSizeViewConstraints = [NSLayoutConstraint constraintsWithVisualFormat:offsetConstraint
+                                                                       options:0
+                                                                       metrics:@{@"leadingOffset":sizeOffset, @"offset":offset}
+                                                                         views:viewsDictionary];
     
+    // Set current constraint
+    if (self.startWithRecordsView) {
+        self.startWithRecordsView = NO;
+        self.currentViewConstraints = self.showRecordsViewConstraints;
+    } else {
+        if (self.showingRecordsView) {
+            self.currentViewConstraints = self.showRecordsViewConstraints;
+        } else if (self.showingSizeView) {
+            self.currentViewConstraints = self.showSizeViewConstraints;
+        } else {
+            self.currentViewConstraints = self.showSourceViewConstraints;
+        }
+    }
+    
+    [self.view addConstraints:self.currentViewConstraints];
 }
 
 - (void)viewDidLoad
@@ -338,41 +288,10 @@ typedef enum {
     [_bannerView addSubview:banner];
     [banner loadRequest:[GADRequest request]];
     
-    // Configure constraints to change between records, source and size view
-    
-    /*
-    UIView *stripView = self.stripView;
-    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(stripView);
+    [_sourceBtn setHidden:YES];
+    [_startGameBtn setHidden:YES];
+    [_recordsBtn setHidden:NO];
 
-    _showRecordsViewConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"|-(0)-[stripView]"
-                                                                          options:0
-                                                                          metrics:nil
-                                                                            views:viewsDictionary];
-    
-    _showSourceViewConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"|-(-320)-[stripView]"
-                                                                          options:0
-                                                                          metrics:nil
-                                                                            views:viewsDictionary];
-    
-    _showSizeViewConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"|-(-640)-[stripView]"
-                                                                         options:0
-                                                                         metrics:nil
-                                                                           views:viewsDictionary];
-     */
-    /*
-    // Start controller showing records view
-    if (_startWithRecordsView) {
-        _currentViewConstraints = _showRecordsViewConstraints;
-        
-    // Start controller showing source view
-    } else {
-        // Hide records view to avoid ugly effect when comes from score screen
-        self.recordsView.hidden = YES;
-        
-        [self.view addConstraints:_showSourceViewConstraints];
-        _currentViewConstraints = _showSourceViewConstraints;
-    }
-    */
     [self startTimer];
 }
 
@@ -487,13 +406,29 @@ typedef enum {
 }
 
 /**
- * Animates to show size view
+ * Prepares some elements before animate the view
  */
-- (void)showSizeView
+- (void)prepareForAnimateView
 {
     [_recordsLbl setAlpha:0];
     [_selectSourceLbl setAlpha:0];
     [_selectGridLbl setAlpha:0];
+    
+    [_sourceBtn setHidden:YES];
+    [_startGameBtn setHidden:YES];
+    [_recordsBtn setHidden:YES];
+    
+    self.showingRecordsView = NO;
+    self.showingSourceiew = NO;
+    self.showingSizeView = NO;
+}
+
+/**
+ * Animates to show size view
+ */
+- (void)showSizeView
+{
+    [self prepareForAnimateView];
     
     // Change to select size view
     [UIView animateWithDuration:0.3
@@ -504,10 +439,11 @@ typedef enum {
                          [self.view layoutIfNeeded];
                      }
                      completion:^(BOOL finished) {
-                         
+                         self.showingSizeView = YES;
                          [UIView animateWithDuration:0.3
                                           animations:^{
                                               [_selectGridLbl setAlpha:1];
+                                              [_sourceBtn setHidden:NO];
                                           }];
                      }];
 }
@@ -517,9 +453,7 @@ typedef enum {
  */
 - (void)showSourceView
 {
-    [_recordsLbl setAlpha:0];
-    [_selectSourceLbl setAlpha:0];
-    [_selectGridLbl setAlpha:0];
+    [self prepareForAnimateView];
     
     // Change to select source view
     [UIView animateWithDuration:0.3
@@ -530,9 +464,11 @@ typedef enum {
                          [self.view layoutIfNeeded];
                      }
                      completion:^(BOOL finished) {
+                         self.showingSourceiew = YES;
                          [UIView animateWithDuration:0.3
                                           animations:^{
                                               [_selectSourceLbl setAlpha:1];
+                                              [_recordsBtn setHidden:NO];
                                           }];
                      }];
 }
@@ -542,9 +478,7 @@ typedef enum {
  */
 - (void)showRecordsView
 {
-    [_recordsLbl setAlpha:0];
-    [_selectSourceLbl setAlpha:0];
-    [_selectGridLbl setAlpha:0];
+    [self prepareForAnimateView];
     
     // Records view was hidden to avoid ugly effect when comes from score screen
     self.recordsView.hidden = NO;
@@ -558,9 +492,11 @@ typedef enum {
                          [self.view layoutIfNeeded];
                      }
                      completion:^(BOOL finished) {
+                         self.showingRecordsView = YES;
                          [UIView animateWithDuration:0.3
                                           animations:^{
                                               [_recordsLbl setAlpha:1];
+                                              [_startGameBtn setHidden:NO];
                                           }];
                      }];
 }
