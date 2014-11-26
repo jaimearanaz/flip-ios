@@ -20,7 +20,6 @@
 		6F1AA1631973EAA400101766 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F1AA1611973EAA400101766 /* InfoPlist.strings */; };
 		6F1AA1651973EAA400101766 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1AA1641973EAA400101766 /* main.m */; };
 		6F1AA1691973EAA400101766 /* FLPAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1AA1681973EAA400101766 /* FLPAppDelegate.m */; };
-		6F1AA16C1973EAA400101766 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F1AA16A1973EAA400101766 /* MainStoryboard.storyboard */; };
 		6F1AA1721973EAA400101766 /* FLPMainScrenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1AA1711973EAA400101766 /* FLPMainScrenViewController.m */; };
 		6F1AA1741973EAA400101766 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F1AA1731973EAA400101766 /* Images.xcassets */; };
 		6F1AA17B1973EAA400101766 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F1AA17A1973EAA400101766 /* XCTest.framework */; };
@@ -45,9 +44,13 @@
 		6F878306199BB14100AA118E /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F878305199BB14100AA118E /* StoreKit.framework */; };
 		6F878308199BB14C00AA118E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F878307199BB14C00AA118E /* SystemConfiguration.framework */; };
 		6F87A771199A17B400C2303A /* FLPScoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F87A770199A17B400C2303A /* FLPScoreViewController.m */; };
-		6FAD88D61A25EFEC00E08609 /* CantoraOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6FAD88D31A25EFEC00E08609 /* CantoraOne-Regular.ttf */; };
-		6FAD88D71A25EFEC00E08609 /* Pacifico.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6FAD88D41A25EFEC00E08609 /* Pacifico.ttf */; };
-		6FAD88D81A25EFEC00E08609 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6FAD88D51A25EFEC00E08609 /* Roboto-Bold.ttf */; };
+		6FAD88DC1A25F7FB00E08609 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6FAD88D91A25F7FB00E08609 /* Roboto-Bold.ttf */; };
+		6FAD88DD1A25F7FB00E08609 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6FAD88D91A25F7FB00E08609 /* Roboto-Bold.ttf */; };
+		6FAD88DE1A25F7FB00E08609 /* Pacifico.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6FAD88DA1A25F7FB00E08609 /* Pacifico.ttf */; };
+		6FAD88DF1A25F7FB00E08609 /* Pacifico.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6FAD88DA1A25F7FB00E08609 /* Pacifico.ttf */; };
+		6FAD88E01A25F7FB00E08609 /* CantoraOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6FAD88DB1A25F7FB00E08609 /* CantoraOne-Regular.ttf */; };
+		6FAD88E11A25F7FB00E08609 /* CantoraOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6FAD88DB1A25F7FB00E08609 /* CantoraOne-Regular.ttf */; };
+		6FAD88E21A25FBE500E08609 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F1AA16A1973EAA400101766 /* MainStoryboard.storyboard */; };
 		6FF58536197FC95100926DF9 /* FLPCameraPhotoSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF58535197FC95100926DF9 /* FLPCameraPhotoSource.m */; };
 		6FF58538197FCA5800926DF9 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FF58537197FCA5800926DF9 /* AssetsLibrary.framework */; };
 		6FFC51671976659800668F82 /* FLPPhotoSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFC51661976659800668F82 /* FLPPhotoSource.m */; };
@@ -139,9 +142,9 @@
 		6F878307199BB14C00AA118E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		6F87A76F199A17B400C2303A /* FLPScoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPScoreViewController.h; sourceTree = "<group>"; };
 		6F87A770199A17B400C2303A /* FLPScoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPScoreViewController.m; sourceTree = "<group>"; };
-		6FAD88D31A25EFEC00E08609 /* CantoraOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CantoraOne-Regular.ttf"; sourceTree = "<group>"; };
-		6FAD88D41A25EFEC00E08609 /* Pacifico.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Pacifico.ttf; sourceTree = "<group>"; };
-		6FAD88D51A25EFEC00E08609 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
+		6FAD88D91A25F7FB00E08609 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
+		6FAD88DA1A25F7FB00E08609 /* Pacifico.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Pacifico.ttf; sourceTree = "<group>"; };
+		6FAD88DB1A25F7FB00E08609 /* CantoraOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CantoraOne-Regular.ttf"; sourceTree = "<group>"; };
 		6FF58534197FC95100926DF9 /* FLPCameraPhotoSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPCameraPhotoSource.h; sourceTree = "<group>"; };
 		6FF58535197FC95100926DF9 /* FLPCameraPhotoSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPCameraPhotoSource.m; sourceTree = "<group>"; };
 		6FF58537197FCA5800926DF9 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
@@ -336,9 +339,9 @@
 		6F55BE8C19A1616E00FC60E7 /* fonts */ = {
 			isa = PBXGroup;
 			children = (
-				6FAD88D31A25EFEC00E08609 /* CantoraOne-Regular.ttf */,
-				6FAD88D41A25EFEC00E08609 /* Pacifico.ttf */,
-				6FAD88D51A25EFEC00E08609 /* Roboto-Bold.ttf */,
+				6FAD88D91A25F7FB00E08609 /* Roboto-Bold.ttf */,
+				6FAD88DA1A25F7FB00E08609 /* Pacifico.ttf */,
+				6FAD88DB1A25F7FB00E08609 /* CantoraOne-Regular.ttf */,
 			);
 			name = fonts;
 			sourceTree = "<group>";
@@ -476,16 +479,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FAD88E21A25FBE500E08609 /* MainStoryboard.storyboard in Resources */,
 				6F4CF17C19A7928D009F4F31 /* AdMobKey.plist in Resources */,
 				6F4CF17A19A79185009F4F31 /* TwitterKeys.plist in Resources */,
 				6F1AA1741973EAA400101766 /* Images.xcassets in Resources */,
 				6F19F69B19A3A8870047F269 /* camera-shutter-click-01.wav in Resources */,
-				6FAD88D81A25EFEC00E08609 /* Roboto-Bold.ttf in Resources */,
 				6F1AA1991973FE9900101766 /* Localizable.strings in Resources */,
-				6F1AA16C1973EAA400101766 /* MainStoryboard.storyboard in Resources */,
-				6FAD88D71A25EFEC00E08609 /* Pacifico.ttf in Resources */,
+				6FAD88DC1A25F7FB00E08609 /* Roboto-Bold.ttf in Resources */,
+				6FAD88DE1A25F7FB00E08609 /* Pacifico.ttf in Resources */,
+				6FAD88E01A25F7FB00E08609 /* CantoraOne-Regular.ttf in Resources */,
 				6F19F69D19A3AC760047F269 /* polaroid-camera-take-picture-01.wav in Resources */,
-				6FAD88D61A25EFEC00E08609 /* CantoraOne-Regular.ttf in Resources */,
 				6F1AA1631973EAA400101766 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -494,7 +497,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FAD88DD1A25F7FB00E08609 /* Roboto-Bold.ttf in Resources */,
 				6F1AA1851973EAA500101766 /* InfoPlist.strings in Resources */,
+				6FAD88DF1A25F7FB00E08609 /* Pacifico.ttf in Resources */,
+				6FAD88E11A25F7FB00E08609 /* CantoraOne-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

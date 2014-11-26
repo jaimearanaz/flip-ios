@@ -77,39 +77,58 @@
 {
     [super viewDidLoad];
     
-    [_tryAgainBtn setTitle:NSLocalizedString(@"SCORE_AGAIN", @"") forState:UIControlStateNormal];
-    [_mainBtn setTitle:NSLocalizedString(@"OTHER_MAIN", @"") forState:UIControlStateNormal];
+    // Custom fonts and size must be set using Size Class within Interface Builder
+    // However, there is no way to use it form IB, it doesn't work (maybe is it a bug?)
+    
+    CGFloat titleSize = ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) ? kiPadTitleFontSize : kiPhoneTitleFontSize;
+    CGFloat mainSize = ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) ? kiPadMainFontSize : kiPhoneMainFontSize;
+    CGFloat bigSize = ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) ? kiPadBigFontSize : kiPhoneBigFontSize;
 
-    _titleLbl.text = NSLocalizedString(@"SCORE_TITLE", @"");
+    [_tryAgainBtn.titleLabel setFont:[UIFont fontWithName:@"Roboto-Bold" size:kiPhoneMainFontSize]];
+    [self.tryAgainBtn setTitle:NSLocalizedString(@"SCORE_AGAIN", @"") forState:UIControlStateNormal];
+    
+    [_mainBtn.titleLabel setFont:[UIFont fontWithName:@"Roboto-Bold" size:kiPhoneMainFontSize]];
+    [self.mainBtn setTitle:NSLocalizedString(@"OTHER_MAIN", @"") forState:UIControlStateNormal];
+
+    [_titleLbl setFont:[UIFont fontWithName:@"CantoraOne-Regular" size:titleSize]];
+    self.titleLbl.text = NSLocalizedString(@"SCORE_TITLE", @"");
     
     // User scores
     
-    _timeLbl.text = NSLocalizedString(@"SCORE_TIME", @"");
+    [_timeLbl setFont:[UIFont fontWithName:@"CantoraOne-Regular" size:mainSize]];
+    self.timeLbl.text = NSLocalizedString(@"SCORE_TIME", @"");
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"mm:ss:SSS"];
     [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0.0]];
-    _timeResultLbl.text = [dateFormatter stringFromDate:_time];
+    [_timeResultLbl setFont:[UIFont fontWithName:@"CantoraOne-Regular" size:mainSize]];
+    self.timeResultLbl.text = [dateFormatter stringFromDate:self.time];
     
-    _errorsLbl.text = NSLocalizedString(@"SCORE_ERRORS", @"");
-    _errorsResultLbl.text = [NSString stringWithFormat:@"%ld", (long)_numOfErrors];
+    [_errorsLbl setFont:[UIFont fontWithName:@"CantoraOne-Regular" size:mainSize]];
+    self.errorsLbl.text = NSLocalizedString(@"SCORE_ERRORS", @"");
+    [_errorsResultLbl setFont:[UIFont fontWithName:@"CantoraOne-Regular" size:mainSize]];
+    self.errorsResultLbl.text = [NSString stringWithFormat:@"%ld", (long)self.numOfErrors];
     
-    _penalizationLbl.text = NSLocalizedString(@"SCORE_PENALIZATION", @"");
-    NSTimeInterval penalizationSeconds = _numOfErrors * kPenalizationPerError;
+    [_penalizationLbl setFont:[UIFont fontWithName:@"CantoraOne-Regular" size:mainSize]];
+    self.penalizationLbl.text = NSLocalizedString(@"SCORE_PENALIZATION", @"");
+    NSTimeInterval penalizationSeconds = self.numOfErrors * kPenalizationPerError;
     NSDateFormatter *penalizationDateFormatter = [[NSDateFormatter alloc] init];
     [penalizationDateFormatter setDateFormat:@"mm:ss"];
     [penalizationDateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0.0]];
-    _penalizationResultLbl.text = [penalizationDateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:penalizationSeconds]];
+    [_penalizationResultLbl setFont:[UIFont fontWithName:@"CantoraOne-Regular" size:mainSize]];
+    self.penalizationResultLbl.text = [penalizationDateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:penalizationSeconds]];
     
     // Final time
     
-    _finalTimeLbl.text = NSLocalizedString(@"SCORE_TIME_FINAL", @"");
-    NSDate *finalTime = [NSDate dateWithTimeInterval:penalizationSeconds sinceDate:_time];
-    _finalTimeResultLbl.text = [dateFormatter stringFromDate:finalTime];
+    [_finalTimeLbl setFont:[UIFont fontWithName:@"CantoraOne-Regular" size:bigSize]];
+    self.finalTimeLbl.text = NSLocalizedString(@"SCORE_TIME_FINAL", @"");
+    NSDate *finalTime = [NSDate dateWithTimeInterval:penalizationSeconds sinceDate:self.time];
+    [_finalTimeResultLbl setFont:[UIFont fontWithName:@"CantoraOne-Regular" size:bigSize]];
+    self.finalTimeResultLbl.text = [dateFormatter stringFromDate:finalTime];
     
     // It's a new record ?
     
     NSString *key = @"";
-    switch (_gridSize) {
+    switch (self.gridSize) {
         case GridSizeSmall:
             key = @"small";
             break;
@@ -124,20 +143,21 @@
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSDate *record = (NSDate *)[userDefaults objectForKey:key];
 
-    _recordLbl.text = NSLocalizedString(@"SCORE_RECORD", @"");
+    [_recordLbl setFont:[UIFont fontWithName:@"CantoraOne-Regular" size:bigSize]];
+    self.recordLbl.text = NSLocalizedString(@"SCORE_RECORD", @"");
     
     // It's a record, save it
     if (([record compare:finalTime] == NSOrderedDescending) || (record == nil)) {
         [userDefaults setObject:finalTime forKey:key];
-        _recordLbl.hidden = NO;
-        _newRecord = YES;
-        _numberBlinks = 0;
+        self.recordLbl.hidden = NO;
+        self.newRecord = YES;
+        self.numberBlinks = 0;
         [self startTimer];
         
     // No record
     } else {
-        _recordLbl.hidden = YES;
-        _newRecord = NO;
+        self.recordLbl.hidden = YES;
+        self.newRecord = NO;
     }
     
     // Configure banner
@@ -147,15 +167,15 @@
     NSDictionary *adMobKey = [[NSDictionary alloc] initWithContentsOfFile:adMobPlist];
     banner.adUnitID = [adMobKey objectForKey:@"key"];
     banner.rootViewController = self;
-    [_bannerView addSubview:banner];
+    [self.bannerView addSubview:banner];
     [banner loadRequest:[GADRequest request]];
     
     // Camera sound, play only if no other sound is playing (i.e. music player)
     if (![[AVAudioSession sharedInstance] isOtherAudioPlaying]) {
         NSString *cameraSoundPath = [[NSBundle mainBundle] pathForResource:@"polaroid-camera-take-picture-01" ofType:@"wav"];
         NSURL *cameraSoundURL = [NSURL fileURLWithPath:cameraSoundPath];
-        _playerCamera = [[AVAudioPlayer alloc] initWithContentsOfURL:cameraSoundURL error:nil];
-        [_playerCamera play];
+        self.playerCamera = [[AVAudioPlayer alloc] initWithContentsOfURL:cameraSoundURL error:nil];
+        [self.playerCamera play];
     }
 }
 
