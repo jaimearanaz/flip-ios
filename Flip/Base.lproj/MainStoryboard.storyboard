@@ -159,6 +159,9 @@
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <variation key="heightClass=regular-widthClass=regular" ambiguous="YES" misplaced="YES">
+                                            <rect key="frame" x="60" y="384" width="200" height="30"/>
+                                        </variation>
                                         <connections>
                                             <action selector="onStartGameButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="ME8-2r-5Hl"/>
                                         </connections>
@@ -175,6 +178,9 @@
                                     <constraint firstAttribute="width" constant="320" id="2px-xv-g0E"/>
                                     <constraint firstAttribute="bottom" secondItem="cya-Zk-Guq" secondAttribute="bottom" id="BTH-yB-cLE"/>
                                 </constraints>
+                                <variation key="heightClass=regular-widthClass=regular" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="150" y="336" width="320" height="414"/>
+                                </variation>
                             </view>
                             <view contentMode="scaleAspectFit" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tAh-NM-16j" userLabel="View - Select source">
                                 <rect key="frame" x="150" y="236" width="320" height="314"/>
@@ -223,6 +229,9 @@
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <variation key="heightClass=regular-widthClass=regular" ambiguous="YES" misplaced="YES">
+                                            <rect key="frame" x="60" y="384" width="200" height="30"/>
+                                        </variation>
                                         <connections>
                                             <action selector="onRecordsButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="LSy-XF-rs4"/>
                                         </connections>
@@ -238,6 +247,9 @@
                                     <constraint firstAttribute="bottom" secondItem="iUh-rM-8BA" secondAttribute="bottom" id="7z7-Xl-7BY"/>
                                     <constraint firstAttribute="width" constant="320" id="u2L-AE-uO6"/>
                                 </constraints>
+                                <variation key="heightClass=regular-widthClass=regular" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="150" y="336" width="320" height="414"/>
+                                </variation>
                             </view>
                             <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kxo-yw-E5g" userLabel="View - Select size">
                                 <rect key="frame" x="150" y="236" width="320" height="314"/>
@@ -306,6 +318,9 @@
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <variation key="heightClass=regular-widthClass=regular" ambiguous="YES" misplaced="YES">
+                                            <rect key="frame" x="35" y="384" width="250" height="30"/>
+                                        </variation>
                                         <connections>
                                             <action selector="onSourceButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="jeU-8b-zcr"/>
                                         </connections>
@@ -321,6 +336,9 @@
                                     <constraint firstAttribute="width" constant="320" id="TRL-Bl-max"/>
                                     <constraint firstAttribute="bottom" secondItem="sL0-Tf-rcq" secondAttribute="bottom" id="Vlc-hV-7MV"/>
                                 </constraints>
+                                <variation key="heightClass=regular-widthClass=regular" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="150" y="336" width="320" height="414"/>
+                                </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nvf-ly-HpF" userLabel="View - Banner">
                                 <rect key="frame" x="0.0" y="550" width="600" height="50"/>
@@ -589,7 +607,7 @@
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Your score" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="76j-8e-ngm">
                                         <rect key="frame" x="10" y="0.0" width="280" height="37"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="21"/>
                                         <color key="textColor" red="0.0078431372550000003" green="0.40000000000000002" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -690,7 +708,6 @@
                                 <include reference="rbV-Bm-MfT"/>
                             </mask>
                         </variation>
-                        <variation key="heightClass=compact-widthClass=compact"/>
                     </view>
                     <connections>
                         <outlet property="bannerView" destination="vmx-15-tnM" id="zWe-T8-39d"/>
@@ -734,7 +751,7 @@
         <image name="Watch" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="bqU-UK-gYp"/>
         <segue reference="uZU-Ea-4mk"/>
+        <segue reference="bqU-UK-gYp"/>
     </inferredMetricsTieBreakers>
 </document>
