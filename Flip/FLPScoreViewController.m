@@ -52,6 +52,27 @@
     return self;
 }
 
+- (NSUInteger)supportedInterfaceOrientations
+{
+    // Only iPad and iPhone 6 Plus must rotate
+    
+    // iPhone 6 Plus should be detected using size class, not height!
+    // But on simulator, iPhone 6 Plus in landscape is still compact!!
+    UIScreen *screen = [UIScreen mainScreen];
+    CGFloat height = screen.bounds.size.height;
+    
+    // It's an iPad
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad){
+        return UIInterfaceOrientationMaskAll;
+        // It's an iPhone 6 Plus
+    } else if (height == kiPhone6PlusHeight) {
+        return UIInterfaceOrientationMaskAllButUpsideDown;
+        // It's other iPhone
+    } else {
+        return UIInterfaceOrientationMaskPortrait;
+    }
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
