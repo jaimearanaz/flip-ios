@@ -77,45 +77,33 @@
 {
     [super viewDidLoad];
     
-    [_tryAgainBtn.titleLabel setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
     [_tryAgainBtn setTitle:NSLocalizedString(@"SCORE_AGAIN", @"") forState:UIControlStateNormal];
-    
-    [_mainBtn.titleLabel setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
     [_mainBtn setTitle:NSLocalizedString(@"OTHER_MAIN", @"") forState:UIControlStateNormal];
 
-    [_titleLbl setFont:[UIFont fontWithName:@"CantoraOne-Regular" size:25]];
     _titleLbl.text = NSLocalizedString(@"SCORE_TITLE", @"");
     
     // User scores
     
-    [_timeLbl setFont:[UIFont fontWithName:@"CantoraOne-Regular" size:17]];
     _timeLbl.text = NSLocalizedString(@"SCORE_TIME", @"");
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"mm:ss:SSS"];
     [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0.0]];
-    [_timeResultLbl setFont:[UIFont fontWithName:@"CantoraOne-Regular" size:17]];
     _timeResultLbl.text = [dateFormatter stringFromDate:_time];
     
-    [_errorsLbl setFont:[UIFont fontWithName:@"CantoraOne-Regular" size:17]];
     _errorsLbl.text = NSLocalizedString(@"SCORE_ERRORS", @"");
-    [_errorsResultLbl setFont:[UIFont fontWithName:@"CantoraOne-Regular" size:17]];
     _errorsResultLbl.text = [NSString stringWithFormat:@"%ld", (long)_numOfErrors];
     
-    [_penalizationLbl setFont:[UIFont fontWithName:@"CantoraOne-Regular" size:17]];
     _penalizationLbl.text = NSLocalizedString(@"SCORE_PENALIZATION", @"");
     NSTimeInterval penalizationSeconds = _numOfErrors * kPenalizationPerError;
     NSDateFormatter *penalizationDateFormatter = [[NSDateFormatter alloc] init];
     [penalizationDateFormatter setDateFormat:@"mm:ss"];
     [penalizationDateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0.0]];
-    [_penalizationResultLbl setFont:[UIFont fontWithName:@"CantoraOne-Regular" size:17]];
     _penalizationResultLbl.text = [penalizationDateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:penalizationSeconds]];
     
     // Final time
     
-    [_finalTimeLbl setFont:[UIFont fontWithName:@"CantoraOne-Regular" size:23]];
     _finalTimeLbl.text = NSLocalizedString(@"SCORE_TIME_FINAL", @"");
     NSDate *finalTime = [NSDate dateWithTimeInterval:penalizationSeconds sinceDate:_time];
-    [_finalTimeResultLbl setFont:[UIFont fontWithName:@"CantoraOne-Regular" size:23]];
     _finalTimeResultLbl.text = [dateFormatter stringFromDate:finalTime];
     
     // It's a new record ?
@@ -136,7 +124,6 @@
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSDate *record = (NSDate *)[userDefaults objectForKey:key];
 
-    [_recordLbl setFont:[UIFont fontWithName:@"CantoraOne-Regular" size:23]];
     _recordLbl.text = NSLocalizedString(@"SCORE_RECORD", @"");
     
     // It's a record, save it
