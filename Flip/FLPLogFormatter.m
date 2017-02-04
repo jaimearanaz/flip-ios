@@ -49,7 +49,7 @@
 - (NSString *)formatLogMessage:(DDLogMessage *)logMessage
 {
     NSString *logLevel;
-    switch (logMessage->logFlag)
+    switch (logMessage.flag)
     {
         case LOG_FLAG_ERROR : logLevel = @"E"; break;
         case LOG_FLAG_WARN  : logLevel = @"W"; break;
@@ -58,9 +58,9 @@
         default             : logLevel = @"V"; break;
     }
     
-    NSString* date = [_dateFormatter stringFromDate:logMessage->timestamp];
+    NSString* date = [_dateFormatter stringFromDate:logMessage.timestamp];
 
-    return [NSString stringWithFormat:@"%@ %@[%d] %@ | %@", date, _appName, _processId, logLevel, logMessage->logMsg];
+    return [NSString stringWithFormat:@"%@ %@[%d] %@ | %@", date, _appName, _processId, logLevel, logMessage.message];
 }
 
 @end

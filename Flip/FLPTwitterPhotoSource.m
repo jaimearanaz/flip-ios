@@ -6,11 +6,11 @@
 //  Copyright (c) 2014 MobiOak. All rights reserved.
 //
 
-#import <AFOAuth1Client/AFOAuth1Client.h>
+#import <AFNetworking/AFNetworking.h>
 
 #import "FLPTwitterPhotoSource.h"
 
-#import "STTwitterAPI.h"
+//#import "STTwitterAPI.h"
 
 @interface FLPTwitterPhotoSource()
 
@@ -19,7 +19,7 @@
 @property (nonatomic) NSString *oauthToken;
 @property (nonatomic) NSString *oauthTokenSecret;
 @property (nonatomic) NSString *screenName;
-@property (nonatomic) STTwitterAPI *twitterApi;
+//@property (nonatomic) STTwitterAPI *twitterApi;
 
 @end
 
@@ -57,10 +57,11 @@
         return;
     }
 
-    _twitterApi = [STTwitterAPI twitterAPIWithOAuthConsumerKey:_consumerKey
-                                                            consumerSecret:_secretKey
-                                                                oauthToken:_oauthToken
-                                                          oauthTokenSecret:_oauthTokenSecret];
+    // TODO: uncomment
+//    _twitterApi = [STTwitterAPI twitterAPIWithOAuthConsumerKey:_consumerKey
+//                                                            consumerSecret:_secretKey
+//                                                                oauthToken:_oauthToken
+//                                                          oauthTokenSecret:_oauthTokenSecret];
     
     // Steps:
     // 1. get friends from Twitter
@@ -71,88 +72,89 @@
     // 6. download photos from random friends and followers
     
     // TODO: friends and followers are return in 5000 users per page, paginate?
-    
+
+    // TODO:uncomment
     // 1. get friends from Twitter
-    [_twitterApi getFriendsIDsForScreenName:_screenName
-                              successBlock:^(NSArray *friends) {
-                                  FLPLogDebug(@"number of friends: %ld", (unsigned long)friends.count);
-                                  
-    // 2. get followers from Twitter
-    [_twitterApi getFollowersIDsForScreenName:_screenName
-                                 successBlock:^(NSArray *followers) {
-                                     FLPLogDebug(@"number of followers: %ld", (unsigned long)followers.count);
-                                     
+//    [_twitterApi getFriendsIDsForScreenName:_screenName
+//                              successBlock:^(NSArray *friends) {
+//                                  FLPLogDebug(@"number of friends: %ld", (unsigned long)friends.count);
+//                                  
+//    // 2. get followers from Twitter
+//    [_twitterApi getFollowersIDsForScreenName:_screenName
+//                                 successBlock:^(NSArray *followers) {
+//                                     FLPLogDebug(@"number of followers: %ld", (unsigned long)followers.count);
+    
     // 3. get complete description for friends and followers from Twitter
                                      
-    NSMutableArray *users = [[NSMutableArray alloc] init];
-    [users addObjectsFromArray:friends];
-    [users addObjectsFromArray:followers];
-                                     
-    [self getDescriptioForUsers:users
-                    succesBlock:^(NSArray *usersDescription) {
-                                                         
-                        NSMutableArray *completeUsers = [[NSMutableArray alloc] init];
-                        
-                        // 4. discard those with default image profiles (egg image)
-                        for (NSDictionary* user in usersDescription) {
-                            BOOL defaultProfile = [[user objectForKey:@"default_profile_image"] boolValue];
-                            if (defaultProfile) {
-                                FLPLogWarn(@"egg image, skip user");
-                                continue;
-                            } else {
-                                [completeUsers addObject:user];
-                            }
-                        }
-                        
-                        if (completeUsers.count >= number) {
-                            
-                            // 5. get |number| random friends and followers
-                            NSArray *randomUsers = [self selectRandom:number fromUsers:completeUsers];
-                            
-                            // 6. download photos from random friends and followers
-                            NSArray *photos = [self downloadPhotosForUsers:randomUsers];
-                            
-                            // Return photos
-                            if (photos.count >= number) {
-                                success(photos);
-                                
-                            // Error downloading some photos
-                            } else {
-                                FLPLogError(@"not enough downloaded photos");
-                                failure([NSError errorWithDomain:@""
-                                                            code:kErrorDownloadingPhotos
-                                                        userInfo:nil]);
-                            }
-                            
-                        // Not enough complete users
-                        } else {
-                            FLPLogError(@"not enough complete users");
-                            failure([NSError errorWithDomain:@""
-                                                        code:KErrorEnoughPhotos
-                                                    userInfo:nil]);
-                        }
-                        
-                        
-    } failureBlock:^(NSError *error) {
-        FLPLogError(@"error: %@", [error localizedDescription]);
-        failure([NSError errorWithDomain:@""
-                                    code:kErrorDownloadingPhotos
-                                userInfo:nil]);
-    }];
-
-    } errorBlock:^(NSError *error) {
-        FLPLogError(@"error: %@", [error localizedDescription]);
-        failure([NSError errorWithDomain:@""
-                                    code:kErrorDownloadingPhotos
-                                userInfo:nil]);
-        }];
-                                  
-    } errorBlock:^(NSError *error) {
-        FLPLogError(@"error: %@", [error localizedDescription]);
-        failure([NSError errorWithDomain:@""
-                                    code:kErrorDownloadingPhotos
-                                userInfo:nil]);
-    }];
+//    NSMutableArray *users = [[NSMutableArray alloc] init];
+//    [users addObjectsFromArray:friends];
+//    [users addObjectsFromArray:followers];
+//                                     
+//    [self getDescriptioForUsers:users
+//                    succesBlock:^(NSArray *usersDescription) {
+//                                                         
+//                        NSMutableArray *completeUsers = [[NSMutableArray alloc] init];
+//                        
+//                        // 4. discard those with default image profiles (egg image)
+//                        for (NSDictionary* user in usersDescription) {
+//                            BOOL defaultProfile = [[user objectForKey:@"default_profile_image"] boolValue];
+//                            if (defaultProfile) {
+//                                FLPLogWarn(@"egg image, skip user");
+//                                continue;
+//                            } else {
+//                                [completeUsers addObject:user];
+//                            }
+//                        }
+//                        
+//                        if (completeUsers.count >= number) {
+//                            
+//                            // 5. get |number| random friends and followers
+//                            NSArray *randomUsers = [self selectRandom:number fromUsers:completeUsers];
+//                            
+//                            // 6. download photos from random friends and followers
+//                            NSArray *photos = [self downloadPhotosForUsers:randomUsers];
+//                            
+//                            // Return photos
+//                            if (photos.count >= number) {
+//                                success(photos);
+//                                
+//                            // Error downloading some photos
+//                            } else {
+//                                FLPLogError(@"not enough downloaded photos");
+//                                failure([NSError errorWithDomain:@""
+//                                                            code:kErrorDownloadingPhotos
+//                                                        userInfo:nil]);
+//                            }
+//                            
+//                        // Not enough complete users
+//                        } else {
+//                            FLPLogError(@"not enough complete users");
+//                            failure([NSError errorWithDomain:@""
+//                                                        code:KErrorEnoughPhotos
+//                                                    userInfo:nil]);
+//                        }
+//                        
+//                        
+//    } failureBlock:^(NSError *error) {
+//        FLPLogError(@"error: %@", [error localizedDescription]);
+//        failure([NSError errorWithDomain:@""
+//                                    code:kErrorDownloadingPhotos
+//                                userInfo:nil]);
+//    }];
+//
+//    } errorBlock:^(NSError *error) {
+//        FLPLogError(@"error: %@", [error localizedDescription]);
+//        failure([NSError errorWithDomain:@""
+//                                    code:kErrorDownloadingPhotos
+//                                userInfo:nil]);
+//        }];
+//                                  
+//    } errorBlock:^(NSError *error) {
+//        FLPLogError(@"error: %@", [error localizedDescription]);
+//        failure([NSError errorWithDomain:@""
+//                                    code:kErrorDownloadingPhotos
+//                                userInfo:nil]);
+//    }];
     
 }
 
@@ -237,16 +239,16 @@
     NSArray *randomUsers = [self selectRandom:100 fromUsers:[NSMutableArray arrayWithArray:usersId]];
     
     NSString * allUsers = [randomUsers componentsJoinedByString:@","];
-    [_twitterApi getUsersLookupForScreenName:nil
-                                    orUserID:allUsers
-                             includeEntities:0
-                                successBlock:^(NSArray *usersLookup) {
-                                    success(usersLookup);
-                                    
-                                } errorBlock:^(NSError *error) {
-                                    FLPLogError(@"error getting lookup users: %@", [error localizedDescription]);
-                                    failure(error);
-                                }];
+//    [_twitterApi getUsersLookupForScreenName:nil
+//                                    orUserID:allUsers
+//                             includeEntities:0
+//                                successBlock:^(NSArray *usersLookup) {
+//                                    success(usersLookup);
+//                                    
+//                                } errorBlock:^(NSError *error) {
+//                                    FLPLogError(@"error getting lookup users: %@", [error localizedDescription]);
+//                                    failure(error);
+//                                }];
 }
 
 @end
