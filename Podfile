@@ -1,5 +1,5 @@
 source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '8.0'
+platform :ios, '9.0'
 
 # ignore all warnings from all pods
 inhibit_all_warnings!
@@ -9,16 +9,21 @@ inhibit_all_warnings!
 use_frameworks!
 
 def flip_pods
-	pod 'CocoaLumberjack', '~> 1.6.2'
-	pod 'MBProgressHUD', '~> 0.8'
-	pod 'WCAlertView', '~> 1.0.1'
-	pod 'PFTwitterSignOn', :git => 'https://github.com/jesseditson/PFTwitterSignOn.git'
-	pod 'STTwitter', '~> 0.1.4'
+    pod 'AFNetworking'
+	pod 'CocoaLumberjack'
+	pod 'MBProgressHUD'
+	pod 'WCAlertView'
+    #pod 'PFTwitterSignOn', :git => 'https://github.com/jesseditson/PFTwitterSignOn.git'
+    #pod 'STTwitter'
 	pod 'SCNetworkReachability'
-	pod 'Facebook-iOS-SDK', '~> 3.12.0'
+    #pod 'Facebook-iOS-SDK'
 end
 
 target 'Flip' do
+    flip_pods
+end
+
+target 'FlipTests' do
     flip_pods
 end
 

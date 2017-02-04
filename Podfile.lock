@@ -1,0 +1,50 @@
+PODS:
+  - AFNetworking (3.1.0):
+    - AFNetworking/NSURLSession (= 3.1.0)
+    - AFNetworking/Reachability (= 3.1.0)
+    - AFNetworking/Security (= 3.1.0)
+    - AFNetworking/Serialization (= 3.1.0)
+    - AFNetworking/UIKit (= 3.1.0)
+  - AFNetworking/NSURLSession (3.1.0):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (3.1.0)
+  - AFNetworking/Security (3.1.0)
+  - AFNetworking/Serialization (3.1.0)
+  - AFNetworking/UIKit (3.1.0):
+    - AFNetworking/NSURLSession
+  - CocoaLumberjack (3.0.0):
+    - CocoaLumberjack/Default (= 3.0.0)
+    - CocoaLumberjack/Extensions (= 3.0.0)
+  - CocoaLumberjack/Core (3.0.0)
+  - CocoaLumberjack/Default (3.0.0):
+    - CocoaLumberjack/Core
+  - CocoaLumberjack/Extensions (3.0.0):
+    - CocoaLumberjack/Default
+  - macros_blocks (0.0.1)
+  - MBProgressHUD (1.0.0)
+  - SCNetworkReachability (2.0.5):
+    - SCNetworkReachability/Core (= 2.0.5)
+  - SCNetworkReachability/Core (2.0.5):
+    - macros_blocks (= 0.0.1)
+  - WCAlertView (1.0.1)
+
+DEPENDENCIES:
+  - AFNetworking
+  - CocoaLumberjack
+  - MBProgressHUD
+  - SCNetworkReachability
+  - WCAlertView
+
+SPEC CHECKSUMS:
+  AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  CocoaLumberjack: c823149bccc5519a9447aeb433be7b1212a7d6a5
+  macros_blocks: da2106a0975514e16f3669f2f50a02efaff642cf
+  MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
+  SCNetworkReachability: 14026e754d9abb264c157131539e8e2c2131cb62
+  WCAlertView: 36a1d087d0b3eb7f6ce3dae623fbb474f26f2beb
+
+PODFILE CHECKSUM: 664c6b4f5b0150968db1558da881a843be637a4d
+
+COCOAPODS: 1.2.0

@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 MobiOak. All rights reserved.
 //
 
-#import <AFOAuth1Client/AFOAuth1Client.h>
-#import <FacebookSDK/FacebookSDK.h>
+#import <AFNetworking/AFNetworking.h>
+//#import <FacebookSDK/FacebookSDK.h>
 
 #import "FLPAppDelegate.h"
 #import "FLPLogFormatter.h"
@@ -55,8 +55,8 @@
 #endif
     
     // App logs
-    [DDLog addLogger:[DDASLLogger sharedInstance] withLogLevel:appLogLevel];
-    [DDLog addLogger:[DDTTYLogger sharedInstance] withLogLevel:appLogLevel];
+    [DDLog addLogger:[DDASLLogger sharedInstance] withLevel:appLogLevel];
+    [DDLog addLogger:[DDTTYLogger sharedInstance] withLevel:appLogLevel];
     FLPLogFormatter* logFormatter = [FLPLogFormatter new];
     [[DDASLLogger sharedInstance] setLogFormatter:logFormatter];
     [[DDTTYLogger sharedInstance] setLogFormatter:logFormatter];
@@ -68,7 +68,9 @@
  */
 - (bool)handleFacebookUrl:(NSURL *)callbackUrl
 {
-    return [FBSession.activeSession handleOpenURL:callbackUrl];
+    return false;
+    // TODO: uncoment
+    //return [FBSession.activeSession handleOpenURL:callbackUrl];
 }
 
 /**
@@ -97,10 +99,12 @@
             
         // User logged successfuly in Twitter web
         } else {
-            NSNotification *notification = [NSNotification notificationWithName:kAFApplicationLaunchedWithURLNotification
-                                                                         object:nil
-                                                                       userInfo:@{kAFApplicationLaunchOptionsURLKey: url}];
-            [[NSNotificationCenter defaultCenter] postNotification:notification];
+            
+            // TODO: uncomment
+//            NSNotification *notification = [NSNotification notificationWithName:kAFApplicationLaunchedWithURLNotification
+//                                                                         object:nil
+//                                                                       userInfo:@{kAFApplicationLaunchOptionsURLKey: url}];
+//            [[NSNotificationCenter defaultCenter] postNotification:notification];
         }
         return YES;
     }

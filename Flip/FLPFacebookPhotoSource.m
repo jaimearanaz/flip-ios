@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 MobiOak. All rights reserved.
 //
 
-#import <FacebookSDK/FacebookSDK.h>
+//#import <FacebookSDK/FacebookSDK.h>
 
 #import "FLPFacebookPhotoSource.h"
 
@@ -105,47 +105,48 @@
 {
     NSMutableDictionary *paginatedPhotos = [[NSMutableDictionary alloc] init];
     NSString *requestPath = [NSString stringWithFormat:@"%@?limit=%ld&offset=%ld", path, (long)limit, (long)offset];
-    
+
+    // TODO: uncomment
     // Launch request
-    [[FBRequest requestForGraphPath:requestPath] startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-        
-        NSArray* data=[result objectForKey:@"data"];
-        
-        // Loop through images
-        for (FBGraphObject* graphObject in data) {
-            
-            NSArray *images = [graphObject objectForKey:@"images"];
-            
-            // Loop through different sizes for this image
-            for (FBGraphObject* imageObject in images) {
-                    NSString *width = [imageObject objectForKey:@"width"];
-                
-                    // Add immages with width between 300 and 600 pixels
-                    if ((300 < [width integerValue]) && ([width integerValue] < 600)) {
-                        FLPLogDebug(@"add photo %@", [imageObject objectForKey:@"source"]);
-                        [paginatedPhotos setValue:[imageObject objectForKey:@"source"] forKey:[graphObject objectForKey:@"id"]];
-                        break;
-                    }
-            }
-        }
-        
-        // More result pending, call itself again and add current photos
-        if (result[@"paging"][@"next"] != nil) {
-            FLPLogWarn(@"more photos pending, call again");
-            [self getPhotosUrlFromFacebookPath:path
-                                         limit:limit
-                                        offset:(offset + limit)
-                                   succesBlock:^(NSDictionary *photos) {
-                                            [paginatedPhotos setValuesForKeysWithDictionary:photos];
-                                            success(paginatedPhotos);
-                                        }
-                                  failureBlock:failure];
-            
-        // No more results, run success block
-        } else {
-            success(paginatedPhotos);
-        }
-    }];
+//    [[FBRequest requestForGraphPath:requestPath] startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+//        
+//        NSArray* data=[result objectForKey:@"data"];
+//        
+//        // Loop through images
+//        for (FBGraphObject* graphObject in data) {
+//            
+//            NSArray *images = [graphObject objectForKey:@"images"];
+//            
+//            // Loop through different sizes for this image
+//            for (FBGraphObject* imageObject in images) {
+//                    NSString *width = [imageObject objectForKey:@"width"];
+//                
+//                    // Add immages with width between 300 and 600 pixels
+//                    if ((300 < [width integerValue]) && ([width integerValue] < 600)) {
+//                        FLPLogDebug(@"add photo %@", [imageObject objectForKey:@"source"]);
+//                        [paginatedPhotos setValue:[imageObject objectForKey:@"source"] forKey:[graphObject objectForKey:@"id"]];
+//                        break;
+//                    }
+//            }
+//        }
+//        
+//        // More result pending, call itself again and add current photos
+//        if (result[@"paging"][@"next"] != nil) {
+//            FLPLogWarn(@"more photos pending, call again");
+//            [self getPhotosUrlFromFacebookPath:path
+//                                         limit:limit
+//                                        offset:(offset + limit)
+//                                   succesBlock:^(NSDictionary *photos) {
+//                                            [paginatedPhotos setValuesForKeysWithDictionary:photos];
+//                                            success(paginatedPhotos);
+//                                        }
+//                                  failureBlock:failure];
+//            
+//        // No more results, run success block
+//        } else {
+//            success(paginatedPhotos);
+//        }
+//    }];
     
 }
 

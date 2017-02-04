@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 MobiOak. All rights reserved.
 //
 
-#import <PFTwitterSignOn/PFTwitterSignOn.h>
-#import <FacebookSDK/FacebookSDK.h>
+//#import <PFTwitterSignOn/PFTwitterSignOn.h>
+//#import <FacebookSDK/FacebookSDK.h>
 
 #import "FLPMainScrenViewController.h"
 #import "FLPPhotoSource.h"
@@ -85,7 +85,7 @@ typedef enum {
 // List of Twitter accounts configured in device
 @property (nonatomic, strong) NSArray *twitterAccounts;
 // Callback used when login with Twitter API
-@property (nonatomic, strong) __block twitterAccountCallback twitterCallback;
+//@property (nonatomic, strong) __block twitterAccountCallback twitterCallback;
 // Status of network connection
 @property (nonatomic) __block SCNetworkStatus networkStatus;
 // Size selected for grid
@@ -279,14 +279,14 @@ typedef enum {
      }];
     
     // Configure banner
-    GADBannerView *banner = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner];
-    // AdMob key is stored in a plist file, not tracked in git repository
-    NSString *adMobPlist = [[NSBundle mainBundle] pathForResource:@"AdMobKey" ofType:@"plist"];
-    NSDictionary *adMobKey = [[NSDictionary alloc] initWithContentsOfFile:adMobPlist];
-    banner.adUnitID = [adMobKey objectForKey:@"key"];
-    banner.rootViewController = self;
-    [_bannerView addSubview:banner];
-    [banner loadRequest:[GADRequest request]];
+//    GADBannerView *banner = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner];
+//    // AdMob key is stored in a plist file, not tracked in git repository
+//    NSString *adMobPlist = [[NSBundle mainBundle] pathForResource:@"AdMobKey" ofType:@"plist"];
+//    NSDictionary *adMobKey = [[NSDictionary alloc] initWithContentsOfFile:adMobPlist];
+//    banner.adUnitID = [adMobKey objectForKey:@"key"];
+//    banner.rootViewController = self;
+//    [_bannerView addSubview:banner];
+//    [banner loadRequest:[GADRequest request]];
     
     [_sourceBtn setHidden:YES];
     [_startGameBtn setHidden:YES];
@@ -374,7 +374,7 @@ typedef enum {
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex != actionSheet.cancelButtonIndex) {
-        _twitterCallback([_twitterAccounts objectAtIndex:buttonIndex]);
+        //_twitterCallback([_twitterAccounts objectAtIndex:buttonIndex]);
     } else {
         [self enableButtons];
         [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -582,39 +582,40 @@ typedef enum {
  */
 - (void)loginInFacebookAndPreparePhotosOnSuccess:(void(^)())success onFail:(void(^)(NSError *error))fail
 {
-    BOOL openedWithCachedToken = [FBSession openActiveSessionWithAllowLoginUI:NO];
-    FLPLogDebug(@"Facebook cached token %d", openedWithCachedToken);
-    
-    // Facebook session is open
-    if (openedWithCachedToken) {
-                _photoSource = [[FLPFacebookPhotoSource alloc] init];
-                success();
-
-    // No Facebook session, login
-    } else {
-        [FBSession openActiveSessionWithReadPermissions:kFacebookPermissions
-                                           allowLoginUI:YES
-                                      completionHandler:^(FBSession *session, FBSessionState state, NSError *error) {
-                                          
-                                          if (state == FBSessionStateOpen) {
-                                              FLPLogWarn(@"Facebook session opened");
-                                              _photoSource = [[FLPFacebookPhotoSource alloc] init];
-                                              [FBSession setActiveSession:session];
-                                              
-                                              success();
-                                              
-                                          } else if (state == FBSessionStateClosed || state==FBSessionStateClosedLoginFailed) {
-                                              FLPLogWarn(@"Facebook session closed or failed");
-                                          }
-                                          
-                                          if (error) {
-                                              FLPLogError(@"Facebook session error: %@", [error localizedDescription]);
-                                              fail([NSError errorWithDomain:@""
-                                                                       code:KErrorLogin
-                                                                   userInfo:nil]);
-                                          }
-                                      }];
-    }
+    // TODO: uncomment
+//    BOOL openedWithCachedToken = [FBSession openActiveSessionWithAllowLoginUI:NO];
+//    FLPLogDebug(@"Facebook cached token %d", openedWithCachedToken);
+//    
+//    // Facebook session is open
+//    if (openedWithCachedToken) {
+//                _photoSource = [[FLPFacebookPhotoSource alloc] init];
+//                success();
+//
+//    // No Facebook session, login
+//    } else {
+//        [FBSession openActiveSessionWithReadPermissions:kFacebookPermissions
+//                                           allowLoginUI:YES
+//                                      completionHandler:^(FBSession *session, FBSessionState state, NSError *error) {
+//                                          
+//                                          if (state == FBSessionStateOpen) {
+//                                              FLPLogWarn(@"Facebook session opened");
+//                                              _photoSource = [[FLPFacebookPhotoSource alloc] init];
+//                                              [FBSession setActiveSession:session];
+//                                              
+//                                              success();
+//                                              
+//                                          } else if (state == FBSessionStateClosed || state==FBSessionStateClosedLoginFailed) {
+//                                              FLPLogWarn(@"Facebook session closed or failed");
+//                                          }
+//                                          
+//                                          if (error) {
+//                                              FLPLogError(@"Facebook session error: %@", [error localizedDescription]);
+//                                              fail([NSError errorWithDomain:@""
+//                                                                       code:KErrorLogin
+//                                                                   userInfo:nil]);
+//                                          }
+//                                      }];
+//    }
 }
 
 /**
@@ -628,66 +629,66 @@ typedef enum {
     NSString *twitterPlist = [[NSBundle mainBundle] pathForResource:@"TwitterKeys" ofType:@"plist"];
     NSDictionary *twitterKeys = [[NSDictionary alloc] initWithContentsOfFile:twitterPlist];
     
-    [PFTwitterSignOn setCredentialsWithConsumerKey:[twitterKeys objectForKey:@"consumerKey"]
-                                         andSecret:[twitterKeys objectForKey:@"secretKey"]];
+//    [PFTwitterSignOn setCredentialsWithConsumerKey:[twitterKeys objectForKey:@"consumerKey"]
+//                                         andSecret:[twitterKeys objectForKey:@"secretKey"]];
     
     // Login with Twitter
     // Two ways to login:
     // a) with user account in device, through the selectCallback in this method
     // b) with Twitter login web view, through |application:openURL:sourceApplication:annotation:| method in app delegate
     
-    [PFTwitterSignOn requestAuthenticationWithSelectCallback:^(NSArray *accounts, twitterAccountCallback callback) {
-        FLPLogWarn(@"more than one Twitter account");
-        
-        // User has Twitter accounts on device, use action sheet
-        
-        // Get Twitter account names
-        _twitterAccounts = accounts;
-        NSMutableArray *accountNames = [[accounts valueForKey:@"username"] mutableCopy];
-        [accountNames enumerateObjectsUsingBlock:^(NSString *accountName, NSUInteger index, BOOL *stop){
-            [accountNames replaceObjectAtIndex:index withObject:[NSString stringWithFormat:@"@%@",accountName]];
-        }];
-        
-        // Build and configure action sheet
-        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"MAIN_SELECT_TWITTER", @"")
-                                                                 delegate:self
-                                                        cancelButtonTitle:nil
-                                                   destructiveButtonTitle:nil
-                                                        otherButtonTitles:nil];
-        for (NSString *title in accountNames) {
-            [actionSheet addButtonWithTitle:title];
-        }
-        [actionSheet addButtonWithTitle:NSLocalizedString(@"OTHER_CANCEL", @"")];
-        [actionSheet setCancelButtonIndex:accountNames.count];
-        
-        // Callback when user selects an option
-        _twitterCallback = callback;
-        
-        [actionSheet showInView:self.view];
-        
-    } andCompletion:^(NSDictionary *accountInfo, NSError *error) {
-        
-        if (error) {
-            FLPLogError(@"error: %@", [error localizedDescription]);
-            fail([NSError errorWithDomain:@""
-                                     code:KErrorLogin
-                                 userInfo:nil]);
-        } else {
-            FLPLogWarn(@"login with Twitter successful");
-        
-            // Logged via web or via local account, at this point we have NSDictionary with user data
-
-            [self unsubscribeToTwitterNotifications];
-            
-            [(FLPTwitterPhotoSource *)_photoSource setOauthConsumerKey:[twitterKeys objectForKey:@"consumerKey"]
-                                                        consumerSecret:[twitterKeys objectForKey:@"secretKey"]
-                                                            oauthToken:accountInfo[@"accessToken"]
-                                                      oauthTokenSecret:accountInfo[@"tokenSecret"]
-                                                             screeName:accountInfo[@"screen_name"]];
-            
-            success();
-        }
-    }];
+//    [PFTwitterSignOn requestAuthenticationWithSelectCallback:^(NSArray *accounts, twitterAccountCallback callback) {
+//        FLPLogWarn(@"more than one Twitter account");
+//        
+//        // User has Twitter accounts on device, use action sheet
+//        
+//        // Get Twitter account names
+//        _twitterAccounts = accounts;
+//        NSMutableArray *accountNames = [[accounts valueForKey:@"username"] mutableCopy];
+//        [accountNames enumerateObjectsUsingBlock:^(NSString *accountName, NSUInteger index, BOOL *stop){
+//            [accountNames replaceObjectAtIndex:index withObject:[NSString stringWithFormat:@"@%@",accountName]];
+//        }];
+//        
+//        // Build and configure action sheet
+//        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"MAIN_SELECT_TWITTER", @"")
+//                                                                 delegate:self
+//                                                        cancelButtonTitle:nil
+//                                                   destructiveButtonTitle:nil
+//                                                        otherButtonTitles:nil];
+//        for (NSString *title in accountNames) {
+//            [actionSheet addButtonWithTitle:title];
+//        }
+//        [actionSheet addButtonWithTitle:NSLocalizedString(@"OTHER_CANCEL", @"")];
+//        [actionSheet setCancelButtonIndex:accountNames.count];
+//        
+//        // Callback when user selects an option
+//        _twitterCallback = callback;
+//        
+//        [actionSheet showInView:self.view];
+//        
+//    } andCompletion:^(NSDictionary *accountInfo, NSError *error) {
+//        
+//        if (error) {
+//            FLPLogError(@"error: %@", [error localizedDescription]);
+//            fail([NSError errorWithDomain:@""
+//                                     code:KErrorLogin
+//                                 userInfo:nil]);
+//        } else {
+//            FLPLogWarn(@"login with Twitter successful");
+//        
+//            // Logged via web or via local account, at this point we have NSDictionary with user data
+//
+//            [self unsubscribeToTwitterNotifications];
+//            
+//            [(FLPTwitterPhotoSource *)_photoSource setOauthConsumerKey:[twitterKeys objectForKey:@"consumerKey"]
+//                                                        consumerSecret:[twitterKeys objectForKey:@"secretKey"]
+//                                                            oauthToken:accountInfo[@"accessToken"]
+//                                                      oauthTokenSecret:accountInfo[@"tokenSecret"]
+//                                                             screeName:accountInfo[@"screen_name"]];
+//            
+//            success();
+//        }
+//    }];
 }
 
 - (void)loginInPhotoSourceAndPreparePhotosOnSuccess:(void(^)())success onFail:(void(^)(NSError *error))fail
