@@ -9,12 +9,12 @@
 #import <UIKit/UIKit.h>
 
 #import "FLPBaseViewController.h"
-#import "Flip-Swift.h"
 
-@class MainPresenterDelegate;
+@protocol MainPresenterDelegate;
+@protocol MainViewControllerDelegate;
 
-@interface FLPMainViewController : UIViewController
+@interface FLPMainViewController : FLPBaseViewController <MainViewControllerDelegate>
 
-//@property (strong, nonatomic, nonnull) id<MainPresenterDelegate> presenterDelegate;
+@property (strong, nonatomic, nonnull) id<MainPresenterDelegate> presenterDelegate;
 
 @end

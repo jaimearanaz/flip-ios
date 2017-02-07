@@ -9,17 +9,18 @@
 import Foundation
 import UIKit
 
-class Router {
+@objc class Router: NSObject {
     
     static let sharedInstance = Router()
- 
-    lazy var mainPresenter: MainPresenter = {
+    
+    var presenterInstances = PresenterInstances()
+    
+    lazy var navigationController: UINavigationController = {
         
-        let presenter = MainPresenter()
-        let viewController = FLPMainViewController(nibName: "FLPMainViewController", bundle: nil)
-        presenter.controllerDelegate = viewController
-        //viewController.presenterDelegate = presenter
+        let rootViewController = Router.sharedInstance.presenterInstances.mainPresenter.viewController
+        let navigationController = UINavigationController(rootViewController: rootViewController)
+        navigationController.isNavigationBarHidden = true
         
-        return presenter
+        return navigationController
     }()
 }

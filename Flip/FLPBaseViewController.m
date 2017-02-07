@@ -14,4 +14,11 @@
 
 @implementation FLPBaseViewController
 
+#pragma mark - FLPBaseViewControllerDelegate methods
+
+- (UIViewController *)viewController
+{
+    return self;
+}
+
 @end

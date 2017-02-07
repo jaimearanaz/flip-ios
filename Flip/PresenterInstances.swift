@@ -10,4 +10,13 @@ import Foundation
 
 class PresenterInstances {
     
+    lazy var mainPresenter: MainPresenter = {
+        
+        let presenter = MainPresenter()
+        let viewController = FLPMainViewController(nibName: "FLPMainViewController", bundle: nil)
+        presenter.controllerDelegate = viewController
+        viewController.presenterDelegate = presenter
+        
+        return presenter
+    }()
 }
