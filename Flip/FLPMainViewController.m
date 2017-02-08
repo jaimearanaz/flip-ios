@@ -14,4 +14,11 @@
 
 @implementation FLPMainViewController
 
+#pragma mark - MainViewControllerDelegate methods
+
+- (void)showRecordsWithSmall:(NSTimeInterval)small medium:(NSTimeInterval)medium big:(NSTimeInterval)big
+{
+    // TODO: implement
+}
+
 @end

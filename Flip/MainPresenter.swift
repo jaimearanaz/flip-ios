@@ -29,4 +29,11 @@ class MainPresenter: FLPBasePresenter, MainPresenterDelegate {
             return self.realControllerDelegate.viewController
         }
     }
+    
+    // MARK: - MainPresenterDelegate methods
+        
+    func didSelectOptions(source: GameSource, size: GameSize) {
+        
+        // TODO: implement
+    }
 }

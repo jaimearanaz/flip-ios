@@ -10,4 +10,5 @@ import Foundation
 
 @objc protocol MainViewControllerDelegate: FLPBaseViewControllerDelegate {
 
+    func showRecords(small: TimeInterval, medium: TimeInterval, big: TimeInterval)
 }
