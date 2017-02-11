@@ -8,8 +8,11 @@
 
 #import "FLPMainViewController.h"
 
+#import "FLPTitleLetterView.h"
+
 @interface FLPMainViewController () <SourceViewDelegate>
 
+@property (weak, nonatomic) IBOutlet TitleView *titleView;
 @property (weak, nonatomic) IBOutlet SourceView *sourceView;
 
 @end
@@ -23,6 +26,13 @@
     [super viewDidLoad];
     
     self.sourceView.delegate = self;
+    [self.titleView startAnimation];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    [self.titleView stopAnimation];
 }
 
 #pragma mark - SourceViewDelegate methods

@@ -1,5 +1,5 @@
 //
-//  SourceView.swift
+//  ViewFromNib.swift
 //  Flip
 //
 //  Created by Jaime on 11/02/2017.
@@ -7,18 +7,10 @@
 //
 
 import Foundation
-import UIKit
 
-@objc class SourceView: UIView {
+@objc class UIViewFromNib: UIView {
     
     @IBOutlet var view: UIView!
-    @IBOutlet var title: UILabel!
-    @IBOutlet var camera: UIButton!
-    @IBOutlet var facebook: UIButton!
-    @IBOutlet var twitter: UIButton!
-    @IBOutlet var showRecords: UIButton!
-    
-    var delegate: SourceViewDelegate!
     
     // MARK: Lifecycle methods
     
@@ -30,31 +22,9 @@ import UIKit
         addSubview(view)
     }
     
-    // MARK: Action methods
-    
-    @IBAction func didSelectCamera() {
-        
-        delegate.didSelectCamera()
-    }
-    
-    @IBAction func didSelectFacebook() {
-        
-        delegate.didSelectFacebook()
-    }
-    
-    @IBAction func didSelectTwitter() {
-        
-        delegate.didSelectTwitter()
-    }
-    
-    @IBAction func didSelectRecords() {
-     
-        delegate.didSelectRecords()
-    }
-    
     // MARK: Private methods
     
-    fileprivate func loadViewFromNib() -> UIView {
+    private func loadViewFromNib() -> UIView {
         
         let bundle = Bundle(for: type(of: self))
         let nib = UINib(nibName: String(describing: type(of: self)), bundle: bundle)
@@ -63,7 +33,7 @@ import UIKit
         return nibView
     }
     
-    fileprivate func setupView() {
+    private func setupView() {
         
         view = loadViewFromNib()
         view.frame = bounds

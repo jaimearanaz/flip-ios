@@ -61,6 +61,9 @@
 		6FF528E41E4F6A7A0081747E /* SourceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF528E31E4F6A7A0081747E /* SourceView.swift */; };
 		6FF528E61E4F6A8B0081747E /* SourceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FF528E51E4F6A8B0081747E /* SourceView.xib */; };
 		6FF528E81E4F71EE0081747E /* SourceViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF528E71E4F71EE0081747E /* SourceViewDelegate.swift */; };
+		6FF528EA1E4F75950081747E /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF528E91E4F75950081747E /* TitleView.swift */; };
+		6FF528EC1E4F75AC0081747E /* TitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FF528EB1E4F75AC0081747E /* TitleView.xib */; };
+		6FF528F01E4F78430081747E /* UIViewFromNib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF528EF1E4F78430081747E /* UIViewFromNib.swift */; };
 		6FF58536197FC95100926DF9 /* FLPCameraPhotoSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF58535197FC95100926DF9 /* FLPCameraPhotoSource.m */; };
 		6FF58538197FCA5800926DF9 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FF58537197FCA5800926DF9 /* AssetsLibrary.framework */; };
 		6FFC51671976659800668F82 /* FLPPhotoSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFC51661976659800668F82 /* FLPPhotoSource.m */; };
@@ -175,6 +178,9 @@
 		6FF528E31E4F6A7A0081747E /* SourceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SourceView.swift; sourceTree = "<group>"; };
 		6FF528E51E4F6A8B0081747E /* SourceView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SourceView.xib; sourceTree = "<group>"; };
 		6FF528E71E4F71EE0081747E /* SourceViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SourceViewDelegate.swift; sourceTree = "<group>"; };
+		6FF528E91E4F75950081747E /* TitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
+		6FF528EB1E4F75AC0081747E /* TitleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TitleView.xib; sourceTree = "<group>"; };
+		6FF528EF1E4F78430081747E /* UIViewFromNib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewFromNib.swift; sourceTree = "<group>"; };
 		6FF58534197FC95100926DF9 /* FLPCameraPhotoSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPCameraPhotoSource.h; sourceTree = "<group>"; };
 		6FF58535197FC95100926DF9 /* FLPCameraPhotoSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPCameraPhotoSource.m; sourceTree = "<group>"; };
 		6FF58537197FCA5800926DF9 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
@@ -291,6 +297,7 @@
 				6F5579F91E4625C6008FB1BB /* base classes */,
 				6F5579E81E46249D008FB1BB /* app navigation */,
 				6F5579EC1E4624FD008FB1BB /* use cases */,
+				6FF528F11E4F78C70081747E /* views */,
 				6F19F69719A3A8470047F269 /* sounds */,
 				6F55BE8C19A1616E00FC60E7 /* fonts */,
 				6F8782EE199BB0B600AA118E /* adMob */,
@@ -359,8 +366,6 @@
 			children = (
 				6F33AC7A1998C14000FBF9C4 /* FLPCollectionViewCell.h */,
 				6F33AC7B1998C14000FBF9C4 /* FLPCollectionViewCell.m */,
-				6F03D18519A678DE003EE79B /* FLPTitleLetterView.h */,
-				6F03D18619A678DE003EE79B /* FLPTitleLetterView.m */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -394,6 +399,10 @@
 		6F5579ED1E462514008FB1BB /* main */ = {
 			isa = PBXGroup;
 			children = (
+				6F03D18519A678DE003EE79B /* FLPTitleLetterView.h */,
+				6F03D18619A678DE003EE79B /* FLPTitleLetterView.m */,
+				6FF528EB1E4F75AC0081747E /* TitleView.xib */,
+				6FF528E91E4F75950081747E /* TitleView.swift */,
 				6FF528E51E4F6A8B0081747E /* SourceView.xib */,
 				6FF528E31E4F6A7A0081747E /* SourceView.swift */,
 				6FF528E71E4F71EE0081747E /* SourceViewDelegate.swift */,
@@ -457,6 +466,14 @@
 				6F8782FB199BB0DC00AA118E /* libGoogleAdMobAds.a */,
 			);
 			name = adMob;
+			sourceTree = "<group>";
+		};
+		6FF528F11E4F78C70081747E /* views */ = {
+			isa = PBXGroup;
+			children = (
+				6FF528EF1E4F78430081747E /* UIViewFromNib.swift */,
+			);
+			name = views;
 			sourceTree = "<group>";
 		};
 		6FFC51641976655B00668F82 /* sources */ = {
@@ -588,6 +605,7 @@
 				6FAD88E01A25F7FB00E08609 /* CantoraOne-Regular.ttf in Resources */,
 				6F19F69D19A3AC760047F269 /* polaroid-camera-take-picture-01.wav in Resources */,
 				6F1AA1631973EAA400101766 /* InfoPlist.strings in Resources */,
+				6FF528EC1E4F75AC0081747E /* TitleView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -705,6 +723,7 @@
 				6F7B2DE01980FC9200C9FE69 /* FLPGridViewController.m in Sources */,
 				6F5579F11E462565008FB1BB /* FLPMainViewController.m in Sources */,
 				6F557A031E462754008FB1BB /* PresenterInstances.swift in Sources */,
+				6FF528EA1E4F75950081747E /* TitleView.swift in Sources */,
 				6F67A358197FD19600AC9CF5 /* FLPLogFormatter.m in Sources */,
 				6F14872419A0FDE90087527C /* FLPFlipFromRightSegue.m in Sources */,
 				6F3B3A9419825C1C00EA4BA1 /* FLPTwitterPhotoSource.m in Sources */,
@@ -725,6 +744,7 @@
 				6F87A771199A17B400C2303A /* FLPScoreViewController.m in Sources */,
 				6F5579F41E46257A008FB1BB /* MainPresenter.swift in Sources */,
 				6F5AD5C71987ABF600B65D09 /* FLPFacebookPhotoSource.m in Sources */,
+				6FF528F01E4F78430081747E /* UIViewFromNib.swift in Sources */,
 				6F14872119A0FD110087527C /* FLPFlipFromLeftSegue.m in Sources */,
 				6F1AA1691973EAA400101766 /* FLPAppDelegate.m in Sources */,
 				6FB3BEEB1E474707007933CB /* FLPBaseViewController.m in Sources */,
