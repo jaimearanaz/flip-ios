@@ -10,9 +10,10 @@
 
 #import "FLPTitleLetterView.h"
 
-@interface FLPMainViewController () <SourceViewDelegate>
+@interface FLPMainViewController () <SourceViewDelegate, RecordsViewDelegate>
 
 @property (weak, nonatomic) IBOutlet TitleView *titleView;
+@property (weak, nonatomic) IBOutlet RecordsView *recordsView;
 @property (weak, nonatomic) IBOutlet SourceView *sourceView;
 
 @end
@@ -25,6 +26,7 @@
 {
     [super viewDidLoad];
     
+    self.recordsView.delegate = self;
     self.sourceView.delegate = self;
     [self.titleView startAnimation];
 }
@@ -33,6 +35,13 @@
 {
     [super viewDidDisappear:animated];
     [self.titleView stopAnimation];
+}
+
+#pragma mark - RecordsViewDelegate methods
+
+- (void)didSelectStartGame
+{
+    // TODO: implement
 }
 
 #pragma mark - SourceViewDelegate methods

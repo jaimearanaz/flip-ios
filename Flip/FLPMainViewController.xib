@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FLPMainViewController">
             <connections>
+                <outlet property="recordsView" destination="aX4-0e-ZzR" id="H4U-JY-JHD"/>
                 <outlet property="sourceView" destination="bGb-1H-ylJ" id="4rD-An-ytQ"/>
                 <outlet property="titleView" destination="wVe-J2-wsj" id="pxc-yP-Elw"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -24,7 +25,11 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="284"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bGb-1H-ylJ" userLabel="Source view" customClass="SourceView" customModule="Flip" customModuleProvider="target">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aX4-0e-ZzR" userLabel="Records view" customClass="RecordsView" customModule="Flip" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="292" width="375" height="375"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bGb-1H-ylJ" userLabel="Source view" customClass="SourceView" customModule="Flip" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="292" width="375" height="375"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
@@ -32,13 +37,17 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="wVe-J2-wsj" secondAttribute="bottom" constant="383" id="2yL-nl-Pnd"/>
+                <constraint firstAttribute="trailing" secondItem="aX4-0e-ZzR" secondAttribute="trailing" id="7P0-JS-qHy"/>
                 <constraint firstAttribute="bottom" secondItem="bGb-1H-ylJ" secondAttribute="bottom" id="HDe-Bu-bvo"/>
                 <constraint firstItem="bGb-1H-ylJ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="a5B-Uj-Qho"/>
                 <constraint firstItem="wVe-J2-wsj" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="aos-Tj-Yic"/>
+                <constraint firstAttribute="bottom" secondItem="aX4-0e-ZzR" secondAttribute="bottom" id="bnJ-Fm-fmi"/>
+                <constraint firstItem="aX4-0e-ZzR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="dDh-zv-qAQ"/>
                 <constraint firstItem="wVe-J2-wsj" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="dvv-NT-hl2"/>
                 <constraint firstItem="bGb-1H-ylJ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="292" id="kxY-g4-HyB"/>
                 <constraint firstAttribute="trailing" secondItem="bGb-1H-ylJ" secondAttribute="trailing" id="l1V-SL-dAj"/>
                 <constraint firstAttribute="trailing" secondItem="wVe-J2-wsj" secondAttribute="trailing" id="xqr-xl-nRf"/>
+                <constraint firstItem="aX4-0e-ZzR" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="292" id="yjq-nT-oUS"/>
             </constraints>
             <point key="canvasLocation" x="26.5" y="51.5"/>
         </view>
