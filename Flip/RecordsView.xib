@@ -160,9 +160,6 @@
                 </stackView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aWv-p0-4JH">
                     <rect key="frame" x="87" y="617" width="200" height="30"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="200" id="Kr1-N3-qjY"/>
-                    </constraints>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                     <state key="normal" title="Start new game">
                         <color key="titleShadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

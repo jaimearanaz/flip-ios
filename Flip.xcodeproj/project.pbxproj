@@ -67,6 +67,7 @@
 		6FF528F31E4F8BF60081747E /* RecordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF528F21E4F8BF60081747E /* RecordsView.swift */; };
 		6FF528F51E4F8C020081747E /* RecordsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FF528F41E4F8C020081747E /* RecordsView.xib */; };
 		6FF528F71E4F91E10081747E /* RecordsViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF528F61E4F91E10081747E /* RecordsViewDelegate.swift */; };
+		6FF528FA1E4F96F50081747E /* UIView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF528F91E4F96F50081747E /* UIView+Constraints.swift */; };
 		6FF58536197FC95100926DF9 /* FLPCameraPhotoSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF58535197FC95100926DF9 /* FLPCameraPhotoSource.m */; };
 		6FF58538197FCA5800926DF9 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FF58537197FCA5800926DF9 /* AssetsLibrary.framework */; };
 		6FFC51671976659800668F82 /* FLPPhotoSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFC51661976659800668F82 /* FLPPhotoSource.m */; };
@@ -187,6 +188,7 @@
 		6FF528F21E4F8BF60081747E /* RecordsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordsView.swift; sourceTree = "<group>"; };
 		6FF528F41E4F8C020081747E /* RecordsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecordsView.xib; sourceTree = "<group>"; };
 		6FF528F61E4F91E10081747E /* RecordsViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordsViewDelegate.swift; sourceTree = "<group>"; };
+		6FF528F91E4F96F50081747E /* UIView+Constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Constraints.swift"; sourceTree = "<group>"; };
 		6FF58534197FC95100926DF9 /* FLPCameraPhotoSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPCameraPhotoSource.h; sourceTree = "<group>"; };
 		6FF58535197FC95100926DF9 /* FLPCameraPhotoSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPCameraPhotoSource.m; sourceTree = "<group>"; };
 		6FF58537197FCA5800926DF9 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
@@ -304,6 +306,7 @@
 				6F5579E81E46249D008FB1BB /* app navigation */,
 				6F5579EC1E4624FD008FB1BB /* use cases */,
 				6FF528F11E4F78C70081747E /* views */,
+				6FF528F81E4F96E50081747E /* extensions */,
 				6F19F69719A3A8470047F269 /* sounds */,
 				6F55BE8C19A1616E00FC60E7 /* fonts */,
 				6F8782EE199BB0B600AA118E /* adMob */,
@@ -483,6 +486,14 @@
 				6FF528EF1E4F78430081747E /* UIViewFromNib.swift */,
 			);
 			name = views;
+			sourceTree = "<group>";
+		};
+		6FF528F81E4F96E50081747E /* extensions */ = {
+			isa = PBXGroup;
+			children = (
+				6FF528F91E4F96F50081747E /* UIView+Constraints.swift */,
+			);
+			name = extensions;
 			sourceTree = "<group>";
 		};
 		6FFC51641976655B00668F82 /* sources */ = {
@@ -745,6 +756,7 @@
 				6FF58536197FC95100926DF9 /* FLPCameraPhotoSource.m in Sources */,
 				6F1AA1651973EAA400101766 /* main.m in Sources */,
 				6F5579F61E46258D008FB1BB /* MainViewControllerDelegate.swift in Sources */,
+				6FF528FA1E4F96F50081747E /* UIView+Constraints.swift in Sources */,
 				6F33AC7C1998C14000FBF9C4 /* FLPCollectionViewCell.m in Sources */,
 				6FF528E81E4F71EE0081747E /* SourceViewDelegate.swift in Sources */,
 				6F14871B19A0F5E90087527C /* FLPCoverFromLeftSegue.m in Sources */,
