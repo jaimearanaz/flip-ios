@@ -12,13 +12,15 @@
 
 #define kSlideAnimationDuration 0.3
 
-@interface FLPMainViewController () <SourceViewDelegate, RecordsViewDelegate>
+@interface FLPMainViewController () <RecordsViewDelegate, SourceViewDelegate, SizeViewDelegate>
 
 @property (weak, nonatomic) IBOutlet TitleView *titleView;
 @property (weak, nonatomic) IBOutlet RecordsView *recordsView;
 @property (weak, nonatomic) IBOutlet SourceView *sourceView;
+@property (weak, nonatomic) IBOutlet SizeView *sizeView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *recordsLeading;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *sourceLeading;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *sizeLeading;
 
 @property (nonatomic) CGFloat screenWidth;
 
@@ -49,6 +51,7 @@
     
     self.recordsView.delegate = self;
     self.sourceView.delegate = self;
+    self.sizeView.delegate = self;
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -75,22 +78,44 @@
 
 - (void)didSelectCamera
 {
-    // TODO: implement
+    [self showSizeView];
 }
 
 - (void)didSelectFacebook
 {
-    // TODO: implement
+    [self showSizeView];
 }
 
 - (void)didSelectTwitter
 {
-    // TODO: implement
+    [self showSizeView];
 }
 
 - (void)didSelectRecords
 {
     [self showRecordsView];
+}
+
+#pragma mark - SizeViewDelegate
+
+- (void)didSelectSmall
+{
+    // TODO: implement
+}
+
+- (void)didSelectMedium
+{
+    // TODO: implement
+}
+
+- (void)didSelectBig
+{
+    // TODO: implement
+}
+
+- (void)didSelectShowSource
+{
+    [self showSourceView:YES];
 }
 
 #pragma mark - MainViewControllerDelegate methods
@@ -126,16 +151,34 @@
     }
 }
 
+- (void)showSizeView
+{
+    [UIView animateWithDuration:kSlideAnimationDuration
+                     animations:^{
+                         [self updateConstraintsToShowSizeView];
+                         [self.view layoutIfNeeded];
+                     }];
+}
+
 - (void)updateConstraintsToShowRecordsView
 {
     self.recordsLeading.constant = 0;
     self.sourceLeading.constant = self.screenWidth;
+    self.sizeLeading.constant = self.screenWidth * 2;
 }
 
 - (void)updateConstraintsToShowSourceView
 {
-    self.sourceLeading.constant = 0;
     self.recordsLeading.constant = -self.screenWidth;
+    self.sourceLeading.constant = 0;
+    self.sizeLeading.constant = self.screenWidth;
+}
+
+- (void)updateConstraintsToShowSizeView
+{
+    self.recordsLeading.constant = -(self.screenWidth * 2);
+    self.sourceLeading.constant = -self.screenWidth;
+    self.sizeLeading.constant = 0;
 }
 
 @end

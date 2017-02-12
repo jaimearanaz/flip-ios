@@ -12,6 +12,8 @@
             <connections>
                 <outlet property="recordsLeading" destination="dDh-zv-qAQ" id="rhG-ND-oNv"/>
                 <outlet property="recordsView" destination="aX4-0e-ZzR" id="H4U-JY-JHD"/>
+                <outlet property="sizeLeading" destination="XcD-AP-nYP" id="jrR-ao-WKJ"/>
+                <outlet property="sizeView" destination="hVC-eg-LNh" id="cm1-LF-hQq"/>
                 <outlet property="sourceLeading" destination="a5B-Uj-Qho" id="CRs-zg-1ln"/>
                 <outlet property="sourceView" destination="bGb-1H-ylJ" id="4rD-An-ytQ"/>
                 <outlet property="titleView" destination="wVe-J2-wsj" id="pxc-yP-Elw"/>
@@ -35,20 +37,28 @@
                     <rect key="frame" x="0.0" y="292" width="375" height="375"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hVC-eg-LNh" userLabel="Size view" customClass="SizeView" customModule="Flip" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="292" width="375" height="375"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="wVe-J2-wsj" secondAttribute="bottom" constant="383" id="2yL-nl-Pnd"/>
                 <constraint firstAttribute="bottom" secondItem="bGb-1H-ylJ" secondAttribute="bottom" id="HDe-Bu-bvo"/>
+                <constraint firstItem="hVC-eg-LNh" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="XcD-AP-nYP"/>
                 <constraint firstItem="bGb-1H-ylJ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="a5B-Uj-Qho"/>
                 <constraint firstItem="wVe-J2-wsj" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="aos-Tj-Yic"/>
                 <constraint firstItem="aX4-0e-ZzR" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="b6G-VP-CJH"/>
                 <constraint firstAttribute="bottom" secondItem="aX4-0e-ZzR" secondAttribute="bottom" id="bnJ-Fm-fmi"/>
                 <constraint firstItem="aX4-0e-ZzR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="dDh-zv-qAQ"/>
                 <constraint firstItem="wVe-J2-wsj" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="dvv-NT-hl2"/>
+                <constraint firstAttribute="bottom" secondItem="hVC-eg-LNh" secondAttribute="bottom" id="fZL-v4-FWT"/>
                 <constraint firstItem="bGb-1H-ylJ" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="fkU-7i-xeJ"/>
+                <constraint firstItem="hVC-eg-LNh" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="292" id="ghG-AY-4Xb"/>
                 <constraint firstItem="bGb-1H-ylJ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="292" id="kxY-g4-HyB"/>
                 <constraint firstAttribute="trailing" secondItem="wVe-J2-wsj" secondAttribute="trailing" id="xqr-xl-nRf"/>
+                <constraint firstItem="hVC-eg-LNh" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="yMA-PP-csr"/>
                 <constraint firstItem="aX4-0e-ZzR" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="292" id="yjq-nT-oUS"/>
             </constraints>
             <point key="canvasLocation" x="26.5" y="51.5"/>
