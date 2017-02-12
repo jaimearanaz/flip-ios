@@ -8,6 +8,11 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Pacifico.ttf">
+            <string>Pacifico</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SourceView" customModule="Flip" customModuleProvider="target">
             <connections>
@@ -31,35 +36,58 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="PQQ-TY-s6r">
-                    <rect key="frame" x="154" y="268.5" width="67" height="130"/>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Jn8-Lw-YTp">
+                    <rect key="frame" x="87.5" y="278.5" width="200" height="110"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kvP-bB-XSC">
-                            <rect key="frame" x="0.0" y="0.0" width="67" height="30"/>
+                            <rect key="frame" x="0.0" y="0.0" width="200" height="30"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <state key="normal" title="Camera"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="200" id="DGH-Eh-jv2"/>
+                                <constraint firstAttribute="height" constant="30" id="YRd-A9-vUk"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Pacifico" family="Pacifico" pointSize="17"/>
+                            <state key="normal" title="Camera" backgroundImage="Camera_button_normal">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="highlighted" backgroundImage="Camera_button_pressed"/>
                             <connections>
                                 <action selector="didSelectCamera" destination="-1" eventType="touchUpInside" id="JfE-wX-Cmz"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LMs-GK-W8W">
-                            <rect key="frame" x="0.0" y="50" width="67" height="30"/>
+                            <rect key="frame" x="0.0" y="40" width="200" height="30"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <state key="normal" title="Facebook"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="200" id="WO3-YT-8Tb"/>
+                                <constraint firstAttribute="height" constant="30" id="jNw-V8-0Gt"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Pacifico" family="Pacifico" pointSize="17"/>
+                            <state key="normal" title="Facebook" backgroundImage="Facebook_button_normal">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="highlighted" backgroundImage="Facebook_button_pressed"/>
                             <connections>
                                 <action selector="didSelectFacebook" destination="-1" eventType="touchUpInside" id="eMD-5l-v3w"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="abB-wm-Ex0">
-                            <rect key="frame" x="0.0" y="100" width="67" height="30"/>
+                            <rect key="frame" x="0.0" y="80" width="200" height="30"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <state key="normal" title="Twitter"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="200" id="D5V-ty-59W"/>
+                                <constraint firstAttribute="height" constant="30" id="FlQ-pX-jDd"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Pacifico" family="Pacifico" pointSize="17"/>
+                            <state key="normal" title="Twitter" backgroundImage="Twitter_button_normal">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="highlighted" backgroundImage="Twitter_button_pressed"/>
                             <connections>
                                 <action selector="didSelectTwitter" destination="-1" eventType="touchUpInside" id="n69-QK-ojj"/>
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </stackView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lGs-uV-ycS">
                     <rect key="frame" x="127" y="617" width="120" height="30"/>
@@ -79,14 +107,22 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="TTz-au-hUl" secondAttribute="trailing" constant="16" id="C5a-do-JIQ"/>
+                <constraint firstItem="Jn8-Lw-YTp" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Lsk-Z1-xvx"/>
                 <constraint firstItem="TTz-au-hUl" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="NiW-ph-5B5"/>
-                <constraint firstItem="PQQ-TY-s6r" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="cY0-Nv-kPc"/>
+                <constraint firstItem="Jn8-Lw-YTp" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="ckc-0S-z5s"/>
                 <constraint firstAttribute="bottom" secondItem="lGs-uV-ycS" secondAttribute="bottom" constant="20" id="fDL-Dz-h1h"/>
                 <constraint firstItem="lGs-uV-ycS" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="q0p-U5-C5y"/>
                 <constraint firstItem="TTz-au-hUl" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="seN-o4-bKr"/>
-                <constraint firstItem="PQQ-TY-s6r" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="spW-o4-Aqe"/>
             </constraints>
             <point key="canvasLocation" x="24.5" y="51.5"/>
         </view>
     </objects>
+    <resources>
+        <image name="Camera_button_normal" width="200" height="34"/>
+        <image name="Camera_button_pressed" width="200" height="34"/>
+        <image name="Facebook_button_normal" width="200" height="34"/>
+        <image name="Facebook_button_pressed" width="200" height="34"/>
+        <image name="Twitter_button_normal" width="200" height="34"/>
+        <image name="Twitter_button_pressed" width="200" height="34"/>
+    </resources>
 </document>
