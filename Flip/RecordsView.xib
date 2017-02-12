@@ -8,9 +8,22 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="CantoraOne-Regular.ttf">
+            <string>CantoraOne-Regular</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RecordsView" customModule="Flip" customModuleProvider="target">
             <connections>
+                <outlet property="bigLabel" destination="c7k-re-aEK" id="QXz-eB-eAV"/>
+                <outlet property="bigTime" destination="uD2-WO-IVa" id="9uj-E9-1Xe"/>
+                <outlet property="mediumLabel" destination="yll-Ul-i0h" id="Ldh-oO-Mfu"/>
+                <outlet property="mediumTime" destination="ame-wO-5Mn" id="s9d-GU-2yA"/>
+                <outlet property="smallLabel" destination="b1R-b0-Ubo" id="6Um-1G-jdo"/>
+                <outlet property="smallTime" destination="xpE-wo-TJl" id="lhE-vY-4W5"/>
+                <outlet property="startNewGame" destination="aWv-p0-4JH" id="n7N-KO-9QU"/>
+                <outlet property="title" destination="Mn1-6H-gkb" id="Df6-El-slF"/>
                 <outlet property="view" destination="iN0-l3-epB" id="1GH-ta-cCE"/>
             </connections>
         </placeholder>
@@ -29,16 +42,16 @@
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="cTI-TF-ybh">
                     <rect key="frame" x="67.5" y="272" width="240" height="123"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8vo-Q9-QYt" userLabel="Normal view">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8vo-Q9-QYt" userLabel="Small view">
                             <rect key="frame" x="0.0" y="0.0" width="240" height="41"/>
                             <subviews>
-                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Normal" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b1R-b0-Ubo">
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Small" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b1R-b0-Ubo">
                                     <rect key="frame" x="11" y="10" width="91" height="21"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="91" id="7yG-Vq-8D5"/>
                                         <constraint firstAttribute="height" constant="21" id="uxn-y4-ybx"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <fontDescription key="fontDescription" name="CantoraOne-Regular" family="CantoraOne" pointSize="17"/>
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -48,7 +61,7 @@
                                         <constraint firstAttribute="height" constant="21" id="Qca-qC-96z"/>
                                         <constraint firstAttribute="width" constant="91" id="okg-ie-xsx"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <fontDescription key="fontDescription" name="CantoraOne-Regular" family="CantoraOne" pointSize="17"/>
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -81,7 +94,7 @@
                                         <constraint firstAttribute="height" constant="21" id="2k2-t9-2jV"/>
                                         <constraint firstAttribute="width" constant="91" id="kBt-hc-fvo"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <fontDescription key="fontDescription" name="CantoraOne-Regular" family="CantoraOne" pointSize="17"/>
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -91,7 +104,7 @@
                                         <constraint firstAttribute="width" constant="91" id="QWU-l5-c0E"/>
                                         <constraint firstAttribute="height" constant="21" id="ToY-2K-V78"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <fontDescription key="fontDescription" name="CantoraOne-Regular" family="CantoraOne" pointSize="17"/>
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -124,7 +137,7 @@
                                         <constraint firstAttribute="height" constant="21" id="u1F-it-Xlu"/>
                                         <constraint firstAttribute="width" constant="91" id="w2L-zK-MH8"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <fontDescription key="fontDescription" name="CantoraOne-Regular" family="CantoraOne" pointSize="17"/>
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -134,7 +147,7 @@
                                         <constraint firstAttribute="height" constant="21" id="p5f-He-BjL"/>
                                         <constraint firstAttribute="width" constant="91" id="zPM-Hm-8Zj"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <fontDescription key="fontDescription" name="CantoraOne-Regular" family="CantoraOne" pointSize="17"/>
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>

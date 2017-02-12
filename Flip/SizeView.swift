@@ -18,6 +18,14 @@ import Foundation
     
     var delegate: SizeViewDelegate!
     
+    // MARK: - Lifecycle methods
+    
+    override func layoutSubviews() {
+        
+        super.layoutSubviews()
+        localizeTexts()
+    }
+    
     // MARK: - Action methods
     
     @IBAction func didSelectSmall() {
@@ -40,4 +48,16 @@ import Foundation
         delegate.didSelectShowSource()
     }
 
+    // MARK: - Private methods
+    
+    fileprivate func localizeTexts() {
+        
+        title.text =  NSLocalizedString("MAIN_SELECT_GRID", comment: "Title for size screen")
+        
+        small.setTitle(NSLocalizedString("MAIN_SMALL", comment: "Button for small size"), for: .normal)
+        medium.setTitle(NSLocalizedString("MAIN_MEDIUM", comment: "Button for medium size"), for: .normal)
+        big.setTitle(NSLocalizedString("MAIN_BIG", comment: "Button for big size"), for: .normal)
+        
+        showSource.setTitle(NSLocalizedString("MAIN_SOURCE", comment: "Button to change source"), for: .normal)
+    }
 }

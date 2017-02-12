@@ -9,9 +9,8 @@
 import Foundation
 import UIKit
 
-@objc class SourceView: UIView {
+@objc class SourceView: UIViewFromNib {
     
-    @IBOutlet var view: UIView!
     @IBOutlet var title: UILabel!
     @IBOutlet var camera: UIButton!
     @IBOutlet var facebook: UIButton!
@@ -20,14 +19,12 @@ import UIKit
     
     var delegate: SourceViewDelegate!
     
-    // MARK: Lifecycle methods
+    // MARK: - Lifecycle methods
     
-    override func awakeFromNib() {
+    override func layoutSubviews() {
         
-        super.awakeFromNib()
-        
-        setupView()
-        addSubview(view)
+        super.layoutSubviews()
+        localizeTexts()
     }
     
     // MARK: Action methods
@@ -53,21 +50,11 @@ import UIKit
     }
     
     // MARK: Private methods
-    
-    fileprivate func loadViewFromNib() -> UIView {
+
+    fileprivate func localizeTexts() {
         
-        let bundle = Bundle(for: type(of: self))
-        let nib = UINib(nibName: String(describing: type(of: self)), bundle: bundle)
-        let nibView = nib.instantiate(withOwner: self, options: nil).first as! UIView
-        
-        return nibView
-    }
-    
-    fileprivate func setupView() {
-        
-        view = loadViewFromNib()
-        view.frame = bounds
-        view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        view.translatesAutoresizingMaskIntoConstraints = true
+        self.title.text = NSLocalizedString("MAIN_SELECT_SOURCE", comment: "Title for selecting source")
+        self.camera.setTitle(NSLocalizedString("MAIN_CAMERA", comment: "Camera option"), for: .normal)
+        self.showRecords.setTitle(NSLocalizedString("MAIN_RECORDS", comment: "Button to show records"), for: .normal)
     }
 }
