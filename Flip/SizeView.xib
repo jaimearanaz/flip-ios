@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -25,6 +26,7 @@
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select a size for the grid" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UFO-Z0-WJP">
                     <rect key="frame" x="16" y="20" width="343" height="20.5"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20.5" id="yZF-lY-8ib"/>
                     </constraints>
@@ -32,21 +34,12 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ide-RB-xTq">
-                    <rect key="frame" x="140" y="617" width="94" height="30"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="94" id="n9x-yE-Zun"/>
-                    </constraints>
-                    <state key="normal" title="Show source"/>
-                    <connections>
-                        <action selector="didSelectShowSource" destination="-1" eventType="touchUpInside" id="So1-es-L06"/>
-                    </connections>
-                </button>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="eAv-YF-ida">
                     <rect key="frame" x="160" y="268" width="55" height="130"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cZH-Ic-XIQ">
                             <rect key="frame" x="0.0" y="0.0" width="55" height="30"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <state key="normal" title="Small"/>
                             <connections>
                                 <action selector="didSelectSmall" destination="-1" eventType="touchUpInside" id="KKb-PT-TQ5"/>
@@ -54,6 +47,7 @@
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iat-om-phs">
                             <rect key="frame" x="0.0" y="50" width="55" height="30"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <state key="normal" title="Medium"/>
                             <connections>
                                 <action selector="didSelectMedium" destination="-1" eventType="touchUpInside" id="9Jr-cW-2BF"/>
@@ -61,15 +55,31 @@
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jRL-kW-Wh6">
                             <rect key="frame" x="0.0" y="100" width="55" height="30"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <state key="normal" title="Big"/>
                             <connections>
                                 <action selector="didSelectBig" destination="-1" eventType="touchUpInside" id="xUh-Zr-Ll9"/>
                             </connections>
                         </button>
                     </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </stackView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ide-RB-xTq">
+                    <rect key="frame" x="127" y="617" width="120" height="30"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="120" id="n9x-yE-Zun"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                    <state key="normal" title="Show source">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="didSelectShowSource" destination="-1" eventType="touchUpInside" id="So1-es-L06"/>
+                    </connections>
+                </button>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="UFO-Z0-WJP" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="7ae-DT-PeX"/>
                 <constraint firstItem="UFO-Z0-WJP" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="N1x-8w-4oR"/>

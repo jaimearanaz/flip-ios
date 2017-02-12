@@ -23,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *sizeLeading;
 
 @property (nonatomic) CGFloat screenWidth;
+@property (nonatomic) GameSource selectedSource;
 
 @end
 
@@ -78,16 +79,19 @@
 
 - (void)didSelectCamera
 {
+    self.selectedSource = GameSourceCamera;
     [self showSizeView];
 }
 
 - (void)didSelectFacebook
 {
+    self.selectedSource = GameSourceFacebook;
     [self showSizeView];
 }
 
 - (void)didSelectTwitter
 {
+    self.selectedSource = GameSourceTwitter;
     [self showSizeView];
 }
 
@@ -100,17 +104,17 @@
 
 - (void)didSelectSmall
 {
-    // TODO: implement
+    [self.presenterDelegate didSelectOptionsWithSource:self.selectedSource size:GameSizeSmall];
 }
 
 - (void)didSelectMedium
 {
-    // TODO: implement
+    [self.presenterDelegate didSelectOptionsWithSource:self.selectedSource size:GameSizeMedium];
 }
 
 - (void)didSelectBig
 {
-    // TODO: implement
+    [self.presenterDelegate didSelectOptionsWithSource:self.selectedSource size:GameSizeBig];
 }
 
 - (void)didSelectShowSource
