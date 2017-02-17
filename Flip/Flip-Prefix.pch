@@ -15,6 +15,7 @@
     #import <Foundation/Foundation.h>
     #import "DDLog.h"
     #import "Constants.h"
+    #import "Flip-Swift.h"
 #endif
 
 #ifdef DEBUG

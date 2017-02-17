@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Pacifico.ttf">
+            <string>Pacifico</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TitleView" customModule="Flip" customModuleProvider="target">
+            <connections>
+                <outlet property="lettersView" destination="Yad-rn-eRl" id="jvV-se-bgc"/>
+                <outlet property="view" destination="iN0-l3-epB" id="XKg-5J-ewR"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Yad-rn-eRl" userLabel="Stack view">
+                    <rect key="frame" x="34" y="293.5" width="306" height="80"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zjv-X2-A1e" userLabel="View - Letter F" customClass="FLPTitleLetterView">
+                            <rect key="frame" x="0.0" y="0.0" width="69" height="80"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Title_letter_background" translatesAutoresizingMaskIntoConstraints="NO" id="8Xv-GU-3pk">
+                                    <rect key="frame" x="0.0" y="0.0" width="69" height="80"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </imageView>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Title_letter_F" translatesAutoresizingMaskIntoConstraints="NO" id="BlG-MI-y6O">
+                                    <rect key="frame" x="0.0" y="0.0" width="69" height="80"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <outlet property="coverSide" destination="8Xv-GU-3pk" id="cVb-Gc-Q2m"/>
+                                <outlet property="letterSide" destination="BlG-MI-y6O" id="kW0-2k-cNR"/>
+                            </connections>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cde-kS-PEY" userLabel="View - Letter L" customClass="FLPTitleLetterView">
+                            <rect key="frame" x="79" y="0.0" width="69" height="80"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Title_letter_background" translatesAutoresizingMaskIntoConstraints="NO" id="C7i-Ee-aOa">
+                                    <rect key="frame" x="0.0" y="0.0" width="69" height="80"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </imageView>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Title_letter_L" translatesAutoresizingMaskIntoConstraints="NO" id="yzt-a9-m6M">
+                                    <rect key="frame" x="0.0" y="0.0" width="69" height="80"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <outlet property="coverSide" destination="C7i-Ee-aOa" id="1hg-2p-P9w"/>
+                                <outlet property="letterSide" destination="yzt-a9-m6M" id="ruG-lD-2cB"/>
+                            </connections>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pfn-Ei-TkA" userLabel="View - Letter I" customClass="FLPTitleLetterView">
+                            <rect key="frame" x="158" y="0.0" width="69" height="80"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Title_letter_background" translatesAutoresizingMaskIntoConstraints="NO" id="p0a-DO-Yad">
+                                    <rect key="frame" x="0.0" y="0.0" width="69" height="80"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </imageView>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Title_letter_I" translatesAutoresizingMaskIntoConstraints="NO" id="a8a-Vs-8bH">
+                                    <rect key="frame" x="0.0" y="0.0" width="69" height="80"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <outlet property="coverSide" destination="p0a-DO-Yad" id="n8Y-CV-DtK"/>
+                                <outlet property="letterSide" destination="a8a-Vs-8bH" id="KEl-j6-WTK"/>
+                            </connections>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tsH-YC-JRv" userLabel="View - Letter P" customClass="FLPTitleLetterView">
+                            <rect key="frame" x="237" y="0.0" width="69" height="80"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Title_letter_background" translatesAutoresizingMaskIntoConstraints="NO" id="aiL-Dv-Vou">
+                                    <rect key="frame" x="0.0" y="0.0" width="69" height="80"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </imageView>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Title_letter_P" translatesAutoresizingMaskIntoConstraints="NO" id="RfO-Ja-O71">
+                                    <rect key="frame" x="0.0" y="0.0" width="69" height="80"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <outlet property="coverSide" destination="aiL-Dv-Vou" id="v8v-iZ-IeO"/>
+                                <outlet property="letterSide" destination="RfO-Ja-O71" id="7A9-jy-8VX"/>
+                            </connections>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="tsH-YC-JRv" firstAttribute="leading" secondItem="Yad-rn-eRl" secondAttribute="leading" constant="237" id="JHQ-9U-a0t"/>
+                        <constraint firstItem="cde-kS-PEY" firstAttribute="leading" secondItem="Yad-rn-eRl" secondAttribute="leading" constant="79" id="Nes-Ft-Nhh"/>
+                        <constraint firstAttribute="height" constant="80" id="SWe-cV-V86"/>
+                        <constraint firstAttribute="width" constant="306" id="c7e-wq-5bv"/>
+                        <constraint firstItem="Pfn-Ei-TkA" firstAttribute="leading" secondItem="Yad-rn-eRl" secondAttribute="leading" constant="158" id="jpq-4h-WN2"/>
+                    </constraints>
+                </stackView>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="your photos" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WAp-hD-ugf" userLabel="Label - Subtitle">
+                    <rect key="frame" x="107" y="381" width="160" height="50"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <rect key="contentStretch" x="1.3877787807814457e-17" y="1.3877787807814457e-17" width="1" height="1"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="160" id="bLX-bW-6Da"/>
+                        <constraint firstAttribute="height" constant="50" id="lxA-Kc-ypd"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Pacifico" family="Pacifico" pointSize="25"/>
+                    <color key="textColor" red="0.0078431372550000003" green="0.40000000000000002" blue="0.78823529410000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="Yad-rn-eRl" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="3Vp-Sw-mxi"/>
+                <constraint firstItem="Yad-rn-eRl" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="dKo-zG-Qim"/>
+                <constraint firstItem="WAp-hD-ugf" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="jdD-iD-tMc"/>
+                <constraint firstItem="WAp-hD-ugf" firstAttribute="top" secondItem="Yad-rn-eRl" secondAttribute="bottom" constant="7.5" id="mvt-ry-f47"/>
+            </constraints>
+        </view>
+    </objects>
+    <resources>
+        <image name="Title_letter_F" width="69" height="80"/>
+        <image name="Title_letter_I" width="69" height="80"/>
+        <image name="Title_letter_L" width="69" height="80"/>
+        <image name="Title_letter_P" width="69" height="80"/>
+        <image name="Title_letter_background" width="69" height="80"/>
+    </resources>
+</document>

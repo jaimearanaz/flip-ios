@@ -21,23 +21,29 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [self setLogLevels];
-
-    // Add background and banner view to window to show in lateral transitions
-    UIImageView *imageView;
-    UIView *bannerView;
-    if (isiPhone5) {
-        imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 568)];
-        bannerView = [[UIView alloc] initWithFrame:CGRectMake(0, 518, 320, 50)];
-    } else {
-        imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
-        bannerView = [[UIView alloc] initWithFrame:CGRectMake(0, 430, 320, 50)];
-    }
-    [bannerView setBackgroundColor:[UIColor blackColor]];
-    [imageView setImage:[UIImage imageNamed:@"Background_image"]];
-    [self.window addSubview:imageView];
-    [self.window addSubview:bannerView];
-    [self.window layoutIfNeeded];
+    CGRect frame = [UIScreen mainScreen].bounds;
+    self.window = [[UIWindow alloc] initWithFrame:frame];
+    self.window.backgroundColor = [UIColor whiteColor];
+    self.window.rootViewController = [Router sharedInstance].navigationController;
+    [self.window makeKeyAndVisible];
+    
+//    [self setLogLevels];
+//
+//    // Add background and banner view to window to show in lateral transitions
+//    UIImageView *imageView;
+//    UIView *bannerView;
+//    if (isiPhone5) {
+//        imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 568)];
+//        bannerView = [[UIView alloc] initWithFrame:CGRectMake(0, 518, 320, 50)];
+//    } else {
+//        imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+//        bannerView = [[UIView alloc] initWithFrame:CGRectMake(0, 430, 320, 50)];
+//    }
+//    [bannerView setBackgroundColor:[UIColor blackColor]];
+//    [imageView setImage:[UIImage imageNamed:@"Background_image"]];
+//    [self.window addSubview:imageView];
+//    [self.window addSubview:bannerView];
+//    [self.window layoutIfNeeded];
     
     return YES;
 }
