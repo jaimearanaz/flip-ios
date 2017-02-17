@@ -29,4 +29,16 @@ class GridPresenter: FLPBasePresenter, GridPresenterDelegate {
         }
     }
     
+    // MARK: - GridPresenterDelegate methods
+    
+    func didSelectExit() {
+        
+        // TODO: implement
+    }
+    
+    func didSelectFinish(time: TimeInterval, errors: Int) {
+        
+        // TODO: implement
+    }
+    
 }

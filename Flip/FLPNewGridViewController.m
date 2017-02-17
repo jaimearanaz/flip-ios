@@ -14,4 +14,11 @@
 
 @implementation FLPNewGridViewController
 
+#pragma mark - NewGridViewControllerDelegate methods
+
+- (void)showPicturesWithPictures:(NSArray<NSString *> *)pictures
+{
+    // TODO: implement
+}
+
 @end

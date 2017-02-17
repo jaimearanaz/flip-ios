@@ -10,7 +10,7 @@
 
 @protocol GridPresenterDelegate;
 
-@interface FLPNewGridViewController : FLPBaseViewController <FLPBaseViewControllerDelegate>
+@interface FLPNewGridViewController : FLPBaseViewController <NewGridViewControllerDelegate>
 
 @property (strong, nonatomic, nonnull) id<GridPresenterDelegate> presenterDelegate;
 

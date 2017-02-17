@@ -9,5 +9,8 @@
 import Foundation
 
 @objc protocol GridPresenterDelegate: FLPBasePresenterDelegate {
+ 
+    func didSelectExit()
     
+    func didSelectFinish(time: TimeInterval, errors: Int)
 }
