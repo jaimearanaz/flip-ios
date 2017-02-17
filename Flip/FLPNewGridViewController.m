@@ -26,19 +26,42 @@
 
 #pragma mark - UICollectionViewDelegate methods
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    // TODO: implement
+}
+
 #pragma mark - UICollectionViewDataSource methods
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
+    // TODO: implement
     return 0;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    // TODO: implement
     return [[UICollectionViewCell alloc] init];
 }
 
 #pragma mark - UICollectionViewDelegateFlowLayout methods
+
+- (CGSize)collectionView:(UICollectionView *)collectionView
+                  layout:(UICollectionViewLayout*)collectionViewLayout
+  sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    // TODO: implement
+    return CGSizeMake(90, 100);
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView
+                   layout:(UICollectionViewLayout*)collectionViewLayout
+minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
+{
+    // TODO: implement
+    return 3;
+}
 
 #pragma mark - NewGridViewControllerDelegate methods
 
@@ -51,7 +74,7 @@
 
 - (void)confirmExit
 {
-    
+    // TODO: implement
 }
 
 @end
