@@ -138,6 +138,8 @@
                          [self updateConstraintsToShowRecordsView];
                          [self.view layoutIfNeeded];
                      }];
+    
+    [self animateViewsTexts];
 }
 
 - (void)showSourceView:(BOOL)animated
@@ -149,6 +151,9 @@
                              [self updateConstraintsToShowSourceView];
                              [self.view layoutIfNeeded];
                          }];
+        
+        [self animateViewsTexts];
+        
     } else {
 
         [self updateConstraintsToShowSourceView];
@@ -162,6 +167,8 @@
                          [self updateConstraintsToShowSizeView];
                          [self.view layoutIfNeeded];
                      }];
+    
+    [self animateViewsTexts];
 }
 
 - (void)updateConstraintsToShowRecordsView
@@ -183,6 +190,28 @@
     self.recordsLeading.constant = -(self.screenWidth * 2);
     self.sourceLeading.constant = -self.screenWidth;
     self.sizeLeading.constant = 0;
+}
+
+- (void)animateViewsTexts
+{
+    self.sourceView.title.alpha = 0;
+    self.sourceView.showRecords.alpha = 0;
+    
+    self.sizeView.title.alpha = 0;
+    self.sizeView.showSource.alpha = 0;
+    
+    [UIView animateWithDuration:kSlideAnimationDuration
+                          delay:kSlideAnimationDuration
+                        options:0
+                     animations:^{
+                         
+                         self.sourceView.title.alpha = 1;
+                         self.sourceView.showRecords.alpha = 1;
+                         
+                         self.sizeView.title.alpha = 1;
+                         self.sizeView.showSource.alpha = 1;
+                         
+                     } completion:^(BOOL finished) {}];
 }
 
 @end
