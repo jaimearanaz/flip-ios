@@ -26,5 +26,11 @@ import UIKit
     
     func presentGridWithImages(images: [UIImage]) {
 
+        navigationController.pushViewController(presenterInstances.gridPresenter.viewController, animated: true)
+    }
+    
+    func dismissCurrentViewController() {
+        
+        navigationController.popViewController(animated: true)
     }
 }

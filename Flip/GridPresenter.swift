@@ -40,7 +40,7 @@ class GridPresenter: FLPBasePresenter, GridPresenterDelegate {
     
     func didSelectExit() {
         
-        // TODO: implement
+        Router.sharedInstance.dismissCurrentViewController()
     }
     
     func didSelectFinish(time: TimeInterval, errors: Int) {

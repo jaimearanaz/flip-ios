@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @protocol GridPresenterDelegate;
+@protocol NewGridViewControllerDelegate;
 
 @interface FLPNewGridViewController : FLPBaseViewController <NewGridViewControllerDelegate>
 
