@@ -17,9 +17,9 @@ import Foundation
 
 // TODO: rename to GridSize
 @objc enum GameSize: Int {
-    case small
-    case medium
-    case big
+    case small = 12
+    case medium = 18
+    case big = 24
 }
 
 @objc protocol MainPresenterDelegate: FLPBasePresenterDelegate {

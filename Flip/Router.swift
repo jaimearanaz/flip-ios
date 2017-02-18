@@ -23,4 +23,8 @@ import UIKit
         
         return navigationController
     }()
+    
+    func presentGridWithImages(images: [UIImage]) {
+
+    }
 }

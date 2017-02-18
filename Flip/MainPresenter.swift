@@ -34,13 +34,29 @@ class MainPresenter: FLPBasePresenter, MainPresenterDelegate {
         
     func didSelectOptions(source: GameSource, size: GameSize) {
         
-        downloadPictures(fromSource: source, size: size)
+        downloadImages(fromSource: source, size: size)
     }
     
     // MARK: - Private methods
     
-    fileprivate func downloadPictures(fromSource source: GameSource, size: GameSize) {
+    fileprivate func downloadImages(fromSource source: GameSource, size: GameSize) {
         
         realControllerDelegate.startLoadingState()
+        
+        let numberOfImages = size.rawValue / 2
+        var images = [UIImage]()
+        
+        for index in 1...numberOfImages {
+            
+            let name = "photo_\(index).jpg"
+            let oneImage = UIImage(named: name)
+            images.append(oneImage!)
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            
+            self.realControllerDelegate.stopLoadingState()
+            Router.sharedInstance.presentGridWithImages(images: images)
+        }
     }
 }
