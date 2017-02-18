@@ -36,4 +36,10 @@ class MainPresenter: FLPBasePresenter, MainPresenterDelegate {
         
         // TODO: implement
     }
+    
+    // MARK: - Private methods
+    
+    fileprivate func downloadPictures(fromSource source: GameSource, size: GameSize) {
+        
+    }
 }

@@ -29,6 +29,13 @@ class GridPresenter: FLPBasePresenter, GridPresenterDelegate {
         }
     }
     
+    // MARK: - Public methods
+    
+    func showGridWithPictures(pictures: [UIImage]) {
+        
+        realControllerDelegate.showPictures(pictures: <#T##[String]#>)
+    }
+    
     // MARK: - GridPresenterDelegate methods
     
     func didSelectExit() {

@@ -57,6 +57,18 @@
 		6F878306199BB14100AA118E /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F878305199BB14100AA118E /* StoreKit.framework */; };
 		6F878308199BB14C00AA118E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F878307199BB14C00AA118E /* SystemConfiguration.framework */; };
 		6F87A771199A17B400C2303A /* FLPScoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F87A770199A17B400C2303A /* FLPScoreViewController.m */; };
+		6F94696B1E584DBD003D102B /* photo_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F94695F1E584DBD003D102B /* photo_1.jpg */; };
+		6F94696D1E584DBD003D102B /* photo_3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F9469611E584DBD003D102B /* photo_3.jpg */; };
+		6F94696E1E584DBD003D102B /* photo_4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F9469621E584DBD003D102B /* photo_4.jpg */; };
+		6F9469701E584DBD003D102B /* photo_6.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F9469641E584DBD003D102B /* photo_6.jpg */; };
+		6F9469711E584DBD003D102B /* photo_7.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F9469651E584DBD003D102B /* photo_7.jpg */; };
+		6F9469721E584DBD003D102B /* photo_8.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F9469661E584DBD003D102B /* photo_8.jpg */; };
+		6F9469731E584DBD003D102B /* photo_9.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F9469671E584DBD003D102B /* photo_9.jpg */; };
+		6F9469741E584DBD003D102B /* photo_10.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F9469681E584DBD003D102B /* photo_10.jpg */; };
+		6F9469751E584DBD003D102B /* photo_11.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F9469691E584DBD003D102B /* photo_11.jpg */; };
+		6F9469761E584DBD003D102B /* photo_12.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F94696A1E584DBD003D102B /* photo_12.jpg */; };
+		6F9469791E584DEE003D102B /* photo_2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F9469771E584DEE003D102B /* photo_2.jpg */; };
+		6F94697A1E584DEE003D102B /* photo_5.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F9469781E584DEE003D102B /* photo_5.jpg */; };
 		6FAD88DC1A25F7FB00E08609 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6FAD88D91A25F7FB00E08609 /* Roboto-Bold.ttf */; };
 		6FAD88DD1A25F7FB00E08609 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6FAD88D91A25F7FB00E08609 /* Roboto-Bold.ttf */; };
 		6FAD88DE1A25F7FB00E08609 /* Pacifico.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6FAD88DA1A25F7FB00E08609 /* Pacifico.ttf */; };
@@ -186,6 +198,18 @@
 		6F878307199BB14C00AA118E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		6F87A76F199A17B400C2303A /* FLPScoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPScoreViewController.h; sourceTree = "<group>"; };
 		6F87A770199A17B400C2303A /* FLPScoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPScoreViewController.m; sourceTree = "<group>"; };
+		6F94695F1E584DBD003D102B /* photo_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = photo_1.jpg; sourceTree = "<group>"; };
+		6F9469611E584DBD003D102B /* photo_3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = photo_3.jpg; sourceTree = "<group>"; };
+		6F9469621E584DBD003D102B /* photo_4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = photo_4.jpg; sourceTree = "<group>"; };
+		6F9469641E584DBD003D102B /* photo_6.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = photo_6.jpg; sourceTree = "<group>"; };
+		6F9469651E584DBD003D102B /* photo_7.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = photo_7.jpg; sourceTree = "<group>"; };
+		6F9469661E584DBD003D102B /* photo_8.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = photo_8.jpg; sourceTree = "<group>"; };
+		6F9469671E584DBD003D102B /* photo_9.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = photo_9.jpg; sourceTree = "<group>"; };
+		6F9469681E584DBD003D102B /* photo_10.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = photo_10.jpg; sourceTree = "<group>"; };
+		6F9469691E584DBD003D102B /* photo_11.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = photo_11.jpg; sourceTree = "<group>"; };
+		6F94696A1E584DBD003D102B /* photo_12.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = photo_12.jpg; sourceTree = "<group>"; };
+		6F9469771E584DEE003D102B /* photo_2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = photo_2.jpg; sourceTree = "<group>"; };
+		6F9469781E584DEE003D102B /* photo_5.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = photo_5.jpg; sourceTree = "<group>"; };
 		6FAD88D91A25F7FB00E08609 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		6FAD88DA1A25F7FB00E08609 /* Pacifico.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Pacifico.ttf; sourceTree = "<group>"; };
 		6FAD88DB1A25F7FB00E08609 /* CantoraOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CantoraOne-Regular.ttf"; sourceTree = "<group>"; };
@@ -332,6 +356,7 @@
 		6F1AA15E1973EAA400101766 /* Flip */ = {
 			isa = PBXGroup;
 			children = (
+				6F94695E1E584DB1003D102B /* images */,
 				6F5579F91E4625C6008FB1BB /* base classes */,
 				6F5579E81E46249D008FB1BB /* app navigation */,
 				6F5579EC1E4624FD008FB1BB /* use cases */,
@@ -514,6 +539,25 @@
 			name = adMob;
 			sourceTree = "<group>";
 		};
+		6F94695E1E584DB1003D102B /* images */ = {
+			isa = PBXGroup;
+			children = (
+				6F94695F1E584DBD003D102B /* photo_1.jpg */,
+				6F9469771E584DEE003D102B /* photo_2.jpg */,
+				6F9469611E584DBD003D102B /* photo_3.jpg */,
+				6F9469621E584DBD003D102B /* photo_4.jpg */,
+				6F9469781E584DEE003D102B /* photo_5.jpg */,
+				6F9469641E584DBD003D102B /* photo_6.jpg */,
+				6F9469651E584DBD003D102B /* photo_7.jpg */,
+				6F9469661E584DBD003D102B /* photo_8.jpg */,
+				6F9469671E584DBD003D102B /* photo_9.jpg */,
+				6F9469681E584DBD003D102B /* photo_10.jpg */,
+				6F9469691E584DBD003D102B /* photo_11.jpg */,
+				6F94696A1E584DBD003D102B /* photo_12.jpg */,
+			);
+			name = images;
+			sourceTree = "<group>";
+		};
 		6FF528F11E4F78C70081747E /* views */ = {
 			isa = PBXGroup;
 			children = (
@@ -648,21 +692,33 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F94696D1E584DBD003D102B /* photo_3.jpg in Resources */,
 				6FAD88E21A25FBE500E08609 /* MainStoryboard.storyboard in Resources */,
 				6F103A661E56D189007C0E21 /* FLPNewGridViewController.xib in Resources */,
 				6F22B29B1E50766900237258 /* SizeView.xib in Resources */,
 				6FF528E61E4F6A8B0081747E /* SourceView.xib in Resources */,
+				6F94696B1E584DBD003D102B /* photo_1.jpg in Resources */,
 				6F1AA1741973EAA400101766 /* Images.xcassets in Resources */,
+				6F9469741E584DBD003D102B /* photo_10.jpg in Resources */,
 				6F5579F21E462565008FB1BB /* FLPMainViewController.xib in Resources */,
 				6F19F69B19A3A8870047F269 /* camera-shutter-click-01.wav in Resources */,
 				6F1AA1991973FE9900101766 /* Localizable.strings in Resources */,
+				6F9469751E584DBD003D102B /* photo_11.jpg in Resources */,
+				6F94697A1E584DEE003D102B /* photo_5.jpg in Resources */,
+				6F9469761E584DBD003D102B /* photo_12.jpg in Resources */,
+				6F9469731E584DBD003D102B /* photo_9.jpg in Resources */,
+				6F9469701E584DBD003D102B /* photo_6.jpg in Resources */,
 				6FAD88DC1A25F7FB00E08609 /* Roboto-Bold.ttf in Resources */,
 				6FAD88DE1A25F7FB00E08609 /* Pacifico.ttf in Resources */,
+				6F94696E1E584DBD003D102B /* photo_4.jpg in Resources */,
+				6F9469711E584DBD003D102B /* photo_7.jpg in Resources */,
 				6FAD88E01A25F7FB00E08609 /* CantoraOne-Regular.ttf in Resources */,
 				6F19F69D19A3AC760047F269 /* polaroid-camera-take-picture-01.wav in Resources */,
+				6F9469721E584DBD003D102B /* photo_8.jpg in Resources */,
 				6F1AA1631973EAA400101766 /* InfoPlist.strings in Resources */,
 				6FF528F51E4F8C020081747E /* RecordsView.xib in Resources */,
 				6FF528EC1E4F75AC0081747E /* TitleView.xib in Resources */,
+				6F9469791E584DEE003D102B /* photo_2.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
