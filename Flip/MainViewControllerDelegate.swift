@@ -10,5 +10,9 @@ import Foundation
 
 @objc protocol MainViewControllerDelegate: FLPBaseViewControllerDelegate {
 
+    func startLoadingState()
+    
+    func stopLoadingState()
+    
     func showRecords(small: TimeInterval, medium: TimeInterval, big: TimeInterval)
 }

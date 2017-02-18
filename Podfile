@@ -17,6 +17,7 @@ def flip_pods
     #pod 'STTwitter'
 	pod 'SCNetworkReachability'
     #pod 'Facebook-iOS-SDK'
+    pod 'RZSquaresLoading'
 end
 
 target 'Flip' do

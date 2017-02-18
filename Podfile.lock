@@ -24,6 +24,7 @@ PODS:
     - CocoaLumberjack/Default
   - macros_blocks (0.0.1)
   - MBProgressHUD (1.0.0)
+  - RZSquaresLoading (1.1)
   - SCNetworkReachability (2.0.5):
     - SCNetworkReachability/Core (= 2.0.5)
   - SCNetworkReachability/Core (2.0.5):
@@ -34,6 +35,7 @@ DEPENDENCIES:
   - AFNetworking
   - CocoaLumberjack
   - MBProgressHUD
+  - RZSquaresLoading
   - SCNetworkReachability
   - WCAlertView
 
@@ -42,9 +44,10 @@ SPEC CHECKSUMS:
   CocoaLumberjack: c823149bccc5519a9447aeb433be7b1212a7d6a5
   macros_blocks: da2106a0975514e16f3669f2f50a02efaff642cf
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
+  RZSquaresLoading: c0aefa508119a76497424829e439e1b8b0d12fdc
   SCNetworkReachability: 14026e754d9abb264c157131539e8e2c2131cb62
   WCAlertView: 36a1d087d0b3eb7f6ce3dae623fbb474f26f2beb
 
-PODFILE CHECKSUM: 664c6b4f5b0150968db1558da881a843be637a4d
+PODFILE CHECKSUM: 3b72b8a2485aa803f7b516bf65ccec043f10aeb2
 
 COCOAPODS: 1.2.0

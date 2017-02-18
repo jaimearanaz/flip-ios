@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FLPMainViewController">
             <connections>
+                <outlet property="loadingShade" destination="gxW-r0-UBW" id="nd4-2n-AHc"/>
                 <outlet property="recordsLeading" destination="dDh-zv-qAQ" id="rhG-ND-oNv"/>
                 <outlet property="recordsView" destination="aX4-0e-ZzR" id="H4U-JY-JHD"/>
                 <outlet property="sizeLeading" destination="XcD-AP-nYP" id="jrR-ao-WKJ"/>
@@ -27,9 +28,14 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="OiN-oj-hvc">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="OiN-oj-hvc" userLabel="Background">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                 </imageView>
+                <view hidden="YES" alpha="0.40000000000000002" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gxW-r0-UBW" userLabel="Loading shade">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="681"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wVe-J2-wsj" userLabel="Title view" customClass="TitleView" customModule="Flip" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="333.5"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>

@@ -8,6 +8,8 @@
 
 #import "FLPMainViewController.h"
 
+#import "RZSquaresLoading.h"
+
 #import "FLPTitleLetterView.h"
 
 #define kSlideAnimationDuration 0.3
@@ -21,9 +23,11 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *recordsLeading;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *sourceLeading;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *sizeLeading;
+@property (weak, nonatomic) IBOutlet UIView *loadingShade;
 
 @property (nonatomic) CGFloat screenWidth;
 @property (nonatomic) GameSource selectedSource;
+@property (strong, nonatomic, nullable) RZSquaresLoading *squareLoading;
 
 @end
 
@@ -123,6 +127,25 @@
 }
 
 #pragma mark - MainViewControllerDelegate methods
+
+- (void)startLoadingState
+{
+    self.loadingShade.hidden = NO;
+    [self.view bringSubviewToFront:self.loadingShade];
+    
+    CGRect frame =  CGRectMake(0, 0, 50, 50);
+    self.squareLoading = [[RZSquaresLoading alloc] initWithFrame:frame];
+    self.squareLoading.center = self.view.center;
+    [self.view addSubview:self.squareLoading];
+}
+
+- (void)stopLoadingState
+{
+    self.loadingShade.hidden = YES;
+    [self.view sendSubviewToBack:self.loadingShade];
+    
+    [self.squareLoading removeFromSuperview];
+}
 
 - (void)showRecordsWithSmall:(NSTimeInterval)small medium:(NSTimeInterval)medium big:(NSTimeInterval)big
 {

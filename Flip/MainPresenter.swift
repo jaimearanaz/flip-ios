@@ -34,12 +34,13 @@ class MainPresenter: FLPBasePresenter, MainPresenterDelegate {
         
     func didSelectOptions(source: GameSource, size: GameSize) {
         
-        // TODO: implement
+        downloadPictures(fromSource: source, size: size)
     }
     
     // MARK: - Private methods
     
     fileprivate func downloadPictures(fromSource source: GameSource, size: GameSize) {
         
+        realControllerDelegate.startLoadingState()
     }
 }

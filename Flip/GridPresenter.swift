@@ -33,7 +33,7 @@ class GridPresenter: FLPBasePresenter, GridPresenterDelegate {
     
     func showGridWithPictures(pictures: [UIImage]) {
         
-        realControllerDelegate.showPictures(pictures: <#T##[String]#>)
+        realControllerDelegate.showPictures(pictures: pictures)
     }
     
     // MARK: - GridPresenterDelegate methods
