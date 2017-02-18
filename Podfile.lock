@@ -29,6 +29,7 @@ PODS:
     - SCNetworkReachability/Core (= 2.0.5)
   - SCNetworkReachability/Core (2.0.5):
     - macros_blocks (= 0.0.1)
+  - SDCAlertView (7.1)
   - WCAlertView (1.0.1)
 
 DEPENDENCIES:
@@ -37,7 +38,17 @@ DEPENDENCIES:
   - MBProgressHUD
   - RZSquaresLoading
   - SCNetworkReachability
+  - SDCAlertView (from `https://github.com/sberrevoets/SDCAlertView`)
   - WCAlertView
+
+EXTERNAL SOURCES:
+  SDCAlertView:
+    :git: https://github.com/sberrevoets/SDCAlertView
+
+CHECKOUT OPTIONS:
+  SDCAlertView:
+    :commit: 47e3626aa7cda2be777653870fdd94f93e731b2d
+    :git: https://github.com/sberrevoets/SDCAlertView
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
@@ -46,8 +57,9 @@ SPEC CHECKSUMS:
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   RZSquaresLoading: c0aefa508119a76497424829e439e1b8b0d12fdc
   SCNetworkReachability: 14026e754d9abb264c157131539e8e2c2131cb62
+  SDCAlertView: a8fa1ad92b82de0feea0f6a50475c63c70b840a5
   WCAlertView: 36a1d087d0b3eb7f6ce3dae623fbb474f26f2beb
 
-PODFILE CHECKSUM: 3b72b8a2485aa803f7b516bf65ccec043f10aeb2
+PODFILE CHECKSUM: 342d2a0562d19247ccccf3b713925c62f057174a
 
 COCOAPODS: 1.2.0

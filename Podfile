@@ -9,15 +9,19 @@ inhibit_all_warnings!
 use_frameworks!
 
 def flip_pods
+    
+    #delete these pods
     pod 'AFNetworking'
 	pod 'CocoaLumberjack'
 	pod 'MBProgressHUD'
 	pod 'WCAlertView'
+    
     #pod 'PFTwitterSignOn', :git => 'https://github.com/jesseditson/PFTwitterSignOn.git'
     #pod 'STTwitter'
 	pod 'SCNetworkReachability'
     #pod 'Facebook-iOS-SDK'
     pod 'RZSquaresLoading'
+    pod 'SDCAlertView', :git => 'https://github.com/sberrevoets/SDCAlertView'
 end
 
 target 'Flip' do

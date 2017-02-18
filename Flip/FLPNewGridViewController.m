@@ -74,7 +74,18 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 
 - (void)confirmExit
 {
-    // TODO: implement
+    // TODO: stop timer
+
+    [DWPAlertController showAlertWithMessage:NSLocalizedString(@"GRID_EXIT_CONFIRM", @"")
+                                       title:@""
+                            firstButtonTitle:NSLocalizedString(@"OTHER_CANCEL", @"")
+                           secondButtonTitle:NSLocalizedString(@"GRID_EXIT", @"")
+                                  firstBlock:^{
+                                      // TODO: resume timer
+                                  }
+                                 secondBlock:^{
+                                     [self.presenterDelegate didSelectExit];
+                                 }];
 }
 
 @end
