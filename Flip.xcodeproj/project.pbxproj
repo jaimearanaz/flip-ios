@@ -41,6 +41,7 @@
 		6F3AB3721E5A139400CE62CE /* GridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3AB3711E5A139400CE62CE /* GridCell.swift */; };
 		6F3AB3741E5A141C00CE62CE /* GridCellStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3AB3731E5A141C00CE62CE /* GridCellStatus.swift */; };
 		6F3AB3761E5A152600CE62CE /* MutableCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3AB3751E5A152600CE62CE /* MutableCollection.swift */; };
+		6F3AB3781E5A21D100CE62CE /* FLPCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F3AB3771E5A21D100CE62CE /* FLPCollectionViewCell.xib */; };
 		6F3B3A9419825C1C00EA4BA1 /* FLPTwitterPhotoSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3B3A9319825C1C00EA4BA1 /* FLPTwitterPhotoSource.m */; };
 		6F5579EB1E4624B4008FB1BB /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5579EA1E4624B4008FB1BB /* Router.swift */; };
 		6F5579F11E462565008FB1BB /* FLPMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5579EF1E462565008FB1BB /* FLPMainViewController.m */; };
@@ -167,6 +168,7 @@
 		6F3AB3711E5A139400CE62CE /* GridCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridCell.swift; sourceTree = "<group>"; };
 		6F3AB3731E5A141C00CE62CE /* GridCellStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridCellStatus.swift; sourceTree = "<group>"; };
 		6F3AB3751E5A152600CE62CE /* MutableCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MutableCollection.swift; sourceTree = "<group>"; };
+		6F3AB3771E5A21D100CE62CE /* FLPCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FLPCollectionViewCell.xib; sourceTree = "<group>"; };
 		6F3B3A9219825C1C00EA4BA1 /* FLPTwitterPhotoSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPTwitterPhotoSource.h; sourceTree = "<group>"; };
 		6F3B3A9319825C1C00EA4BA1 /* FLPTwitterPhotoSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPTwitterPhotoSource.m; sourceTree = "<group>"; };
 		6F5579EA1E4624B4008FB1BB /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
@@ -287,6 +289,9 @@
 		6F103A611E56D156007C0E21 /* grid */ = {
 			isa = PBXGroup;
 			children = (
+				6F3AB3771E5A21D100CE62CE /* FLPCollectionViewCell.xib */,
+				6F33AC7A1998C14000FBF9C4 /* FLPCollectionViewCell.h */,
+				6F33AC7B1998C14000FBF9C4 /* FLPCollectionViewCell.m */,
 				6F103A641E56D189007C0E21 /* FLPNewGridViewController.xib */,
 				6F103A621E56D189007C0E21 /* FLPNewGridViewController.h */,
 				6F103A631E56D189007C0E21 /* FLPNewGridViewController.m */,
@@ -379,7 +384,6 @@
 				6F67A355197FD17F00AC9CF5 /* utils */,
 				6FFC51641976655B00668F82 /* sources */,
 				6F14871819A0F5A50087527C /* segues */,
-				6F1AA1911973EAF800101766 /* views */,
 				6F1AA1901973EAF000101766 /* controllers */,
 				6F1AA15F1973EAA400101766 /* Supporting Files */,
 				6F1AA1731973EAA400101766 /* Images.xcassets */,
@@ -433,15 +437,6 @@
 				6F87A770199A17B400C2303A /* FLPScoreViewController.m */,
 			);
 			name = controllers;
-			sourceTree = "<group>";
-		};
-		6F1AA1911973EAF800101766 /* views */ = {
-			isa = PBXGroup;
-			children = (
-				6F33AC7A1998C14000FBF9C4 /* FLPCollectionViewCell.h */,
-				6F33AC7B1998C14000FBF9C4 /* FLPCollectionViewCell.m */,
-			);
-			name = views;
 			sourceTree = "<group>";
 		};
 		6F33AC811999244600FBF9C4 /* model */ = {
@@ -717,6 +712,7 @@
 				6F94696D1E584DBD003D102B /* photo_3.jpg in Resources */,
 				6FAD88E21A25FBE500E08609 /* MainStoryboard.storyboard in Resources */,
 				6F103A661E56D189007C0E21 /* FLPNewGridViewController.xib in Resources */,
+				6F3AB3781E5A21D100CE62CE /* FLPCollectionViewCell.xib in Resources */,
 				6F22B29B1E50766900237258 /* SizeView.xib in Resources */,
 				6FF528E61E4F6A8B0081747E /* SourceView.xib in Resources */,
 				6F94696B1E584DBD003D102B /* photo_1.jpg in Resources */,

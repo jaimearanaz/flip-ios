@@ -208,12 +208,12 @@
     // Configure cell
     UIImage *image = (UIImage *)[_photos objectAtIndex:gridItem.imageIndex];
     if (image.size.height != image.size.width) {
-        [cell.photoView setImage:[self imageCrop:image]];
+        [cell.userImage setImage:[self imageCrop:image]];
     } else {
-        [cell.photoView setImage:image];
+        [cell.userImage setImage:image];
     }
-    [cell.coverLbl setFont:[UIFont fontWithName:@"CantoraOne-Regular" size:40]];
-    cell.coverLbl.text = [NSString stringWithFormat:@"%ld", (indexPath.row + 1)];
+    [cell.number setFont:[UIFont fontWithName:@"CantoraOne-Regular" size:40]];
+    cell.number.text = [NSString stringWithFormat:@"%ld", (indexPath.row + 1)];
 
     // Game is not started yet, show all images
     if ((![_started boolValue]) && ([gridItem.isShowing boolValue])) {

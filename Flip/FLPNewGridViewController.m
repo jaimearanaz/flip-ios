@@ -8,14 +8,30 @@
 
 #import "FLPNewGridViewController.h"
 
+#import "FLPCollectionViewCell.h"
+
 @interface FLPNewGridViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
+@property (strong, nonatomic, nonnull) NSArray *gridCells;
+
 @end
 
 @implementation FLPNewGridViewController
+
+#pragma mark - Lifecycle methods
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    UINib *nib = [UINib nibWithNibName:kReusableIdentifier bundle:nil];
+    [self.collectionView registerNib:nib forCellWithReuseIdentifier:kReusableIdentifier];
+
+    [self.collectionView reloadData];
+}
 
 #pragma mark - Action methods
 
@@ -35,14 +51,18 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    // TODO: implement
-    return 0;
+    return (self.gridCells == nil) ? 0 : self.gridCells.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    // TODO: implement
-    return [[UICollectionViewCell alloc] init];
+
+    FLPCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kReusableIdentifier
+                                                                            forIndexPath:indexPath];
+    GridCellStatus *gridCellStatus = [self.gridCells objectAtIndex:indexPath.item];
+    [cell setupCell:gridCellStatus.gridCell withPosition:indexPath.item];
+    
+    return cell;
 }
 
 #pragma mark - UICollectionViewDelegateFlowLayout methods
@@ -51,7 +71,6 @@
                   layout:(UICollectionViewLayout*)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    // TODO: implement
     return CGSizeMake(90, 100);
 }
 
@@ -59,15 +78,17 @@
                    layout:(UICollectionViewLayout*)collectionViewLayout
 minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 {
-    // TODO: implement
     return 3;
 }
 
 #pragma mark - NewGridViewControllerDelegate methods
 
-- (void)showItems:(NSArray<GridCell *> *)pictures
+- (void)showItems:(NSArray<GridCell *> *)items
 {
-    // TODO: implement
+    self.gridCells = [self createGridCellsFromItems:items];
+    if (self.collectionView != nil) {
+        [self.collectionView reloadData];
+    }
 }
 
 #pragma mark - Private methods
@@ -86,6 +107,23 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
                                  secondBlock:^{
                                      [self.presenterDelegate didSelectExit];
                                  }];
+}
+
+- (NSArray *)createGridCellsFromItems:(NSArray *)items
+{
+    NSMutableArray *gridCells = [[NSMutableArray alloc] init];
+    [items enumerateObjectsUsingBlock:^(GridCell * _Nonnull oneItem, NSUInteger idx, BOOL * _Nonnull stop) {
+        
+        GridCellStatus *oneGridCell = [[GridCellStatus alloc] init];
+        oneGridCell.gridCell = oneItem;
+        oneGridCell.isPaired = NO;
+        oneGridCell.isFlipped = NO;
+        
+        [gridCells addObject:oneGridCell];
+        
+    }];
+    
+    return gridCells;
 }
 
 @end

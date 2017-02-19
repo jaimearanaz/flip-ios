@@ -8,7 +8,19 @@
 
 #import "FLPCollectionViewCell.h"
 
+@interface FLPCollectionViewCell ()
+
+@end
+
 @implementation FLPCollectionViewCell
+
+#pragma mark - Public methods
+
+- (void)setupCell:(GridCell *)gridCell withPosition:(NSInteger)position
+{
+    self.userImage.image = gridCell.image;
+    self.number.text = [NSString stringWithFormat:@"%@", @(position)];
+}
 
 - (BOOL)isShowingImage
 {
