@@ -65,7 +65,7 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 
 #pragma mark - NewGridViewControllerDelegate methods
 
-- (void)showPicturesWithPictures:(NSArray<UIImage *> *)pictures
+- (void)showItems:(NSArray<GridCell *> *)pictures
 {
     // TODO: implement
 }

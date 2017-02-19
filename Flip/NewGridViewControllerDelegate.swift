@@ -10,5 +10,6 @@ import Foundation
 
 @objc protocol NewGridViewControllerDelegate: FLPBaseViewControllerDelegate {
     
-    func showPictures(pictures: [UIImage])
+    @objc (showItems:)
+    func showItems(_ items: [GridCell])
 }

@@ -31,9 +31,10 @@ class GridPresenter: FLPBasePresenter, GridPresenterDelegate {
     
     // MARK: - Public methods
     
-    func showGridWithPictures(pictures: [UIImage]) {
+    func showGrid(withImages images: [UIImage]) {
         
-        realControllerDelegate.showPictures(pictures: pictures)
+        let gridCells = createGridCells(withImages: images)
+        realControllerDelegate.showItems(gridCells)
     }
     
     // MARK: - GridPresenterDelegate methods
@@ -48,4 +49,33 @@ class GridPresenter: FLPBasePresenter, GridPresenterDelegate {
         // TODO: implement
     }
     
+    // MARK: - Private methods
+    
+    fileprivate func createGridCells(withImages images: [UIImage]) -> [GridCell] {
+    
+        var mirroredImages = images
+        mirroredImages.append(contentsOf: images)
+        mirroredImages.shuffle()
+        
+        var cellsForGrid = [GridCell]()
+        var currentIndex = 0
+        for image in mirroredImages {
+            
+            var pairIndex = 0;
+            for pairImage in mirroredImages {
+                if (pairImage == image) && (currentIndex != pairIndex) {
+                    break;
+                }
+                pairIndex += 1
+            }
+            
+            let gridCell = GridCell()
+            gridCell.image = image
+            gridCell.equalIndex = pairIndex;
+            cellsForGrid.append(gridCell)
+            currentIndex += 1
+        }
+        
+        return cellsForGrid
+    }
 }

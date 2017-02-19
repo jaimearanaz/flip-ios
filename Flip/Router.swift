@@ -24,8 +24,9 @@ import UIKit
         return navigationController
     }()
     
-    func presentGridWithImages(images: [UIImage]) {
+    func presentGrid(withImages images: [UIImage]) {
 
+        presenterInstances.gridPresenter.showGrid(withImages: images)
         navigationController.pushViewController(presenterInstances.gridPresenter.viewController, animated: true)
     }
     
