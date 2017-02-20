@@ -15,14 +15,12 @@
 @property (weak, nonatomic) IBOutlet UIView *coverSide;
 @property (weak, nonatomic) IBOutlet UILabel *number;
 
-- (void)setupCell:(GridCell *)gridCell withPosition:(NSInteger)position;
+- (void)setupCell:(nonnull GridCell *)gridCell withNumber:(NSInteger)position;
 
-- (void)flipCellToImageAnimated:(NSNumber *)animated onCompletion:(void(^)())completion;
+- (void)flipToUserImageWithAnimation:(BOOL)animated onCompletion:(nonnull void(^)())completion;
 
-- (void)flipCellToCoverAnimated:(NSNumber *)animated;
+- (void)flipToCoverWithAnimation:(BOOL)animated onCompletion:(nonnull void(^)())completion;
 
-- (BOOL)isShowingImage;
-
-- (void)matchedAnimation;
+- (void)showPairedAnimation:(nonnull void(^)())completion;
 
 @end

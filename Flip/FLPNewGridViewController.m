@@ -16,6 +16,8 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
 @property (strong, nonatomic, nonnull) NSArray *gridCells;
+@property (strong, nonatomic, nullable) NSIndexPath *flippedIndexPath;
+@property (nonatomic) BOOL isUserInteractionEnabled;
 
 @end
 
@@ -26,6 +28,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.isUserInteractionEnabled = YES;
     
     UINib *nib = [UINib nibWithNibName:kReusableIdentifier bundle:nil];
     [self.collectionView registerNib:nib forCellWithReuseIdentifier:kReusableIdentifier];
@@ -44,7 +48,70 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    // TODO: implement
+    if (!self.isUserInteractionEnabled) {
+        
+        return;
+        
+    } else {
+        
+        GridCellStatus *selectedModel = [self.gridCells objectAtIndex:indexPath.item];
+        FLPCollectionViewCell *selectedCell = (FLPCollectionViewCell *) [collectionView cellForItemAtIndexPath:indexPath];
+        
+        if (selectedModel.isFlipped) {
+            
+            return;
+            
+        } else {
+            
+            selectedModel.isFlipped = YES;
+            self.isUserInteractionEnabled = (self.flippedIndexPath == nil) ? YES : NO;
+            
+            [selectedCell flipToUserImageWithAnimation:YES onCompletion:^{
+                
+                if (self.flippedIndexPath == nil) {
+                    
+                    self.isUserInteractionEnabled = YES;
+                    self.flippedIndexPath = indexPath;
+                    return;
+                    
+                } else {
+                    
+                    GridCellStatus *flippedModel = [self.gridCells objectAtIndex:self.flippedIndexPath.item];
+                    FLPCollectionViewCell *flippedCell = (FLPCollectionViewCell *) [collectionView cellForItemAtIndexPath:self.flippedIndexPath];
+                    BOOL isAMatch = selectedModel.gridCell.equalIndex == self.flippedIndexPath.item;
+                    
+                    if (isAMatch) {
+                        
+                        selectedModel.isFlipped = YES;
+                        selectedModel.isPaired = YES;
+                        flippedModel.isPaired = YES;
+                        
+                        self.flippedIndexPath = nil;
+                        self.isUserInteractionEnabled = NO;
+                        
+                        [selectedCell showPairedAnimation:^{}];
+                        [flippedCell showPairedAnimation:^{
+                            self.isUserInteractionEnabled = YES;
+                        }];
+                        
+                    } else {
+                        
+                        self.isUserInteractionEnabled = NO;
+                        
+                        [selectedCell flipToCoverWithAnimation:YES onCompletion:^{
+                            selectedModel.isFlipped = NO;
+                        }];
+                        
+                        [flippedCell flipToCoverWithAnimation:YES onCompletion:^{
+                            flippedModel.isFlipped = NO;
+                            self.flippedIndexPath = nil;
+                            self.isUserInteractionEnabled = YES;
+                        }];
+                    }
+                }
+            }];
+        }
+    }
 }
 
 #pragma mark - UICollectionViewDataSource methods
@@ -60,7 +127,7 @@
     FLPCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kReusableIdentifier
                                                                             forIndexPath:indexPath];
     GridCellStatus *gridCellStatus = [self.gridCells objectAtIndex:indexPath.item];
-    [cell setupCell:gridCellStatus.gridCell withPosition:indexPath.item];
+    [cell setupCell:gridCellStatus.gridCell withNumber:(indexPath.item + 1)];
     
     return cell;
 }

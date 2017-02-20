@@ -217,21 +217,21 @@
 
     // Game is not started yet, show all images
     if ((![_started boolValue]) && ([gridItem.isShowing boolValue])) {
-        [cell flipCellToImageAnimated:[NSNumber numberWithBool:NO] onCompletion:nil];
+        [cell flipToUserImageWithAnimation:[NSNumber numberWithBool:NO] onCompletion:^{}];
         
     // Game is started
     } else {
         
         // Matched
         if ([gridItem.isMatched boolValue]) {
-            [cell flipCellToImageAnimated:[NSNumber numberWithBool:NO] onCompletion:nil];
+            [cell flipToUserImageWithAnimation:[NSNumber numberWithBool:NO] onCompletion:^{}];
         } else {
             // Selected
             if ([gridItem.isShowing boolValue]) {
-                [cell flipCellToImageAnimated:[NSNumber numberWithBool:NO] onCompletion:nil];
+                [cell flipToUserImageWithAnimation:[NSNumber numberWithBool:NO] onCompletion:^{}];
             // Not selected
             } else {
-                [cell flipCellToCoverAnimated:[NSNumber numberWithBool:NO]];
+                [cell flipToCoverWithAnimation:[NSNumber numberWithBool:NO] onCompletion:^{}];
             }
         }
     }
@@ -256,7 +256,7 @@
         if (_firstPhoto == nil) {
             gridItem.isShowing = [NSNumber numberWithBool:YES];
             _firstPhoto = gridItem;
-            [cell flipCellToImageAnimated:[NSNumber numberWithBool:YES] onCompletion:nil];
+            [cell flipToUserImageWithAnimation:[NSNumber numberWithBool:YES] onCompletion:^{}];
             
         // It's second photo
         } else {
@@ -273,11 +273,11 @@
                 // Photos match, keep showing
                 if (_firstPhoto.imageIndex == _secondPhoto.imageIndex) {
                     
-                        [cell flipCellToImageAnimated:[NSNumber numberWithBool:YES] onCompletion:^{
+                        [cell flipToUserImageWithAnimation:[NSNumber numberWithBool:YES] onCompletion:^{
                             
                             // Flash animation
-                            [firstCell matchedAnimation];
-                            [secondCell matchedAnimation];
+                            [firstCell showPairedAnimation:^{}];
+                            [secondCell showPairedAnimation:^{}];
                             
                             // Camera sound
                             if ((_playerCamera) && (![[AVAudioSession sharedInstance] isOtherAudioPlaying])) {
@@ -308,9 +308,9 @@
                     
                 // Photos don't match, hide them
                 } else {
-                    [cell flipCellToImageAnimated:[NSNumber numberWithBool:YES] onCompletion:^{
-                        [firstCell flipCellToCoverAnimated:[NSNumber numberWithBool:YES]];
-                        [secondCell flipCellToCoverAnimated:[NSNumber numberWithBool:YES]];
+                    [cell flipToUserImageWithAnimation:[NSNumber numberWithBool:YES] onCompletion:^{
+                        [firstCell flipToCoverWithAnimation:[NSNumber numberWithBool:YES] onCompletion:^{}];
+                        [secondCell flipToCoverWithAnimation:[NSNumber numberWithBool:YES] onCompletion:^{}];
                         _firstPhoto.isShowing = [NSNumber numberWithBool:NO];
                         _firstPhoto = nil;
                         _secondPhoto.isShowing = [NSNumber numberWithBool:NO];

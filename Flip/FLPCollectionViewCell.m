@@ -16,51 +16,45 @@
 
 #pragma mark - Public methods
 
-- (void)setupCell:(GridCell *)gridCell withPosition:(NSInteger)position
+- (void)setupCell:(nonnull GridCell *)gridCell withNumber:(NSInteger)position
 {
     self.userImage.image = gridCell.image;
     self.number.text = [NSString stringWithFormat:@"%@", @(position)];
 }
 
-- (BOOL)isShowingImage
+- (void)flipToUserImageWithAnimation:(BOOL)animated onCompletion:(nonnull void(^)())completion
 {
-    return ([self.contentView.subviews objectAtIndex:1] == _imageSide);
-}
-
-- (void)flipCellToImageAnimated:(NSNumber *)animated onCompletion:(void(^)())completion
-{
-    if ([animated boolValue]) {
+    if (animated) {
         [UIView transitionWithView:self.contentView
                           duration:0.4
                            options:UIViewAnimationOptionTransitionFlipFromRight
                         animations:^{
-                                [self.contentView bringSubviewToFront:_imageSide];
+                                [self.contentView bringSubviewToFront:self.imageSide];
                         } completion:^(BOOL finished) {
-                            if (completion) {
-                                completion();
-                            }
+                            completion();
                         }];
     } else {
-        [self.contentView bringSubviewToFront:_imageSide];
+        [self.contentView bringSubviewToFront:self.imageSide];
     }
 }
 
-- (void)flipCellToCoverAnimated:(NSNumber *)animated
+- (void)flipToCoverWithAnimation:(BOOL)animated onCompletion:(nonnull void(^)())completion
 {
-    if ([animated boolValue]) {
+    if (animated) {
         [UIView transitionWithView:self.contentView
                           duration:0.4
                            options:UIViewAnimationOptionTransitionFlipFromRight
                         animations:^{
-                            [self.contentView bringSubviewToFront:_coverSide];
+                            [self.contentView bringSubviewToFront:self.coverSide];
                         } completion:^(BOOL finished) {
+                            completion();
                         }];
     } else {
-        [self.contentView bringSubviewToFront:_coverSide];
+        [self.contentView bringSubviewToFront:self.coverSide];
     }
 }
 
-- (void)matchedAnimation
+- (void)showPairedAnimation:(nonnull void(^)())completion
 {
     self.alpha = 0;
     [UIView animateWithDuration:0.5
@@ -68,6 +62,7 @@
                          self.alpha = 1;
                      }
                      completion:^(BOOL finished) {
+                         completion();
                      }];
 }
 
