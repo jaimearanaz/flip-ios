@@ -48,68 +48,13 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (!self.isUserInteractionEnabled) {
-        
-        return;
-        
-    } else {
+    if (self.isUserInteractionEnabled) {
         
         GridCellStatus *selectedModel = [self.gridCells objectAtIndex:indexPath.item];
         FLPCollectionViewCell *selectedCell = (FLPCollectionViewCell *) [collectionView cellForItemAtIndexPath:indexPath];
         
-        if (selectedModel.isFlipped) {
-            
-            return;
-            
-        } else {
-            
-            selectedModel.isFlipped = YES;
-            self.isUserInteractionEnabled = (self.flippedIndexPath == nil) ? YES : NO;
-            
-            [selectedCell flipToUserImageWithAnimation:YES onCompletion:^{
-                
-                if (self.flippedIndexPath == nil) {
-                    
-                    self.isUserInteractionEnabled = YES;
-                    self.flippedIndexPath = indexPath;
-                    return;
-                    
-                } else {
-                    
-                    GridCellStatus *flippedModel = [self.gridCells objectAtIndex:self.flippedIndexPath.item];
-                    FLPCollectionViewCell *flippedCell = (FLPCollectionViewCell *) [collectionView cellForItemAtIndexPath:self.flippedIndexPath];
-                    BOOL isAMatch = selectedModel.gridCell.equalIndex == self.flippedIndexPath.item;
-                    
-                    if (isAMatch) {
-                        
-                        selectedModel.isFlipped = YES;
-                        selectedModel.isPaired = YES;
-                        flippedModel.isPaired = YES;
-                        
-                        self.flippedIndexPath = nil;
-                        self.isUserInteractionEnabled = NO;
-                        
-                        [selectedCell showPairedAnimation:^{}];
-                        [flippedCell showPairedAnimation:^{
-                            self.isUserInteractionEnabled = YES;
-                        }];
-                        
-                    } else {
-                        
-                        self.isUserInteractionEnabled = NO;
-                        
-                        [selectedCell flipToCoverWithAnimation:YES onCompletion:^{
-                            selectedModel.isFlipped = NO;
-                        }];
-                        
-                        [flippedCell flipToCoverWithAnimation:YES onCompletion:^{
-                            flippedModel.isFlipped = NO;
-                            self.flippedIndexPath = nil;
-                            self.isUserInteractionEnabled = YES;
-                        }];
-                    }
-                }
-            }];
+        if (!selectedModel.isFlipped) {
+            [self flipSelectedCell:selectedCell atIndex:indexPath withModel:selectedModel];
         }
     }
 }
@@ -191,6 +136,85 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
     }];
     
     return gridCells;
+}
+
+- (void)flipSelectedCell:(FLPCollectionViewCell *)selectedCell
+                 atIndex:(NSIndexPath *)indexPath
+               withModel:(GridCellStatus *)selectedModel
+{
+    selectedModel.isFlipped = YES;
+    self.isUserInteractionEnabled = (self.flippedIndexPath == nil) ? YES : NO;
+    
+    [selectedCell flipToUserImageWithAnimation:YES onCompletion:^{
+        
+        if (self.flippedIndexPath == nil) {
+            [self oneCellIsFlippedWithIndex:indexPath];
+        } else {
+            [self twoCellsAreFlippedWithSelectedCell:selectedCell andModel:selectedModel];
+        }
+    }];
+}
+
+- (void)oneCellIsFlippedWithIndex:(NSIndexPath *)indexPath
+{
+    self.isUserInteractionEnabled = YES;
+    self.flippedIndexPath = indexPath;
+    return;
+}
+
+- (void)twoCellsAreFlippedWithSelectedCell:(FLPCollectionViewCell *)selectedCell andModel:(GridCellStatus *)selectedModel
+{
+    GridCellStatus *flippedModel = [self.gridCells objectAtIndex:self.flippedIndexPath.item];
+    FLPCollectionViewCell *flippedCell = (FLPCollectionViewCell *) [self.collectionView cellForItemAtIndexPath:self.flippedIndexPath];
+    BOOL isAMatch = selectedModel.gridCell.equalIndex == self.flippedIndexPath.item;
+    
+    if (isAMatch) {
+        [self cellsMatch:@[selectedCell, flippedCell] withModels:@[selectedModel, flippedModel]];
+    } else {
+        [self cellsDoesntMatch:@[selectedCell, flippedCell] withModels:@[selectedModel, flippedModel]];
+    }
+}
+
+- (void)cellsMatch:(NSArray *)cell withModels:(NSArray *)models
+{
+    FLPCollectionViewCell *selectedCell = cell[0];
+    GridCellStatus *selectedModel = models[0];
+    
+    FLPCollectionViewCell *flippedCell = cell[1];
+    GridCellStatus *flippedModel = models[1];
+    
+    selectedModel.isFlipped = YES;
+    selectedModel.isPaired = YES;
+    flippedModel.isPaired = YES;
+    
+    self.flippedIndexPath = nil;
+    self.isUserInteractionEnabled = NO;
+    
+    [selectedCell showPairedAnimation:^{}];
+    [flippedCell showPairedAnimation:^{
+        self.isUserInteractionEnabled = YES;
+    }];
+}
+
+- (void)cellsDoesntMatch:(NSArray *)cells withModels:(NSArray *)models
+{
+    FLPCollectionViewCell *selectedCell = cells[0];
+    GridCellStatus *selectedModel = models[0];
+    
+    FLPCollectionViewCell *flippedCell = cells[1];
+    GridCellStatus *flippedModel = models[1];
+    
+    self.isUserInteractionEnabled = NO;
+    
+    [selectedCell flipToCoverWithAnimation:YES onCompletion:^{
+        selectedModel.isFlipped = NO;
+    }];
+    
+    [flippedCell flipToCoverWithAnimation:YES onCompletion:^{
+        flippedModel.isFlipped = NO;
+        self.flippedIndexPath = nil;
+        self.isUserInteractionEnabled = YES;
+    }];
 }
 
 @end
