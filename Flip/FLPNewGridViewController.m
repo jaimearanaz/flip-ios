@@ -143,26 +143,20 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
                withModel:(GridCellStatus *)selectedModel
 {
     selectedModel.isFlipped = YES;
-    self.isUserInteractionEnabled = (self.flippedIndexPath == nil) ? YES : NO;
+    BOOL isFirstOfTwoCells = (self.flippedIndexPath == nil);
     
+    self.flippedIndexPath = (isFirstOfTwoCells) ? indexPath : self.flippedIndexPath;
+    self.isUserInteractionEnabled = (isFirstOfTwoCells) ? YES : NO;
+
     [selectedCell flipToUserImageWithAnimation:YES onCompletion:^{
         
-        if (self.flippedIndexPath == nil) {
-            [self oneCellIsFlippedWithIndex:indexPath];
-        } else {
-            [self twoCellsAreFlippedWithSelectedCell:selectedCell andModel:selectedModel];
+        if (!isFirstOfTwoCells) {
+            [self checkIfCellsMatchWithSelectedCell:selectedCell andModel:selectedModel];
         }
     }];
 }
 
-- (void)oneCellIsFlippedWithIndex:(NSIndexPath *)indexPath
-{
-    self.isUserInteractionEnabled = YES;
-    self.flippedIndexPath = indexPath;
-    return;
-}
-
-- (void)twoCellsAreFlippedWithSelectedCell:(FLPCollectionViewCell *)selectedCell andModel:(GridCellStatus *)selectedModel
+- (void)checkIfCellsMatchWithSelectedCell:(FLPCollectionViewCell *)selectedCell andModel:(GridCellStatus *)selectedModel
 {
     GridCellStatus *flippedModel = [self.gridCells objectAtIndex:self.flippedIndexPath.item];
     FLPCollectionViewCell *flippedCell = (FLPCollectionViewCell *) [self.collectionView cellForItemAtIndexPath:self.flippedIndexPath];
