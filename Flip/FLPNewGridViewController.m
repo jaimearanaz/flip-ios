@@ -15,9 +15,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
-@property (strong, nonatomic, nonnull) NSArray *gridCells;
+@property (strong, nonatomic, nonnull) NSArray *gridCellsModels;
 @property (strong, nonatomic, nullable) NSIndexPath *flippedIndexPath;
 @property (nonatomic) BOOL isUserInteractionEnabled;
+@property (nonatomic) NSInteger numberOfmatchs;
 
 @end
 
@@ -50,7 +51,7 @@
 {
     if (self.isUserInteractionEnabled) {
         
-        GridCellStatus *selectedModel = [self.gridCells objectAtIndex:indexPath.item];
+        GridCellStatus *selectedModel = [self.gridCellsModels objectAtIndex:indexPath.item];
         FLPCollectionViewCell *selectedCell = (FLPCollectionViewCell *) [collectionView cellForItemAtIndexPath:indexPath];
         
         if (!selectedModel.isFlipped) {
@@ -63,7 +64,7 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return (self.gridCells == nil) ? 0 : self.gridCells.count;
+    return (self.gridCellsModels == nil) ? 0 : self.gridCellsModels.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -71,7 +72,7 @@
 
     FLPCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kReusableIdentifier
                                                                             forIndexPath:indexPath];
-    GridCellStatus *gridCellStatus = [self.gridCells objectAtIndex:indexPath.item];
+    GridCellStatus *gridCellStatus = [self.gridCellsModels objectAtIndex:indexPath.item];
     [cell setupCell:gridCellStatus.gridCell withNumber:(indexPath.item + 1)];
     
     return cell;
@@ -97,7 +98,7 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 
 - (void)showItems:(NSArray<GridCell *> *)items
 {
-    self.gridCells = [self createGridCellsFromItems:items];
+    self.gridCellsModels = [self createGridCellsFromItems:items];
     if (self.collectionView != nil) {
         [self.collectionView reloadData];
     }
@@ -158,7 +159,7 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 
 - (void)checkIfCellsMatchWithSelectedCell:(FLPCollectionViewCell *)selectedCell andModel:(GridCellStatus *)selectedModel
 {
-    GridCellStatus *flippedModel = [self.gridCells objectAtIndex:self.flippedIndexPath.item];
+    GridCellStatus *flippedModel = [self.gridCellsModels objectAtIndex:self.flippedIndexPath.item];
     FLPCollectionViewCell *flippedCell = (FLPCollectionViewCell *) [self.collectionView cellForItemAtIndexPath:self.flippedIndexPath];
     BOOL isAMatch = selectedModel.gridCell.equalIndex == self.flippedIndexPath.item;
     
@@ -177,16 +178,21 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
     FLPCollectionViewCell *flippedCell = cell[1];
     GridCellStatus *flippedModel = models[1];
     
-    selectedModel.isFlipped = YES;
-    selectedModel.isPaired = YES;
-    flippedModel.isPaired = YES;
-    
     self.flippedIndexPath = nil;
     self.isUserInteractionEnabled = NO;
     
-    [selectedCell showPairedAnimation:^{}];
+    [selectedCell showPairedAnimation:^{
+    
+        selectedModel.isFlipped = YES;
+        selectedModel.isPaired = YES;
+    }];
+    
     [flippedCell showPairedAnimation:^{
+        
+        flippedModel.isPaired = YES;
         self.isUserInteractionEnabled = YES;
+        self.numberOfmatchs += 2;
+        [self checkIfGameIsFinished];
     }];
 }
 
@@ -209,6 +215,16 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
         self.flippedIndexPath = nil;
         self.isUserInteractionEnabled = YES;
     }];
+}
+
+- (void)checkIfGameIsFinished
+{
+    BOOL isGameFinshed = self.gridCellsModels.count == self.numberOfmatchs;
+    
+    if (isGameFinshed) {
+        
+        // TODO: call presenter delegate
+    }
 }
 
 @end
