@@ -163,10 +163,13 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
     FLPCollectionViewCell *flippedCell = (FLPCollectionViewCell *) [self.collectionView cellForItemAtIndexPath:self.flippedIndexPath];
     BOOL isAMatch = selectedModel.gridCell.equalIndex == self.flippedIndexPath.item;
     
+    NSArray *cells = @[selectedCell, flippedCell];
+    NSArray *models = @[selectedModel, flippedModel];
+    
     if (isAMatch) {
-        [self cellsMatch:@[selectedCell, flippedCell] withModels:@[selectedModel, flippedModel]];
+        [self cellsMatch:cells withModels:models];
     } else {
-        [self cellsDoesntMatch:@[selectedCell, flippedCell] withModels:@[selectedModel, flippedModel]];
+        [self cellsDoesntMatch:cells withModels:models];
     }
 }
 
@@ -211,6 +214,7 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
     }];
     
     [flippedCell flipToCoverWithAnimation:YES onCompletion:^{
+        
         flippedModel.isFlipped = NO;
         self.flippedIndexPath = nil;
         self.isUserInteractionEnabled = YES;
