@@ -19,6 +19,9 @@
 @property (strong, nonatomic, nullable) NSIndexPath *flippedIndexPath;
 @property (nonatomic) BOOL isUserInteractionEnabled;
 @property (nonatomic) NSInteger numberOfmatchs;
+@property (strong, nonatomic, nullable) NSTimer *timer;
+@property (strong, nonatomic, nullable) NSDate *startDate;
+@property (nonatomic) NSTimeInterval timeNotPaused;
 
 @end
 
@@ -36,6 +39,7 @@
     [self.collectionView registerNib:nib forCellWithReuseIdentifier:kReusableIdentifier];
 
     [self.collectionView reloadData];
+    [self startTimer];
 }
 
 #pragma mark - Action methods
@@ -43,21 +47,6 @@
 - (IBAction)didSelectExit:(id)sender
 {
     [self confirmExit];
-}
-
-#pragma mark - UICollectionViewDelegate methods
-
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (self.isUserInteractionEnabled) {
-        
-        GridCellStatus *selectedModel = [self.gridCellsModels objectAtIndex:indexPath.item];
-        FLPCollectionViewCell *selectedCell = (FLPCollectionViewCell *) [collectionView cellForItemAtIndexPath:indexPath];
-        
-        if (!selectedModel.isFlipped) {
-            [self flipSelectedCell:selectedCell atIndex:indexPath withModel:selectedModel];
-        }
-    }
 }
 
 #pragma mark - UICollectionViewDataSource methods
@@ -94,6 +83,21 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
     return 3;
 }
 
+#pragma mark - UICollectionViewDelegate methods
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (self.isUserInteractionEnabled) {
+        
+        GridCellStatus *selectedModel = [self.gridCellsModels objectAtIndex:indexPath.item];
+        FLPCollectionViewCell *selectedCell = (FLPCollectionViewCell *) [collectionView cellForItemAtIndexPath:indexPath];
+        
+        if (!selectedModel.isFlipped) {
+            [self flipSelectedCell:selectedCell atIndex:indexPath withModel:selectedModel];
+        }
+    }
+}
+
 #pragma mark - NewGridViewControllerDelegate methods
 
 - (void)showItems:(NSArray<GridCell *> *)items
@@ -101,6 +105,7 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
     self.gridCellsModels = [self createGridCellsFromItems:items];
     if (self.collectionView != nil) {
         [self.collectionView reloadData];
+        [self startTimer];
     }
 }
 
@@ -108,16 +113,19 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 
 - (void)confirmExit
 {
-    // TODO: stop timer
+    [self pauseTimer];
 
     [DWPAlertController showAlertWithMessage:NSLocalizedString(@"GRID_EXIT_CONFIRM", @"")
                                        title:@""
                             firstButtonTitle:NSLocalizedString(@"OTHER_CANCEL", @"")
                            secondButtonTitle:NSLocalizedString(@"GRID_EXIT", @"")
                                   firstBlock:^{
-                                      // TODO: resume timer
+                                      
+                                      [self resumeTimer];
                                   }
                                  secondBlock:^{
+                                     
+                                     [self stopTimer];
                                      [self.presenterDelegate didSelectExit];
                                  }];
 }
@@ -229,6 +237,54 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
         
         // TODO: call presenter delegate
     }
+}
+
+- (void)startTimer
+{
+    self.startDate = [NSDate date];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1
+                                                  target:self
+                                                selector:@selector(updateTimeLabel)
+                                                userInfo:nil
+                                                 repeats:YES];
+    
+    NSRunLoop *runloop = [NSRunLoop currentRunLoop];
+    [runloop addTimer:self.timer forMode:NSRunLoopCommonModes];
+    [runloop addTimer:self.timer forMode:UITrackingRunLoopMode];
+}
+
+- (void)pauseTimer
+{
+    NSDate *now = [NSDate date];
+    NSTimeInterval elapsedTime = [now timeIntervalSinceDate:self.startDate];
+    self.timeNotPaused += elapsedTime;
+    
+    [self stopTimer];
+}
+
+- (void)resumeTimer
+{
+    [self startTimer];
+}
+
+- (void)stopTimer
+{
+    [self.timer invalidate];
+    self.timer = nil;
+}
+
+- (void)updateTimeLabel
+{
+    NSDate *now = [NSDate date];
+    NSTimeInterval totalTime = [now timeIntervalSinceDate:self.startDate] + self.timeNotPaused;
+    
+    NSDate *totalDate = [NSDate dateWithTimeIntervalSince1970:totalTime];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"mm:ss"];
+    [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0.0]];
+    NSString *totalTimeFormatted = [dateFormatter stringFromDate:totalDate];
+    
+    self.timeLabel.text = totalTimeFormatted;
 }
 
 @end
