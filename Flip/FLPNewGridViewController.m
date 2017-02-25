@@ -10,6 +10,9 @@
 
 #import "FLPCollectionViewCell.h"
 
+#define kFirstLookDuration 4.0f
+#define kNextCellDelayDuration 0.2f
+
 @interface FLPNewGridViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
@@ -33,13 +36,16 @@
 {
     [super viewDidLoad];
     
-    self.isUserInteractionEnabled = YES;
-    
     UINib *nib = [UINib nibWithNibName:kReusableIdentifier bundle:nil];
     [self.collectionView registerNib:nib forCellWithReuseIdentifier:kReusableIdentifier];
-
     [self.collectionView reloadData];
-    [self startTimer];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    [self showAllUserImagesForAWhile];
 }
 
 #pragma mark - Action methods
@@ -58,11 +64,12 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-
     FLPCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kReusableIdentifier
                                                                             forIndexPath:indexPath];
     GridCellStatus *gridCellStatus = [self.gridCellsModels objectAtIndex:indexPath.item];
     [cell setupCell:gridCellStatus.gridCell withNumber:(indexPath.item + 1)];
+    
+    [cell flipToUserImageWithAnimation:@(NO) onCompletion:^{}];
     
     return cell;
 }
@@ -157,7 +164,7 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
     self.flippedIndexPath = (isFirstOfTwoCells) ? indexPath : self.flippedIndexPath;
     self.isUserInteractionEnabled = (isFirstOfTwoCells) ? YES : NO;
 
-    [selectedCell flipToUserImageWithAnimation:YES onCompletion:^{
+    [selectedCell flipToUserImageWithAnimation:@(YES) onCompletion:^{
         
         if (!isFirstOfTwoCells) {
             [self checkIfCellsMatchWithSelectedCell:selectedCell andModel:selectedModel];
@@ -217,11 +224,11 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
     
     self.isUserInteractionEnabled = NO;
     
-    [selectedCell flipToCoverWithAnimation:YES onCompletion:^{
+    [selectedCell flipToCoverWithAnimation:@(YES) onCompletion:^{
         selectedModel.isFlipped = NO;
     }];
     
-    [flippedCell flipToCoverWithAnimation:YES onCompletion:^{
+    [flippedCell flipToCoverWithAnimation:@(YES) onCompletion:^{
         
         flippedModel.isFlipped = NO;
         self.flippedIndexPath = nil;
@@ -285,6 +292,65 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
     NSString *totalTimeFormatted = [dateFormatter stringFromDate:totalDate];
     
     self.timeLabel.text = totalTimeFormatted;
+}
+
+- (void)showAllUserImagesForAWhile
+{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, kFirstLookDuration * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [self hideAllUserImagesAndStartGame];
+    });
+}
+
+- (void)hideAllUserImagesAndStartGame
+{
+    NSTimeInterval delay = 0;
+    
+    for (int cellIndex = 0; cellIndex < (self.gridCellsModels.count); cellIndex++) {
+        [self flipCellToCoverAtIndex:cellIndex withDelay:delay];
+        delay += kNextCellDelayDuration;
+    }
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, delay * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [self gameStarts];
+    });
+}
+
+- (void)gameStarts
+{
+    [self startTimer];
+    self.isUserInteractionEnabled = YES;
+}
+
+- (void)flipCellToCoverAtIndex:(NSInteger)index withDelay:(NSTimeInterval)delay
+{
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
+    FLPCollectionViewCell *cell = (FLPCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+    NSInvocation *invocation = [self invocationToFlipCellToCover:cell];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, delay * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        
+        BOOL isLastCell = (indexPath.item == (self.gridCellsModels.count - 1));
+        if (isLastCell) {
+            [self startTimer];
+            self.isUserInteractionEnabled = YES;
+        }
+        [invocation invoke];
+    });
+}
+
+- (NSInvocation *)invocationToFlipCellToCover:(FLPCollectionViewCell *)cell
+{
+    SEL selector = NSSelectorFromString(@"flipToCoverWithAnimation:onCompletion:");
+    NSNumber *animated = [NSNumber numberWithBool:YES];
+    void (^completion)(void) = ^void(){};
+    
+    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[cell methodSignatureForSelector:selector]];
+    [invocation setSelector:selector];
+    [invocation setTarget:cell];
+    [invocation setArgument:&animated atIndex:2];
+    [invocation setArgument:&completion atIndex:3];
+    
+    return invocation;
 }
 
 @end

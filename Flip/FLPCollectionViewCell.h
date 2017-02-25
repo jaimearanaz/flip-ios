@@ -17,9 +17,9 @@
 
 - (void)setupCell:(nonnull GridCell *)gridCell withNumber:(NSInteger)position;
 
-- (void)flipToUserImageWithAnimation:(BOOL)animated onCompletion:(nonnull void(^)())completion;
+- (void)flipToUserImageWithAnimation:(nonnull NSNumber *)animated onCompletion:(nonnull void(^)())completion;
 
-- (void)flipToCoverWithAnimation:(BOOL)animated onCompletion:(nonnull void(^)())completion;
+- (void)flipToCoverWithAnimation:(nonnull NSNumber *)animated onCompletion:(nonnull void(^)())completion;
 
 - (void)showPairedAnimation:(nonnull void(^)())completion;
 
