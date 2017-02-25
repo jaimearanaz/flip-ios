@@ -22,6 +22,7 @@
 @property (strong, nonatomic, nullable) NSIndexPath *flippedIndexPath;
 @property (nonatomic) BOOL isUserInteractionEnabled;
 @property (nonatomic) NSInteger numberOfmatchs;
+@property (nonatomic) NSInteger numberOfErrors;
 @property (strong, nonatomic, nullable) NSTimer *timer;
 @property (strong, nonatomic, nullable) NSDate *startDate;
 @property (nonatomic) NSTimeInterval timeNotPaused;
@@ -210,7 +211,7 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
         flippedModel.isPaired = YES;
         self.isUserInteractionEnabled = YES;
         self.numberOfmatchs += 2;
-        [self checkIfGameIsFinished];
+        [self finishGameIfAllCellsMatch];
     }];
 }
 
@@ -223,6 +224,7 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
     GridCellStatus *flippedModel = models[1];
     
     self.isUserInteractionEnabled = NO;
+    self.numberOfErrors++;
     
     [selectedCell flipToCoverWithAnimation:@(YES) onCompletion:^{
         selectedModel.isFlipped = NO;
@@ -236,13 +238,17 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
     }];
 }
 
-- (void)checkIfGameIsFinished
+- (void)finishGameIfAllCellsMatch
 {
     BOOL isGameFinshed = self.gridCellsModels.count == self.numberOfmatchs;
     
     if (isGameFinshed) {
+    
+        [self stopTimer];
+        NSDate *now = [NSDate date];
+        NSTimeInterval totalTime = [now timeIntervalSinceDate:self.startDate] + self.timeNotPaused;
         
-        // TODO: call presenter delegate
+        [self.presenterDelegate gameFinishedWithTime:totalTime numberOferrors:self.numberOfErrors];
     }
 }
 
@@ -282,16 +288,19 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 
 - (void)updateTimeLabel
 {
-    NSDate *now = [NSDate date];
-    NSTimeInterval totalTime = [now timeIntervalSinceDate:self.startDate] + self.timeNotPaused;
-    
-    NSDate *totalDate = [NSDate dateWithTimeIntervalSince1970:totalTime];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"mm:ss"];
-    [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0.0]];
-    NSString *totalTimeFormatted = [dateFormatter stringFromDate:totalDate];
-    
-    self.timeLabel.text = totalTimeFormatted;
+    if (self.timer != nil) {
+        
+        NSDate *now = [NSDate date];
+        NSTimeInterval totalTime = [now timeIntervalSinceDate:self.startDate] + self.timeNotPaused;
+        
+        NSDate *totalDate = [NSDate dateWithTimeIntervalSince1970:totalTime];
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"mm:ss"];
+        [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0.0]];
+        NSString *totalTimeFormatted = [dateFormatter stringFromDate:totalDate];
+        
+        self.timeLabel.text = totalTimeFormatted;
+    }
 }
 
 - (void)showAllUserImagesForAWhile

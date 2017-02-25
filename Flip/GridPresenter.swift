@@ -44,8 +44,8 @@ class GridPresenter: FLPBasePresenter, GridPresenterDelegate {
         Router.sharedInstance.dismissCurrentViewController()
     }
     
-    func didSelectFinish(time: TimeInterval, errors: Int) {
-        
+    func gameFinished(withTime time: TimeInterval, numberOferrors: Int) {
+ 
         // TODO: implement
     }
     
