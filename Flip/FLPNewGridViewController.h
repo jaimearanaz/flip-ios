@@ -11,8 +11,6 @@
 @protocol GridPresenterDelegate;
 @protocol NewGridViewControllerDelegate;
 
-#define kReusableIdentifier @"FLPCollectionViewCell"
-
 @interface FLPNewGridViewController : FLPBaseViewController <NewGridViewControllerDelegate>
 
 @property (strong, nonatomic, nonnull) id<GridPresenterDelegate> presenterDelegate;

@@ -10,6 +10,6 @@ import Foundation
 
 @objc protocol NewGridViewControllerDelegate: FLPBaseViewControllerDelegate {
     
-    @objc (showItems:)
-    func showItems(_ items: [GridCell])
+    @objc (showItems:withSize:)
+    func showItems(_ items: [GridCell], withSize size: GameSize)
 }

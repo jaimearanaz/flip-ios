@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#define kFLPCollectionViewCellIdentifier @"FLPCollectionViewCell"
+
 @interface FLPCollectionViewCell : UICollectionViewCell
 
 @property (weak, nonatomic) IBOutlet UIView *imageSide;

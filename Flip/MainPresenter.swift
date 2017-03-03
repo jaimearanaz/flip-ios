@@ -56,7 +56,7 @@ class MainPresenter: FLPBasePresenter, MainPresenterDelegate {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             
             self.realControllerDelegate.stopLoadingState()
-            Router.sharedInstance.presentGrid(withImages: images)
+            Router.sharedInstance.presentGrid(withImages: images, andSize: size)
         }
     }
 }

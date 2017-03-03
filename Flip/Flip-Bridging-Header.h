@@ -3,6 +3,7 @@
 //
 
 #import "DWPAlertController.h"
+#import "DWPDevice.h"
 #import "FLPBaseViewController.h"
 #import "FLPBaseViewControllerDelegate.h"
 #import "FLPBasePresenterDelegate.h"

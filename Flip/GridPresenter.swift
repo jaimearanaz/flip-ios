@@ -31,10 +31,10 @@ class GridPresenter: FLPBasePresenter, GridPresenterDelegate {
     
     // MARK: - Public methods
     
-    func showGrid(withImages images: [UIImage]) {
+    func showGrid(withImages images: [UIImage], andSize size: GameSize) {
         
         let gridCells = createGridCells(withImages: images)
-        realControllerDelegate.showItems(gridCells)
+        realControllerDelegate.showItems(gridCells, withSize: size)
     }
     
     // MARK: - GridPresenterDelegate methods

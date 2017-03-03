@@ -13,7 +13,7 @@
 #define kFirstLookDuration 4.0f
 #define kNextCellDelayDuration 0.2f
 
-@interface FLPNewGridViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+@interface FLPNewGridViewController () <UICollectionViewDelegateFlowLayout>
 
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -26,6 +26,7 @@
 @property (strong, nonatomic, nullable) NSTimer *timer;
 @property (strong, nonatomic, nullable) NSDate *startDate;
 @property (nonatomic) NSTimeInterval timeNotPaused;
+@property (nonatomic) GameSize gameSize;
 
 @end
 
@@ -37,9 +38,26 @@
 {
     [super viewDidLoad];
     
-    UINib *nib = [UINib nibWithNibName:kReusableIdentifier bundle:nil];
-    [self.collectionView registerNib:nib forCellWithReuseIdentifier:kReusableIdentifier];
-    [self.collectionView reloadData];
+    UINib *nib = [UINib nibWithNibName:kFLPCollectionViewCellIdentifier bundle:nil];
+    [self.collectionView registerNib:nib forCellWithReuseIdentifier:kFLPCollectionViewCellIdentifier];
+ 
+    [self setupCollectionViewIfReady];
+}
+
+- (void)setupCollectionViewIfReady
+{
+    BOOL ready = ((self.collectionView != nil) && (self.gridCellsModels != nil));
+    if (ready) {
+        
+        GridCollectionViewDelegates *collectionDelegate = [[GridCollectionViewDelegates alloc] initWithCollectionView:self.collectionView
+                                                                                                                 size:self.gameSize
+                                                                                                               models:self.gridCellsModels];
+        self.collectionView.delegate = collectionDelegate;
+        self.collectionView.dataSource = collectionDelegate;
+        [self.collectionView reloadData];
+        
+        [self startTimer];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -65,7 +83,7 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    FLPCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kReusableIdentifier
+    FLPCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kFLPCollectionViewCellIdentifier
                                                                             forIndexPath:indexPath];
     GridCellStatus *gridCellStatus = [self.gridCellsModels objectAtIndex:indexPath.item];
     [cell setupCell:gridCellStatus.gridCell withNumber:(indexPath.item + 1)];
@@ -108,13 +126,11 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 
 #pragma mark - NewGridViewControllerDelegate methods
 
-- (void)showItems:(NSArray<GridCell *> *)items
+- (void)showItems:(NSArray<GridCell *> *)items withSize:(GameSize)size
 {
     self.gridCellsModels = [self createGridCellsFromItems:items];
-    if (self.collectionView != nil) {
-        [self.collectionView reloadData];
-        [self startTimer];
-    }
+    self.gameSize = size;
+    [self setupCollectionViewIfReady];
 }
 
 #pragma mark - Private methods
