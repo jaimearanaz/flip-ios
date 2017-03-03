@@ -20,7 +20,6 @@
 #import "MBProgressHUD.h"
 #import "WCAlertView.h"
 #import "SCNetworkReachability.h"
-#import "GADBannerView.h"
 
 // Types of sources available
 typedef enum {

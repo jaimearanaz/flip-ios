@@ -6,13 +6,14 @@
 //  Copyright (c) 2014 MobiOak. All rights reserved.
 //
 
+#import <AVFoundation/AVFoundation.h>
+
 #import "FLPGridViewController.h"
 #import "FLPCollectionViewCell.h"
 #import "FLPGridItem.h"
 #import "FLPScoreViewController.h"
 
 #import "WCAlertView.h"
-#import "GADBannerView.h"
 
 @interface FLPGridViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
@@ -102,14 +103,14 @@
     _photosInGrid = [self sortRandomlyArray:_photosInGrid];
     
     // Configure banner
-    GADBannerView *banner = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner];
-    // AdMob key is stored in a plist file, not tracked in git repository
-    NSString *adMobPlist = [[NSBundle mainBundle] pathForResource:@"AdMobKey" ofType:@"plist"];
-    NSDictionary *adMobKey = [[NSDictionary alloc] initWithContentsOfFile:adMobPlist];
-    banner.adUnitID = [adMobKey objectForKey:@"key"];
-    banner.rootViewController = self;
-    [_bannerView addSubview:banner];
-    [banner loadRequest:[GADRequest request]];
+//    GADBannerView *banner = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner];
+//    // AdMob key is stored in a plist file, not tracked in git repository
+//    NSString *adMobPlist = [[NSBundle mainBundle] pathForResource:@"AdMobKey" ofType:@"plist"];
+//    NSDictionary *adMobKey = [[NSDictionary alloc] initWithContentsOfFile:adMobPlist];
+//    banner.adUnitID = [adMobKey objectForKey:@"key"];
+//    banner.rootViewController = self;
+//    [_bannerView addSubview:banner];
+//    [banner loadRequest:[GADRequest request]];
     
     // If 3.5 inches and small grid, remove banner for better performance
     if ((!isiPhone5) && (_gridSize == GridSizeSmall)) {
