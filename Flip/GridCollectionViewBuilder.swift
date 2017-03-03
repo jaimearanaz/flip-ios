@@ -37,6 +37,7 @@ UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+        delegate?.didSelectCell(withIndexPath: indexPath)
     }
     
     // MARK: - UICollectionViewDataSource methods

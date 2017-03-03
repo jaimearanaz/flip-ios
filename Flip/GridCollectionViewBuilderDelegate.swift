@@ -12,4 +12,6 @@ import UIKit
 @objc protocol GridCollectionViewBuilderDelegate {
     
     func collectionViewIsBuilt()
+    
+    func didSelectCell(withIndexPath indexPath: IndexPath)
 }

@@ -13,21 +13,21 @@
 #define kFirstLookDuration 4.0f
 #define kNextCellDelayDuration 0.2f
 
-@interface FLPNewGridViewController () <UICollectionViewDelegateFlowLayout, GridCollectionViewBuilderDelegate>
+@interface FLPNewGridViewController () <GridCollectionViewBuilderDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
+@property (strong, nonatomic, nullable) GridCollectionViewBuilder *collectionViewDelegate;
 @property (strong, nonatomic, nonnull) NSArray *gridCellsModels;
+@property (nonatomic) GameSize gameSize;
 @property (strong, nonatomic, nullable) NSIndexPath *flippedIndexPath;
 @property (nonatomic) BOOL isUserInteractionEnabled;
-@property (nonatomic) NSInteger numberOfmatchs;
+@property (nonatomic) NSInteger numberOfMatches;
 @property (nonatomic) NSInteger numberOfErrors;
 @property (strong, nonatomic, nullable) NSTimer *timer;
 @property (strong, nonatomic, nullable) NSDate *startDate;
 @property (nonatomic) NSTimeInterval timeNotPaused;
-@property (nonatomic) GameSize gameSize;
-@property (strong, nonatomic, nullable) GridCollectionViewBuilder *collectionViewDelegate;
 
 @end
 
@@ -66,26 +66,24 @@
     [self confirmExit];
 }
 
-#pragma mark - UICollectionViewDelegate methods
-
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (self.isUserInteractionEnabled) {
-        
-        GridCellStatus *selectedModel = [self.gridCellsModels objectAtIndex:indexPath.item];
-        FLPCollectionViewCell *selectedCell = (FLPCollectionViewCell *) [collectionView cellForItemAtIndexPath:indexPath];
-        
-        if (!selectedModel.isFlipped) {
-            [self flipSelectedCell:selectedCell atIndex:indexPath withModel:selectedModel];
-        }
-    }
-}
-
 #pragma mark - GridCollectionViewBuilderDelegate methods
 
 - (void)collectionViewIsBuilt
 {
     [self showAllUserImagesForAWhile];
+}
+
+- (void)didSelectCellWithIndexPath:(NSIndexPath *)indexPath
+{
+    if (self.isUserInteractionEnabled) {
+        
+        GridCellStatus *selectedModel = [self.gridCellsModels objectAtIndex:indexPath.item];
+        FLPCollectionViewCell *selectedCell = (FLPCollectionViewCell *) [self.collectionView cellForItemAtIndexPath:indexPath];
+        
+        if (!selectedModel.isFlipped) {
+            [self flipSelectedCell:selectedCell atIndex:indexPath withModel:selectedModel];
+        }
+    }
 }
 
 #pragma mark - NewGridViewControllerDelegate methods
@@ -190,7 +188,7 @@
         
         flippedModel.isPaired = YES;
         self.isUserInteractionEnabled = YES;
-        self.numberOfmatchs += 2;
+        self.numberOfMatches += 2;
         [self finishGameIfAllCellsMatch];
     }];
 }
@@ -220,7 +218,7 @@
 
 - (void)finishGameIfAllCellsMatch
 {
-    BOOL isGameFinshed = self.gridCellsModels.count == self.numberOfmatchs;
+    BOOL isGameFinshed = self.gridCellsModels.count == self.numberOfMatches;
     
     if (isGameFinshed) {
     
