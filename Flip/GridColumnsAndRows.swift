@@ -8,7 +8,7 @@
 
 import Foundation
 
-class GridRowsAndColumns {
+class GridColumnsAndRows {
     
     static fileprivate let iPhone4and4_7Small: (columns: Int, rows: Int) = (3, 4)
     static fileprivate let iPhone4and4_7Medium: (columns: Int, rows: Int) = (4, 5)

@@ -13,7 +13,7 @@
 #define kFirstLookDuration 4.0f
 #define kNextCellDelayDuration 0.2f
 
-@interface FLPNewGridViewController () <UICollectionViewDelegateFlowLayout>
+@interface FLPNewGridViewController () <UICollectionViewDelegateFlowLayout, GridCollectionViewBuilderDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -27,6 +27,7 @@
 @property (strong, nonatomic, nullable) NSDate *startDate;
 @property (nonatomic) NSTimeInterval timeNotPaused;
 @property (nonatomic) GameSize gameSize;
+@property (strong, nonatomic, nullable) GridCollectionViewBuilder *collectionViewDelegate;
 
 @end
 
@@ -37,9 +38,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    UINib *nib = [UINib nibWithNibName:kFLPCollectionViewCellIdentifier bundle:nil];
-    [self.collectionView registerNib:nib forCellWithReuseIdentifier:kFLPCollectionViewCellIdentifier];
  
     [self setupCollectionViewIfReady];
 }
@@ -49,22 +47,16 @@
     BOOL ready = ((self.collectionView != nil) && (self.gridCellsModels != nil));
     if (ready) {
         
-        GridCollectionViewDelegates *collectionDelegate = [[GridCollectionViewDelegates alloc] initWithCollectionView:self.collectionView
-                                                                                                                 size:self.gameSize
-                                                                                                               models:self.gridCellsModels];
-        self.collectionView.delegate = collectionDelegate;
-        self.collectionView.dataSource = collectionDelegate;
+        self.collectionViewDelegate = [[GridCollectionViewBuilder alloc] initWithCollectionView:self.collectionView
+                                                                                           size:self.gameSize
+                                                                                         models:self.gridCellsModels
+                                                                                       delegate:self];
+        self.collectionView.delegate = self.collectionViewDelegate;
+        self.collectionView.dataSource = self.collectionViewDelegate;
         [self.collectionView reloadData];
         
         [self startTimer];
     }
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
-    [self showAllUserImagesForAWhile];
 }
 
 #pragma mark - Action methods
@@ -72,41 +64,6 @@
 - (IBAction)didSelectExit:(id)sender
 {
     [self confirmExit];
-}
-
-#pragma mark - UICollectionViewDataSource methods
-
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
-{
-    return (self.gridCellsModels == nil) ? 0 : self.gridCellsModels.count;
-}
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    FLPCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kFLPCollectionViewCellIdentifier
-                                                                            forIndexPath:indexPath];
-    GridCellStatus *gridCellStatus = [self.gridCellsModels objectAtIndex:indexPath.item];
-    [cell setupCell:gridCellStatus.gridCell withNumber:(indexPath.item + 1)];
-    
-    [cell flipToUserImageWithAnimation:@(NO) onCompletion:^{}];
-    
-    return cell;
-}
-
-#pragma mark - UICollectionViewDelegateFlowLayout methods
-
-- (CGSize)collectionView:(UICollectionView *)collectionView
-                  layout:(UICollectionViewLayout*)collectionViewLayout
-  sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    return CGSizeMake(90, 100);
-}
-
-- (CGFloat)collectionView:(UICollectionView *)collectionView
-                   layout:(UICollectionViewLayout*)collectionViewLayout
-minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
-{
-    return 3;
 }
 
 #pragma mark - UICollectionViewDelegate methods
@@ -122,6 +79,13 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
             [self flipSelectedCell:selectedCell atIndex:indexPath withModel:selectedModel];
         }
     }
+}
+
+#pragma mark - GridCollectionViewBuilderDelegate methods
+
+- (void)collectionViewIsBuilt
+{
+    [self showAllUserImagesForAWhile];
 }
 
 #pragma mark - NewGridViewControllerDelegate methods

@@ -1,0 +1,15 @@
+//
+//  GridCollectionViewBuilderDelegate.swift
+//  Flip
+//
+//  Created by Jaime Aranaz on 03/03/2017.
+//  Copyright © 2017 MobiOak. All rights reserved.
+//
+
+import Foundation
+import UIKit
+
+@objc protocol GridCollectionViewBuilderDelegate {
+    
+    func collectionViewIsBuilt()
+}

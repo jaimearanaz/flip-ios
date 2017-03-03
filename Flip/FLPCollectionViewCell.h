@@ -10,6 +10,8 @@
 
 #define kFLPCollectionViewCellIdentifier @"FLPCollectionViewCell"
 
+@class GridCell;
+
 @interface FLPCollectionViewCell : UICollectionViewCell
 
 @property (weak, nonatomic) IBOutlet UIView *imageSide;
@@ -17,12 +19,12 @@
 @property (weak, nonatomic) IBOutlet UIView *coverSide;
 @property (weak, nonatomic) IBOutlet UILabel *number;
 
-- (void)setupCell:(nonnull GridCell *)gridCell withNumber:(NSInteger)position;
+- (void)setupCellWithModel:(nonnull GridCell *)gridCell andNumber:(NSInteger)position;
 
-- (void)flipToUserImageWithAnimation:(nonnull NSNumber *)animated onCompletion:(nonnull void(^)())completion;
+- (void)flipToUserImageWithAnimation:(nonnull NSNumber *)animated onCompletion:(nullable void(^)())completion;
 
-- (void)flipToCoverWithAnimation:(nonnull NSNumber *)animated onCompletion:(nonnull void(^)())completion;
+- (void)flipToCoverWithAnimation:(nonnull NSNumber *)animated onCompletion:(nullable void(^)())completion;
 
-- (void)showPairedAnimation:(nonnull void(^)())completion;
+- (void)showPairedAnimation:(nullable void(^)())completion;
 
 @end

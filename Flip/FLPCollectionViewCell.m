@@ -16,13 +16,13 @@
 
 #pragma mark - Public methods
 
-- (void)setupCell:(nonnull GridCell *)gridCell withNumber:(NSInteger)position
+- (void)setupCellWithModel:(nonnull GridCell *)gridCell andNumber:(NSInteger)position;
 {
     self.userImage.image = gridCell.image;
     self.number.text = [NSString stringWithFormat:@"%@", @(position)];
 }
 
-- (void)flipToUserImageWithAnimation:(nonnull NSNumber *)animated onCompletion:(nonnull void(^)())completion
+- (void)flipToUserImageWithAnimation:(nonnull NSNumber *)animated onCompletion:(nullable void(^)())completion
 {
     if ([animated boolValue]) {
         [UIView transitionWithView:self.contentView
@@ -31,14 +31,16 @@
                         animations:^{
                                 [self.contentView bringSubviewToFront:self.imageSide];
                         } completion:^(BOOL finished) {
-                            completion();
+                            if (completion) {
+                                completion();
+                            }
                         }];
     } else {
         [self.contentView bringSubviewToFront:self.imageSide];
     }
 }
 
-- (void)flipToCoverWithAnimation:(nonnull NSNumber *)animated onCompletion:(nonnull void(^)())completion
+- (void)flipToCoverWithAnimation:(nonnull NSNumber *)animated onCompletion:(nullable void(^)())completion
 {
     if ([animated boolValue]) {
         [UIView transitionWithView:self.contentView
@@ -47,14 +49,16 @@
                         animations:^{
                             [self.contentView bringSubviewToFront:self.coverSide];
                         } completion:^(BOOL finished) {
-                            completion();
+                            if (completion) {
+                                completion();
+                            }
                         }];
     } else {
         [self.contentView bringSubviewToFront:self.coverSide];
     }
 }
 
-- (void)showPairedAnimation:(nonnull void(^)())completion
+- (void)showPairedAnimation:(nullable void(^)())completion
 {
     self.alpha = 0;
     [UIView animateWithDuration:0.5
@@ -62,7 +66,9 @@
                          self.alpha = 1;
                      }
                      completion:^(BOOL finished) {
-                         completion();
+                         if (completion) {
+                             completion();
+                         }
                      }];
 }
 
