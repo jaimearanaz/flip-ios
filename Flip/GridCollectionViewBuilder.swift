@@ -11,13 +11,15 @@ import Foundation
 @objc class GridCollectionViewBuilder: NSObject, UICollectionViewDelegate, UICollectionViewDataSource,
 UICollectionViewDelegateFlowLayout {
     
-    fileprivate let cellRatio = (100 / 90)
+    fileprivate let cellRatio: CGFloat = (100 / 90)
     fileprivate let minMargin: CGFloat = 5
     
     fileprivate var gridCellsModels = [GridCellStatus]()
     fileprivate var collectionView: UICollectionView!
     fileprivate var cellSize = CGSize(width: 0, height: 0)
-    fileprivate var rowsAndColumns: (columns: Int, rows: Int)
+    fileprivate var sideMargin: CGFloat = 0
+    fileprivate var edgeMargin: CGFloat = 0
+    fileprivate var columnsAndRows: (columns: Int, rows: Int)
     fileprivate var delegate: GridCollectionViewBuilderDelegate?
     
     // MARK: - Lifecycle methods
@@ -28,7 +30,7 @@ UICollectionViewDelegateFlowLayout {
         let nib = UINib.init(nibName: kFLPCollectionViewCellIdentifier, bundle: nil)
         self.collectionView.register(nib, forCellWithReuseIdentifier: kFLPCollectionViewCellIdentifier)
         
-        rowsAndColumns = GridColumnsAndRows.getColumnsAndRows(forGameSize: size)
+        columnsAndRows = GridColumnsAndRows.getColumnsAndRows(forGameSize: size)
         gridCellsModels = models
         self.delegate = delegate
     }
@@ -75,7 +77,7 @@ UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         insetForSectionAt section: Int) -> UIEdgeInsets {
         
-        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        return UIEdgeInsets(top: edgeMargin, left: sideMargin, bottom: edgeMargin, right: sideMargin)
     }
     
     // MARK: - Private methods
@@ -84,10 +86,49 @@ UICollectionViewDelegateFlowLayout {
         
         let firstUse = cellSize.equalTo(CGSize(width: 0, height: 0))
         if (firstUse) {
-            cellSize = CGSize(width: 90, height: 100)
+            cellSize = calculateCellSize()
         }
         
         return cellSize;
+    }
+    
+    fileprivate func calculateCellSize() -> CGSize {
+        
+        var cellHeight: CGFloat = 0
+        var cellWidth: CGFloat = 0
+        
+        let columns = columnsAndRows.columns
+        let rows = columnsAndRows.rows
+        
+        let availableHeight = collectionView.frame.height - (minMargin * CGFloat(rows + 1))
+        cellHeight = availableHeight / CGFloat(rows)
+        cellWidth = cellHeight / cellRatio
+        
+        let offset = collectionView.frame.width - (cellWidth * CGFloat(columns)) - (minMargin * CGFloat(columns + 1))
+        
+        if (offset < 0) {
+            
+            let offsetPerCell = abs(offset) / CGFloat(columns)
+            cellWidth -= (offsetPerCell)
+            cellHeight = cellWidth * cellRatio
+        }
+        
+        sideMargin = (collectionView.frame.width - (cellWidth * CGFloat(columns))) / CGFloat(columns + 1)
+        edgeMargin = (collectionView.frame.height - (cellHeight * CGFloat(columns)) - (minMargin * 2)) / CGFloat(rows + 1)
+        
+        return CGSize(width: cellWidth, height: cellHeight)
+        
+        // alto = (alto collection view - margen mínimo * (filas + 1)) / filas
+        // ancho = alto / ratio
+        
+        // sobrante = ancho collection view - ((ancho * columnas) + (margen mínimo * (columnas + 1))
+        // si (sobrante < 0)
+        //      reduccion total = abs(sobrante)
+        //      reducción celda = recucción total / columnas
+        //      ancho = ancho - reducción celda
+        //      alto = ancho * ratio
+        
+        // return alto y ancho
     }
     
     fileprivate func gridCellForIndexPath(_ indexPath: IndexPath) -> FLPCollectionViewCell {
