@@ -104,8 +104,8 @@ import Foundation
     
     fileprivate func calculateCellSize() -> CGSize {
         
-        var cellHeight = cellSize.height
-        var cellWidth = cellSize.width
+        var cellHeight: CGFloat = 0
+        var cellWidth: CGFloat = 0
         let columns = CGFloat(columnsAndRows.columns)
         let rows = CGFloat(columnsAndRows.rows)
         let collectionWidth = collectionView.frame.width
