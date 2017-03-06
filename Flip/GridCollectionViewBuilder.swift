@@ -8,8 +8,7 @@
 
 import Foundation
 
-@objc class GridCollectionViewBuilder: NSObject, UICollectionViewDelegate, UICollectionViewDataSource,
-UICollectionViewDelegateFlowLayout {
+@objc class GridCollectionViewBuilder: NSObject, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     fileprivate let cellRatio: CGFloat = (100 / 90)
     fileprivate let minMargin: CGFloat = 5
@@ -17,7 +16,7 @@ UICollectionViewDelegateFlowLayout {
     fileprivate var gridCellsModels = [GridCellStatus]()
     fileprivate var collectionView: UICollectionView!
     fileprivate var cellSize = CGSize(width: 0, height: 0)
-    fileprivate var insets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    fileprivate var sectionInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     fileprivate var columnsAndRows: (columns: Int, rows: Int)
     fileprivate var delegate: GridCollectionViewBuilderDelegate?
     
@@ -83,12 +82,12 @@ UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         insetForSectionAt section: Int) -> UIEdgeInsets {
         
-        let firstUse = (insets.top == 0) && (insets.left == 0) && (insets.bottom == 0) && (insets.right == 0)
+        let firstUse = (sectionInsets.top == 0) && (sectionInsets.left == 0) && (sectionInsets.bottom == 0) && (sectionInsets.right == 0)
         if (firstUse) {
-            insets = calculateInsets()
+            sectionInsets = calculateInsets()
         }
         
-        return insets
+        return sectionInsets
     }
     
     // MARK: - Private methods
@@ -105,10 +104,10 @@ UICollectionViewDelegateFlowLayout {
     
     fileprivate func calculateCellSize() -> CGSize {
         
-        var cellHeight: CGFloat = 0
-        var cellWidth: CGFloat = 0
-        let columns = columnsAndRows.columns
-        let rows = columnsAndRows.rows
+        var cellHeight = cellSize.height
+        var cellWidth = cellSize.width
+        let columns = CGFloat(columnsAndRows.columns)
+        let rows = CGFloat(columnsAndRows.rows)
         let collectionWidth = collectionView.frame.width
         let collectionHeight = collectionView.frame.height
         
@@ -129,7 +128,7 @@ UICollectionViewDelegateFlowLayout {
     }
     
     fileprivate func calculateInsets() -> UIEdgeInsets {
-        
+
         let cellHeight = cellSize.height
         let cellWidth = cellSize.width
         let columns = CGFloat(columnsAndRows.columns)
@@ -139,7 +138,7 @@ UICollectionViewDelegateFlowLayout {
         
         let sideMargin = (collectionWidth - (cellWidth * columns) - (minMargin * (columns - 1))) / 2
         let edgeMargin = (collectionHeight - (cellHeight * rows) - (minMargin * (rows - 1))) / 2
-        insets = UIEdgeInsets(top: edgeMargin, left: sideMargin, bottom: edgeMargin, right: sideMargin)
+        let insets = UIEdgeInsets(top: edgeMargin, left: sideMargin, bottom: edgeMargin, right: sideMargin)
 
         return insets
     }
