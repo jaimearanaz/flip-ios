@@ -42,21 +42,10 @@
     [self setupCollectionViewIfReady];
 }
 
-- (void)setupCollectionViewIfReady
+- (void)willTransitionToTraitCollection:(UITraitCollection *)newCollection withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
-    BOOL ready = ((self.collectionView != nil) && (self.gridCellsModels != nil));
-    if (ready) {
-        
-        self.collectionViewDelegate = [[GridCollectionViewBuilder alloc] initWithCollectionView:self.collectionView
-                                                                                           size:self.gameSize
-                                                                                         models:self.gridCellsModels
-                                                                                       delegate:self];
-        self.collectionView.delegate = self.collectionViewDelegate;
-        self.collectionView.dataSource = self.collectionViewDelegate;
-        [self.collectionView reloadData];
-        
-        [self startTimer];
-    }
+    [super willTransitionToTraitCollection:newCollection withTransitionCoordinator:coordinator];
+    [self setupCollectionView];
 }
 
 #pragma mark - Action methods
@@ -96,6 +85,27 @@
 }
 
 #pragma mark - Private methods
+
+- (void)setupCollectionViewIfReady
+{
+    BOOL ready = ((self.collectionView != nil) && (self.gridCellsModels != nil));
+    if (ready) {
+        
+        [self setupCollectionView];
+        [self startTimer];
+    }
+}
+
+- (void)setupCollectionView
+{
+    self.collectionViewDelegate = [[GridCollectionViewBuilder alloc] initWithCollectionView:self.collectionView
+                                                                                       size:self.gameSize
+                                                                                     models:self.gridCellsModels
+                                                                                   delegate:self];
+    self.collectionView.delegate = self.collectionViewDelegate;
+    self.collectionView.dataSource = self.collectionViewDelegate;
+    [self.collectionView reloadData];
+}
 
 - (void)confirmExit
 {
