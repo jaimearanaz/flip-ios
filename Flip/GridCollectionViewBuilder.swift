@@ -18,11 +18,16 @@ import Foundation
     fileprivate var cellSize = CGSize(width: 0, height: 0)
     fileprivate var sectionInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     fileprivate var columnsAndRows: (columns: Int, rows: Int)
+    fileprivate var isStartingGame: Bool
     fileprivate var delegate: GridCollectionViewBuilderDelegate?
     
     // MARK: - Lifecycle methods
     
-    init(collectionView: UICollectionView, size: GameSize, models: [GridCellStatus], delegate: GridCollectionViewBuilderDelegate) {
+    init(collectionView: UICollectionView,
+         size: GameSize,
+         models: [GridCellStatus],
+         isStartingGame: Bool,
+         delegate: GridCollectionViewBuilderDelegate) {
         
         self.collectionView = collectionView
         let nib = UINib.init(nibName: kFLPCollectionViewCellIdentifier, bundle: nil)
@@ -30,6 +35,7 @@ import Foundation
         
         columnsAndRows = GridColumnsAndRows.getColumnsAndRows(forGameSize: size)
         gridCellsModels = models
+        self.isStartingGame = isStartingGame
         self.delegate = delegate
     }
     
@@ -153,7 +159,19 @@ import Foundation
         
         let cellModel = gridCellsModels[indexPath.item]
         cell.setupCell(withModel: cellModel.gridCell, andNumber: indexPath.item + 1)
-        cell.flipToUserImage(withAnimation: NSNumber.init(booleanLiteral: false), onCompletion: nil)
+        
+        if (isStartingGame) {
+            
+            cell.flipToUserImage(withAnimation: NSNumber.init(booleanLiteral: false), onCompletion: nil)
+            
+        } else {
+            
+            if (cellModel.isFlipped) {
+                cell.flipToUserImage(withAnimation: NSNumber.init(booleanLiteral: false), onCompletion: nil)
+            } else {
+                cell.flipToCover(withAnimation: NSNumber.init(booleanLiteral: false), onCompletion: nil)
+            }
+        }
         
         return cell
     }

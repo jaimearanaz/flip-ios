@@ -28,6 +28,7 @@
 @property (strong, nonatomic, nullable) NSTimer *timer;
 @property (strong, nonatomic, nullable) NSDate *startDate;
 @property (nonatomic) NSTimeInterval timeNotPaused;
+@property (nonatomic) BOOL isStartingGame;
 
 @end
 
@@ -59,7 +60,10 @@
 
 - (void)collectionViewIsBuilt
 {
-    [self showAllUserImagesForAWhile];
+    if (self.isStartingGame) {
+        [self showAllUserImagesForAWhile];
+        self.isStartingGame = NO;
+    }
 }
 
 - (void)didSelectCellWithIndexPath:(NSIndexPath *)indexPath
@@ -81,6 +85,7 @@
 {
     self.gridCellsModels = [self createGridCellsFromItems:items];
     self.gameSize = size;
+    self.isStartingGame = YES;
     [self setupCollectionViewIfReady];
 }
 
@@ -92,7 +97,6 @@
     if (ready) {
         
         [self setupCollectionView];
-        [self startTimer];
     }
 }
 
@@ -101,6 +105,7 @@
     self.collectionViewDelegate = [[GridCollectionViewBuilder alloc] initWithCollectionView:self.collectionView
                                                                                        size:self.gameSize
                                                                                      models:self.gridCellsModels
+                                                                             isStartingGame:self.isStartingGame
                                                                                    delegate:self];
     self.collectionView.delegate = self.collectionViewDelegate;
     self.collectionView.dataSource = self.collectionViewDelegate;
@@ -328,7 +333,6 @@
         
         BOOL isLastCell = (indexPath.item == (self.gridCellsModels.count - 1));
         if (isLastCell) {
-            [self startTimer];
             self.isUserInteractionEnabled = YES;
         }
         [invocation invoke];
