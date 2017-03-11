@@ -120,7 +120,7 @@ import Foundation
         let availableHeight = collectionHeight - (minMargin * CGFloat(rows + 1))
         cellHeight = availableHeight / CGFloat(rows)
         // TODO: ñapa, solve this!
-        cellHeight *= CGFloat(0.90)
+        //cellHeight *= CGFloat(0.90)
         cellWidth = cellHeight / cellRatio
         
         let horizontalOffset = collectionWidth - (cellWidth * CGFloat(columns)) - (minMargin * CGFloat(columns + 1))
@@ -130,7 +130,7 @@ import Foundation
             let offsetPerCell = abs(horizontalOffset) / CGFloat(columns)
             cellWidth -= (offsetPerCell)
             // TODO: ñapa, solve this!
-            cellWidth *= CGFloat(0.90)
+            //cellWidth *= CGFloat(0.90)
             cellHeight = cellWidth * cellRatio
         }
 
@@ -146,8 +146,18 @@ import Foundation
         let collectionWidth = collectionView.frame.width
         let collectionHeight = collectionView.frame.height
         
-        let sideMargin = (collectionWidth - (cellWidth * columns) - (minMargin * (columns - 1))) / 2
-        let edgeMargin = (collectionHeight - (cellHeight * rows) - (minMargin * (rows - 1))) / 2
+        let isInLandscape = (UIDevice.current.orientation == .landscapeLeft) || (UIDevice.current.orientation == .landscapeRight)
+        var sideMargin: CGFloat = 0
+        var edgeMargin: CGFloat = 0
+
+        if (isInLandscape) {
+            sideMargin = (collectionWidth - (cellWidth * rows) - (minMargin * (rows - 1))) / 2
+            edgeMargin = (collectionHeight - (cellHeight * columns) - (minMargin * (columns - 1))) / 2
+        } else {
+            sideMargin = (collectionWidth - (cellWidth * columns) - (minMargin * (columns - 1))) / 2
+            edgeMargin = (collectionHeight - (cellHeight * rows) - (minMargin * (rows - 1))) / 2
+        }
+
         let insets = UIEdgeInsets(top: edgeMargin, left: sideMargin, bottom: edgeMargin, right: sideMargin)
 
         return insets

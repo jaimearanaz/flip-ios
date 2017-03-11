@@ -8,6 +8,7 @@
 
 #import "FLPNewGridViewController.h"
 
+#import "DWPDevice.h"
 #import "FLPCollectionViewCell.h"
 
 #define kFirstLookDuration 4.0f
