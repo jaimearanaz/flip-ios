@@ -24,26 +24,25 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nCv-Fb-DbX" userLabel="Image">
-                        <rect key="frame" x="1" y="1" width="88" height="98"/>
+                        <rect key="frame" x="0.0" y="0.0" width="90" height="100"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="99v-Wf-c1T" userLabel="User image">
-                                <rect key="frame" x="2" y="2" width="84" height="84"/>
+                                <rect key="frame" x="0.0" y="0.0" width="90" height="100"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="99v-Wf-c1T" firstAttribute="leading" secondItem="nCv-Fb-DbX" secondAttribute="leading" constant="2" id="FaZ-3N-uFb"/>
-                            <constraint firstItem="99v-Wf-c1T" firstAttribute="centerX" secondItem="nCv-Fb-DbX" secondAttribute="centerX" id="aFz-hS-9SA"/>
-                            <constraint firstItem="99v-Wf-c1T" firstAttribute="top" secondItem="nCv-Fb-DbX" secondAttribute="top" constant="2" id="enQ-sP-4Wc"/>
-                            <constraint firstAttribute="bottom" secondItem="99v-Wf-c1T" secondAttribute="bottom" constant="12" id="pUe-NJ-SSl"/>
+                            <constraint firstItem="99v-Wf-c1T" firstAttribute="top" secondItem="nCv-Fb-DbX" secondAttribute="top" id="CR2-of-M5L"/>
+                            <constraint firstAttribute="trailing" secondItem="99v-Wf-c1T" secondAttribute="trailing" id="Lie-sd-wSw"/>
+                            <constraint firstItem="99v-Wf-c1T" firstAttribute="leading" secondItem="nCv-Fb-DbX" secondAttribute="leading" id="Ode-bx-cLe"/>
+                            <constraint firstAttribute="bottom" secondItem="99v-Wf-c1T" secondAttribute="bottom" id="cGk-3t-XE6"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VLR-Te-w87" userLabel="Cover">
-                        <rect key="frame" x="1" y="1" width="88" height="98"/>
+                        <rect key="frame" x="0.0" y="0.0" width="90" height="100"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Photo_frame" translatesAutoresizingMaskIntoConstraints="NO" id="3Vs-l7-rKr" userLabel="Fixed image">
-                                <rect key="frame" x="-1" y="-1" width="90" height="100"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Photo_frame" translatesAutoresizingMaskIntoConstraints="NO" id="3Vs-l7-rKr" userLabel="Fixed image">
+                                <rect key="frame" x="0.0" y="0.0" width="90" height="100"/>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IyA-dn-yrG" userLabel="Number">
                                 <rect key="frame" x="2" y="2" width="84" height="84"/>
@@ -55,23 +54,27 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="IyA-dn-yrG" firstAttribute="top" secondItem="VLR-Te-w87" secondAttribute="top" constant="2" id="4h3-ri-Zam"/>
-                            <constraint firstAttribute="bottom" secondItem="IyA-dn-yrG" secondAttribute="bottom" constant="12" id="5wC-82-J8N"/>
-                            <constraint firstItem="IyA-dn-yrG" firstAttribute="leading" secondItem="VLR-Te-w87" secondAttribute="leading" constant="2" id="fUp-ho-oPh"/>
-                            <constraint firstItem="IyA-dn-yrG" firstAttribute="centerX" secondItem="VLR-Te-w87" secondAttribute="centerX" id="n0X-SK-mq1"/>
+                            <constraint firstAttribute="trailing" secondItem="3Vs-l7-rKr" secondAttribute="trailing" id="IGG-kB-HUq"/>
+                            <constraint firstItem="3Vs-l7-rKr" firstAttribute="leading" secondItem="VLR-Te-w87" secondAttribute="leading" id="YOE-1W-R6J"/>
+                            <constraint firstAttribute="bottom" secondItem="IyA-dn-yrG" secondAttribute="bottom" constant="14" id="bmf-9G-c6d"/>
+                            <constraint firstAttribute="trailing" secondItem="IyA-dn-yrG" secondAttribute="trailing" constant="4" id="ccK-Zh-OeK"/>
+                            <constraint firstItem="IyA-dn-yrG" firstAttribute="top" secondItem="VLR-Te-w87" secondAttribute="top" constant="2" id="hqA-y6-Jgq"/>
+                            <constraint firstAttribute="bottom" secondItem="3Vs-l7-rKr" secondAttribute="bottom" id="lbC-iT-b5f"/>
+                            <constraint firstItem="IyA-dn-yrG" firstAttribute="leading" secondItem="VLR-Te-w87" secondAttribute="leading" constant="2" id="pGA-oN-vhp"/>
+                            <constraint firstItem="3Vs-l7-rKr" firstAttribute="top" secondItem="VLR-Te-w87" secondAttribute="top" id="ukw-Ro-dr2"/>
                         </constraints>
                     </view>
                 </subviews>
             </view>
             <constraints>
-                <constraint firstItem="VLR-Te-w87" firstAttribute="trailing" secondItem="nCv-Fb-DbX" secondAttribute="trailing" id="6s3-Az-48a"/>
-                <constraint firstItem="nCv-Fb-DbX" firstAttribute="bottom" secondItem="VLR-Te-w87" secondAttribute="bottom" id="A7N-Ln-vPX"/>
-                <constraint firstItem="VLR-Te-w87" firstAttribute="centerX" secondItem="8NR-ul-lzi" secondAttribute="centerX" id="BVP-AW-saj"/>
-                <constraint firstItem="nCv-Fb-DbX" firstAttribute="leading" secondItem="VLR-Te-w87" secondAttribute="leading" id="QTQ-gx-g0l"/>
-                <constraint firstItem="nCv-Fb-DbX" firstAttribute="leading" secondItem="8NR-ul-lzi" secondAttribute="leading" constant="1" id="SXM-iA-WUl"/>
-                <constraint firstItem="VLR-Te-w87" firstAttribute="top" secondItem="8NR-ul-lzi" secondAttribute="top" constant="1" id="rgQ-A1-Zyg"/>
-                <constraint firstItem="VLR-Te-w87" firstAttribute="top" secondItem="nCv-Fb-DbX" secondAttribute="top" id="u5N-7y-K1u"/>
-                <constraint firstItem="nCv-Fb-DbX" firstAttribute="centerY" secondItem="8NR-ul-lzi" secondAttribute="centerY" id="xKr-nX-ef1"/>
+                <constraint firstAttribute="bottom" secondItem="VLR-Te-w87" secondAttribute="bottom" id="032-Yc-juF"/>
+                <constraint firstAttribute="trailing" secondItem="nCv-Fb-DbX" secondAttribute="trailing" id="1Zc-lY-cJx"/>
+                <constraint firstAttribute="bottom" secondItem="nCv-Fb-DbX" secondAttribute="bottom" id="3aG-Om-VAX"/>
+                <constraint firstItem="nCv-Fb-DbX" firstAttribute="leading" secondItem="8NR-ul-lzi" secondAttribute="leading" id="PFY-kg-bqh"/>
+                <constraint firstAttribute="trailing" secondItem="VLR-Te-w87" secondAttribute="trailing" id="QSo-Xc-IiO"/>
+                <constraint firstItem="VLR-Te-w87" firstAttribute="leading" secondItem="8NR-ul-lzi" secondAttribute="leading" id="QxP-TK-tUa"/>
+                <constraint firstItem="nCv-Fb-DbX" firstAttribute="top" secondItem="8NR-ul-lzi" secondAttribute="top" id="cwy-VU-i4j"/>
+                <constraint firstItem="VLR-Te-w87" firstAttribute="top" secondItem="8NR-ul-lzi" secondAttribute="top" id="jWY-B3-Gp8"/>
             </constraints>
             <size key="customSize" width="90" height="100"/>
             <connections>
