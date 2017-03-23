@@ -87,6 +87,7 @@
     self.gridCellsModels = [self createGridCellsFromItems:items];
     self.gameSize = size;
     self.isStartingGame = YES;
+    [self resetTimeLabel];
     [self setupCollectionViewIfReady];
 }
 
@@ -249,6 +250,7 @@
 - (void)startTimer
 {
     self.startDate = [NSDate date];
+    self.timeNotPaused = 0;
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1
                                                   target:self
                                                 selector:@selector(updateTimeLabel)
@@ -295,6 +297,11 @@
         
         self.timeLabel.text = totalTimeFormatted;
     }
+}
+
+- (void)resetTimeLabel
+{
+    self.timeLabel.text = @"00:00";
 }
 
 - (void)showAllUserImagesForAWhile
