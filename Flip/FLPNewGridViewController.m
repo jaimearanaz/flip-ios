@@ -242,7 +242,7 @@
         NSDate *now = [NSDate date];
         NSTimeInterval totalTime = [now timeIntervalSinceDate:self.startDate] + self.timeNotPaused;
         
-        [self.presenterDelegate gameFinishedWithTime:totalTime numberOferrors:self.numberOfErrors];
+        [self.presenterDelegate gameFinishedWithTime:totalTime numberOfErrors:self.numberOfErrors];
     }
 }
 
@@ -304,6 +304,7 @@
     });
 }
 
+// TODO: bug, last images are flipped simultaneously
 - (void)hideAllUserImagesAndStartGame
 {
     NSTimeInterval delay = 0;
@@ -322,6 +323,8 @@
 {
     [self startTimer];
     self.isUserInteractionEnabled = YES;
+    self.numberOfErrors = 0;
+    self.numberOfMatches = 0;
 }
 
 - (void)flipCellToCoverAtIndex:(NSInteger)index withDelay:(NSTimeInterval)delay

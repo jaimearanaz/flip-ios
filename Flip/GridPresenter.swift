@@ -44,9 +44,13 @@ class GridPresenter: FLPBasePresenter, GridPresenterDelegate {
         Router.sharedInstance.dismissCurrentViewController()
     }
     
-    func gameFinished(withTime time: TimeInterval, numberOferrors: Int) {
- 
-        // TODO: implement
+    func gameFinished(withTime time: TimeInterval, numberOfErrors: Int) {
+
+        let dateFormmatter = DateFormatter()
+        dateFormmatter.setLocalizedDateFormatFromTemplate("mm:ss:SSS")
+        let timeString = dateFormmatter.string(from: Date(timeIntervalSince1970: time))
+        
+        print("time \(timeString), errors \(numberOfErrors)")
     }
     
     // MARK: - Private methods

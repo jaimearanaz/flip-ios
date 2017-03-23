@@ -12,5 +12,5 @@ import Foundation
  
     func didSelectExit()
     
-    func gameFinished(withTime time: TimeInterval, numberOferrors: Int)
+    func gameFinished(withTime time: TimeInterval, numberOfErrors: Int)
 }
