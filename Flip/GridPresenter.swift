@@ -22,7 +22,7 @@ class GridPresenter: FLPBasePresenter, GridPresenterDelegate {
     // real delegate to use inside of the class
     var realControllerDelegate: NewGridViewControllerDelegate!
     
-    // overrides property in Objective-c class DWPBasePresenter
+    // overrides property in Objective-c class FLPBasePresenter
     override var viewController: UIViewController {
         get {
             return self.realControllerDelegate.viewController
@@ -51,6 +51,8 @@ class GridPresenter: FLPBasePresenter, GridPresenterDelegate {
         let timeString = dateFormmatter.string(from: Date(timeIntervalSince1970: time))
         
         print("time \(timeString), errors \(numberOfErrors)")
+        
+        Router.sharedInstance.presentScore(Score())
     }
     
     // MARK: - Private methods

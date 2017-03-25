@@ -29,4 +29,14 @@ class PresenterInstances {
         
         return presenter
     }()
+    
+    lazy var scorePresenter: ScorePresenter = {
+        
+        let presenter = ScorePresenter()
+        let viewController = FLPNewScoreViewController(nibName: "FLPNewScoreViewController", bundle: nil)
+        presenter.controllerDelegate = viewController
+        viewController.presenterDelegate = presenter
+        
+        return presenter
+    }()
 }

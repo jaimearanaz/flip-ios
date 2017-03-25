@@ -23,7 +23,7 @@ class MainPresenter: FLPBasePresenter, MainPresenterDelegate {
     // real delegate to use inside of the class
     var realControllerDelegate: MainViewControllerDelegate!
     
-    // overrides property in Objective-c class DWPBasePresenter
+    // overrides property in Objective-c class FLPBasePresenter
     override var viewController: UIViewController {
         get {
             return self.realControllerDelegate.viewController
@@ -56,7 +56,8 @@ class MainPresenter: FLPBasePresenter, MainPresenterDelegate {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             
             self.realControllerDelegate.stopLoadingState()
-            Router.sharedInstance.presentGrid(withImages: images, andSize: size)
+            //Router.sharedInstance.presentGrid(withImages: images, andSize: size)
+            Router.sharedInstance.presentScore(Score())
         }
     }
 }

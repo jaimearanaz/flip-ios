@@ -26,8 +26,20 @@ import UIKit
     
     func presentGrid(withImages images: [UIImage], andSize size: GameSize) {
 
-        presenterInstances.gridPresenter.showGrid(withImages: images, andSize: size)
-        navigationController.pushViewController(presenterInstances.gridPresenter.viewController, animated: true)
+        let presenter = presenterInstances.gridPresenter
+        let viewController = presenterInstances.gridPresenter.viewController
+        
+        presenter.showGrid(withImages: images, andSize: size)
+        navigationController.pushViewController(viewController, animated: true)
+    }
+    
+    func presentScore(_ score: Score) {
+        
+        let presenter = presenterInstances.scorePresenter
+        let viewController = presenterInstances.scorePresenter.viewController
+        
+        presenter.showScore(score)
+        navigationController.pushViewController(viewController, animated: true)
     }
     
     func dismissCurrentViewController() {
