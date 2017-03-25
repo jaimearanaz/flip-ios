@@ -71,7 +71,8 @@
 {
     if (self.isUserInteractionEnabled) {
         
-        GridCellStatus *selectedModel = [self.gridCellsModels objectAtIndex:indexPath.item];
+        NSInteger index = [self indexInsideModelForIndexPath:indexPath];
+        GridCellStatus *selectedModel = [self.gridCellsModels objectAtIndex:index];
         FLPCollectionViewCell *selectedCell = (FLPCollectionViewCell *) [self.collectionView cellForItemAtIndexPath:indexPath];
         
         if (!selectedModel.isFlipped) {
@@ -170,10 +171,11 @@
 
 - (void)checkIfCellsMatchWithSelectedCell:(FLPCollectionViewCell *)selectedCell andModel:(GridCellStatus *)selectedModel
 {
-    GridCellStatus *flippedModel = [self.gridCellsModels objectAtIndex:self.flippedIndexPath.item];
+    NSInteger ordinalForFlippedItem = [self indexInsideModelForIndexPath:self.flippedIndexPath];
+    GridCellStatus *flippedModel = [self.gridCellsModels objectAtIndex:ordinalForFlippedItem];
     FLPCollectionViewCell *flippedCell = (FLPCollectionViewCell *) [self.collectionView cellForItemAtIndexPath:self.flippedIndexPath];
-    BOOL isAMatch = selectedModel.gridCell.equalIndex == self.flippedIndexPath.item;
-    
+
+    BOOL isAMatch = selectedModel.gridCell.equalIndex == ordinalForFlippedItem;
     NSArray *cells = @[selectedCell, flippedCell];
     NSArray *models = @[selectedModel, flippedModel];
     
@@ -182,6 +184,14 @@
     } else {
         [self cellsDoesntMatch:cells withModels:models];
     }
+}
+
+- (NSInteger)indexInsideModelForIndexPath:(NSIndexPath *)indexPath
+{
+    NSInteger itemsPerSection = [self.collectionView numberOfItemsInSection:0];
+    NSInteger modelIndex = (itemsPerSection * indexPath.section) + indexPath.item;
+    
+    return modelIndex;
 }
 
 - (void)cellsMatch:(NSArray *)cell withModels:(NSArray *)models
@@ -315,10 +325,17 @@
 - (void)hideAllUserImagesAndStartGame
 {
     NSTimeInterval delay = 0;
+    NSInteger numOfSections = [self.collectionView numberOfSections];
     
-    for (int cellIndex = 0; cellIndex < (self.gridCellsModels.count); cellIndex++) {
-        [self flipCellToCoverAtIndex:cellIndex withDelay:delay];
-        delay += kNextCellDelayDuration;
+    for (int oneSection = 0; oneSection < numOfSections; oneSection++) {
+        
+        NSInteger numOfItems = [self.collectionView numberOfItemsInSection:oneSection];
+        
+        for (int oneItem = 0; oneItem < numOfItems; oneItem++) {
+            NSIndexPath *indexPath = [NSIndexPath indexPathForItem:oneItem inSection:oneSection];
+            [self flipCellToCoverAtIndex:indexPath withDelay:delay];
+            delay += kNextCellDelayDuration;
+        }
     }
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, delay * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
@@ -334,15 +351,16 @@
     self.numberOfMatches = 0;
 }
 
-- (void)flipCellToCoverAtIndex:(NSInteger)index withDelay:(NSTimeInterval)delay
+- (void)flipCellToCoverAtIndex:(NSIndexPath *)indexPath withDelay:(NSTimeInterval)delay
 {
-    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
     FLPCollectionViewCell *cell = (FLPCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
     NSInvocation *invocation = [self invocationToFlipCellToCover:cell];
+    NSInteger numOfSections = [self.collectionView numberOfSections];
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, delay * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         
-        BOOL isLastCell = (indexPath.item == (self.gridCellsModels.count - 1));
+        NSInteger indexInModel = [self indexInsideModelForIndexPath:indexPath];
+        BOOL isLastCell = ((indexPath.section == (numOfSections - 1)) && ((self.gridCellsModels.count - 1) == indexInModel));
         if (isLastCell) {
             self.isUserInteractionEnabled = YES;
         }

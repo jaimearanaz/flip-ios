@@ -20,6 +20,8 @@ import Foundation
     fileprivate var columnsAndRows: (columns: Int, rows: Int)
     fileprivate var isStartingGame: Bool
     fileprivate var delegate: GridCollectionViewBuilderDelegate?
+    fileprivate var needsExtraSection = false
+    fileprivate var ordinalForItem = 1
     
     // MARK: - Lifecycle methods
     
@@ -35,6 +37,8 @@ import Foundation
         
         columnsAndRows = GridColumnsAndRows.getColumnsAndRows(forGameSize: size)
         gridCellsModels = models
+        let hasOrphanItems = ((columnsAndRows.columns * columnsAndRows.rows) % gridCellsModels.count != 0)
+        needsExtraSection = hasOrphanItems
         self.isStartingGame = isStartingGame
         self.delegate = delegate
     }
@@ -48,9 +52,23 @@ import Foundation
     
     // MARK: - UICollectionViewDataSource methods
     
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        
+        return (needsExtraSection) ? 2 : 1
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return gridCellsModels.count
+        if (needsExtraSection) {
+            
+            let orphanItems = (columnsAndRows.columns * columnsAndRows.rows) % gridCellsModels.count
+            let fullItems = gridCellsModels.count - orphanItems
+            return (section == 0) ? fullItems : orphanItems
+            
+        } else {
+            
+            return gridCellsModels.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -88,12 +106,17 @@ import Foundation
                         layout collectionViewLayout: UICollectionViewLayout,
                         insetForSectionAt section: Int) -> UIEdgeInsets {
         
-        let firstUse = (sectionInsets.top == 0) && (sectionInsets.left == 0) && (sectionInsets.bottom == 0) && (sectionInsets.right == 0)
-        if (firstUse) {
-            sectionInsets = calculateInsets()
+        var insets = calculateInsets()
+        
+        if (needsExtraSection) {
+            if (section == 0) {
+                insets = UIEdgeInsetsMake(insets.top, insets.left, minMargin, insets.right)
+            } else {
+                insets = UIEdgeInsetsMake(minMargin, insets.left, insets.bottom, insets.right)
+            }
         }
         
-        return sectionInsets
+        return insets
     }
     
     // MARK: - Private methods
@@ -157,8 +180,9 @@ import Foundation
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kFLPCollectionViewCellIdentifier, for: indexPath) as! FLPCollectionViewCell
         
-        let cellModel = gridCellsModels[indexPath.item]
-        cell.setupCell(withModel: cellModel.gridCell, andNumber: indexPath.item + 1)
+        let cellModel = gridCellsModels[ordinalForItem - 1]
+        cell.setupCell(withModel: cellModel.gridCell, andNumber: ordinalForItem)
+        ordinalForItem += 1
         
         if (isStartingGame) {
             
@@ -178,7 +202,10 @@ import Foundation
     
     fileprivate func callDelegateIfLastIndexPath(_ indexPath: IndexPath) {
         
-        let lastCell = (indexPath.item == (gridCellsModels.count - 1))
+        let orphanItems = (columnsAndRows.columns * columnsAndRows.rows) % gridCellsModels.count
+        let lastIndexPathForOneSection = ((indexPath.section == 0) && (indexPath.item == (gridCellsModels.count - 1)))
+        let lastIndexPathForTwoSections = ((indexPath.section == 1) && (indexPath.item == (orphanItems - 1)))
+        let lastCell = lastIndexPathForOneSection || lastIndexPathForTwoSections
         if (lastCell) {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 self.delegate?.collectionViewIsBuilt()
