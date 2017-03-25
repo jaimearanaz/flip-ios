@@ -33,6 +33,8 @@ class ScorePresenter: FLPBasePresenter, ScorePresenterDelegate {
     
     func showScore(_ score: Score) {
         
+        let newRecord = isNewRecord(score.finalTime)
+        realControllerDelegate.showScore(score, isNewRecord: newRecord)
     }
     
     // MARK: - ScorePresenterDelegate methods
@@ -45,5 +47,13 @@ class ScorePresenter: FLPBasePresenter, ScorePresenterDelegate {
     func didSelectMain() {
      
         // TODO: implement
+    }
+    
+    // MARK: - Private methods
+    
+    fileprivate func isNewRecord(_ record: TimeInterval) -> Bool {
+    
+        // TODO: implement
+        return true
     }
 }

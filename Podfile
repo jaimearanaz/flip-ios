@@ -22,6 +22,7 @@ def flip_pods
     #pod 'Facebook-iOS-SDK'
     pod 'RZSquaresLoading'
     pod 'SDCAlertView', :git => 'https://github.com/sberrevoets/SDCAlertView'
+    pod 'UINavigationControllerWithCompletionBlock'
 end
 
 target 'Flip' do

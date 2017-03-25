@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
+import UINavigationControllerWithCompletionBlock
+
 @objc class Router: NSObject {
     
     static let sharedInstance = Router()
@@ -29,8 +31,9 @@ import UIKit
         let presenter = presenterInstances.gridPresenter
         let viewController = presenterInstances.gridPresenter.viewController
         
-        presenter.showGrid(withImages: images, andSize: size)
-        navigationController.pushViewController(viewController, animated: true)
+        navigationController.pushViewController(viewController, animated: true) {
+            presenter.showGrid(withImages: images, andSize: size)
+        }
     }
     
     func presentScore(_ score: Score) {
@@ -38,8 +41,9 @@ import UIKit
         let presenter = presenterInstances.scorePresenter
         let viewController = presenterInstances.scorePresenter.viewController
         
-        presenter.showScore(score)
-        navigationController.pushViewController(viewController, animated: true)
+        navigationController.pushViewController(viewController, animated: true) { 
+            presenter.showScore(score)
+        }
     }
     
     func dismissCurrentViewController() {

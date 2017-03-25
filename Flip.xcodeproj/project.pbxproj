@@ -49,6 +49,7 @@
 		6F3935761E869AE700226DCE /* ScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3935751E869AE700226DCE /* ScoreView.swift */; };
 		6F3935781E86A00D00226DCE /* ScoreResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3935771E86A00D00226DCE /* ScoreResultView.swift */; };
 		6F39357A1E86A03200226DCE /* ScoreView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F3935791E86A03200226DCE /* ScoreView.xib */; };
+		6F39357C1E86CDAE00226DCE /* ScoreResultView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F39357B1E86CDAE00226DCE /* ScoreResultView.xib */; };
 		6F3AB3721E5A139400CE62CE /* GridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3AB3711E5A139400CE62CE /* GridCell.swift */; };
 		6F3AB3741E5A141C00CE62CE /* GridCellStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3AB3731E5A141C00CE62CE /* GridCellStatus.swift */; };
 		6F3AB3761E5A152600CE62CE /* MutableCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3AB3751E5A152600CE62CE /* MutableCollection.swift */; };
@@ -190,6 +191,7 @@
 		6F3935751E869AE700226DCE /* ScoreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreView.swift; sourceTree = "<group>"; };
 		6F3935771E86A00D00226DCE /* ScoreResultView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreResultView.swift; sourceTree = "<group>"; };
 		6F3935791E86A03200226DCE /* ScoreView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScoreView.xib; sourceTree = "<group>"; };
+		6F39357B1E86CDAE00226DCE /* ScoreResultView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScoreResultView.xib; sourceTree = "<group>"; };
 		6F3AB3711E5A139400CE62CE /* GridCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridCell.swift; sourceTree = "<group>"; };
 		6F3AB3731E5A141C00CE62CE /* GridCellStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridCellStatus.swift; sourceTree = "<group>"; };
 		6F3AB3751E5A152600CE62CE /* MutableCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MutableCollection.swift; sourceTree = "<group>"; };
@@ -466,6 +468,7 @@
 		6F3935671E86913700226DCE /* score */ = {
 			isa = PBXGroup;
 			children = (
+				6F39357B1E86CDAE00226DCE /* ScoreResultView.xib */,
 				6F3935771E86A00D00226DCE /* ScoreResultView.swift */,
 				6F3935791E86A03200226DCE /* ScoreView.xib */,
 				6F3935751E869AE700226DCE /* ScoreView.swift */,
@@ -732,6 +735,7 @@
 				6F39356C1E86918200226DCE /* FLPNewScoreViewController.xib in Resources */,
 				6FF528E61E4F6A8B0081747E /* SourceView.xib in Resources */,
 				6F94696B1E584DBD003D102B /* photo_1.jpg in Resources */,
+				6F39357C1E86CDAE00226DCE /* ScoreResultView.xib in Resources */,
 				6F1AA1741973EAA400101766 /* Images.xcassets in Resources */,
 				6F9469741E584DBD003D102B /* photo_10.jpg in Resources */,
 				6F5579F21E462565008FB1BB /* FLPMainViewController.xib in Resources */,

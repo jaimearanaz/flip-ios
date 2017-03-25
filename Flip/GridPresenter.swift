@@ -29,10 +29,13 @@ class GridPresenter: FLPBasePresenter, GridPresenterDelegate {
         }
     }
     
+    var gameSize: GameSize = .small
+    
     // MARK: - Public methods
     
     func showGrid(withImages images: [UIImage], andSize size: GameSize) {
         
+        gameSize = size
         let gridCells = createGridCells(withImages: images)
         realControllerDelegate.showItems(gridCells, withSize: size)
     }
@@ -46,13 +49,13 @@ class GridPresenter: FLPBasePresenter, GridPresenterDelegate {
     
     func gameFinished(withTime time: TimeInterval, numberOfErrors: Int) {
 
-        let dateFormmatter = DateFormatter()
-        dateFormmatter.setLocalizedDateFormatFromTemplate("mm:ss:SSS")
-        let timeString = dateFormmatter.string(from: Date(timeIntervalSince1970: time))
+        let score = Score()
+        score.time = time
+        score.errors = numberOfErrors
+        score.penalization = Double(penalizationInSeconds(forErrors: numberOfErrors, withGameSize: gameSize))
+        score.finalTime = time + Double(score.penalization)
         
-        print("time \(timeString), errors \(numberOfErrors)")
-        
-        Router.sharedInstance.presentScore(Score())
+        Router.sharedInstance.presentScore(score)
     }
     
     // MARK: - Private methods
@@ -83,5 +86,24 @@ class GridPresenter: FLPBasePresenter, GridPresenterDelegate {
         }
         
         return cellsForGrid
+    }
+    
+    fileprivate func penalizationInSeconds(forErrors errors: Int, withGameSize gameSize: GameSize) -> Int {
+        
+        var penalization = 0
+        
+        switch gameSize {
+        case .small:
+            penalization = errors * GamePenalization.small.rawValue
+            break
+        case .medium:
+            penalization = errors * GamePenalization.medium.rawValue
+            break
+        case .big:
+            penalization = errors * GamePenalization.big.rawValue
+            break
+        }
+        
+        return penalization
     }
 }

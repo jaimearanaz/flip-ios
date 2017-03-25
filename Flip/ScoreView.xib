@@ -8,6 +8,11 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="CantoraOne-Regular.ttf">
+            <string>CantoraOne-Regular</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ScoreView" customModule="Flip" customModuleProvider="target">
             <connections>
@@ -25,17 +30,17 @@
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UJ4-BD-m50" userLabel="Title">
                     <rect key="frame" x="24" y="20" width="327" height="22"/>
-                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="22" id="7X2-mQ-CtT"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" name="CantoraOne-Regular" family="CantoraOne" pointSize="25"/>
+                    <color key="textColor" red="0.0078431372550000003" green="0.40000000000000002" blue="0.78823529410000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="feR-42-Vpz" userLabel="Time" customClass="ScoreResultView" customModule="Flip" customModuleProvider="target">
                     <rect key="frame" x="85.5" y="112" width="200" height="22"/>
-                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="22" id="0xi-lT-lJc"/>
                         <constraint firstAttribute="width" constant="200" id="ROW-aN-yNl"/>
@@ -43,7 +48,7 @@
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LvA-Fc-4ec" userLabel="Errors" customClass="ScoreResultView" customModule="Flip" customModuleProvider="target">
                     <rect key="frame" x="85.5" y="142" width="200" height="22"/>
-                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="22" id="hzl-YR-bdP"/>
                         <constraint firstAttribute="width" constant="200" id="rIB-nn-nBE"/>
@@ -51,7 +56,7 @@
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TB1-CE-5Md" userLabel="Penalization" customClass="ScoreResultView" customModule="Flip" customModuleProvider="target">
                     <rect key="frame" x="85.5" y="172" width="200" height="22"/>
-                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="22" id="2r3-WF-28d"/>
                         <constraint firstAttribute="width" constant="200" id="Bu5-MI-3ua"/>
@@ -59,14 +64,14 @@
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="brX-s8-oCB" userLabel="Final time" customClass="ScoreResultView" customModule="Flip" customModuleProvider="target">
                     <rect key="frame" x="85.5" y="202" width="200" height="22"/>
-                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="22" id="hor-Jd-tft"/>
                         <constraint firstAttribute="width" constant="200" id="suF-0S-ZBv"/>
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="UJ4-BD-m50" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="6UO-hF-71k"/>
                 <constraint firstItem="brX-s8-oCB" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="D7y-lQ-26C"/>

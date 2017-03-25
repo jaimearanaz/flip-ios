@@ -9,6 +9,12 @@
 import Foundation
 import UIKit
 
+enum GamePenalization: Int {
+    case small = 3
+    case medium = 2
+    case big = 1
+}
+
 @objc class Score: NSObject {
     
     var time: TimeInterval = 0

@@ -8,6 +8,11 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="CantoraOne-Regular.ttf">
+            <string>CantoraOne-Regular</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FLPNewScoreViewController">
             <connections>
@@ -33,6 +38,9 @@
                         <constraint firstAttribute="height" constant="30" id="N3e-g6-HzF"/>
                     </constraints>
                     <state key="normal" title="Try again"/>
+                    <connections>
+                        <action selector="didSelectTryAgain" destination="-1" eventType="touchUpInside" id="IV1-34-iC6"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rc7-Ix-CjZ">
                     <rect key="frame" x="279" y="27" width="80" height="30"/>
@@ -41,24 +49,27 @@
                         <constraint firstAttribute="height" constant="30" id="xa2-Qw-noI"/>
                     </constraints>
                     <state key="normal" title="Main"/>
+                    <connections>
+                        <action selector="didSelectMain" destination="-1" eventType="touchUpInside" id="DZg-Gc-00T"/>
+                    </connections>
                 </button>
-                <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i5M-Pr-FkT" userLabel="Score view">
-                    <rect key="frame" x="16" y="244" width="343" height="179"/>
-                    <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZMr-B3-fdz" userLabel="New record">
+                    <rect key="frame" x="16" y="460" width="343" height="30"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="179" id="9aE-iw-Vcw"/>
+                        <constraint firstAttribute="height" constant="30" id="gEn-IX-32G"/>
                     </constraints>
-                </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZMr-B3-fdz" userLabel="New record">
-                    <rect key="frame" x="16" y="454" width="343" height="21"/>
-                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="21" id="gEn-IX-32G"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <fontDescription key="fontDescription" name="CantoraOne-Regular" family="CantoraOne" pointSize="23"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i5M-Pr-FkT" userLabel="Score view" customClass="ScoreView" customModule="Flip" customModuleProvider="target">
+                    <rect key="frame" x="16" y="218" width="343" height="230"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="230" id="9aE-iw-Vcw"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
@@ -71,7 +82,7 @@
                 <constraint firstAttribute="trailing" secondItem="ZMr-B3-fdz" secondAttribute="trailing" constant="16" id="U98-9Z-tDP"/>
                 <constraint firstAttribute="trailing" secondItem="i5M-Pr-FkT" secondAttribute="trailing" constant="16" id="axa-s0-EGX"/>
                 <constraint firstAttribute="bottom" secondItem="95e-U6-2ii" secondAttribute="bottom" id="mbh-b7-stn"/>
-                <constraint firstItem="ZMr-B3-fdz" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="bottom" constant="31" id="nOA-H2-lbc"/>
+                <constraint firstItem="ZMr-B3-fdz" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="bottom" constant="12" id="nOA-H2-lbc"/>
                 <constraint firstItem="rAt-47-2zb" firstAttribute="leading" secondItem="KNv-9q-UaH" secondAttribute="leading" constant="16" id="rH2-ZL-QOc"/>
                 <constraint firstItem="95e-U6-2ii" firstAttribute="top" secondItem="KNv-9q-UaH" secondAttribute="top" id="uEt-zE-MyR"/>
                 <constraint firstItem="i5M-Pr-FkT" firstAttribute="leading" secondItem="KNv-9q-UaH" secondAttribute="leading" constant="16" id="vLF-9g-sgp"/>

@@ -9,7 +9,20 @@
 import Foundation
 import UIKit
 
-class ScoreResultView: UIView {
+class ScoreResultView: UIViewFromNib {
 
+    @IBOutlet var titleView: UILabel!
+    @IBOutlet var valueView: UILabel!
     
+    // MARK: - Public methods
+    
+    func setupView(withTitle title: String) {
+        
+        titleView.text = title
+    }
+    
+    func setupView(withValue value: String) {
+        
+        valueView.text = value
+    }
 }
