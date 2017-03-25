@@ -6,10 +6,10 @@
 //  Copyright (c) 2014 MobiOak. All rights reserved.
 //
 
+#import <AVFoundation/AVFoundation.h>
+
 #import "FLPScoreViewController.h"
 #import "FLPMainScrenViewController.h"
-
-#import "GADBannerView.h"
 
 @interface FLPScoreViewController ()
 
@@ -161,14 +161,14 @@
     }
     
     // Configure banner
-    GADBannerView *banner = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner];
-    // AdMob key is stored in a plist file, not tracked in git repository
-    NSString *adMobPlist = [[NSBundle mainBundle] pathForResource:@"AdMobKey" ofType:@"plist"];
-    NSDictionary *adMobKey = [[NSDictionary alloc] initWithContentsOfFile:adMobPlist];
-    banner.adUnitID = [adMobKey objectForKey:@"key"];
-    banner.rootViewController = self;
-    [self.bannerView addSubview:banner];
-    [banner loadRequest:[GADRequest request]];
+//    GADBannerView *banner = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner];
+//    // AdMob key is stored in a plist file, not tracked in git repository
+//    NSString *adMobPlist = [[NSBundle mainBundle] pathForResource:@"AdMobKey" ofType:@"plist"];
+//    NSDictionary *adMobKey = [[NSDictionary alloc] initWithContentsOfFile:adMobPlist];
+//    banner.adUnitID = [adMobKey objectForKey:@"key"];
+//    banner.rootViewController = self;
+//    [self.bannerView addSubview:banner];
+//    [banner loadRequest:[GADRequest request]];
     
     // Camera sound, play only if no other sound is playing (i.e. music player)
     if (![[AVAudioSession sharedInstance] isOtherAudioPlaying]) {

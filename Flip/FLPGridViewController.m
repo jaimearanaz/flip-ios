@@ -6,13 +6,14 @@
 //  Copyright (c) 2014 MobiOak. All rights reserved.
 //
 
+#import <AVFoundation/AVFoundation.h>
+
 #import "FLPGridViewController.h"
 #import "FLPCollectionViewCell.h"
 #import "FLPGridItem.h"
 #import "FLPScoreViewController.h"
 
 #import "WCAlertView.h"
-#import "GADBannerView.h"
 
 @interface FLPGridViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
@@ -102,14 +103,14 @@
     _photosInGrid = [self sortRandomlyArray:_photosInGrid];
     
     // Configure banner
-    GADBannerView *banner = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner];
-    // AdMob key is stored in a plist file, not tracked in git repository
-    NSString *adMobPlist = [[NSBundle mainBundle] pathForResource:@"AdMobKey" ofType:@"plist"];
-    NSDictionary *adMobKey = [[NSDictionary alloc] initWithContentsOfFile:adMobPlist];
-    banner.adUnitID = [adMobKey objectForKey:@"key"];
-    banner.rootViewController = self;
-    [_bannerView addSubview:banner];
-    [banner loadRequest:[GADRequest request]];
+//    GADBannerView *banner = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner];
+//    // AdMob key is stored in a plist file, not tracked in git repository
+//    NSString *adMobPlist = [[NSBundle mainBundle] pathForResource:@"AdMobKey" ofType:@"plist"];
+//    NSDictionary *adMobKey = [[NSDictionary alloc] initWithContentsOfFile:adMobPlist];
+//    banner.adUnitID = [adMobKey objectForKey:@"key"];
+//    banner.rootViewController = self;
+//    [_bannerView addSubview:banner];
+//    [banner loadRequest:[GADRequest request]];
     
     // If 3.5 inches and small grid, remove banner for better performance
     if ((!isiPhone5) && (_gridSize == GridSizeSmall)) {
@@ -208,30 +209,30 @@
     // Configure cell
     UIImage *image = (UIImage *)[_photos objectAtIndex:gridItem.imageIndex];
     if (image.size.height != image.size.width) {
-        [cell.photoView setImage:[self imageCrop:image]];
+        [cell.userImage setImage:[self imageCrop:image]];
     } else {
-        [cell.photoView setImage:image];
+        [cell.userImage setImage:image];
     }
-    [cell.coverLbl setFont:[UIFont fontWithName:@"CantoraOne-Regular" size:40]];
-    cell.coverLbl.text = [NSString stringWithFormat:@"%ld", (indexPath.row + 1)];
+    [cell.number setFont:[UIFont fontWithName:@"CantoraOne-Regular" size:40]];
+    cell.number.text = [NSString stringWithFormat:@"%ld", (indexPath.row + 1)];
 
     // Game is not started yet, show all images
     if ((![_started boolValue]) && ([gridItem.isShowing boolValue])) {
-        [cell flipCellToImageAnimated:[NSNumber numberWithBool:NO] onCompletion:nil];
+        [cell flipToUserImageWithAnimation:[NSNumber numberWithBool:NO] onCompletion:^{}];
         
     // Game is started
     } else {
         
         // Matched
         if ([gridItem.isMatched boolValue]) {
-            [cell flipCellToImageAnimated:[NSNumber numberWithBool:NO] onCompletion:nil];
+            [cell flipToUserImageWithAnimation:[NSNumber numberWithBool:NO] onCompletion:^{}];
         } else {
             // Selected
             if ([gridItem.isShowing boolValue]) {
-                [cell flipCellToImageAnimated:[NSNumber numberWithBool:NO] onCompletion:nil];
+                [cell flipToUserImageWithAnimation:[NSNumber numberWithBool:NO] onCompletion:^{}];
             // Not selected
             } else {
-                [cell flipCellToCoverAnimated:[NSNumber numberWithBool:NO]];
+                [cell flipToCoverWithAnimation:[NSNumber numberWithBool:NO] onCompletion:^{}];
             }
         }
     }
@@ -256,7 +257,7 @@
         if (_firstPhoto == nil) {
             gridItem.isShowing = [NSNumber numberWithBool:YES];
             _firstPhoto = gridItem;
-            [cell flipCellToImageAnimated:[NSNumber numberWithBool:YES] onCompletion:nil];
+            [cell flipToUserImageWithAnimation:[NSNumber numberWithBool:YES] onCompletion:^{}];
             
         // It's second photo
         } else {
@@ -273,11 +274,11 @@
                 // Photos match, keep showing
                 if (_firstPhoto.imageIndex == _secondPhoto.imageIndex) {
                     
-                        [cell flipCellToImageAnimated:[NSNumber numberWithBool:YES] onCompletion:^{
+                        [cell flipToUserImageWithAnimation:[NSNumber numberWithBool:YES] onCompletion:^{
                             
                             // Flash animation
-                            [firstCell matchedAnimation];
-                            [secondCell matchedAnimation];
+                            [firstCell showPairedAnimation:^{}];
+                            [secondCell showPairedAnimation:^{}];
                             
                             // Camera sound
                             if ((_playerCamera) && (![[AVAudioSession sharedInstance] isOtherAudioPlaying])) {
@@ -308,9 +309,9 @@
                     
                 // Photos don't match, hide them
                 } else {
-                    [cell flipCellToImageAnimated:[NSNumber numberWithBool:YES] onCompletion:^{
-                        [firstCell flipCellToCoverAnimated:[NSNumber numberWithBool:YES]];
-                        [secondCell flipCellToCoverAnimated:[NSNumber numberWithBool:YES]];
+                    [cell flipToUserImageWithAnimation:[NSNumber numberWithBool:YES] onCompletion:^{
+                        [firstCell flipToCoverWithAnimation:[NSNumber numberWithBool:YES] onCompletion:^{}];
+                        [secondCell flipToCoverWithAnimation:[NSNumber numberWithBool:YES] onCompletion:^{}];
                         _firstPhoto.isShowing = [NSNumber numberWithBool:NO];
                         _firstPhoto = nil;
                         _secondPhoto.isShowing = [NSNumber numberWithBool:NO];

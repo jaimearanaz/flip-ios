@@ -23,4 +23,15 @@ import UIKit
         
         return navigationController
     }()
+    
+    func presentGrid(withImages images: [UIImage], andSize size: GameSize) {
+
+        presenterInstances.gridPresenter.showGrid(withImages: images, andSize: size)
+        navigationController.pushViewController(presenterInstances.gridPresenter.viewController, animated: true)
+    }
+    
+    func dismissCurrentViewController() {
+        
+        navigationController.popViewController(animated: true)
+    }
 }

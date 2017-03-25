@@ -48,6 +48,31 @@
     return YES;
 }
 
+- (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window
+{
+    BOOL isSmallScreen = ([DWPDevice isiPhone4Inches] || [DWPDevice isiPhone4_7Inches]);
+    if (isSmallScreen) {
+        return UIInterfaceOrientationMaskPortrait;
+    } else {
+        return UIInterfaceOrientationMaskAll;
+    }
+}
+
+/*
+ func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+ 
+ if let navigationController = self.window?.rootViewController as? UINavigationController {
+ if navigationController.visibleViewController is ViewerViewController || navigationController.visibleViewController is VideosViewController {
+ return UIInterfaceOrientationMask.all
+ } else {
+ return UIInterfaceOrientationMask.portrait
+ }
+ }
+ 
+ return UIInterfaceOrientationMask.portrait
+ }
+ */
+
 /**
  *  Sets all log frameworks levels
  */

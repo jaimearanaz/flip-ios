@@ -7,7 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F039E5B1E63393400236FC9 /* GridCollectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F039E5A1E63393400236FC9 /* GridCollectionController.swift */; };
+		6F039E5E1E633DEA00236FC9 /* DWPDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F039E5D1E633DEA00236FC9 /* DWPDevice.m */; };
 		6F03D18719A678DE003EE79B /* FLPTitleLetterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F03D18619A678DE003EE79B /* FLPTitleLetterView.m */; };
+		6F103A651E56D189007C0E21 /* FLPNewGridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F103A631E56D189007C0E21 /* FLPNewGridViewController.m */; };
+		6F103A661E56D189007C0E21 /* FLPNewGridViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F103A641E56D189007C0E21 /* FLPNewGridViewController.xib */; };
+		6F103A681E56D1A9007C0E21 /* NewGridViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F103A671E56D1A9007C0E21 /* NewGridViewControllerDelegate.swift */; };
+		6F103A6A1E56D1CD007C0E21 /* GridPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F103A691E56D1CD007C0E21 /* GridPresenter.swift */; };
+		6F103A6C1E56D1F4007C0E21 /* GridPresenterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F103A6B1E56D1F4007C0E21 /* GridPresenterDelegate.swift */; };
 		6F14871B19A0F5E90087527C /* FLPCoverFromLeftSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F14871A19A0F5E90087527C /* FLPCoverFromLeftSegue.m */; };
 		6F14871E19A0F6640087527C /* FLPCoverFromRightSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F14871D19A0F6640087527C /* FLPCoverFromRightSegue.m */; };
 		6F14872119A0FD110087527C /* FLPFlipFromLeftSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F14872019A0FD110087527C /* FLPFlipFromLeftSegue.m */; };
@@ -33,6 +40,10 @@
 		6F22B29D1E50767500237258 /* SizeViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F22B29C1E50767500237258 /* SizeViewDelegate.swift */; };
 		6F33AC7C1998C14000FBF9C4 /* FLPCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F33AC7B1998C14000FBF9C4 /* FLPCollectionViewCell.m */; };
 		6F33AC841999245500FBF9C4 /* FLPGridItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F33AC831999245500FBF9C4 /* FLPGridItem.m */; };
+		6F3AB3721E5A139400CE62CE /* GridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3AB3711E5A139400CE62CE /* GridCell.swift */; };
+		6F3AB3741E5A141C00CE62CE /* GridCellStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3AB3731E5A141C00CE62CE /* GridCellStatus.swift */; };
+		6F3AB3761E5A152600CE62CE /* MutableCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3AB3751E5A152600CE62CE /* MutableCollection.swift */; };
+		6F3AB3781E5A21D100CE62CE /* FLPCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F3AB3771E5A21D100CE62CE /* FLPCollectionViewCell.xib */; };
 		6F3B3A9419825C1C00EA4BA1 /* FLPTwitterPhotoSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3B3A9319825C1C00EA4BA1 /* FLPTwitterPhotoSource.m */; };
 		6F5579EB1E4624B4008FB1BB /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5579EA1E4624B4008FB1BB /* Router.swift */; };
 		6F5579F11E462565008FB1BB /* FLPMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5579EF1E462565008FB1BB /* FLPMainViewController.m */; };
@@ -44,7 +55,6 @@
 		6F5AD5C71987ABF600B65D09 /* FLPFacebookPhotoSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5AD5C61987ABF600B65D09 /* FLPFacebookPhotoSource.m */; };
 		6F67A358197FD19600AC9CF5 /* FLPLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F67A357197FD19600AC9CF5 /* FLPLogFormatter.m */; };
 		6F7B2DE01980FC9200C9FE69 /* FLPGridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7B2DDF1980FC9200C9FE69 /* FLPGridViewController.m */; };
-		6F8782FC199BB0DC00AA118E /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8782FB199BB0DC00AA118E /* libGoogleAdMobAds.a */; };
 		6F8782FE199BB11000AA118E /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8782FD199BB11000AA118E /* AdSupport.framework */; };
 		6F878300199BB11900AA118E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8782FF199BB11900AA118E /* AudioToolbox.framework */; };
 		6F878302199BB12900AA118E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F878301199BB12900AA118E /* AVFoundation.framework */; };
@@ -52,6 +62,19 @@
 		6F878306199BB14100AA118E /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F878305199BB14100AA118E /* StoreKit.framework */; };
 		6F878308199BB14C00AA118E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F878307199BB14C00AA118E /* SystemConfiguration.framework */; };
 		6F87A771199A17B400C2303A /* FLPScoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F87A770199A17B400C2303A /* FLPScoreViewController.m */; };
+		6F94696B1E584DBD003D102B /* photo_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F94695F1E584DBD003D102B /* photo_1.jpg */; };
+		6F94696D1E584DBD003D102B /* photo_3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F9469611E584DBD003D102B /* photo_3.jpg */; };
+		6F94696E1E584DBD003D102B /* photo_4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F9469621E584DBD003D102B /* photo_4.jpg */; };
+		6F9469701E584DBD003D102B /* photo_6.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F9469641E584DBD003D102B /* photo_6.jpg */; };
+		6F9469711E584DBD003D102B /* photo_7.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F9469651E584DBD003D102B /* photo_7.jpg */; };
+		6F9469721E584DBD003D102B /* photo_8.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F9469661E584DBD003D102B /* photo_8.jpg */; };
+		6F9469731E584DBD003D102B /* photo_9.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F9469671E584DBD003D102B /* photo_9.jpg */; };
+		6F9469741E584DBD003D102B /* photo_10.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F9469681E584DBD003D102B /* photo_10.jpg */; };
+		6F9469751E584DBD003D102B /* photo_11.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F9469691E584DBD003D102B /* photo_11.jpg */; };
+		6F9469761E584DBD003D102B /* photo_12.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F94696A1E584DBD003D102B /* photo_12.jpg */; };
+		6F9469791E584DEE003D102B /* photo_2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F9469771E584DEE003D102B /* photo_2.jpg */; };
+		6F94697A1E584DEE003D102B /* photo_5.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F9469781E584DEE003D102B /* photo_5.jpg */; };
+		6F94697D1E585A08003D102B /* DWPAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F94697C1E585A08003D102B /* DWPAlertController.m */; };
 		6FAD88DC1A25F7FB00E08609 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6FAD88D91A25F7FB00E08609 /* Roboto-Bold.ttf */; };
 		6FAD88DD1A25F7FB00E08609 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6FAD88D91A25F7FB00E08609 /* Roboto-Bold.ttf */; };
 		6FAD88DE1A25F7FB00E08609 /* Pacifico.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6FAD88DA1A25F7FB00E08609 /* Pacifico.ttf */; };
@@ -61,6 +84,8 @@
 		6FAD88E21A25FBE500E08609 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F1AA16A1973EAA400101766 /* MainStoryboard.storyboard */; };
 		6FB3BEEB1E474707007933CB /* FLPBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB3BEEA1E474707007933CB /* FLPBaseViewController.m */; };
 		6FB3BEEE1E474718007933CB /* FLPBasePresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB3BEED1E474718007933CB /* FLPBasePresenter.m */; };
+		6FC031831E64079000857D9D /* GridColumnsAndRows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC031821E64079000857D9D /* GridColumnsAndRows.swift */; };
+		6FEEC3451E6981460077BECA /* GridCollectionControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FEEC3441E6981460077BECA /* GridCollectionControllerDelegate.swift */; };
 		6FF528E41E4F6A7A0081747E /* SourceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF528E31E4F6A7A0081747E /* SourceView.swift */; };
 		6FF528E61E4F6A8B0081747E /* SourceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FF528E51E4F6A8B0081747E /* SourceView.xib */; };
 		6FF528E81E4F71EE0081747E /* SourceViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF528E71E4F71EE0081747E /* SourceViewDelegate.swift */; };
@@ -94,8 +119,17 @@
 		4BBCAE98D7219A1863DA7EFE /* Pods-Flip.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flip.release.xcconfig"; path = "Pods/Target Support Files/Pods-Flip/Pods-Flip.release.xcconfig"; sourceTree = "<group>"; };
 		612618E1383860C51F74F5A6 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		64A060032C00B166A7B24DFB /* Pods-FlipTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlipTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FlipTests/Pods-FlipTests.debug.xcconfig"; sourceTree = "<group>"; };
+		6F039E5A1E63393400236FC9 /* GridCollectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridCollectionController.swift; sourceTree = "<group>"; };
+		6F039E5C1E633DEA00236FC9 /* DWPDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DWPDevice.h; sourceTree = "<group>"; };
+		6F039E5D1E633DEA00236FC9 /* DWPDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DWPDevice.m; sourceTree = "<group>"; };
 		6F03D18519A678DE003EE79B /* FLPTitleLetterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPTitleLetterView.h; sourceTree = "<group>"; };
 		6F03D18619A678DE003EE79B /* FLPTitleLetterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPTitleLetterView.m; sourceTree = "<group>"; };
+		6F103A621E56D189007C0E21 /* FLPNewGridViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPNewGridViewController.h; sourceTree = "<group>"; };
+		6F103A631E56D189007C0E21 /* FLPNewGridViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPNewGridViewController.m; sourceTree = "<group>"; };
+		6F103A641E56D189007C0E21 /* FLPNewGridViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FLPNewGridViewController.xib; sourceTree = "<group>"; };
+		6F103A671E56D1A9007C0E21 /* NewGridViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGridViewControllerDelegate.swift; sourceTree = "<group>"; };
+		6F103A691E56D1CD007C0E21 /* GridPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridPresenter.swift; sourceTree = "<group>"; };
+		6F103A6B1E56D1F4007C0E21 /* GridPresenterDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridPresenterDelegate.swift; sourceTree = "<group>"; };
 		6F14871919A0F5E90087527C /* FLPCoverFromLeftSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPCoverFromLeftSegue.h; sourceTree = "<group>"; };
 		6F14871A19A0F5E90087527C /* FLPCoverFromLeftSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPCoverFromLeftSegue.m; sourceTree = "<group>"; };
 		6F14871C19A0F6640087527C /* FLPCoverFromRightSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPCoverFromRightSegue.h; sourceTree = "<group>"; };
@@ -137,6 +171,10 @@
 		6F33AC7B1998C14000FBF9C4 /* FLPCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPCollectionViewCell.m; sourceTree = "<group>"; };
 		6F33AC821999245500FBF9C4 /* FLPGridItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPGridItem.h; sourceTree = "<group>"; };
 		6F33AC831999245500FBF9C4 /* FLPGridItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPGridItem.m; sourceTree = "<group>"; };
+		6F3AB3711E5A139400CE62CE /* GridCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridCell.swift; sourceTree = "<group>"; };
+		6F3AB3731E5A141C00CE62CE /* GridCellStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridCellStatus.swift; sourceTree = "<group>"; };
+		6F3AB3751E5A152600CE62CE /* MutableCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MutableCollection.swift; sourceTree = "<group>"; };
+		6F3AB3771E5A21D100CE62CE /* FLPCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FLPCollectionViewCell.xib; sourceTree = "<group>"; };
 		6F3B3A9219825C1C00EA4BA1 /* FLPTwitterPhotoSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPTwitterPhotoSource.h; sourceTree = "<group>"; };
 		6F3B3A9319825C1C00EA4BA1 /* FLPTwitterPhotoSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPTwitterPhotoSource.m; sourceTree = "<group>"; };
 		6F5579EA1E4624B4008FB1BB /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
@@ -154,19 +192,6 @@
 		6F7B2DDE1980FC9200C9FE69 /* FLPGridViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPGridViewController.h; sourceTree = "<group>"; };
 		6F7B2DDF1980FC9200C9FE69 /* FLPGridViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPGridViewController.m; sourceTree = "<group>"; };
 		6F7B2DE11981144D00C9FE69 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
-		6F8782EF199BB0DC00AA118E /* GADAdMobExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdMobExtras.h; sourceTree = "<group>"; };
-		6F8782F0199BB0DC00AA118E /* GADAdNetworkExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdNetworkExtras.h; sourceTree = "<group>"; };
-		6F8782F1199BB0DC00AA118E /* GADAdSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdSize.h; sourceTree = "<group>"; };
-		6F8782F2199BB0DC00AA118E /* GADBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADBannerView.h; sourceTree = "<group>"; };
-		6F8782F3199BB0DC00AA118E /* GADBannerViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADBannerViewDelegate.h; sourceTree = "<group>"; };
-		6F8782F4199BB0DC00AA118E /* GADInAppPurchase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInAppPurchase.h; sourceTree = "<group>"; };
-		6F8782F5199BB0DC00AA118E /* GADInAppPurchaseDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInAppPurchaseDelegate.h; sourceTree = "<group>"; };
-		6F8782F6199BB0DC00AA118E /* GADInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInterstitial.h; sourceTree = "<group>"; };
-		6F8782F7199BB0DC00AA118E /* GADInterstitialDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInterstitialDelegate.h; sourceTree = "<group>"; };
-		6F8782F8199BB0DC00AA118E /* GADModules.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADModules.h; sourceTree = "<group>"; };
-		6F8782F9199BB0DC00AA118E /* GADRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequest.h; sourceTree = "<group>"; };
-		6F8782FA199BB0DC00AA118E /* GADRequestError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequestError.h; sourceTree = "<group>"; };
-		6F8782FB199BB0DC00AA118E /* libGoogleAdMobAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAdMobAds.a; sourceTree = "<group>"; };
 		6F8782FD199BB11000AA118E /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		6F8782FF199BB11900AA118E /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		6F878301199BB12900AA118E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -175,6 +200,20 @@
 		6F878307199BB14C00AA118E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		6F87A76F199A17B400C2303A /* FLPScoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPScoreViewController.h; sourceTree = "<group>"; };
 		6F87A770199A17B400C2303A /* FLPScoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPScoreViewController.m; sourceTree = "<group>"; };
+		6F94695F1E584DBD003D102B /* photo_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = photo_1.jpg; sourceTree = "<group>"; };
+		6F9469611E584DBD003D102B /* photo_3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = photo_3.jpg; sourceTree = "<group>"; };
+		6F9469621E584DBD003D102B /* photo_4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = photo_4.jpg; sourceTree = "<group>"; };
+		6F9469641E584DBD003D102B /* photo_6.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = photo_6.jpg; sourceTree = "<group>"; };
+		6F9469651E584DBD003D102B /* photo_7.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = photo_7.jpg; sourceTree = "<group>"; };
+		6F9469661E584DBD003D102B /* photo_8.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = photo_8.jpg; sourceTree = "<group>"; };
+		6F9469671E584DBD003D102B /* photo_9.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = photo_9.jpg; sourceTree = "<group>"; };
+		6F9469681E584DBD003D102B /* photo_10.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = photo_10.jpg; sourceTree = "<group>"; };
+		6F9469691E584DBD003D102B /* photo_11.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = photo_11.jpg; sourceTree = "<group>"; };
+		6F94696A1E584DBD003D102B /* photo_12.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = photo_12.jpg; sourceTree = "<group>"; };
+		6F9469771E584DEE003D102B /* photo_2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = photo_2.jpg; sourceTree = "<group>"; };
+		6F9469781E584DEE003D102B /* photo_5.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = photo_5.jpg; sourceTree = "<group>"; };
+		6F94697B1E585A08003D102B /* DWPAlertController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DWPAlertController.h; sourceTree = "<group>"; };
+		6F94697C1E585A08003D102B /* DWPAlertController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DWPAlertController.m; sourceTree = "<group>"; };
 		6FAD88D91A25F7FB00E08609 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		6FAD88DA1A25F7FB00E08609 /* Pacifico.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Pacifico.ttf; sourceTree = "<group>"; };
 		6FAD88DB1A25F7FB00E08609 /* CantoraOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CantoraOne-Regular.ttf"; sourceTree = "<group>"; };
@@ -184,7 +223,9 @@
 		6FB3BEED1E474718007933CB /* FLPBasePresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPBasePresenter.m; sourceTree = "<group>"; };
 		6FB3BEEF1E47475C007933CB /* FLPBaseViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPBaseViewControllerDelegate.h; sourceTree = "<group>"; };
 		6FB3BEF01E474773007933CB /* FLPBasePresenterDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPBasePresenterDelegate.h; sourceTree = "<group>"; };
+		6FC031821E64079000857D9D /* GridColumnsAndRows.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridColumnsAndRows.swift; sourceTree = "<group>"; };
 		6FDB63F91E462E6D00A0DF1D /* Flip-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Flip-Bridging-Header.h"; sourceTree = "<group>"; };
+		6FEEC3441E6981460077BECA /* GridCollectionControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridCollectionControllerDelegate.swift; sourceTree = "<group>"; };
 		6FF528E31E4F6A7A0081747E /* SourceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SourceView.swift; sourceTree = "<group>"; };
 		6FF528E51E4F6A8B0081747E /* SourceView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SourceView.xib; sourceTree = "<group>"; };
 		6FF528E71E4F71EE0081747E /* SourceViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SourceViewDelegate.swift; sourceTree = "<group>"; };
@@ -221,7 +262,6 @@
 				6F1AA15B1973EAA400101766 /* CoreGraphics.framework in Frameworks */,
 				6F1AA1591973EAA400101766 /* Foundation.framework in Frameworks */,
 				6F1AA15D1973EAA400101766 /* UIKit.framework in Frameworks */,
-				6F8782FC199BB0DC00AA118E /* libGoogleAdMobAds.a in Frameworks */,
 				C4AA718B0627E08BE2AA2523 /* Pods_Flip.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -240,6 +280,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6F103A611E56D156007C0E21 /* grid */ = {
+			isa = PBXGroup;
+			children = (
+				6F3AB3771E5A21D100CE62CE /* FLPCollectionViewCell.xib */,
+				6F33AC7A1998C14000FBF9C4 /* FLPCollectionViewCell.h */,
+				6F33AC7B1998C14000FBF9C4 /* FLPCollectionViewCell.m */,
+				6FC031821E64079000857D9D /* GridColumnsAndRows.swift */,
+				6F039E5A1E63393400236FC9 /* GridCollectionController.swift */,
+				6FEEC3441E6981460077BECA /* GridCollectionControllerDelegate.swift */,
+				6F103A641E56D189007C0E21 /* FLPNewGridViewController.xib */,
+				6F103A621E56D189007C0E21 /* FLPNewGridViewController.h */,
+				6F103A631E56D189007C0E21 /* FLPNewGridViewController.m */,
+				6F103A671E56D1A9007C0E21 /* NewGridViewControllerDelegate.swift */,
+				6F103A6B1E56D1F4007C0E21 /* GridPresenterDelegate.swift */,
+				6F103A691E56D1CD007C0E21 /* GridPresenter.swift */,
+			);
+			name = grid;
+			sourceTree = "<group>";
+		};
 		6F14871819A0F5A50087527C /* segues */ = {
 			isa = PBXGroup;
 			children = (
@@ -311,16 +370,16 @@
 				6F5579F91E4625C6008FB1BB /* base classes */,
 				6F5579E81E46249D008FB1BB /* app navigation */,
 				6F5579EC1E4624FD008FB1BB /* use cases */,
+				6F3AB3701E5A136F00CE62CE /* models */,
+				6F94695E1E584DB1003D102B /* images */,
 				6FF528F11E4F78C70081747E /* views */,
 				6FF528F81E4F96E50081747E /* extensions */,
 				6F19F69719A3A8470047F269 /* sounds */,
 				6F55BE8C19A1616E00FC60E7 /* fonts */,
-				6F8782EE199BB0B600AA118E /* adMob */,
 				6F33AC811999244600FBF9C4 /* model */,
 				6F67A355197FD17F00AC9CF5 /* utils */,
 				6FFC51641976655B00668F82 /* sources */,
 				6F14871819A0F5A50087527C /* segues */,
-				6F1AA1911973EAF800101766 /* views */,
 				6F1AA1901973EAF000101766 /* controllers */,
 				6F1AA15F1973EAA400101766 /* Supporting Files */,
 				6F1AA1731973EAA400101766 /* Images.xcassets */,
@@ -376,15 +435,6 @@
 			name = controllers;
 			sourceTree = "<group>";
 		};
-		6F1AA1911973EAF800101766 /* views */ = {
-			isa = PBXGroup;
-			children = (
-				6F33AC7A1998C14000FBF9C4 /* FLPCollectionViewCell.h */,
-				6F33AC7B1998C14000FBF9C4 /* FLPCollectionViewCell.m */,
-			);
-			name = views;
-			sourceTree = "<group>";
-		};
 		6F33AC811999244600FBF9C4 /* model */ = {
 			isa = PBXGroup;
 			children = (
@@ -392,6 +442,15 @@
 				6F33AC831999245500FBF9C4 /* FLPGridItem.m */,
 			);
 			name = model;
+			sourceTree = "<group>";
+		};
+		6F3AB3701E5A136F00CE62CE /* models */ = {
+			isa = PBXGroup;
+			children = (
+				6F3AB3711E5A139400CE62CE /* GridCell.swift */,
+				6F3AB3731E5A141C00CE62CE /* GridCellStatus.swift */,
+			);
+			name = models;
 			sourceTree = "<group>";
 		};
 		6F5579E81E46249D008FB1BB /* app navigation */ = {
@@ -407,6 +466,7 @@
 			isa = PBXGroup;
 			children = (
 				6F5579ED1E462514008FB1BB /* main */,
+				6F103A611E56D156007C0E21 /* grid */,
 			);
 			name = "use cases";
 			sourceTree = "<group>";
@@ -465,28 +525,31 @@
 			children = (
 				6F67A356197FD19600AC9CF5 /* FLPLogFormatter.h */,
 				6F67A357197FD19600AC9CF5 /* FLPLogFormatter.m */,
+				6F94697B1E585A08003D102B /* DWPAlertController.h */,
+				6F94697C1E585A08003D102B /* DWPAlertController.m */,
+				6F039E5C1E633DEA00236FC9 /* DWPDevice.h */,
+				6F039E5D1E633DEA00236FC9 /* DWPDevice.m */,
 			);
 			name = utils;
 			sourceTree = "<group>";
 		};
-		6F8782EE199BB0B600AA118E /* adMob */ = {
+		6F94695E1E584DB1003D102B /* images */ = {
 			isa = PBXGroup;
 			children = (
-				6F8782EF199BB0DC00AA118E /* GADAdMobExtras.h */,
-				6F8782F0199BB0DC00AA118E /* GADAdNetworkExtras.h */,
-				6F8782F1199BB0DC00AA118E /* GADAdSize.h */,
-				6F8782F2199BB0DC00AA118E /* GADBannerView.h */,
-				6F8782F3199BB0DC00AA118E /* GADBannerViewDelegate.h */,
-				6F8782F4199BB0DC00AA118E /* GADInAppPurchase.h */,
-				6F8782F5199BB0DC00AA118E /* GADInAppPurchaseDelegate.h */,
-				6F8782F6199BB0DC00AA118E /* GADInterstitial.h */,
-				6F8782F7199BB0DC00AA118E /* GADInterstitialDelegate.h */,
-				6F8782F8199BB0DC00AA118E /* GADModules.h */,
-				6F8782F9199BB0DC00AA118E /* GADRequest.h */,
-				6F8782FA199BB0DC00AA118E /* GADRequestError.h */,
-				6F8782FB199BB0DC00AA118E /* libGoogleAdMobAds.a */,
+				6F94695F1E584DBD003D102B /* photo_1.jpg */,
+				6F9469771E584DEE003D102B /* photo_2.jpg */,
+				6F9469611E584DBD003D102B /* photo_3.jpg */,
+				6F9469621E584DBD003D102B /* photo_4.jpg */,
+				6F9469781E584DEE003D102B /* photo_5.jpg */,
+				6F9469641E584DBD003D102B /* photo_6.jpg */,
+				6F9469651E584DBD003D102B /* photo_7.jpg */,
+				6F9469661E584DBD003D102B /* photo_8.jpg */,
+				6F9469671E584DBD003D102B /* photo_9.jpg */,
+				6F9469681E584DBD003D102B /* photo_10.jpg */,
+				6F9469691E584DBD003D102B /* photo_11.jpg */,
+				6F94696A1E584DBD003D102B /* photo_12.jpg */,
 			);
-			name = adMob;
+			name = images;
 			sourceTree = "<group>";
 		};
 		6FF528F11E4F78C70081747E /* views */ = {
@@ -501,6 +564,7 @@
 			isa = PBXGroup;
 			children = (
 				6FF528F91E4F96F50081747E /* UIView+Constraints.swift */,
+				6F3AB3751E5A152600CE62CE /* MutableCollection.swift */,
 			);
 			name = extensions;
 			sourceTree = "<group>";
@@ -623,20 +687,34 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F94696D1E584DBD003D102B /* photo_3.jpg in Resources */,
 				6FAD88E21A25FBE500E08609 /* MainStoryboard.storyboard in Resources */,
+				6F103A661E56D189007C0E21 /* FLPNewGridViewController.xib in Resources */,
+				6F3AB3781E5A21D100CE62CE /* FLPCollectionViewCell.xib in Resources */,
 				6F22B29B1E50766900237258 /* SizeView.xib in Resources */,
 				6FF528E61E4F6A8B0081747E /* SourceView.xib in Resources */,
+				6F94696B1E584DBD003D102B /* photo_1.jpg in Resources */,
 				6F1AA1741973EAA400101766 /* Images.xcassets in Resources */,
+				6F9469741E584DBD003D102B /* photo_10.jpg in Resources */,
 				6F5579F21E462565008FB1BB /* FLPMainViewController.xib in Resources */,
 				6F19F69B19A3A8870047F269 /* camera-shutter-click-01.wav in Resources */,
 				6F1AA1991973FE9900101766 /* Localizable.strings in Resources */,
+				6F9469751E584DBD003D102B /* photo_11.jpg in Resources */,
+				6F94697A1E584DEE003D102B /* photo_5.jpg in Resources */,
+				6F9469761E584DBD003D102B /* photo_12.jpg in Resources */,
+				6F9469731E584DBD003D102B /* photo_9.jpg in Resources */,
+				6F9469701E584DBD003D102B /* photo_6.jpg in Resources */,
 				6FAD88DC1A25F7FB00E08609 /* Roboto-Bold.ttf in Resources */,
 				6FAD88DE1A25F7FB00E08609 /* Pacifico.ttf in Resources */,
+				6F94696E1E584DBD003D102B /* photo_4.jpg in Resources */,
+				6F9469711E584DBD003D102B /* photo_7.jpg in Resources */,
 				6FAD88E01A25F7FB00E08609 /* CantoraOne-Regular.ttf in Resources */,
 				6F19F69D19A3AC760047F269 /* polaroid-camera-take-picture-01.wav in Resources */,
+				6F9469721E584DBD003D102B /* photo_8.jpg in Resources */,
 				6F1AA1631973EAA400101766 /* InfoPlist.strings in Resources */,
 				6FF528F51E4F8C020081747E /* RecordsView.xib in Resources */,
 				6FF528EC1E4F75AC0081747E /* TitleView.xib in Resources */,
+				6F9469791E584DEE003D102B /* photo_2.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -755,15 +833,20 @@
 				6F5579F11E462565008FB1BB /* FLPMainViewController.m in Sources */,
 				6F557A031E462754008FB1BB /* PresenterInstances.swift in Sources */,
 				6FF528EA1E4F75950081747E /* TitleView.swift in Sources */,
+				6F103A681E56D1A9007C0E21 /* NewGridViewControllerDelegate.swift in Sources */,
 				6F67A358197FD19600AC9CF5 /* FLPLogFormatter.m in Sources */,
 				6F14872419A0FDE90087527C /* FLPFlipFromRightSegue.m in Sources */,
+				6F103A6C1E56D1F4007C0E21 /* GridPresenterDelegate.swift in Sources */,
 				6F3B3A9419825C1C00EA4BA1 /* FLPTwitterPhotoSource.m in Sources */,
+				6F94697D1E585A08003D102B /* DWPAlertController.m in Sources */,
 				6F5579EB1E4624B4008FB1BB /* Router.swift in Sources */,
 				6FF528E41E4F6A7A0081747E /* SourceView.swift in Sources */,
 				6F33AC841999245500FBF9C4 /* FLPGridItem.m in Sources */,
 				6F03D18719A678DE003EE79B /* FLPTitleLetterView.m in Sources */,
 				6FFC51671976659800668F82 /* FLPPhotoSource.m in Sources */,
+				6F3AB3741E5A141C00CE62CE /* GridCellStatus.swift in Sources */,
 				6F22B2991E50765D00237258 /* SizeView.swift in Sources */,
+				6F103A651E56D189007C0E21 /* FLPNewGridViewController.m in Sources */,
 				6FF58536197FC95100926DF9 /* FLPCameraPhotoSource.m in Sources */,
 				6F1AA1651973EAA400101766 /* main.m in Sources */,
 				6F5579F61E46258D008FB1BB /* MainViewControllerDelegate.swift in Sources */,
@@ -774,17 +857,24 @@
 				6F5579F81E46259E008FB1BB /* MainPresenterDelegate.swift in Sources */,
 				6FB3BEEE1E474718007933CB /* FLPBasePresenter.m in Sources */,
 				6F1AA1721973EAA400101766 /* FLPMainScrenViewController.m in Sources */,
+				6F039E5B1E63393400236FC9 /* GridCollectionController.swift in Sources */,
+				6F039E5E1E633DEA00236FC9 /* DWPDevice.m in Sources */,
 				6F87A771199A17B400C2303A /* FLPScoreViewController.m in Sources */,
 				6F5579F41E46257A008FB1BB /* MainPresenter.swift in Sources */,
 				6F5AD5C71987ABF600B65D09 /* FLPFacebookPhotoSource.m in Sources */,
+				6FC031831E64079000857D9D /* GridColumnsAndRows.swift in Sources */,
 				6FF528F71E4F91E10081747E /* RecordsViewDelegate.swift in Sources */,
+				6F3AB3761E5A152600CE62CE /* MutableCollection.swift in Sources */,
+				6FEEC3451E6981460077BECA /* GridCollectionControllerDelegate.swift in Sources */,
 				6FF528F01E4F78430081747E /* UIViewFromNib.swift in Sources */,
+				6F103A6A1E56D1CD007C0E21 /* GridPresenter.swift in Sources */,
 				6F14872119A0FD110087527C /* FLPFlipFromLeftSegue.m in Sources */,
 				6F1AA1691973EAA400101766 /* FLPAppDelegate.m in Sources */,
 				6F22B29D1E50767500237258 /* SizeViewDelegate.swift in Sources */,
 				6FF528F31E4F8BF60081747E /* RecordsView.swift in Sources */,
 				6FB3BEEB1E474707007933CB /* FLPBaseViewController.m in Sources */,
 				6F14871E19A0F6640087527C /* FLPCoverFromRightSegue.m in Sources */,
+				6F3AB3721E5A139400CE62CE /* GridCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
