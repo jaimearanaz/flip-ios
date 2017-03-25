@@ -1,21 +1,20 @@
 //
 //  UIView+Constraints.swift
-//  Mystilo
+//  BaseProject
 //
-//  Created by Jaime Aranaz on 25/05/16.
-//  Copyright © 2016 Corpora360. All rights reserved.
+//  Created by Jaime Aranaz on 13/03/2017.
+//  Copyright © 2017 Jaime Aranaz. All rights reserved.
 //
 
 import Foundation
+import UIKit
 
 extension UIView {
     
-    func addConstraintWitdh(_ width: CGFloat) {
-        
-        addConstraintWitdh(width, constraintId: nil)
-    }
+    // MARK: Public methods
     
-    func addConstraintWitdh(_ width: CGFloat, constraintId: String?) {
+    @discardableResult
+    func addWidthConstraint(_ width: CGFloat, withIdentifier identifier: String? = nil) -> NSLayoutConstraint {
         
         let widthConstraint = NSLayoutConstraint(
             item: self,
@@ -26,17 +25,14 @@ extension UIView {
             multiplier: 1.0,
             constant: width)
         
-        setConstraintIdentifier(constraintId, toConstraint: widthConstraint)
-        
+        setIdentifier(identifier, toConstraint: widthConstraint)
         addConstraint(widthConstraint)
-    }
-    
-    func addConstraintHeight(_ height: CGFloat) {
         
-        addConstraintHeight(height, constraintId: nil)
+        return widthConstraint
     }
     
-    func addConstraintHeight(_ height: CGFloat, constraintId: String?) {
+    @discardableResult
+    func addHeightConstraint(_ height: CGFloat, withIdentifier identifier: String? = nil) -> NSLayoutConstraint {
         
         let heightConstraint = NSLayoutConstraint(
             item: self,
@@ -47,99 +43,60 @@ extension UIView {
             multiplier: 1.0,
             constant: height)
         
-        setConstraintIdentifier(constraintId, toConstraint: heightConstraint)
-        
+        setIdentifier(identifier, toConstraint: heightConstraint)
         addConstraint(heightConstraint)
-    }
-    
-    func addConstraintsAnchorToSuperview(top: Bool, trailing: Bool, bottom: Bool, leading: Bool) {
         
-        addConstraintsAnchorToSuperview(top: top, trailing: trailing, bottom: bottom, leading: leading, constraintId: nil)
+        return heightConstraint
     }
     
-    func addConstraintsAnchorToSuperview(top: Bool, trailing: Bool, bottom: Bool, leading: Bool, constraintId: String?) {
+    @discardableResult
+    func addAnchorToSuperviewConstraints(toTop: Bool,
+                                         toTrailing: Bool,
+                                         toBottom: Bool,
+                                         toLeading: Bool,
+                                         withIdentifier identifier: String? = nil) -> [NSLayoutConstraint] {
+        
+        var constraints = [NSLayoutConstraint]()
+        
+        guard let _ = superview else {
+            NSLog("error adding constraint \(identifier), there is no superview")
+            return constraints
+        }
+        
+        if (toTop) {
+           constraints.append(addAnchorConstraintToSuperview(withAttribute: .top, identifier: identifier))
+        }
+        
+        if (toTrailing) {
+            constraints.append(addAnchorConstraintToSuperview(withAttribute: .trailing, identifier: identifier))
+        }
+        
+        if (toBottom) {
+            constraints.append(addAnchorConstraintToSuperview(withAttribute: .bottom, identifier: identifier))
+        }
+        
+        if (toLeading) {
+            constraints.append(addAnchorConstraintToSuperview(withAttribute: .leading, identifier: identifier))
+        }
+        
+        return constraints
+    }
+    
+    @discardableResult
+    func addCenterInSuperviewConstraints(withIdentifier identifier: String? = nil) -> [NSLayoutConstraint] {
+
+        let verticalConstraint = addCenterVerticallyInSuperviewConstraint(withIdentifier: identifier)
+        let horizontalConstraint = addCenterHorizontallyInSuperviewConstraint(withIdentifier: identifier)
+        
+        return [verticalConstraint, horizontalConstraint]
+    }
+    
+    @discardableResult
+    func addCenterVerticallyInSuperviewConstraint(withIdentifier identifier: String? = nil) -> NSLayoutConstraint {
         
         guard let superview = superview else {
-            NSLog("error adding constraint \(constraintId), there is no superview")
-            return
-        }
-        
-        if (top) {
-            
-            let topConstraint = NSLayoutConstraint(item: self,
-                                                   attribute: .top,
-                                                   relatedBy: .equal,
-                                                   toItem: superview,
-                                                   attribute: .top,
-                                                   multiplier: 1,
-                                                   constant: 0)
-            
-            setConstraintIdentifier(constraintId, toConstraint: topConstraint)
-            superview.addConstraint(topConstraint)
-        }
-        
-        if (trailing) {
-            
-            let trailingConstraint = NSLayoutConstraint(item: self,
-                                                        attribute: .trailing,
-                                                        relatedBy: .equal,
-                                                        toItem: superview,
-                                                        attribute: .trailing,
-                                                        multiplier: 1,
-                                                        constant: 0)
-            setConstraintIdentifier(constraintId, toConstraint: trailingConstraint)
-            superview.addConstraint(trailingConstraint)
-        }
-        
-        if (bottom) {
-            
-            let bottomConstraint = NSLayoutConstraint(item: self,
-                                                      attribute: .bottom,
-                                                      relatedBy: .equal,
-                                                      toItem: superview,
-                                                      attribute: .bottom,
-                                                      multiplier: 1,
-                                                      constant: 0)
-            setConstraintIdentifier(constraintId, toConstraint: bottomConstraint)
-            superview.addConstraint(bottomConstraint)
-        }
-        
-        if (leading) {
-            
-            let leadingConstraint = NSLayoutConstraint(item: self,
-                                                       attribute: .leading,
-                                                       relatedBy: .equal,
-                                                       toItem: superview,
-                                                       attribute: .leading,
-                                                       multiplier: 1,
-                                                       constant: 0)
-            setConstraintIdentifier(constraintId, toConstraint: leadingConstraint)
-            superview.addConstraint(leadingConstraint)
-        }
-    }
-    
-    func addConstraintsCenterInSuperview() {
-        
-        addConstraintCenterVerticallyInSuperview(nil)
-        addConstraintCenterHorizontallyInSuperview(nil)
-    }
-    
-    func addConstraintsCenterInSuperview(_ constraintId: String?) {
-        
-        addConstraintCenterVerticallyInSuperview(constraintId)
-        addConstraintCenterHorizontallyInSuperview(constraintId)
-    }
-    
-    func addConstraintCenterVerticallyInSuperview() {
-        
-        addConstraintCenterVerticallyInSuperview(nil)
-    }
-    
-    func addConstraintCenterVerticallyInSuperview(_ constraintId: String?) {
-        
-        guard let superview = superview else {
-            NSLog("error adding constraint \(constraintId), there is no superview")
-            return
+            NSLog("error adding constraint \(identifier), there is no superview")
+            return NSLayoutConstraint()
         }
         
         let verticalConstraint = NSLayoutConstraint(
@@ -151,21 +108,18 @@ extension UIView {
             multiplier: 1,
             constant: 0)
         
-        setConstraintIdentifier(constraintId, toConstraint: verticalConstraint)
-        
+        setIdentifier(identifier, toConstraint: verticalConstraint)
         superview.addConstraint(verticalConstraint)
-    }
-    
-    func addConstraintCenterHorizontallyInSuperview() {
         
-        addConstraintCenterHorizontallyInSuperview(nil)
+        return verticalConstraint
     }
     
-    func addConstraintCenterHorizontallyInSuperview(_ constraintId: String?) {
+    @discardableResult
+    func addCenterHorizontallyInSuperviewConstraint(withIdentifier identifier: String? = nil) -> NSLayoutConstraint {
         
         guard let superview = superview else {
-            NSLog("error adding constraint \(constraintId), there is no superview")
-            return
+            NSLog("error adding constraint \(identifier), there is no superview")
+            return NSLayoutConstraint()
         }
         
         let horizontalConstraint = NSLayoutConstraint(
@@ -177,22 +131,17 @@ extension UIView {
             multiplier: 1,
             constant: 0)
         
-        setConstraintIdentifier(constraintId, toConstraint: horizontalConstraint)
-        
+        setIdentifier(identifier, toConstraint: horizontalConstraint)
         superview.addConstraint(horizontalConstraint)
-    }
-    
-    // TODO: return constraint in all methods
-    @discardableResult
-    func addConstraintTopSpaceToSuperview(_ space: CGFloat) -> NSLayoutConstraint {
         
-        return addConstraintTopSpaceToSuperview(space, constraintId: nil)
+        return horizontalConstraint
     }
     
-    func addConstraintTopSpaceToSuperview(_ space: CGFloat, constraintId: String?)  -> NSLayoutConstraint {
+    @discardableResult
+    func addTopSpaceToSuperviewConstraint(topSpace: CGFloat, withIdentifier identifier: String? = nil)  -> NSLayoutConstraint {
         
         guard let superview = superview else {
-            NSLog("error adding constraint \(constraintId), there is no superview")
+            NSLog("error adding constraint \(identifier), there is no superview")
             return NSLayoutConstraint()
         }
         
@@ -203,25 +152,20 @@ extension UIView {
             toItem: superview,
             attribute: NSLayoutAttribute.top,
             multiplier: 1.0,
-            constant: space)
+            constant: topSpace)
         
-        setConstraintIdentifier(constraintId, toConstraint: topSpaceConstraint)
-        
+        setIdentifier(identifier, toConstraint: topSpaceConstraint)
         superview.addConstraint(topSpaceConstraint)
         
         return topSpaceConstraint
     }
     
-    func addConstraintBottomSpaceToSuperview(_ space: CGFloat) {
-        
-        addConstraintBottomSpaceToSuperview(space, constraintId: nil)
-    }
-    
-    func addConstraintBottomSpaceToSuperview(_ space: CGFloat, constraintId: String?) {
+    @discardableResult
+    func addBottomSpaceToSuperviewConstraint(bottomSpace: CGFloat, withIdentifier identifier: String? = nil) -> NSLayoutConstraint {
         
         guard let superview = superview else {
-            NSLog("error adding constraint \(constraintId), there is no superview")
-            return
+            NSLog("error adding constraint \(identifier), there is no superview")
+            return NSLayoutConstraint()
         }
         
         let bottomSpaceConstraint = NSLayoutConstraint(
@@ -231,23 +175,20 @@ extension UIView {
             toItem: superview,
             attribute: NSLayoutAttribute.bottom,
             multiplier: 1.0,
-            constant: space)
+            constant: bottomSpace)
         
-        setConstraintIdentifier(constraintId, toConstraint: bottomSpaceConstraint)
-        
+        setIdentifier(identifier, toConstraint: bottomSpaceConstraint)
         superview.addConstraint(bottomSpaceConstraint)
-    }
-    
-    func addConstraintLeadingSpaceToSuperview(_ space: CGFloat) {
         
-        addConstraintLeadingSpaceToSuperview(space, constraintId: nil)
+        return bottomSpaceConstraint
     }
     
-    func addConstraintLeadingSpaceToSuperview(_ space: CGFloat, constraintId: String?) {
+    @discardableResult
+    func addLeadingSpaceToSuperviewConstraint(leadingSpace: CGFloat, withIdentifier identifier: String? = nil) -> NSLayoutConstraint {
         
         guard let superview = superview else {
-            NSLog("error adding constraint \(constraintId), there is no superview")
-            return
+            NSLog("error adding constraint \(identifier), there is no superview")
+            return NSLayoutConstraint()
         }
         
         let leadingConstraint = NSLayoutConstraint(
@@ -257,23 +198,20 @@ extension UIView {
             toItem: self,
             attribute: NSLayoutAttribute.leading,
             multiplier: 1,
-            constant: space)
+            constant: leadingSpace)
         
-        setConstraintIdentifier(constraintId, toConstraint: leadingConstraint)
-        
+        setIdentifier(identifier, toConstraint: leadingConstraint)
         superview.addConstraint(leadingConstraint)
-    }
-    
-    func addConstraintTrailingSpaceToSuperview(_ space: CGFloat) {
         
-        addConstraintTrailingSpaceToSuperview(space, constraintId: nil)
+        return leadingConstraint
     }
     
-    func addConstraintTrailingSpaceToSuperview(_ space: CGFloat, constraintId: String?) {
+    @discardableResult
+    func addTrailingSpaceToSuperviewConstraint(trailingSpace: CGFloat, withIdentifier identifier: String? = nil) -> NSLayoutConstraint {
         
         guard let superview = superview else {
-            NSLog("error adding constraint \(constraintId), there is no superview")
-            return
+            NSLog("error adding constraint \(identifier), there is no superview")
+            return NSLayoutConstraint()
         }
         
         let trailingConstraint = NSLayoutConstraint(
@@ -283,69 +221,82 @@ extension UIView {
             toItem: self,
             attribute: NSLayoutAttribute.trailing,
             multiplier: 1,
-            constant: space)
+            constant: trailingSpace)
         
-        setConstraintIdentifier(constraintId, toConstraint: trailingConstraint)
-        
+        setIdentifier(identifier, toConstraint: trailingConstraint)
         superview.addConstraint(trailingConstraint)
-    }
-    
-    func addConstraintVerticalSpaceToBelowView(_ view: UIView, space: CGFloat) {
         
-        addConstraintVerticalSpaceToBelowView(view, space: space, constraintId: nil)
+        return trailingConstraint
     }
     
-    func addConstraintVerticalSpaceToBelowView(_ view: UIView, space: CGFloat, constraintId: String?) {
+    @discardableResult
+    func addVerticalSpaceConstraint(verticalSpace: CGFloat, toBelowView belowView: UIView, withIdentifier identifier: String? = nil) -> NSLayoutConstraint {
         
         guard let superview = superview else {
-            NSLog("error adding constraint \(constraintId), there is no superview")
-            return
+            NSLog("error adding constraint \(identifier), there is no superview")
+            return NSLayoutConstraint()
         }
         
         let verticalSpaceConstraint = NSLayoutConstraint(
             item: self,
             attribute: NSLayoutAttribute.bottom,
             relatedBy: NSLayoutRelation.equal,
-            toItem: view,
+            toItem: belowView,
             attribute: NSLayoutAttribute.top,
             multiplier: 1,
-            constant: -space)
+            constant: -verticalSpace)
         
-        setConstraintIdentifier(constraintId, toConstraint: verticalSpaceConstraint)
+        setIdentifier(identifier, toConstraint: verticalSpaceConstraint)
         superview.addConstraint(verticalSpaceConstraint)
-    }
-    
-    func addConstraintHorizontalSpaceToLeftView(_ view: UIView, space: CGFloat) {
         
-        addConstraintHorizontalSpaceToLeftView(view, space: space, constraintId: nil)
+        return verticalSpaceConstraint
     }
     
-    func addConstraintHorizontalSpaceToLeftView(_ view: UIView, space: CGFloat, constraintId: String?) {
+    @discardableResult
+    func addHotizontalSpaceConstraint(horizontalSpace: CGFloat, toLeftView leftView: UIView, withIdentifier identifier: String? = nil) -> NSLayoutConstraint {
         
         guard let superview = superview else {
-            NSLog("error adding constraint \(constraintId), there is no superview")
-            return
+            NSLog("error adding constraint \(identifier), there is no superview")
+            return NSLayoutConstraint()
         }
         
         let horizontalSpaceConstraint = NSLayoutConstraint(
             item: self,
             attribute: NSLayoutAttribute.left,
             relatedBy: NSLayoutRelation.equal,
-            toItem: view,
+            toItem: leftView,
             attribute: NSLayoutAttribute.right,
             multiplier: 1,
-            constant: space)
+            constant: horizontalSpace)
         
-        setConstraintIdentifier(constraintId, toConstraint: horizontalSpaceConstraint)
+        setIdentifier(identifier, toConstraint: horizontalSpaceConstraint)
         superview.addConstraint(horizontalSpaceConstraint)
+        
+        return horizontalSpaceConstraint
     }
     
     // MARK: Private methods
     
-    func setConstraintIdentifier(_ identifier: String?, toConstraint constraint: NSLayoutConstraint) {
+    fileprivate func setIdentifier(_ identifier: String?, toConstraint constraint: NSLayoutConstraint) {
         
         if let identifier = identifier {
             constraint.identifier = identifier
         }
+    }
+    
+    fileprivate func addAnchorConstraintToSuperview(withAttribute attribute: NSLayoutAttribute, identifier: String? = nil) -> NSLayoutConstraint {
+        
+        let constraint = NSLayoutConstraint(item: self,
+                                            attribute: attribute,
+                                            relatedBy: .equal,
+                                            toItem: superview,
+                                            attribute: attribute,
+                                            multiplier: 1,
+                                            constant: 0)
+        
+        setIdentifier(identifier, toConstraint: constraint)
+        superview?.addConstraint(constraint)
+        
+        return constraint
     }
 }

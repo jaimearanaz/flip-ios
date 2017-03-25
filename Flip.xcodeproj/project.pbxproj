@@ -50,6 +50,7 @@
 		6F3935781E86A00D00226DCE /* ScoreResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3935771E86A00D00226DCE /* ScoreResultView.swift */; };
 		6F39357A1E86A03200226DCE /* ScoreView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F3935791E86A03200226DCE /* ScoreView.xib */; };
 		6F39357C1E86CDAE00226DCE /* ScoreResultView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F39357B1E86CDAE00226DCE /* ScoreResultView.xib */; };
+		6F39357E1E86E99D00226DCE /* UIView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F39357D1E86E99D00226DCE /* UIView+Constraints.swift */; };
 		6F3AB3721E5A139400CE62CE /* GridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3AB3711E5A139400CE62CE /* GridCell.swift */; };
 		6F3AB3741E5A141C00CE62CE /* GridCellStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3AB3731E5A141C00CE62CE /* GridCellStatus.swift */; };
 		6F3AB3761E5A152600CE62CE /* MutableCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3AB3751E5A152600CE62CE /* MutableCollection.swift */; };
@@ -105,7 +106,6 @@
 		6FF528F31E4F8BF60081747E /* RecordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF528F21E4F8BF60081747E /* RecordsView.swift */; };
 		6FF528F51E4F8C020081747E /* RecordsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FF528F41E4F8C020081747E /* RecordsView.xib */; };
 		6FF528F71E4F91E10081747E /* RecordsViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF528F61E4F91E10081747E /* RecordsViewDelegate.swift */; };
-		6FF528FA1E4F96F50081747E /* UIView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF528F91E4F96F50081747E /* UIView+Constraints.swift */; };
 		6FF58536197FC95100926DF9 /* FLPCameraPhotoSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF58535197FC95100926DF9 /* FLPCameraPhotoSource.m */; };
 		6FF58538197FCA5800926DF9 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FF58537197FCA5800926DF9 /* AssetsLibrary.framework */; };
 		6FFC51671976659800668F82 /* FLPPhotoSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFC51661976659800668F82 /* FLPPhotoSource.m */; };
@@ -192,6 +192,7 @@
 		6F3935771E86A00D00226DCE /* ScoreResultView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreResultView.swift; sourceTree = "<group>"; };
 		6F3935791E86A03200226DCE /* ScoreView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScoreView.xib; sourceTree = "<group>"; };
 		6F39357B1E86CDAE00226DCE /* ScoreResultView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScoreResultView.xib; sourceTree = "<group>"; };
+		6F39357D1E86E99D00226DCE /* UIView+Constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Constraints.swift"; sourceTree = "<group>"; };
 		6F3AB3711E5A139400CE62CE /* GridCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridCell.swift; sourceTree = "<group>"; };
 		6F3AB3731E5A141C00CE62CE /* GridCellStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridCellStatus.swift; sourceTree = "<group>"; };
 		6F3AB3751E5A152600CE62CE /* MutableCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MutableCollection.swift; sourceTree = "<group>"; };
@@ -256,7 +257,6 @@
 		6FF528F21E4F8BF60081747E /* RecordsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordsView.swift; sourceTree = "<group>"; };
 		6FF528F41E4F8C020081747E /* RecordsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecordsView.xib; sourceTree = "<group>"; };
 		6FF528F61E4F91E10081747E /* RecordsViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordsViewDelegate.swift; sourceTree = "<group>"; };
-		6FF528F91E4F96F50081747E /* UIView+Constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Constraints.swift"; sourceTree = "<group>"; };
 		6FF58534197FC95100926DF9 /* FLPCameraPhotoSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPCameraPhotoSource.h; sourceTree = "<group>"; };
 		6FF58535197FC95100926DF9 /* FLPCameraPhotoSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPCameraPhotoSource.m; sourceTree = "<group>"; };
 		6FF58537197FCA5800926DF9 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
@@ -603,7 +603,7 @@
 		6FF528F81E4F96E50081747E /* extensions */ = {
 			isa = PBXGroup;
 			children = (
-				6FF528F91E4F96F50081747E /* UIView+Constraints.swift */,
+				6F39357D1E86E99D00226DCE /* UIView+Constraints.swift */,
 				6F3AB3751E5A152600CE62CE /* MutableCollection.swift */,
 			);
 			name = extensions;
@@ -897,7 +897,6 @@
 				6FF58536197FC95100926DF9 /* FLPCameraPhotoSource.m in Sources */,
 				6F1AA1651973EAA400101766 /* main.m in Sources */,
 				6F5579F61E46258D008FB1BB /* MainViewControllerDelegate.swift in Sources */,
-				6FF528FA1E4F96F50081747E /* UIView+Constraints.swift in Sources */,
 				6F33AC7C1998C14000FBF9C4 /* FLPCollectionViewCell.m in Sources */,
 				6FF528E81E4F71EE0081747E /* SourceViewDelegate.swift in Sources */,
 				6F14871B19A0F5E90087527C /* FLPCoverFromLeftSegue.m in Sources */,
@@ -922,6 +921,7 @@
 				6F1AA1691973EAA400101766 /* FLPAppDelegate.m in Sources */,
 				6F22B29D1E50767500237258 /* SizeViewDelegate.swift in Sources */,
 				6FF528F31E4F8BF60081747E /* RecordsView.swift in Sources */,
+				6F39357E1E86E99D00226DCE /* UIView+Constraints.swift in Sources */,
 				6FB3BEEB1E474707007933CB /* FLPBaseViewController.m in Sources */,
 				6F14871E19A0F6640087527C /* FLPCoverFromRightSegue.m in Sources */,
 				6F3AB3721E5A139400CE62CE /* GridCell.swift in Sources */,

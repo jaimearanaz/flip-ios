@@ -21,6 +21,11 @@
                 <outlet property="penalizationView" destination="TB1-CE-5Md" id="lnx-zY-20l"/>
                 <outlet property="timeView" destination="feR-42-Vpz" id="MdX-lk-5Xn"/>
                 <outlet property="titleView" destination="UJ4-BD-m50" id="uiN-EN-JRb"/>
+                <outlet property="view" destination="iN0-l3-epB" id="7uV-wB-hFK"/>
+                <outletCollection property="centerConstraints" destination="jq7-Jd-m3J" collectionClass="NSMutableArray" id="83Y-9a-Rx9"/>
+                <outletCollection property="centerConstraints" destination="zGP-ta-MZU" collectionClass="NSMutableArray" id="BjK-An-NN4"/>
+                <outletCollection property="centerConstraints" destination="WSO-Z5-7cJ" collectionClass="NSMutableArray" id="02P-Hv-ufA"/>
+                <outletCollection property="centerConstraints" destination="D7y-lQ-26C" collectionClass="NSMutableArray" id="1DI-rH-ZhK"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -39,7 +44,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="feR-42-Vpz" userLabel="Time" customClass="ScoreResultView" customModule="Flip" customModuleProvider="target">
-                    <rect key="frame" x="85.5" y="112" width="200" height="22"/>
+                    <rect key="frame" x="86" y="112" width="200" height="22"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="22" id="0xi-lT-lJc"/>
@@ -47,7 +52,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LvA-Fc-4ec" userLabel="Errors" customClass="ScoreResultView" customModule="Flip" customModuleProvider="target">
-                    <rect key="frame" x="85.5" y="142" width="200" height="22"/>
+                    <rect key="frame" x="86" y="142" width="200" height="22"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="22" id="hzl-YR-bdP"/>
@@ -55,7 +60,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TB1-CE-5Md" userLabel="Penalization" customClass="ScoreResultView" customModule="Flip" customModuleProvider="target">
-                    <rect key="frame" x="85.5" y="172" width="200" height="22"/>
+                    <rect key="frame" x="86" y="172" width="200" height="22"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="22" id="2r3-WF-28d"/>
@@ -63,7 +68,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="brX-s8-oCB" userLabel="Final time" customClass="ScoreResultView" customModule="Flip" customModuleProvider="target">
-                    <rect key="frame" x="85.5" y="202" width="200" height="22"/>
+                    <rect key="frame" x="86" y="202" width="200" height="22"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="22" id="hor-Jd-tft"/>

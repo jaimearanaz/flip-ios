@@ -16,6 +16,11 @@ import UIKit
     @IBOutlet var errorsView: ScoreResultView!
     @IBOutlet var penalizationView: ScoreResultView!
     @IBOutlet var finalTimeView: ScoreResultView!
+    @IBOutlet var centerConstraints: [NSLayoutConstraint]!
+    
+    fileprivate let animationDuration = 0.5
+    fileprivate let delayDuration = 0.2
+    fileprivate var trailingConstraints = [NSLayoutConstraint]()
 
     // MARK: - Lifecycle methods
     
@@ -23,6 +28,13 @@ import UIKit
         
         super.layoutSubviews()
         localizeTexts()
+    }
+    
+    override func updateConstraints() {
+        
+        super.updateConstraints()
+        
+        hideResults()
     }
     
     // MARK: Public methods
@@ -39,6 +51,8 @@ import UIKit
         
         time = readableTime(score.finalTime, withMilliseconds: true)
         finalTimeView.setupView(withValue: time)
+        
+        showResults()
     }
     
     // MARK: Private methods
@@ -70,5 +84,53 @@ import UIKit
         let timeString = dateFormmatter.string(from: Date(timeIntervalSince1970: time))
         
         return timeString
+    }
+    
+    fileprivate func hideResults() {
+        
+        removeCenterConstraints()
+        addTrailingConstraints()
+    }
+    
+    fileprivate func showResults() {
+
+        for i in 1...centerConstraints.count {
+         
+            let index = i - 1
+            trailingConstraints[index].isActive = false
+            centerConstraints[index].isActive = true
+            
+            UIView.animate(withDuration: animationDuration,
+                           delay: (delayDuration * Double(i)),
+                           options: .curveEaseInOut,
+                           animations: {
+                            
+                            self.view.layoutIfNeeded()
+                            
+            }, completion: { (completed) in
+            })
+        }
+    }
+    
+    fileprivate func removeCenterConstraints() {
+        
+        _ = centerConstraints.map({ $0.isActive = false})
+    }
+    
+    fileprivate func addTrailingConstraints() {
+     
+        let trailingSpace = -frame.size.width
+        
+        if (trailingConstraints.count == 0) {
+            
+            trailingConstraints.append(timeView.addTrailingSpaceToSuperviewConstraint(trailingSpace: trailingSpace))
+            trailingConstraints.append(errorsView.addTrailingSpaceToSuperviewConstraint(trailingSpace: trailingSpace))
+            trailingConstraints.append(penalizationView.addTrailingSpaceToSuperviewConstraint(trailingSpace: trailingSpace))
+            trailingConstraints.append(finalTimeView.addTrailingSpaceToSuperviewConstraint(trailingSpace: trailingSpace))
+            
+        } else {
+            
+            _ = trailingConstraints.map({ $0.isActive = true})
+        }
     }
 }
