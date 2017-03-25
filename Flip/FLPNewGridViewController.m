@@ -14,12 +14,12 @@
 #define kFirstLookDuration 4.0f
 #define kNextCellDelayDuration 0.2f
 
-@interface FLPNewGridViewController () <GridCollectionViewBuilderDelegate>
+@interface FLPNewGridViewController () <GridCollectionControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
-@property (strong, nonatomic, nullable) GridCollectionViewBuilder *collectionViewDelegate;
+@property (strong, nonatomic, nullable) GridCollectionController *collectionViewDelegate;
 @property (strong, nonatomic, nonnull) NSArray *gridCellsModels;
 @property (nonatomic) GameSize gameSize;
 @property (strong, nonatomic, nullable) NSIndexPath *flippedIndexPath;
@@ -57,7 +57,7 @@
     [self confirmExit];
 }
 
-#pragma mark - GridCollectionViewBuilderDelegate methods
+#pragma mark - GridCollectionControllerDelegate methods
 
 - (void)collectionViewIsBuilt
 {
@@ -105,7 +105,7 @@
 
 - (void)setupCollectionView
 {
-    self.collectionViewDelegate = [[GridCollectionViewBuilder alloc] initWithCollectionView:self.collectionView
+    self.collectionViewDelegate = [[GridCollectionController alloc] initWithCollectionView:self.collectionView
                                                                                        size:self.gameSize
                                                                                      models:self.gridCellsModels
                                                                              isStartingGame:self.isStartingGame
@@ -171,11 +171,11 @@
 
 - (void)checkIfCellsMatchWithSelectedCell:(FLPCollectionViewCell *)selectedCell andModel:(GridCellStatus *)selectedModel
 {
-    NSInteger ordinalForFlippedItem = [self indexInsideModelForIndexPath:self.flippedIndexPath];
-    GridCellStatus *flippedModel = [self.gridCellsModels objectAtIndex:ordinalForFlippedItem];
+    NSInteger indexForFlippedItem = [self indexInsideModelForIndexPath:self.flippedIndexPath];
+    GridCellStatus *flippedModel = [self.gridCellsModels objectAtIndex:indexForFlippedItem];
     FLPCollectionViewCell *flippedCell = (FLPCollectionViewCell *) [self.collectionView cellForItemAtIndexPath:self.flippedIndexPath];
 
-    BOOL isAMatch = selectedModel.gridCell.equalIndex == ordinalForFlippedItem;
+    BOOL isAMatch = selectedModel.gridCell.equalIndex == indexForFlippedItem;
     NSArray *cells = @[selectedCell, flippedCell];
     NSArray *models = @[selectedModel, flippedModel];
     

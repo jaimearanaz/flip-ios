@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-@objc protocol GridCollectionViewBuilderDelegate {
+@objc protocol GridCollectionControllerDelegate {
     
     func collectionViewIsBuilt()
     

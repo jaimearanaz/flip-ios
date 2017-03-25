@@ -1,5 +1,5 @@
 //
-//  CollectionViewDelegates.swift
+//  GridCollectionController.swift
 //  Flip
 //
 //  Created by Jaime on 26/02/2017.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-@objc class GridCollectionViewBuilder: NSObject, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+@objc class GridCollectionController: NSObject, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     fileprivate let cellRatio: CGFloat = (100 / 90)
     fileprivate let minMargin: CGFloat = 5
@@ -16,10 +16,9 @@ import Foundation
     fileprivate var gridCellsModels = [GridCellStatus]()
     fileprivate var collectionView: UICollectionView!
     fileprivate var cellSize = CGSize(width: 0, height: 0)
-    fileprivate var sectionInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     fileprivate var columnsAndRows: (columns: Int, rows: Int)
     fileprivate var isStartingGame: Bool
-    fileprivate var delegate: GridCollectionViewBuilderDelegate?
+    fileprivate var delegate: GridCollectionControllerDelegate?
     fileprivate var needsExtraSection = false
     fileprivate var ordinalForItem = 1
     
@@ -29,7 +28,7 @@ import Foundation
          size: GameSize,
          models: [GridCellStatus],
          isStartingGame: Bool,
-         delegate: GridCollectionViewBuilderDelegate) {
+         delegate: GridCollectionControllerDelegate) {
         
         self.collectionView = collectionView
         let nib = UINib.init(nibName: kFLPCollectionViewCellIdentifier, bundle: nil)
@@ -106,17 +105,56 @@ import Foundation
                         layout collectionViewLayout: UICollectionViewLayout,
                         insetForSectionAt section: Int) -> UIEdgeInsets {
         
-        var insets = calculateInsets()
-        
+        var insets = UIEdgeInsetsMake(0, 0, 0, 0)
+
         if (needsExtraSection) {
-            if (section == 0) {
-                insets = UIEdgeInsetsMake(insets.top, insets.left, minMargin, insets.right)
+            
+            let isLastSection = (collectionView.numberOfSections - 1) == section
+            if (isLastSection) {
+                insets = insetsForLastSection()
             } else {
-                insets = UIEdgeInsetsMake(minMargin, insets.left, insets.bottom, insets.right)
+                insets = insetsForNonLastSection()
             }
+            
+        } else {
+            
+            insets = insetsForSingleSection()
         }
         
         return insets
+    }
+    
+    fileprivate func insetsForSingleSection() -> UIEdgeInsets {
+     
+        let cellHeight = cellSize.height
+        let cellWidth = cellSize.width
+        let columns = CGFloat(columnsAndRows.columns)
+        let rows = CGFloat(columnsAndRows.rows)
+        let collectionWidth = collectionView.frame.width
+        let collectionHeight = collectionView.frame.height
+        
+        let sideMargin = (collectionWidth - (cellWidth * columns) - (minMargin * (columns - 1))) / 2
+        let edgeMargin = (collectionHeight - (cellHeight * rows) - (minMargin * (rows - 1))) / 2
+        let insets = UIEdgeInsets(top: edgeMargin, left: sideMargin, bottom: edgeMargin, right: sideMargin)
+        
+        return insets
+    }
+    
+    fileprivate func insetsForNonLastSection() -> UIEdgeInsets {
+        
+        let insets = insetsForSingleSection()
+        
+        return UIEdgeInsetsMake(insets.top, insets.left, minMargin, insets.right)
+    }
+    
+    fileprivate func insetsForLastSection() -> UIEdgeInsets {
+        
+        let insets = insetsForSingleSection()
+        let lastSectionColumns = (columnsAndRows.columns * columnsAndRows.rows) % gridCellsModels.count
+        let widthUsed = (CGFloat(lastSectionColumns) * cellSize.width) + minMargin
+        let sideMargin = (self.collectionView.frame.width - widthUsed) / 2
+        
+        return UIEdgeInsetsMake(0, sideMargin, insets.bottom, sideMargin)
     }
     
     // MARK: - Private methods
@@ -158,22 +196,6 @@ import Foundation
         }
 
         return CGSize(width: cellWidth, height: cellHeight)
-    }
-    
-    fileprivate func calculateInsets() -> UIEdgeInsets {
-
-        let cellHeight = cellSize.height
-        let cellWidth = cellSize.width
-        let columns = CGFloat(columnsAndRows.columns)
-        let rows = CGFloat(columnsAndRows.rows)
-        let collectionWidth = collectionView.frame.width
-        let collectionHeight = collectionView.frame.height
-        
-        let sideMargin = (collectionWidth - (cellWidth * columns) - (minMargin * (columns - 1))) / 2
-        let edgeMargin = (collectionHeight - (cellHeight * rows) - (minMargin * (rows - 1))) / 2
-        let insets = UIEdgeInsets(top: edgeMargin, left: sideMargin, bottom: edgeMargin, right: sideMargin)
-
-        return insets
     }
     
     fileprivate func gridCellForIndexPath(_ indexPath: IndexPath) -> FLPCollectionViewCell {
