@@ -22,6 +22,9 @@ class ScorePresenter: FLPBasePresenter, ScorePresenterDelegate {
     // real delegate to use inside of the class
     var realControllerDelegate: ScoreViewControllerDelegate!
     
+    // TODO: use dependency injection
+    fileprivate let dataSouce = DataSource()
+    
     // overrides property in Objective-c class FLPBasePresenter
     override var viewController: UIViewController {
         get {
@@ -31,10 +34,9 @@ class ScorePresenter: FLPBasePresenter, ScorePresenterDelegate {
     
     // MARK: - Public methods
     
-    func showScore(_ score: Score) {
+    func showScore(_ score: Score, isNewRecord: Bool) {
         
-        let newRecord = isNewRecord(score.finalTime)
-        realControllerDelegate.showScore(score, isNewRecord: newRecord)
+        realControllerDelegate.showScore(score, isNewRecord: isNewRecord)
     }
     
     // MARK: - ScorePresenterDelegate methods
@@ -47,13 +49,5 @@ class ScorePresenter: FLPBasePresenter, ScorePresenterDelegate {
     func didSelectMain() {
      
         // TODO: implement
-    }
-    
-    // MARK: - Private methods
-    
-    fileprivate func isNewRecord(_ record: TimeInterval) -> Bool {
-    
-        // TODO: implement
-        return true
     }
 }

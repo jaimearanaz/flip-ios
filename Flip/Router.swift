@@ -36,13 +36,13 @@ import UINavigationControllerWithCompletionBlock
         }
     }
     
-    func presentScore(_ score: Score) {
+    func presentScore(_ score: Score, isNewRecord: Bool) {
         
         let presenter = presenterInstances.scorePresenter
         let viewController = presenterInstances.scorePresenter.viewController
         
         navigationController.pushViewController(viewController, animated: true) { 
-            presenter.showScore(score)
+            presenter.showScore(score, isNewRecord: isNewRecord)
         }
     }
     

@@ -29,7 +29,9 @@ class GridPresenter: FLPBasePresenter, GridPresenterDelegate {
         }
     }
     
-    var gameSize: GameSize = .small
+    // TODO: use dependency injection
+    fileprivate let dataSource = DataSource()
+    fileprivate var gameSize: GameSize = .small
     
     // MARK: - Public methods
     
@@ -55,7 +57,18 @@ class GridPresenter: FLPBasePresenter, GridPresenterDelegate {
         score.penalization = Double(penalizationInSeconds(forErrors: numberOfErrors, withGameSize: gameSize))
         score.finalTime = time + Double(score.penalization)
         
-        Router.sharedInstance.presentScore(score)
+        isNewRecord(time: score.finalTime, gameSize: gameSize) { (isNewRecord, records) in
+            
+            if (isNewRecord) {
+                saveTime(score.finalTime, inRecords: records, forGameSize: gameSize, completion: {
+                    
+                    Router.sharedInstance.presentScore(score, isNewRecord: isNewRecord)
+                })
+            } else {
+                
+                Router.sharedInstance.presentScore(score, isNewRecord: isNewRecord)
+            }
+        }
     }
     
     // MARK: - Private methods
@@ -105,5 +118,49 @@ class GridPresenter: FLPBasePresenter, GridPresenterDelegate {
         }
         
         return penalization
+    }
+    
+    fileprivate func isNewRecord(time: TimeInterval, gameSize: GameSize, completion: ((_ isNewRecord: Bool, _ records: Records) -> Void)){
+        
+        self.dataSource.getRecords { (records) in
+            
+            var newRecord = false
+            
+            switch gameSize {
+                
+            case .big:
+                newRecord = (records.big == 0) || (records.big > time)
+                break
+            case .medium:
+                newRecord = (records.medium == 0) || (records.medium > time)
+                break
+            case .small:
+                newRecord = (records.small == 0) || (records.small > time)
+                break
+            }
+            
+            completion(newRecord, records)
+        }
+    }
+    
+    fileprivate func saveTime(_ time: TimeInterval, inRecords records: Records, forGameSize: GameSize, completion: (() -> Void)) {
+        
+        switch gameSize {
+            
+        case .big:
+            records.big = time
+            break
+        case .medium:
+            records.medium = time
+            break
+        case .small:
+            records.small = time
+            break
+        }
+        
+        self.dataSource.setRecords(records) { 
+            
+            completion()
+        }
     }
 }
