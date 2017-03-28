@@ -19,12 +19,22 @@ import UINavigationControllerWithCompletionBlock
     
     lazy var navigationController: UINavigationController = {
         
-        let rootViewController = Router.sharedInstance.presenterInstances.mainPresenter.viewController
+        let mainPresenter = Router.sharedInstance.presenterInstances.mainPresenter
+        let rootViewController = mainPresenter.viewController
         let navigationController = UINavigationController(rootViewController: rootViewController)
         navigationController.isNavigationBarHidden = true
         
         return navigationController
     }()
+    
+    func presenMain() {
+        
+        let mainPresenter = Router.sharedInstance.presenterInstances.mainPresenter
+        navigationController.popToRootViewController(animated: true) { 
+            
+            mainPresenter.showRecords()
+        }
+    }
     
     func presentGrid(withImages images: [UIImage], andSize size: GameSize) {
 

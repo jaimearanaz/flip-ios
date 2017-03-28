@@ -14,5 +14,5 @@ import Foundation
     
     func stopLoadingState()
     
-    func showRecords(small: TimeInterval, medium: TimeInterval, big: TimeInterval)
+    func showRecords(_ records: Records)
 }

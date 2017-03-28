@@ -11,6 +11,9 @@ import UIKit
 
 class MainPresenter: FLPBasePresenter, MainPresenterDelegate {
     
+    // TODO: use indepency injection
+    let dataSource = DataSource()
+    
     // trick-non-optional var to be able to set delegate from Objective-C classes
     var controllerDelegate: AnyObject = "" as AnyObject  {
         didSet {
@@ -27,6 +30,16 @@ class MainPresenter: FLPBasePresenter, MainPresenterDelegate {
     override var viewController: UIViewController {
         get {
             return self.realControllerDelegate.viewController
+        }
+    }
+    
+    // MARK: - Public methods
+    
+    func showRecords() {
+        
+        dataSource.getRecords { (records) in
+            
+            realControllerDelegate.showRecords(records)
         }
     }
     
