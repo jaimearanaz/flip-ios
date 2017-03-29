@@ -59,7 +59,7 @@
     self.sourceView.delegate = self;
     self.sizeView.delegate = self;
     
-    [self updateRecordsIfAllowed];
+    [self updateRecordsIfReady];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -153,12 +153,17 @@
 - (void)showRecords:(Records *)records
 {
     self.records = records;
-    [self updateRecordsIfAllowed];
+    [self updateRecordsIfReady];
+}
+
+- (void)showSourceView
+{
+    [self showSourceView:NO];
 }
 
 #pragma mark - Private methods
 
-- (void)updateRecordsIfAllowed
+- (void)updateRecordsIfReady
 {
     if ((self.recordsView != nil) && (self.records != nil)) {
         [self.recordsView showRecords:self.records];

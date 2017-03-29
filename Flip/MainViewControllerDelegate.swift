@@ -15,4 +15,6 @@ import Foundation
     func stopLoadingState()
     
     func showRecords(_ records: Records)
+    
+    func showSourceView()
 }

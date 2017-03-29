@@ -48,6 +48,6 @@ class ScorePresenter: FLPBasePresenter, ScorePresenterDelegate {
     
     func didSelectMain() {
      
-        // TODO: implement
+        Router.sharedInstance.presenMain()
     }
 }
