@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *recordView;
 
 @property (strong, nonatomic) NSTimer *recordBlinkTimer;
+@property (nonatomic) BOOL hideScores;
 
 @end
 
@@ -30,18 +31,30 @@
     [self localizeTexts];
 }
 
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    if (self.hideScores) {
+        [self.scoreView hideScore];
+        self.hideScores = NO;
+    }
+}
+
 #pragma mark - Action methods
 
 - (IBAction)didSelectTryAgain
 {
     [self.presenterDelegate didSelectTryAgain];
     [self stopBlinking];
+    self.hideScores = YES;
 }
 
 - (IBAction)didSelectMain
 {
     [self.presenterDelegate didSelectMain];
     [self stopBlinking];
+    self.hideScores = YES;
 }
 
 #pragma mark - ScoreViewControllerDelegate methods

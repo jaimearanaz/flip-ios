@@ -51,7 +51,7 @@ import UINavigationControllerWithCompletionBlock
         let presenter = presenterInstances.scorePresenter
         let viewController = presenterInstances.scorePresenter.viewController
         
-        navigationController.pushViewController(viewController, animated: true) { 
+        navigationController.pushViewController(viewController, animated: true) {
             presenter.showScore(score, isNewRecord: isNewRecord)
         }
     }

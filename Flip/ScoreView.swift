@@ -33,8 +33,7 @@ import UIKit
     override func updateConstraints() {
         
         super.updateConstraints()
-        
-        hideResults()
+        hideScore()
     }
     
     // MARK: Public methods
@@ -52,7 +51,13 @@ import UIKit
         time = readableTime(score.finalTime, withMilliseconds: true)
         finalTimeView.setupView(withValue: time)
         
-        showResults()
+        showResultsWithAnimation()
+    }
+    
+    func hideScore() {
+        
+        removeCenterConstraints()
+        addTrailingConstraints()
     }
     
     // MARK: Private methods
@@ -86,13 +91,7 @@ import UIKit
         return timeString
     }
     
-    fileprivate func hideResults() {
-        
-        removeCenterConstraints()
-        addTrailingConstraints()
-    }
-    
-    fileprivate func showResults() {
+    fileprivate func showResultsWithAnimation() {
 
         for i in 1...centerConstraints.count {
          
