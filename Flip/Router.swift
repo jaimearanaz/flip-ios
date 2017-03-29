@@ -31,7 +31,6 @@ import UINavigationControllerWithCompletionBlock
         
         let mainPresenter = Router.sharedInstance.presenterInstances.mainPresenter
         navigationController.popToRootViewController(animated: true) { 
-            
             mainPresenter.showRecords()
         }
     }
@@ -40,10 +39,10 @@ import UINavigationControllerWithCompletionBlock
 
         let presenter = presenterInstances.gridPresenter
         let viewController = presenterInstances.gridPresenter.viewController
+        presenter.showGrid(withImages: images, andSize: size)
         
         navigationController.pushViewController(viewController, animated: true) {
             completion()
-            presenter.showGrid(withImages: images, andSize: size)
         }
     }
     
