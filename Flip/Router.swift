@@ -46,6 +46,14 @@ import UINavigationControllerWithCompletionBlock
         }
     }
     
+    func presentLastGrid() {
+        
+        let presenter = presenterInstances.gridPresenter
+        presenter.repeatLastGrid()
+        
+        navigationController.popViewController(animated: true)
+    }
+    
     func presentScore(_ score: Score, isNewRecord: Bool) {
         
         let presenter = presenterInstances.scorePresenter

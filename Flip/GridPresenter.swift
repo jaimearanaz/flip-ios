@@ -31,15 +31,23 @@ class GridPresenter: FLPBasePresenter, GridPresenterDelegate {
     
     // TODO: use dependency injection
     fileprivate let dataSource = DataSource()
+    fileprivate var images = [UIImage]()
     fileprivate var gameSize: GameSize = .small
     
     // MARK: - Public methods
     
     func showGrid(withImages images: [UIImage], andSize size: GameSize) {
         
+        self.images = images
         gameSize = size
         let gridCells = createGridCells(withImages: images)
         realControllerDelegate.showItems(gridCells, withSize: size)
+    }
+    
+    func repeatLastGrid() {
+        
+        let gridCells = createGridCells(withImages: images)
+        realControllerDelegate.showItems(gridCells, withSize: gameSize)
     }
     
     // MARK: - GridPresenterDelegate methods

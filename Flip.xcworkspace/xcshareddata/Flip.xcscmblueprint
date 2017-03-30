@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "B7220706F39D15F6803AFD08502BDFE7F5DAFF55",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "B7220706F39D15F6803AFD08502BDFE7F5DAFF55" : 9223372036854775807,
+    "B690D82D2BBC22EED5FA815955F1C0015A87A95D" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "D991E348-0909-42A3-83BD-746D843C3403",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "B7220706F39D15F6803AFD08502BDFE7F5DAFF55" : "flip-ios\/",
+    "B690D82D2BBC22EED5FA815955F1C0015A87A95D" : "baseproject-ios\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Flip",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Flip.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/jaimearanaz\/baseproject-ios",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "B690D82D2BBC22EED5FA815955F1C0015A87A95D"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/jaimearanaz\/flip-ios",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "B7220706F39D15F6803AFD08502BDFE7F5DAFF55"
+    }
+  ]
+}

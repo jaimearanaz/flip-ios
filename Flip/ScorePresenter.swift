@@ -43,7 +43,7 @@ class ScorePresenter: FLPBasePresenter, ScorePresenterDelegate {
     
     func didSelectTryAgain() {
         
-        // TODO: implement
+        Router.sharedInstance.presentLastGrid()
     }
     
     func didSelectMain() {
