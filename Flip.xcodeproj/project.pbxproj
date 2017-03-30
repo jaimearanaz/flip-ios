@@ -40,6 +40,17 @@
 		6F22B29D1E50767500237258 /* SizeViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F22B29C1E50767500237258 /* SizeViewDelegate.swift */; };
 		6F33AC7C1998C14000FBF9C4 /* FLPCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F33AC7B1998C14000FBF9C4 /* FLPCollectionViewCell.m */; };
 		6F33AC841999245500FBF9C4 /* FLPGridItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F33AC831999245500FBF9C4 /* FLPGridItem.m */; };
+		6F39356B1E86918200226DCE /* FLPNewScoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3935691E86918200226DCE /* FLPNewScoreViewController.m */; };
+		6F39356C1E86918200226DCE /* FLPNewScoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F39356A1E86918200226DCE /* FLPNewScoreViewController.xib */; };
+		6F39356E1E86919600226DCE /* ScorePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F39356D1E86919600226DCE /* ScorePresenter.swift */; };
+		6F3935701E8691A200226DCE /* ScorePresenterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F39356F1E8691A200226DCE /* ScorePresenterDelegate.swift */; };
+		6F3935721E8691B100226DCE /* ScoreViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3935711E8691B100226DCE /* ScoreViewControllerDelegate.swift */; };
+		6F3935741E8697F500226DCE /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3935731E8697F500226DCE /* Score.swift */; };
+		6F3935761E869AE700226DCE /* ScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3935751E869AE700226DCE /* ScoreView.swift */; };
+		6F3935781E86A00D00226DCE /* ScoreResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3935771E86A00D00226DCE /* ScoreResultView.swift */; };
+		6F39357A1E86A03200226DCE /* ScoreView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F3935791E86A03200226DCE /* ScoreView.xib */; };
+		6F39357C1E86CDAE00226DCE /* ScoreResultView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F39357B1E86CDAE00226DCE /* ScoreResultView.xib */; };
+		6F39357E1E86E99D00226DCE /* UIView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F39357D1E86E99D00226DCE /* UIView+Constraints.swift */; };
 		6F3AB3721E5A139400CE62CE /* GridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3AB3711E5A139400CE62CE /* GridCell.swift */; };
 		6F3AB3741E5A141C00CE62CE /* GridCellStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3AB3731E5A141C00CE62CE /* GridCellStatus.swift */; };
 		6F3AB3761E5A152600CE62CE /* MutableCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3AB3751E5A152600CE62CE /* MutableCollection.swift */; };
@@ -95,9 +106,13 @@
 		6FF528F31E4F8BF60081747E /* RecordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF528F21E4F8BF60081747E /* RecordsView.swift */; };
 		6FF528F51E4F8C020081747E /* RecordsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FF528F41E4F8C020081747E /* RecordsView.xib */; };
 		6FF528F71E4F91E10081747E /* RecordsViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF528F61E4F91E10081747E /* RecordsViewDelegate.swift */; };
-		6FF528FA1E4F96F50081747E /* UIView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF528F91E4F96F50081747E /* UIView+Constraints.swift */; };
 		6FF58536197FC95100926DF9 /* FLPCameraPhotoSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF58535197FC95100926DF9 /* FLPCameraPhotoSource.m */; };
 		6FF58538197FCA5800926DF9 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FF58537197FCA5800926DF9 /* AssetsLibrary.framework */; };
+		6FF999061E8806B800FAD8B3 /* Records.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF999051E8806B800FAD8B3 /* Records.swift */; };
+		6FF999091E88074B00FAD8B3 /* DataSourceDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF999081E88074B00FAD8B3 /* DataSourceDelegate.swift */; };
+		6FF9990B1E88075C00FAD8B3 /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF9990A1E88075C00FAD8B3 /* DataSource.swift */; };
+		6FF9990F1E88087E00FAD8B3 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF9990C1E88087E00FAD8B3 /* Defaults.swift */; };
+		6FF999101E88087E00FAD8B3 /* DefaultsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF9990D1E88087E00FAD8B3 /* DefaultsDelegate.swift */; };
 		6FFC51671976659800668F82 /* FLPPhotoSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFC51661976659800668F82 /* FLPPhotoSource.m */; };
 		839DC0DE5FB00BF04E124135 /* Pods_FlipTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE9AD0BCCD5D4D4189AC8FF4 /* Pods_FlipTests.framework */; };
 		C4AA718B0627E08BE2AA2523 /* Pods_Flip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95E0931B45ECDDB951B95986 /* Pods_Flip.framework */; };
@@ -171,6 +186,18 @@
 		6F33AC7B1998C14000FBF9C4 /* FLPCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPCollectionViewCell.m; sourceTree = "<group>"; };
 		6F33AC821999245500FBF9C4 /* FLPGridItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPGridItem.h; sourceTree = "<group>"; };
 		6F33AC831999245500FBF9C4 /* FLPGridItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPGridItem.m; sourceTree = "<group>"; };
+		6F3935681E86918200226DCE /* FLPNewScoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPNewScoreViewController.h; sourceTree = "<group>"; };
+		6F3935691E86918200226DCE /* FLPNewScoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPNewScoreViewController.m; sourceTree = "<group>"; };
+		6F39356A1E86918200226DCE /* FLPNewScoreViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FLPNewScoreViewController.xib; sourceTree = "<group>"; };
+		6F39356D1E86919600226DCE /* ScorePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScorePresenter.swift; sourceTree = "<group>"; };
+		6F39356F1E8691A200226DCE /* ScorePresenterDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScorePresenterDelegate.swift; sourceTree = "<group>"; };
+		6F3935711E8691B100226DCE /* ScoreViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreViewControllerDelegate.swift; sourceTree = "<group>"; };
+		6F3935731E8697F500226DCE /* Score.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
+		6F3935751E869AE700226DCE /* ScoreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreView.swift; sourceTree = "<group>"; };
+		6F3935771E86A00D00226DCE /* ScoreResultView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreResultView.swift; sourceTree = "<group>"; };
+		6F3935791E86A03200226DCE /* ScoreView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScoreView.xib; sourceTree = "<group>"; };
+		6F39357B1E86CDAE00226DCE /* ScoreResultView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScoreResultView.xib; sourceTree = "<group>"; };
+		6F39357D1E86E99D00226DCE /* UIView+Constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Constraints.swift"; sourceTree = "<group>"; };
 		6F3AB3711E5A139400CE62CE /* GridCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridCell.swift; sourceTree = "<group>"; };
 		6F3AB3731E5A141C00CE62CE /* GridCellStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridCellStatus.swift; sourceTree = "<group>"; };
 		6F3AB3751E5A152600CE62CE /* MutableCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MutableCollection.swift; sourceTree = "<group>"; };
@@ -235,10 +262,14 @@
 		6FF528F21E4F8BF60081747E /* RecordsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordsView.swift; sourceTree = "<group>"; };
 		6FF528F41E4F8C020081747E /* RecordsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecordsView.xib; sourceTree = "<group>"; };
 		6FF528F61E4F91E10081747E /* RecordsViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordsViewDelegate.swift; sourceTree = "<group>"; };
-		6FF528F91E4F96F50081747E /* UIView+Constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Constraints.swift"; sourceTree = "<group>"; };
 		6FF58534197FC95100926DF9 /* FLPCameraPhotoSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPCameraPhotoSource.h; sourceTree = "<group>"; };
 		6FF58535197FC95100926DF9 /* FLPCameraPhotoSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPCameraPhotoSource.m; sourceTree = "<group>"; };
 		6FF58537197FCA5800926DF9 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		6FF999051E8806B800FAD8B3 /* Records.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Records.swift; sourceTree = "<group>"; };
+		6FF999081E88074B00FAD8B3 /* DataSourceDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceDelegate.swift; sourceTree = "<group>"; };
+		6FF9990A1E88075C00FAD8B3 /* DataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
+		6FF9990C1E88087E00FAD8B3 /* Defaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Defaults.swift; sourceTree = "<group>"; };
+		6FF9990D1E88087E00FAD8B3 /* DefaultsDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultsDelegate.swift; sourceTree = "<group>"; };
 		6FFC51651976659800668F82 /* FLPPhotoSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPPhotoSource.h; sourceTree = "<group>"; };
 		6FFC51661976659800668F82 /* FLPPhotoSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPPhotoSource.m; sourceTree = "<group>"; };
 		95E0931B45ECDDB951B95986 /* Pods_Flip.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Flip.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -367,12 +398,13 @@
 		6F1AA15E1973EAA400101766 /* Flip */ = {
 			isa = PBXGroup;
 			children = (
+				6FF999071E88070A00FAD8B3 /* data */,
 				6F5579F91E4625C6008FB1BB /* base classes */,
 				6F5579E81E46249D008FB1BB /* app navigation */,
 				6F5579EC1E4624FD008FB1BB /* use cases */,
 				6F3AB3701E5A136F00CE62CE /* models */,
 				6F94695E1E584DB1003D102B /* images */,
-				6FF528F11E4F78C70081747E /* views */,
+				6FF528F11E4F78C70081747E /* subclasses */,
 				6FF528F81E4F96E50081747E /* extensions */,
 				6F19F69719A3A8470047F269 /* sounds */,
 				6F55BE8C19A1616E00FC60E7 /* fonts */,
@@ -444,11 +476,30 @@
 			name = model;
 			sourceTree = "<group>";
 		};
+		6F3935671E86913700226DCE /* score */ = {
+			isa = PBXGroup;
+			children = (
+				6F39357B1E86CDAE00226DCE /* ScoreResultView.xib */,
+				6F3935771E86A00D00226DCE /* ScoreResultView.swift */,
+				6F3935791E86A03200226DCE /* ScoreView.xib */,
+				6F3935751E869AE700226DCE /* ScoreView.swift */,
+				6F39356A1E86918200226DCE /* FLPNewScoreViewController.xib */,
+				6F3935681E86918200226DCE /* FLPNewScoreViewController.h */,
+				6F3935691E86918200226DCE /* FLPNewScoreViewController.m */,
+				6F3935711E8691B100226DCE /* ScoreViewControllerDelegate.swift */,
+				6F39356F1E8691A200226DCE /* ScorePresenterDelegate.swift */,
+				6F39356D1E86919600226DCE /* ScorePresenter.swift */,
+			);
+			name = score;
+			sourceTree = "<group>";
+		};
 		6F3AB3701E5A136F00CE62CE /* models */ = {
 			isa = PBXGroup;
 			children = (
 				6F3AB3711E5A139400CE62CE /* GridCell.swift */,
 				6F3AB3731E5A141C00CE62CE /* GridCellStatus.swift */,
+				6F3935731E8697F500226DCE /* Score.swift */,
+				6FF999051E8806B800FAD8B3 /* Records.swift */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -467,6 +518,7 @@
 			children = (
 				6F5579ED1E462514008FB1BB /* main */,
 				6F103A611E56D156007C0E21 /* grid */,
+				6F3935671E86913700226DCE /* score */,
 			);
 			name = "use cases";
 			sourceTree = "<group>";
@@ -552,21 +604,41 @@
 			name = images;
 			sourceTree = "<group>";
 		};
-		6FF528F11E4F78C70081747E /* views */ = {
+		6FF528F11E4F78C70081747E /* subclasses */ = {
 			isa = PBXGroup;
 			children = (
 				6FF528EF1E4F78430081747E /* UIViewFromNib.swift */,
 			);
-			name = views;
+			name = subclasses;
 			sourceTree = "<group>";
 		};
 		6FF528F81E4F96E50081747E /* extensions */ = {
 			isa = PBXGroup;
 			children = (
-				6FF528F91E4F96F50081747E /* UIView+Constraints.swift */,
+				6F39357D1E86E99D00226DCE /* UIView+Constraints.swift */,
 				6F3AB3751E5A152600CE62CE /* MutableCollection.swift */,
 			);
 			name = extensions;
+			sourceTree = "<group>";
+		};
+		6FF999071E88070A00FAD8B3 /* data */ = {
+			isa = PBXGroup;
+			children = (
+				6FF9990E1E88087E00FAD8B3 /* defaults */,
+				6FF9990A1E88075C00FAD8B3 /* DataSource.swift */,
+				6FF999081E88074B00FAD8B3 /* DataSourceDelegate.swift */,
+			);
+			name = data;
+			sourceTree = "<group>";
+		};
+		6FF9990E1E88087E00FAD8B3 /* defaults */ = {
+			isa = PBXGroup;
+			children = (
+				6FF9990C1E88087E00FAD8B3 /* Defaults.swift */,
+				6FF9990D1E88087E00FAD8B3 /* DefaultsDelegate.swift */,
+			);
+			name = defaults;
+			path = "../../baseproject-ios/BaseProject";
 			sourceTree = "<group>";
 		};
 		6FFC51641976655B00668F82 /* sources */ = {
@@ -692,8 +764,10 @@
 				6F103A661E56D189007C0E21 /* FLPNewGridViewController.xib in Resources */,
 				6F3AB3781E5A21D100CE62CE /* FLPCollectionViewCell.xib in Resources */,
 				6F22B29B1E50766900237258 /* SizeView.xib in Resources */,
+				6F39356C1E86918200226DCE /* FLPNewScoreViewController.xib in Resources */,
 				6FF528E61E4F6A8B0081747E /* SourceView.xib in Resources */,
 				6F94696B1E584DBD003D102B /* photo_1.jpg in Resources */,
+				6F39357C1E86CDAE00226DCE /* ScoreResultView.xib in Resources */,
 				6F1AA1741973EAA400101766 /* Images.xcassets in Resources */,
 				6F9469741E584DBD003D102B /* photo_10.jpg in Resources */,
 				6F5579F21E462565008FB1BB /* FLPMainViewController.xib in Resources */,
@@ -705,6 +779,7 @@
 				6F9469731E584DBD003D102B /* photo_9.jpg in Resources */,
 				6F9469701E584DBD003D102B /* photo_6.jpg in Resources */,
 				6FAD88DC1A25F7FB00E08609 /* Roboto-Bold.ttf in Resources */,
+				6F39357A1E86A03200226DCE /* ScoreView.xib in Resources */,
 				6FAD88DE1A25F7FB00E08609 /* Pacifico.ttf in Resources */,
 				6F94696E1E584DBD003D102B /* photo_4.jpg in Resources */,
 				6F9469711E584DBD003D102B /* photo_7.jpg in Resources */,
@@ -832,8 +907,10 @@
 				6F7B2DE01980FC9200C9FE69 /* FLPGridViewController.m in Sources */,
 				6F5579F11E462565008FB1BB /* FLPMainViewController.m in Sources */,
 				6F557A031E462754008FB1BB /* PresenterInstances.swift in Sources */,
+				6F39356B1E86918200226DCE /* FLPNewScoreViewController.m in Sources */,
 				6FF528EA1E4F75950081747E /* TitleView.swift in Sources */,
 				6F103A681E56D1A9007C0E21 /* NewGridViewControllerDelegate.swift in Sources */,
+				6F3935721E8691B100226DCE /* ScoreViewControllerDelegate.swift in Sources */,
 				6F67A358197FD19600AC9CF5 /* FLPLogFormatter.m in Sources */,
 				6F14872419A0FDE90087527C /* FLPFlipFromRightSegue.m in Sources */,
 				6F103A6C1E56D1F4007C0E21 /* GridPresenterDelegate.swift in Sources */,
@@ -841,37 +918,47 @@
 				6F94697D1E585A08003D102B /* DWPAlertController.m in Sources */,
 				6F5579EB1E4624B4008FB1BB /* Router.swift in Sources */,
 				6FF528E41E4F6A7A0081747E /* SourceView.swift in Sources */,
+				6FF9990B1E88075C00FAD8B3 /* DataSource.swift in Sources */,
 				6F33AC841999245500FBF9C4 /* FLPGridItem.m in Sources */,
 				6F03D18719A678DE003EE79B /* FLPTitleLetterView.m in Sources */,
 				6FFC51671976659800668F82 /* FLPPhotoSource.m in Sources */,
 				6F3AB3741E5A141C00CE62CE /* GridCellStatus.swift in Sources */,
 				6F22B2991E50765D00237258 /* SizeView.swift in Sources */,
+				6F3935781E86A00D00226DCE /* ScoreResultView.swift in Sources */,
 				6F103A651E56D189007C0E21 /* FLPNewGridViewController.m in Sources */,
+				6F39356E1E86919600226DCE /* ScorePresenter.swift in Sources */,
 				6FF58536197FC95100926DF9 /* FLPCameraPhotoSource.m in Sources */,
 				6F1AA1651973EAA400101766 /* main.m in Sources */,
 				6F5579F61E46258D008FB1BB /* MainViewControllerDelegate.swift in Sources */,
-				6FF528FA1E4F96F50081747E /* UIView+Constraints.swift in Sources */,
+				6FF999101E88087E00FAD8B3 /* DefaultsDelegate.swift in Sources */,
 				6F33AC7C1998C14000FBF9C4 /* FLPCollectionViewCell.m in Sources */,
 				6FF528E81E4F71EE0081747E /* SourceViewDelegate.swift in Sources */,
 				6F14871B19A0F5E90087527C /* FLPCoverFromLeftSegue.m in Sources */,
 				6F5579F81E46259E008FB1BB /* MainPresenterDelegate.swift in Sources */,
 				6FB3BEEE1E474718007933CB /* FLPBasePresenter.m in Sources */,
+				6FF999061E8806B800FAD8B3 /* Records.swift in Sources */,
 				6F1AA1721973EAA400101766 /* FLPMainScrenViewController.m in Sources */,
 				6F039E5B1E63393400236FC9 /* GridCollectionController.swift in Sources */,
 				6F039E5E1E633DEA00236FC9 /* DWPDevice.m in Sources */,
 				6F87A771199A17B400C2303A /* FLPScoreViewController.m in Sources */,
+				6F3935741E8697F500226DCE /* Score.swift in Sources */,
 				6F5579F41E46257A008FB1BB /* MainPresenter.swift in Sources */,
 				6F5AD5C71987ABF600B65D09 /* FLPFacebookPhotoSource.m in Sources */,
+				6F3935761E869AE700226DCE /* ScoreView.swift in Sources */,
 				6FC031831E64079000857D9D /* GridColumnsAndRows.swift in Sources */,
 				6FF528F71E4F91E10081747E /* RecordsViewDelegate.swift in Sources */,
 				6F3AB3761E5A152600CE62CE /* MutableCollection.swift in Sources */,
 				6FEEC3451E6981460077BECA /* GridCollectionControllerDelegate.swift in Sources */,
+				6F3935701E8691A200226DCE /* ScorePresenterDelegate.swift in Sources */,
+				6FF999091E88074B00FAD8B3 /* DataSourceDelegate.swift in Sources */,
 				6FF528F01E4F78430081747E /* UIViewFromNib.swift in Sources */,
 				6F103A6A1E56D1CD007C0E21 /* GridPresenter.swift in Sources */,
+				6FF9990F1E88087E00FAD8B3 /* Defaults.swift in Sources */,
 				6F14872119A0FD110087527C /* FLPFlipFromLeftSegue.m in Sources */,
 				6F1AA1691973EAA400101766 /* FLPAppDelegate.m in Sources */,
 				6F22B29D1E50767500237258 /* SizeViewDelegate.swift in Sources */,
 				6FF528F31E4F8BF60081747E /* RecordsView.swift in Sources */,
+				6F39357E1E86E99D00226DCE /* UIView+Constraints.swift in Sources */,
 				6FB3BEEB1E474707007933CB /* FLPBaseViewController.m in Sources */,
 				6F14871E19A0F6640087527C /* FLPCoverFromRightSegue.m in Sources */,
 				6F3AB3721E5A139400CE62CE /* GridCell.swift in Sources */,

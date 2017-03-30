@@ -11,4 +11,5 @@
 #import "FLPCollectionViewCell.h"
 #import "FLPMainViewController.h"
 #import "FLPNewGridViewController.h"
+#import "FLPNewScoreViewController.h"
 #import "FLPTitleLetterView.h"

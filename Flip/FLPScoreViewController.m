@@ -211,7 +211,7 @@
 
 - (IBAction)onMainButtonPressed:(id)sender
 {
-    if ([_playerCamera isPlaying]) {
+    if ([_playerCamera isPlaying]) { 
         [_playerCamera stop];
     }
     

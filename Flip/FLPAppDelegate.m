@@ -24,8 +24,10 @@
     CGRect frame = [UIScreen mainScreen].bounds;
     self.window = [[UIWindow alloc] initWithFrame:frame];
     self.window.backgroundColor = [UIColor whiteColor];
-    self.window.rootViewController = [Router sharedInstance].navigationController;
+    Router *router = [Router sharedInstance];
+    self.window.rootViewController = router.navigationController;
     [self.window makeKeyAndVisible];
+    [router presenMain];
     
 //    [self setLogLevels];
 //

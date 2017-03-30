@@ -25,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *sizeLeading;
 @property (weak, nonatomic) IBOutlet UIView *loadingShade;
 
+@property (strong, nonatomic, nullable) Records *records;
 @property (nonatomic) CGFloat screenWidth;
 @property (nonatomic) GameSource selectedSource;
 @property (strong, nonatomic, nullable) RZSquaresLoading *squareLoading;
@@ -57,6 +58,8 @@
     self.recordsView.delegate = self;
     self.sourceView.delegate = self;
     self.sizeView.delegate = self;
+    
+    [self updateRecordsIfReady];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -147,12 +150,25 @@
     [self.squareLoading removeFromSuperview];
 }
 
-- (void)showRecordsWithSmall:(NSTimeInterval)small medium:(NSTimeInterval)medium big:(NSTimeInterval)big
+- (void)showRecords:(Records *)records
 {
-    // TODO: implement
+    self.records = records;
+    [self updateRecordsIfReady];
+}
+
+- (void)showSourceView
+{
+    [self showSourceView:NO];
 }
 
 #pragma mark - Private methods
+
+- (void)updateRecordsIfReady
+{
+    if ((self.recordsView != nil) && (self.records != nil)) {
+        [self.recordsView showRecords:self.records];
+    }
+}
 
 - (void)showRecordsView
 {

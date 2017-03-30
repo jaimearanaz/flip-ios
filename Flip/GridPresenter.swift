@@ -22,19 +22,32 @@ class GridPresenter: FLPBasePresenter, GridPresenterDelegate {
     // real delegate to use inside of the class
     var realControllerDelegate: NewGridViewControllerDelegate!
     
-    // overrides property in Objective-c class DWPBasePresenter
+    // overrides property in Objective-c class FLPBasePresenter
     override var viewController: UIViewController {
         get {
             return self.realControllerDelegate.viewController
         }
     }
     
+    // TODO: use dependency injection
+    fileprivate let dataSource = DataSource()
+    fileprivate var images = [UIImage]()
+    fileprivate var gameSize: GameSize = .small
+    
     // MARK: - Public methods
     
     func showGrid(withImages images: [UIImage], andSize size: GameSize) {
         
+        self.images = images
+        gameSize = size
         let gridCells = createGridCells(withImages: images)
         realControllerDelegate.showItems(gridCells, withSize: size)
+    }
+    
+    func repeatLastGrid() {
+        
+        let gridCells = createGridCells(withImages: images)
+        realControllerDelegate.showItems(gridCells, withSize: gameSize)
     }
     
     // MARK: - GridPresenterDelegate methods
@@ -46,11 +59,24 @@ class GridPresenter: FLPBasePresenter, GridPresenterDelegate {
     
     func gameFinished(withTime time: TimeInterval, numberOfErrors: Int) {
 
-        let dateFormmatter = DateFormatter()
-        dateFormmatter.setLocalizedDateFormatFromTemplate("mm:ss:SSS")
-        let timeString = dateFormmatter.string(from: Date(timeIntervalSince1970: time))
+        let score = Score()
+        score.time = time
+        score.errors = numberOfErrors
+        score.penalization = Double(penalizationInSeconds(forErrors: numberOfErrors, withGameSize: gameSize))
+        score.finalTime = time + Double(score.penalization)
         
-        print("time \(timeString), errors \(numberOfErrors)")
+        isNewRecord(time: score.finalTime, gameSize: gameSize) { (isNewRecord, records) in
+            
+            if (isNewRecord) {
+                saveTime(score.finalTime, inRecords: records, forGameSize: gameSize, completion: {
+                    
+                    Router.sharedInstance.presentScore(score, isNewRecord: isNewRecord)
+                })
+            } else {
+                
+                Router.sharedInstance.presentScore(score, isNewRecord: isNewRecord)
+            }
+        }
     }
     
     // MARK: - Private methods
@@ -81,5 +107,68 @@ class GridPresenter: FLPBasePresenter, GridPresenterDelegate {
         }
         
         return cellsForGrid
+    }
+    
+    fileprivate func penalizationInSeconds(forErrors errors: Int, withGameSize gameSize: GameSize) -> Int {
+        
+        var penalization = 0
+        
+        switch gameSize {
+        case .small:
+            penalization = errors * GamePenalization.small.rawValue
+            break
+        case .medium:
+            penalization = errors * GamePenalization.medium.rawValue
+            break
+        case .big:
+            penalization = errors * GamePenalization.big.rawValue
+            break
+        }
+        
+        return penalization
+    }
+    
+    fileprivate func isNewRecord(time: TimeInterval, gameSize: GameSize, completion: ((_ isNewRecord: Bool, _ records: Records) -> Void)){
+        
+        self.dataSource.getRecords { (records) in
+            
+            var newRecord = false
+            
+            switch gameSize {
+                
+            case .big:
+                newRecord = (records.big == 0) || (records.big > time)
+                break
+            case .medium:
+                newRecord = (records.medium == 0) || (records.medium > time)
+                break
+            case .small:
+                newRecord = (records.small == 0) || (records.small > time)
+                break
+            }
+            
+            completion(newRecord, records)
+        }
+    }
+    
+    fileprivate func saveTime(_ time: TimeInterval, inRecords records: Records, forGameSize: GameSize, completion: (() -> Void)) {
+        
+        switch gameSize {
+            
+        case .big:
+            records.big = time
+            break
+        case .medium:
+            records.medium = time
+            break
+        case .small:
+            records.small = time
+            break
+        }
+        
+        self.dataSource.setRecords(records) { 
+            
+            completion()
+        }
     }
 }

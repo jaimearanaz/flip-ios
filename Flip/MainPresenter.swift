@@ -11,6 +11,9 @@ import UIKit
 
 class MainPresenter: FLPBasePresenter, MainPresenterDelegate {
     
+    // TODO: use indepency injection
+    let dataSource = DataSource()
+    
     // trick-non-optional var to be able to set delegate from Objective-C classes
     var controllerDelegate: AnyObject = "" as AnyObject  {
         didSet {
@@ -23,10 +26,20 @@ class MainPresenter: FLPBasePresenter, MainPresenterDelegate {
     // real delegate to use inside of the class
     var realControllerDelegate: MainViewControllerDelegate!
     
-    // overrides property in Objective-c class DWPBasePresenter
+    // overrides property in Objective-c class FLPBasePresenter
     override var viewController: UIViewController {
         get {
             return self.realControllerDelegate.viewController
+        }
+    }
+    
+    // MARK: - Public methods
+    
+    func showRecords() {
+        
+        dataSource.getRecords { (records) in
+            
+            realControllerDelegate.showRecords(records)
         }
     }
     
@@ -56,7 +69,9 @@ class MainPresenter: FLPBasePresenter, MainPresenterDelegate {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             
             self.realControllerDelegate.stopLoadingState()
-            Router.sharedInstance.presentGrid(withImages: images, andSize: size)
+            Router.sharedInstance.presentGrid(withImages: images, andSize: size, completion: {
+                self.realControllerDelegate.showSourceView()
+            })
         }
     }
 }

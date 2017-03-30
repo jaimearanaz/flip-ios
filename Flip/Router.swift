@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
+import UINavigationControllerWithCompletionBlock
+
 @objc class Router: NSObject {
     
     static let sharedInstance = Router()
@@ -17,17 +19,49 @@ import UIKit
     
     lazy var navigationController: UINavigationController = {
         
-        let rootViewController = Router.sharedInstance.presenterInstances.mainPresenter.viewController
+        let mainPresenter = Router.sharedInstance.presenterInstances.mainPresenter
+        let rootViewController = mainPresenter.viewController
         let navigationController = UINavigationController(rootViewController: rootViewController)
         navigationController.isNavigationBarHidden = true
         
         return navigationController
     }()
     
-    func presentGrid(withImages images: [UIImage], andSize size: GameSize) {
+    func presenMain() {
+        
+        let mainPresenter = Router.sharedInstance.presenterInstances.mainPresenter
+        navigationController.popToRootViewController(animated: true) { 
+            mainPresenter.showRecords()
+        }
+    }
+    
+    func presentGrid(withImages images: [UIImage], andSize size: GameSize, completion: @escaping (()->Void)) {
 
-        presenterInstances.gridPresenter.showGrid(withImages: images, andSize: size)
-        navigationController.pushViewController(presenterInstances.gridPresenter.viewController, animated: true)
+        let presenter = presenterInstances.gridPresenter
+        let viewController = presenterInstances.gridPresenter.viewController
+        presenter.showGrid(withImages: images, andSize: size)
+        
+        navigationController.pushViewController(viewController, animated: true) {
+            completion()
+        }
+    }
+    
+    func presentLastGrid() {
+        
+        let presenter = presenterInstances.gridPresenter
+        presenter.repeatLastGrid()
+        
+        navigationController.popViewController(animated: true)
+    }
+    
+    func presentScore(_ score: Score, isNewRecord: Bool) {
+        
+        let presenter = presenterInstances.scorePresenter
+        let viewController = presenterInstances.scorePresenter.viewController
+        
+        navigationController.pushViewController(viewController, animated: true) {
+            presenter.showScore(score, isNewRecord: isNewRecord)
+        }
     }
     
     func dismissCurrentViewController() {
