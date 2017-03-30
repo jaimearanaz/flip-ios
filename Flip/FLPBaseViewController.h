@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+#import "FLPBasePresenterDelegate.h"
 #import "FLPBaseViewControllerDelegate.h"
 
 @interface FLPBaseViewController : UIViewController <FLPBaseViewControllerDelegate>

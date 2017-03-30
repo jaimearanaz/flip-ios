@@ -26,7 +26,7 @@ class ScorePresenter: FLPBasePresenter, ScorePresenterDelegate {
     fileprivate let dataSouce = DataSource()
     
     // overrides property in Objective-c class FLPBasePresenter
-    override var viewController: UIViewController {
+    var viewController: UIViewController {
         get {
             return self.realControllerDelegate.viewController
         }

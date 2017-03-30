@@ -25,6 +25,8 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *sizeLeading;
 @property (weak, nonatomic) IBOutlet UIView *loadingShade;
 
+
+@property (strong, nonatomic, nonnull) id<MainPresenterDelegate> presenterDelegate;
 @property (strong, nonatomic, nullable) Records *records;
 @property (nonatomic) CGFloat screenWidth;
 @property (nonatomic) GameSource selectedSource;
@@ -73,6 +75,13 @@
     [super updateViewConstraints];
     
     [self showSourceView:NO];
+}
+
+#pragma mark - Public methods
+
+- (void)setupViewController:(id<MainPresenterDelegate>)presenterDelegate
+{
+    self.presenterDelegate = presenterDelegate;
 }
 
 #pragma mark - RecordsViewDelegate methods

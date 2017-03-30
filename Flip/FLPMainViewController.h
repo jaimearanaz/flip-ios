@@ -15,6 +15,6 @@
 
 @interface FLPMainViewController : FLPBaseViewController <MainViewControllerDelegate>
 
-@property (strong, nonatomic, nonnull) id<MainPresenterDelegate> presenterDelegate;
+- (void)setupViewController:(id<MainPresenterDelegate>)presenterDelegate;
 
 @end

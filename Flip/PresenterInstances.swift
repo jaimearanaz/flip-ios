@@ -14,8 +14,11 @@ class PresenterInstances {
         
         let presenter = MainPresenter()
         let viewController = FLPMainViewController(nibName: "FLPMainViewController", bundle: nil)
-        presenter.controllerDelegate = viewController
-        viewController.presenterDelegate = presenter
+
+        presenter.setupPresenter(controllerDelegate: viewController,
+                                 dataSource: DataSource(),
+                                 router: Router.sharedInstance)
+        viewController.setupViewController(presenter)
         
         return presenter
     }()

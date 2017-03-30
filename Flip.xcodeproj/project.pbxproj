@@ -82,6 +82,7 @@
 		6FB0C2D21E8D92260041D108 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FB0C2D11E8D92260041D108 /* LaunchScreen.storyboard */; };
 		6FB0C2D41E8D94790041D108 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB0C2D31E8D94790041D108 /* main.m */; };
 		6FB0C2D51E8D94D90041D108 /* FLPMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5579EF1E462565008FB1BB /* FLPMainViewController.m */; };
+		6FB0C2D71E8D97100041D108 /* RouterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB0C2D61E8D97100041D108 /* RouterDelegate.swift */; };
 		6FB3BEEB1E474707007933CB /* FLPBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB3BEEA1E474707007933CB /* FLPBaseViewController.m */; };
 		6FB3BEEE1E474718007933CB /* FLPBasePresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB3BEED1E474718007933CB /* FLPBasePresenter.m */; };
 		6FC031831E64079000857D9D /* GridColumnsAndRows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC031821E64079000857D9D /* GridColumnsAndRows.swift */; };
@@ -214,6 +215,7 @@
 		6FAD88DB1A25F7FB00E08609 /* CantoraOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CantoraOne-Regular.ttf"; sourceTree = "<group>"; };
 		6FB0C2D11E8D92260041D108 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6FB0C2D31E8D94790041D108 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		6FB0C2D61E8D97100041D108 /* RouterDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouterDelegate.swift; sourceTree = "<group>"; };
 		6FB3BEE91E474707007933CB /* FLPBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPBaseViewController.h; sourceTree = "<group>"; };
 		6FB3BEEA1E474707007933CB /* FLPBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPBaseViewController.m; sourceTree = "<group>"; };
 		6FB3BEEC1E474718007933CB /* FLPBasePresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPBasePresenter.h; sourceTree = "<group>"; };
@@ -446,6 +448,7 @@
 			children = (
 				6F557A021E462754008FB1BB /* PresenterInstances.swift */,
 				6F5579EA1E4624B4008FB1BB /* Router.swift */,
+				6FB0C2D61E8D97100041D108 /* RouterDelegate.swift */,
 			);
 			name = "app navigation";
 			sourceTree = "<group>";
@@ -875,6 +878,7 @@
 				6FC031831E64079000857D9D /* GridColumnsAndRows.swift in Sources */,
 				6FF528F71E4F91E10081747E /* RecordsViewDelegate.swift in Sources */,
 				6F3AB3761E5A152600CE62CE /* MutableCollection+Extension.swift in Sources */,
+				6FB0C2D71E8D97100041D108 /* RouterDelegate.swift in Sources */,
 				6FEEC3451E6981460077BECA /* GridCollectionControllerDelegate.swift in Sources */,
 				6F3935701E8691A200226DCE /* ScorePresenterDelegate.swift in Sources */,
 				6FF999091E88074B00FAD8B3 /* DataSourceDelegate.swift in Sources */,

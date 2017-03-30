@@ -11,7 +11,7 @@ import UIKit
 
 import UINavigationControllerWithCompletionBlock
 
-@objc class Router: NSObject {
+@objc class Router: NSObject, RouterDelegate {
     
     static let sharedInstance = Router()
     
@@ -20,12 +20,14 @@ import UINavigationControllerWithCompletionBlock
     lazy var navigationController: UINavigationController = {
         
         let mainPresenter = Router.sharedInstance.presenterInstances.mainPresenter
-        let rootViewController = mainPresenter.viewController
-        let navigationController = UINavigationController(rootViewController: rootViewController)
+        let rootViewController = mainPresenter.viewController()
+        let navigationController = UINavigationController(rootViewController: rootViewController!)
         navigationController.isNavigationBarHidden = true
         
         return navigationController
     }()
+    
+    // MARK: - RouterDelegate methods
     
     func presenMain() {
         

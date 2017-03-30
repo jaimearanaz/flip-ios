@@ -23,7 +23,7 @@ class GridPresenter: FLPBasePresenter, GridPresenterDelegate {
     var realControllerDelegate: NewGridViewControllerDelegate!
     
     // overrides property in Objective-c class FLPBasePresenter
-    override var viewController: UIViewController {
+    var viewController: UIViewController {
         get {
             return self.realControllerDelegate.viewController
         }
