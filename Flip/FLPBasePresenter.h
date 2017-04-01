@@ -13,6 +13,4 @@
 
 @interface FLPBasePresenter : NSObject <FLPBasePresenterDelegate>
 
-@property (nullable, strong, nonatomic, readonly) UIViewController *viewController;
-
 @end

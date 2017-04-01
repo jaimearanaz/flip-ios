@@ -11,36 +11,31 @@ import UIKit
 
 class MainPresenter: FLPBasePresenter, MainPresenterDelegate {
     
-    // TODO: use indepency injection
-    let dataSource = DataSource()
-    
-    // trick-non-optional var to be able to set delegate from Objective-C classes
-    var controllerDelegate: AnyObject = "" as AnyObject  {
-        didSet {
-            if let delegate = controllerDelegate as? MainViewControllerDelegate {
-                self.realControllerDelegate = delegate
-            }
-        }
-    }
-    
-    // real delegate to use inside of the class
-    var realControllerDelegate: MainViewControllerDelegate!
-    
-    // overrides property in Objective-c class FLPBasePresenter
-    override var viewController: UIViewController {
-        get {
-            return self.realControllerDelegate.viewController
-        }
-    }
+    fileprivate var controllerDelegate: MainViewControllerDelegate!
+    fileprivate var router: RouterDelegate!
+    fileprivate var dataSource: DataSourceDelegate!
     
     // MARK: - Public methods
+    
+    func setupPresenter(controllerDelegate: MainViewControllerDelegate,
+                        dataSource: DataSourceDelegate,
+                        router: RouterDelegate) {
+        
+        self.controllerDelegate = controllerDelegate
+        self.dataSource = dataSource
+        self.router = router
+    }
     
     func showRecords() {
         
         dataSource.getRecords { (records) in
-            
-            realControllerDelegate.showRecords(records)
+            controllerDelegate.showRecords(records)
         }
+    }
+    
+    func viewController() -> UIViewController? {
+        
+        return controllerDelegate as? UIViewController
     }
     
     // MARK: - MainPresenterDelegate methods
@@ -54,7 +49,7 @@ class MainPresenter: FLPBasePresenter, MainPresenterDelegate {
     
     fileprivate func downloadImages(fromSource source: GameSource, size: GameSize) {
         
-        realControllerDelegate.startLoadingState()
+        controllerDelegate.startLoadingState()
         
         let numberOfImages = size.rawValue / 2
         var images = [UIImage]()
@@ -68,9 +63,9 @@ class MainPresenter: FLPBasePresenter, MainPresenterDelegate {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             
-            self.realControllerDelegate.stopLoadingState()
+            self.controllerDelegate.stopLoadingState()
             Router.sharedInstance.presentGrid(withImages: images, andSize: size, completion: {
-                self.realControllerDelegate.showSourceView()
+                self.controllerDelegate.showSourceView()
             })
         }
     }

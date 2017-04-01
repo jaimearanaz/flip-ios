@@ -2,26 +2,17 @@
 //  FLPScoreViewController.h
 //  Flip
 //
-//  Created by Jaime Aranaz on 12/08/14.
-//  Copyright (c) 2014 MobiOak. All rights reserved.
+//  Created by Jaime on 25/03/2017.
+//  Copyright © 2017 MobiOak. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-#import "FLPGridViewController.h"
+@protocol ScorePresenterDelegate;
+@protocol ScoreViewControllerDelegate;
 
-/**
- * This controller represent the score screen after game is completed
- */
-@interface FLPScoreViewController : UIViewController
+@interface FLPScoreViewController : FLPBaseViewController <ScoreViewControllerDelegate>
 
-// Photos in grid, used when user tries again
-@property (nonatomic, strong) NSArray *photos;
-// Size of grid, used when user tries again
-@property (nonatomic) GridSizeType gridSize;
-// Time spent by user in the game
-@property (nonatomic, strong) NSDate *time;
-// Number of errors in the game
-@property (nonatomic) NSInteger numOfErrors;
+- (void)setupViewController:(id<ScorePresenterDelegate>)presenterDelegate;
 
 @end

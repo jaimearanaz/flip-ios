@@ -11,7 +11,7 @@ import UIKit
 
 import UINavigationControllerWithCompletionBlock
 
-@objc class Router: NSObject {
+@objc class Router: NSObject, RouterDelegate {
     
     static let sharedInstance = Router()
     
@@ -20,12 +20,14 @@ import UINavigationControllerWithCompletionBlock
     lazy var navigationController: UINavigationController = {
         
         let mainPresenter = Router.sharedInstance.presenterInstances.mainPresenter
-        let rootViewController = mainPresenter.viewController
-        let navigationController = UINavigationController(rootViewController: rootViewController)
+        let rootViewController = mainPresenter.viewController()
+        let navigationController = UINavigationController(rootViewController: rootViewController!)
         navigationController.isNavigationBarHidden = true
         
         return navigationController
     }()
+    
+    // MARK: - RouterDelegate methods
     
     func presenMain() {
         
@@ -38,7 +40,7 @@ import UINavigationControllerWithCompletionBlock
     func presentGrid(withImages images: [UIImage], andSize size: GameSize, completion: @escaping (()->Void)) {
 
         let presenter = presenterInstances.gridPresenter
-        let viewController = presenterInstances.gridPresenter.viewController
+        let viewController = presenterInstances.gridPresenter.viewController()
         presenter.showGrid(withImages: images, andSize: size)
         
         navigationController.pushViewController(viewController, animated: true) {
@@ -57,7 +59,7 @@ import UINavigationControllerWithCompletionBlock
     func presentScore(_ score: Score, isNewRecord: Bool) {
         
         let presenter = presenterInstances.scorePresenter
-        let viewController = presenterInstances.scorePresenter.viewController
+        let viewController = presenterInstances.scorePresenter.viewController()
         
         navigationController.pushViewController(viewController, animated: true) {
             presenter.showScore(score, isNewRecord: isNewRecord)

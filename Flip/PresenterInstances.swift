@@ -14,8 +14,11 @@ class PresenterInstances {
         
         let presenter = MainPresenter()
         let viewController = FLPMainViewController(nibName: "FLPMainViewController", bundle: nil)
-        presenter.controllerDelegate = viewController
-        viewController.presenterDelegate = presenter
+
+        presenter.setupPresenter(controllerDelegate: viewController,
+                                 dataSource: DataSource(),
+                                 router: Router.sharedInstance)
+        viewController.setupViewController(presenter)
         
         return presenter
     }()
@@ -23,9 +26,12 @@ class PresenterInstances {
     lazy var gridPresenter: GridPresenter = {
         
         let presenter = GridPresenter()
-        let viewController = FLPNewGridViewController(nibName: "FLPNewGridViewController", bundle: nil)
-        presenter.controllerDelegate = viewController
-        viewController.presenterDelegate = presenter
+        let viewController = FLPGridViewController(nibName: "FLPGridViewController", bundle: nil)
+
+        presenter.setupPresenter(controllerDelegate: viewController,
+                                 dataSource: DataSource(),
+                                 router: Router.sharedInstance)
+        viewController.setupViewController(presenter)
         
         return presenter
     }()
@@ -33,9 +39,12 @@ class PresenterInstances {
     lazy var scorePresenter: ScorePresenter = {
         
         let presenter = ScorePresenter()
-        let viewController = FLPNewScoreViewController(nibName: "FLPNewScoreViewController", bundle: nil)
-        presenter.controllerDelegate = viewController
-        viewController.presenterDelegate = presenter
+        let viewController = FLPScoreViewController(nibName: "FLPScoreViewController", bundle: nil)
+        
+        presenter.setupPresenter(controllerDelegate: viewController,
+                                 dataSource: DataSource(),
+                                 router: Router.sharedInstance)
+        viewController.setupViewController(presenter)
         
         return presenter
     }()

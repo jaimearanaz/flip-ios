@@ -14,7 +14,7 @@
         </array>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FLPNewScoreViewController">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FLPScoreViewController">
             <connections>
                 <outlet property="main" destination="rc7-Ix-CjZ" id="nTv-8E-owJ"/>
                 <outlet property="recordView" destination="ZMr-B3-fdz" id="L5s-qM-iRH"/>

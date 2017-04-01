@@ -10,44 +10,40 @@ import Foundation
 
 class GridPresenter: FLPBasePresenter, GridPresenterDelegate {
     
-    // trick-non-optional var to be able to set delegate from Objective-C classes
-    var controllerDelegate: AnyObject = "" as AnyObject  {
-        didSet {
-            if let delegate = controllerDelegate as? NewGridViewControllerDelegate {
-                self.realControllerDelegate = delegate
-            }
-        }
-    }
-    
-    // real delegate to use inside of the class
-    var realControllerDelegate: NewGridViewControllerDelegate!
-    
-    // overrides property in Objective-c class FLPBasePresenter
-    override var viewController: UIViewController {
-        get {
-            return self.realControllerDelegate.viewController
-        }
-    }
-    
-    // TODO: use dependency injection
-    fileprivate let dataSource = DataSource()
+    fileprivate var dataSource: DataSourceDelegate!
+    fileprivate var controllerDelegate: GridViewControllerDelegate!
+    fileprivate var router: RouterDelegate!
     fileprivate var images = [UIImage]()
     fileprivate var gameSize: GameSize = .small
     
     // MARK: - Public methods
+    
+    func setupPresenter(controllerDelegate: GridViewControllerDelegate,
+                        dataSource: DataSourceDelegate,
+                        router: RouterDelegate) {
+        
+        self.controllerDelegate = controllerDelegate
+        self.dataSource = dataSource
+        self.router = router
+    }
+    
+    func viewController() -> UIViewController? {
+        
+        return controllerDelegate as? UIViewController
+    }
     
     func showGrid(withImages images: [UIImage], andSize size: GameSize) {
         
         self.images = images
         gameSize = size
         let gridCells = createGridCells(withImages: images)
-        realControllerDelegate.showItems(gridCells, withSize: size)
+        controllerDelegate.showItems(gridCells, withSize: size)
     }
     
     func repeatLastGrid() {
         
         let gridCells = createGridCells(withImages: images)
-        realControllerDelegate.showItems(gridCells, withSize: gameSize)
+        controllerDelegate.showItems(gridCells, withSize: gameSize)
     }
     
     // MARK: - GridPresenterDelegate methods
@@ -166,7 +162,7 @@ class GridPresenter: FLPBasePresenter, GridPresenterDelegate {
             break
         }
         
-        self.dataSource.setRecords(records) { 
+        self.dataSource.setRecords(records) {
             
             completion()
         }
