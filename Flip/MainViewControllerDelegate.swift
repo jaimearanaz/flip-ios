@@ -17,4 +17,6 @@ import Foundation
     func showRecords(_ records: Records)
     
     func showSourceView()
+    
+    func showMessage(_ message: String)
 }

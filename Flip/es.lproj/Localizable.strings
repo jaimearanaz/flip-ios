@@ -17,7 +17,7 @@
 "MAIN_SOURCE" = "Cambiar origen de las fotos";
 "MAIN_ALERT" = "Error";
 "MAIN_ENOUGH_PHOTOS_CAMERA" = "¡Necesitas tener al menos %d fotos en tu Carrete!";
-"MAIN_ENOUGH_PHOTOS_TWITTER" = "¡Necesitas tener al menos %d followers y following con una imagen de perfil válida en Twitter!";
+"MAIN_ENOUGH_PHOTOS_TWITTER" = "¡Necesitas seguir al menos a %d usuarios con un avatar válido en Twitter!";
 "MAIN_ENOUGH_PHOTOS_FACEBOOK" = "¡Necesitas tener al menos %d fotos en Facebook!";
 "MAIN_ENOUGH_PHOTOS_OTHER" = "¡Necesitas tener al menos %d fotos!";
 "MAIN_SELECT_TWITTER" = "Selecciona una cuenta de Twitter";

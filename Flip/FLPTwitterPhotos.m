@@ -50,7 +50,7 @@
 
 #pragma mark - Public methods
 
-- (void)getPhotos:(NSInteger)numberOfPhotos success:(void(^)(NSArray* photos))success failure:(void(^)())failure
+- (void)getPhotos:(NSInteger)numberOfPhotos success:(void(^)(NSArray* photos))success failure:(void(^)(TwitterErrorType error))failure
 {
     self.successBlock = success;
     self.failureBlock = failure;
@@ -81,7 +81,8 @@
                                               success:success
                                               failure:failure];
         } else {
-            failure();
+            
+            failure(TwitterErrorUnknown);
         }
         
     }];
@@ -93,7 +94,7 @@
 
 - (void)showActionSheetWithAccounts:(NSArray *)accounts
                             success:(void(^)(ACAccount *selectedAccount))success
-                            failure:(void(^)())failure
+                            failure:(void(^)(TwitterErrorType error))failure
 {
     NSMutableArray *names = [accounts valueForKey:@"username"];
     
@@ -103,7 +104,7 @@
     };
     
     AlertControllerSheetCancelCompletion cancelBlock = ^{
-        failure();
+        failure(TwitterErrorCancelled);
     };
     
     NSMutableArray *optionsBlocks = [[NSMutableArray alloc] init];
@@ -121,12 +122,12 @@
 
 - (void)getFollowingsAndContinueWithAccount:(NSDictionary *)accountInfo
                                     success:(void(^)(NSArray *photos))success
-                                    failure:(void(^)())failure
+                                    failure:(void(^)(TwitterErrorType error))failure
 {
     BOOL validAccountInfo = (accountInfo != nil) && (accountInfo.count >= 3);
     
     if (!validAccountInfo) {
-        failure();
+        failure(TwitterErrorUnknown);
         return;
     }
     
@@ -145,13 +146,13 @@
                                                                                succes:success
                                                                               failure:failure];
                                    } errorBlock:^(NSError *error) {
-                                         failure();
+                                         failure(TwitterErrorUnknown);
                                      }];
 }
 
 - (void)getDescriptionsAndContinueWithFollowings:(NSArray *)followings
                                           succes:(void(^)(NSArray *photos))success
-                                         failure:(void(^)())failure
+                                         failure:(void(^)(TwitterErrorType error))failure
 {
     NSArray *randomUsers = [self selectRandom:100 fromUsers:[NSMutableArray arrayWithArray:followings]];
     NSString *allUsers = [randomUsers componentsJoinedByString:@","];
@@ -162,18 +163,27 @@
                                     successBlock:^(NSArray *descriptions) {
                                         
                                         NSArray *validUsers = [self filterUsersWithAvatar:descriptions];
-                                        NSArray *randomUsers = [self selectRandom:self.numberOfPhotos fromUsers:validUsers];
+                                        BOOL areEnough = (validUsers.count >= self.numberOfPhotos);
                                         
-                                        [self downloadPhotosFromUsers:randomUsers
-                                                               succes:success
-                                                              failure:failure];
+                                        if (areEnough) {
+                                            
+                                            NSArray *randomUsers = [self selectRandom:self.numberOfPhotos fromUsers:validUsers];
+                                            [self downloadPhotosFromUsers:randomUsers
+                                                                   succes:success
+                                                                  failure:failure];
+                                        } else {
+                                            failure(TwitterErrorNotEnough);
+                                        }
+
                                         
                                     } errorBlock:^(NSError *error) {
-                                        failure();
+                                        failure(TwitterErrorUnknown);
                                     }];
 }
 
-- (void)downloadPhotosFromUsers:(NSArray *)users succes:(void(^)(NSArray* photos))success failure:(void(^)())failure
+- (void)downloadPhotosFromUsers:(NSArray *)users
+                         succes:(void(^)(NSArray* photos))success
+                        failure:(void(^)(TwitterErrorType error))failure
 {
     NSMutableArray *urls = [[NSMutableArray alloc] init];
     NSMutableArray *photos = [[NSMutableArray alloc] init];
@@ -191,7 +201,7 @@
                                      if (completed == urls.count) {
                                          success(photos);
                                      } else {
-                                         failure();
+                                         failure(TwitterErrorUnknown);
                                      }
                                  }];
 }

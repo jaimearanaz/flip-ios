@@ -170,6 +170,11 @@
     [self showSourceView:NO];
 }
 
+- (void)showMessage:(NSString *)message
+{
+    [AlertController showAlertWithMessage:message title:@"" completionBlock:^{}];
+}
+
 #pragma mark - Private methods
 
 - (void)updateRecordsIfReady

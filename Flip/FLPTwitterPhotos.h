@@ -10,8 +10,14 @@
 
 #define FLP_WEB_LOGIN_TWITTER_CANCELED_NOTIFICATION @"FLPWebLoginViewControllerTwitterCanceledNotification"
 
+typedef enum : NSUInteger {
+    TwitterErrorNotEnough,
+    TwitterErrorCancelled,
+    TwitterErrorUnknown
+} TwitterErrorType;
+
 @interface FLPTwitterPhotos : NSObject
 
-- (void)getPhotos:(NSInteger)numberOfPhotos success:(void(^)(NSArray* photos))success failure:(void(^)())failure;
+- (void)getPhotos:(NSInteger)numberOfPhotos success:(void(^)(NSArray* photos))success failure:(void(^)(TwitterErrorType error))failure;
 
 @end
