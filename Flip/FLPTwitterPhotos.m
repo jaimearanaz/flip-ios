@@ -21,7 +21,7 @@
 @property (nonatomic) NSString *oauthTokenSecret;
 @property (nonatomic) NSString *screenName;
 @property (nonatomic, copy, nullable) void (^successBlock)(NSArray *photos);
-@property (nonatomic, copy, nullable) void (^failureBlock)();
+@property (nonatomic, copy, nullable) void (^failureBlock)(TwitterErrorType error);
 @property (nonatomic, nullable) STTwitterAPI *twitterApi;
 @property (nonatomic) NSInteger numberOfPhotos;
 
@@ -245,15 +245,8 @@
 
 - (void)twitterLoginCanceledNotification
 {
-    self.failureBlock();
+    self.failureBlock(TwitterErrorCancelled);
     [self unsubscribeFromTwitterCancelNotifications];
-    
-//    [WCAlertView showAlertWithTitle:NSLocalizedString(@"MAIN_ALERT", nil)
-//                            message:NSLocalizedString(@"MAIN_LOGIN_ERROR_TWITTER", nil)
-//                 customizationBlock:nil
-//                    completionBlock:nil
-//                  cancelButtonTitle:NSLocalizedString(@"OTHER_OK", nil)
-//                  otherButtonTitles:nil];
 }
 
 - (void)subscribeToTwitterCancelNotifications

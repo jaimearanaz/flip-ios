@@ -53,6 +53,7 @@ class MainPresenter: FLPBasePresenter, MainPresenterDelegate {
             
             self.controllerDelegate.stopLoadingState()
             self.showTwitterError(error, forSize: size)
+            self.controllerDelegate.showSourceView(withAnimation: true)
         })
 
         //downloadImages(fromSource: source, size: size)
@@ -78,7 +79,7 @@ class MainPresenter: FLPBasePresenter, MainPresenterDelegate {
             
             self.controllerDelegate.stopLoadingState()
             Router.sharedInstance.presentGrid(withImages: images, andSize: size, completion: {
-                self.controllerDelegate.showSourceView()
+                self.controllerDelegate.showSourceView(withAnimation: false)
             })
         }
     }
@@ -93,7 +94,7 @@ class MainPresenter: FLPBasePresenter, MainPresenterDelegate {
             let message = String(format: localized, numberOfImages)
             controllerDelegate.showMessage(message)
             
-        } else {
+        } else if (error == .unknown) {
             
             showGenericError()
         }

@@ -16,7 +16,7 @@ import Foundation
     
     func showRecords(_ records: Records)
     
-    func showSourceView()
+    func showSourceView(withAnimation: Bool)
     
     func showMessage(_ message: String)
 }
