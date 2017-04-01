@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet ScoreView *scoreView;
 @property (weak, nonatomic) IBOutlet UILabel *recordView;
 
+@property (strong, nonatomic, nonnull) id<ScorePresenterDelegate> presenterDelegate;
 @property (strong, nonatomic) NSTimer *recordBlinkTimer;
 @property (nonatomic) BOOL hideScores;
 
@@ -39,6 +40,13 @@
         [self.scoreView hideScore];
         self.hideScores = NO;
     }
+}
+
+#pragma mark - Public methods
+
+- (void)setupViewController:(id<ScorePresenterDelegate>)presenterDelegate
+{
+    self.presenterDelegate = presenterDelegate;
 }
 
 #pragma mark - Action methods

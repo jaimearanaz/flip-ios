@@ -27,8 +27,11 @@ class PresenterInstances {
         
         let presenter = GridPresenter()
         let viewController = FLPGridViewController(nibName: "FLPGridViewController", bundle: nil)
-        presenter.controllerDelegate = viewController
-        viewController.presenterDelegate = presenter
+
+        presenter.setupPresenter(controllerDelegate: viewController,
+                                 dataSource: DataSource(),
+                                 router: Router.sharedInstance)
+        viewController.setupViewController(presenter)
         
         return presenter
     }()
@@ -37,8 +40,11 @@ class PresenterInstances {
         
         let presenter = ScorePresenter()
         let viewController = FLPScoreViewController(nibName: "FLPScoreViewController", bundle: nil)
-        presenter.controllerDelegate = viewController
-        viewController.presenterDelegate = presenter
+        
+        presenter.setupPresenter(controllerDelegate: viewController,
+                                 dataSource: DataSource(),
+                                 router: Router.sharedInstance)
+        viewController.setupViewController(presenter)
         
         return presenter
     }()

@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
+@property (strong, nonatomic, nonnull) id<GridPresenterDelegate> presenterDelegate;
 @property (strong, nonatomic, nullable) GridCollectionController *collectionViewDelegate;
 @property (strong, nonatomic, nonnull) NSArray *gridCellsModels;
 @property (nonatomic) GameSize gameSize;
@@ -48,6 +49,13 @@
 {
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
     [self setupCollectionView];
+}
+
+#pragma mark - Public methods
+
+- (void)setupViewController:(id<GridPresenterDelegate>)presenterDelegate
+{
+    self.presenterDelegate = presenterDelegate;
 }
 
 #pragma mark - Action methods

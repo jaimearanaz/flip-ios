@@ -13,6 +13,6 @@
 
 @interface FLPScoreViewController : FLPBaseViewController <ScoreViewControllerDelegate>
 
-@property (strong, nonatomic, nonnull) id<ScorePresenterDelegate> presenterDelegate;
+- (void)setupViewController:(id<ScorePresenterDelegate>)presenterDelegate;
 
 @end

@@ -13,6 +13,6 @@
 
 @interface FLPGridViewController : FLPBaseViewController <GridViewControllerDelegate>
 
-@property (strong, nonatomic, nonnull) id<GridPresenterDelegate> presenterDelegate;
+- (void)setupViewController:(id<GridPresenterDelegate>)presenterDelegate;
 
 @end
