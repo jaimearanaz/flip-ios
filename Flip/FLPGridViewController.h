@@ -1,5 +1,5 @@
 //
-//  FLPNewGridViewController.h
+//  FLPGridViewController.h
 //  Flip
 //
 //  Created by Jaime on 17/02/2017.
@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @protocol GridPresenterDelegate;
-@protocol NewGridViewControllerDelegate;
+@protocol GridViewControllerDelegate;
 
-@interface FLPNewGridViewController : FLPBaseViewController <NewGridViewControllerDelegate>
+@interface FLPGridViewController : FLPBaseViewController <GridViewControllerDelegate>
 
 @property (strong, nonatomic, nonnull) id<GridPresenterDelegate> presenterDelegate;
 

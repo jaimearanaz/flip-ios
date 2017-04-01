@@ -26,7 +26,7 @@ class PresenterInstances {
     lazy var gridPresenter: GridPresenter = {
         
         let presenter = GridPresenter()
-        let viewController = FLPNewGridViewController(nibName: "FLPNewGridViewController", bundle: nil)
+        let viewController = FLPGridViewController(nibName: "FLPGridViewController", bundle: nil)
         presenter.controllerDelegate = viewController
         viewController.presenterDelegate = presenter
         
@@ -36,7 +36,7 @@ class PresenterInstances {
     lazy var scorePresenter: ScorePresenter = {
         
         let presenter = ScorePresenter()
-        let viewController = FLPNewScoreViewController(nibName: "FLPNewScoreViewController", bundle: nil)
+        let viewController = FLPScoreViewController(nibName: "FLPScoreViewController", bundle: nil)
         presenter.controllerDelegate = viewController
         viewController.presenterDelegate = presenter
         

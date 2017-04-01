@@ -10,6 +10,6 @@
 #import "FLPBasePresenter.h"
 #import "FLPCollectionViewCell.h"
 #import "FLPMainViewController.h"
-#import "FLPNewGridViewController.h"
-#import "FLPNewScoreViewController.h"
+#import "FLPGridViewController.h"
+#import "FLPScoreViewController.h"
 #import "FLPTitleLetterView.h"

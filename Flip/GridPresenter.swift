@@ -13,14 +13,14 @@ class GridPresenter: FLPBasePresenter, GridPresenterDelegate {
     // trick-non-optional var to be able to set delegate from Objective-C classes
     var controllerDelegate: AnyObject = "" as AnyObject  {
         didSet {
-            if let delegate = controllerDelegate as? NewGridViewControllerDelegate {
+            if let delegate = controllerDelegate as? GridViewControllerDelegate {
                 self.realControllerDelegate = delegate
             }
         }
     }
     
     // real delegate to use inside of the class
-    var realControllerDelegate: NewGridViewControllerDelegate!
+    var realControllerDelegate: GridViewControllerDelegate!
     
     // overrides property in Objective-c class FLPBasePresenter
     var viewController: UIViewController {

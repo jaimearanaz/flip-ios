@@ -1,12 +1,12 @@
 //
-//  FLPNewGridViewController.m
+//  FLPGridViewController.m
 //  Flip
 //
 //  Created by Jaime on 17/02/2017.
 //  Copyright © 2017 MobiOak. All rights reserved.
 //
 
-#import "FLPNewGridViewController.h"
+#import "FLPGridViewController.h"
 
 #import "DWPDevice.h"
 #import "FLPCollectionViewCell.h"
@@ -14,7 +14,7 @@
 #define kFirstLookDuration 4.0f
 #define kNextCellDelayDuration 0.2f
 
-@interface FLPNewGridViewController () <GridCollectionControllerDelegate>
+@interface FLPGridViewController () <GridCollectionControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -33,7 +33,7 @@
 
 @end
 
-@implementation FLPNewGridViewController
+@implementation FLPGridViewController
 
 #pragma mark - Lifecycle methods
 
@@ -81,7 +81,7 @@
     }
 }
 
-#pragma mark - NewGridViewControllerDelegate methods
+#pragma mark - GridViewControllerDelegate methods
 
 - (void)showItems:(NSArray<GridCell *> *)items withSize:(GameSize)size
 {

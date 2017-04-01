@@ -29,7 +29,6 @@ class MainPresenter: FLPBasePresenter, MainPresenterDelegate {
     func showRecords() {
         
         dataSource.getRecords { (records) in
-            
             controllerDelegate.showRecords(records)
         }
     }

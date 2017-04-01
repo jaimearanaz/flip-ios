@@ -1,5 +1,5 @@
 //
-//  FLPNewScoreViewController.h
+//  FLPScoreViewController.h
 //  Flip
 //
 //  Created by Jaime on 25/03/2017.
@@ -11,7 +11,7 @@
 @protocol ScorePresenterDelegate;
 @protocol ScoreViewControllerDelegate;
 
-@interface FLPNewScoreViewController : FLPBaseViewController <ScoreViewControllerDelegate>
+@interface FLPScoreViewController : FLPBaseViewController <ScoreViewControllerDelegate>
 
 @property (strong, nonatomic, nonnull) id<ScorePresenterDelegate> presenterDelegate;
 

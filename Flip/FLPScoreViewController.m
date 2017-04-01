@@ -1,14 +1,14 @@
 //
-//  FLPNewScoreViewController.m
+//  FLPScoreViewController.m
 //  Flip
 //
 //  Created by Jaime on 25/03/2017.
 //  Copyright © 2017 MobiOak. All rights reserved.
 //
 
-#import "FLPNewScoreViewController.h"
+#import "FLPScoreViewController.h"
 
-@interface FLPNewScoreViewController ()
+@interface FLPScoreViewController ()
 
 @property (weak, nonatomic) IBOutlet UIButton *tryAgain;
 @property (weak, nonatomic) IBOutlet UIButton *main;
@@ -20,7 +20,7 @@
 
 @end
 
-@implementation FLPNewScoreViewController
+@implementation FLPScoreViewController
 
 #pragma mark - Lifecycle methods
 

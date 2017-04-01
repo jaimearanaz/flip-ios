@@ -1,5 +1,5 @@
 //
-//  NewGridViewControllerDelegate.swift
+//  GridViewControllerDelegate.swift
 //  Flip
 //
 //  Created by Jaime on 17/02/2017.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-@objc protocol NewGridViewControllerDelegate: FLPBaseViewControllerDelegate {
+@objc protocol GridViewControllerDelegate: FLPBaseViewControllerDelegate {
     
     @objc (showItems:withSize:)
     func showItems(_ items: [GridCell], withSize size: GameSize)
