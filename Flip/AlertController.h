@@ -8,7 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-typedef void (^AlertControllerCompletion)();
+typedef void (^AlertControllerSheetOptionCompletion)(NSInteger option);
+typedef void (^AlertControllerSheetCancelCompletion)();
 
 @import SDCAlertView;
 
@@ -28,6 +29,6 @@ typedef void (^AlertControllerCompletion)();
                      optionsTitles:(NSArray *)optionsTitles
                      optionsBlocks:(NSArray *)optionsBlocks
                        cancelTitle:(NSString *)cancelTitle
-                       cancelBlock:(AlertControllerCompletion)cancelBlock;
+                       cancelBlock:(AlertControllerSheetCancelCompletion)cancelBlock;
 
 @end

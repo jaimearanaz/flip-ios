@@ -71,7 +71,7 @@
                      optionsTitles:(NSArray *)optionsTitles
                      optionsBlocks:(NSArray *)optionsBlocks
                        cancelTitle:(NSString *)cancelTitle
-                       cancelBlock:(AlertControllerCompletion)cancelBlock
+                       cancelBlock:(AlertControllerSheetCancelCompletion)cancelBlock
 
 {
     if (optionsTitles.count != optionsBlocks.count) {
@@ -97,8 +97,8 @@
                                                    style:SDCAlertActionStyleNormal
                                                  handler:^(SDCAlertAction * _Nonnull action) {
                                                      
-                                                    AlertControllerCompletion completion = optionsBlocks[i];
-                                                    completion();
+                                                    AlertControllerSheetOptionCompletion completion = optionsBlocks[i];
+                                                    completion(i);
                                                  }]];
     }
     

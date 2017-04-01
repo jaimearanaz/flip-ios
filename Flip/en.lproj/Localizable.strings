@@ -20,7 +20,7 @@
 "MAIN_ENOUGH_PHOTOS_TWITTER" = "You need at least %d followers and following with a valid image profile in Twitter!";
 "MAIN_ENOUGH_PHOTOS_FACEBOOK" = "You need at least %d photos in Facebook!";
 "MAIN_ENOUGH_PHOTOS_OTHER" = "You must have at least %d photos!";
-"MAIN_SELECT_TWITTER" = "Select one Twitter account";
+"MAIN_SELECT_TWITTER" = "Select a Twitter account";
 "MAIN_GENERIC_ERROR" = "There was an error getting your photos from selected source. Please try again.";
 "MAIN_INERNET_CONNECTION" = "You need an internet connection to download photos from this source.";
 "MAIN_RECORDS_TITLE" = "My Records";

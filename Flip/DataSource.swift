@@ -12,6 +12,7 @@ class DataSource: DataSourceDelegate {
     
     // TODO: use dependency injection
     fileprivate var defaults = Defaults()
+    fileprivate var twitterPhotos = FLPTwitterPhotos()
     
     // MARK: - DataSourceDelegate methods
     
@@ -23,5 +24,17 @@ class DataSource: DataSourceDelegate {
     func setRecords(_ records: Records, completion: (() -> Void)) {
         
         self.defaults.setRecords(records, completion: completion)
+    }
+    
+    func getTwitterPhotos(forSize size: GameSize, success: @escaping ((_ photos: [String]) -> Void), failure:@escaping (() -> Void)) {
+
+        twitterPhotos.getPhotos(size.rawValue, success: { (pics) in
+
+            let photos = pics as! [String]
+            success(photos)
+            
+        }, failure: { 
+            failure()
+        })
     }
 }

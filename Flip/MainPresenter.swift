@@ -42,7 +42,19 @@ class MainPresenter: FLPBasePresenter, MainPresenterDelegate {
         
     func didSelectOptions(source: GameSource, size: GameSize) {
         
-        downloadImages(fromSource: source, size: size)
+        controllerDelegate.startLoadingState()
+        
+        dataSource.getTwitterPhotos(forSize: size, success: { (photos) in
+            
+            self.controllerDelegate.stopLoadingState()
+            
+        }, failure: {
+            
+            self.controllerDelegate.stopLoadingState()
+        })
+
+        
+        //downloadImages(fromSource: source, size: size)
     }
     
     // MARK: - Private methods

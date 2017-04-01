@@ -20,7 +20,6 @@
 		6F1AA1591973EAA400101766 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F1AA1581973EAA400101766 /* Foundation.framework */; };
 		6F1AA15B1973EAA400101766 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F1AA15A1973EAA400101766 /* CoreGraphics.framework */; };
 		6F1AA15D1973EAA400101766 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F1AA15C1973EAA400101766 /* UIKit.framework */; };
-		6F1AA1691973EAA400101766 /* FLPAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1AA1681973EAA400101766 /* FLPAppDelegate.m */; };
 		6F1AA1741973EAA400101766 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F1AA1731973EAA400101766 /* Images.xcassets */; };
 		6F1AA17B1973EAA400101766 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F1AA17A1973EAA400101766 /* XCTest.framework */; };
 		6F1AA17C1973EAA500101766 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F1AA1581973EAA400101766 /* Foundation.framework */; };
@@ -33,7 +32,11 @@
 		6F22B29D1E50767500237258 /* SizeViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F22B29C1E50767500237258 /* SizeViewDelegate.swift */; };
 		6F26EA8A1E8FA5F400820FD2 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F26EA881E8FA5F400820FD2 /* Defaults.swift */; };
 		6F26EA8B1E8FA5F400820FD2 /* DefaultsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F26EA891E8FA5F400820FD2 /* DefaultsDelegate.swift */; };
+		6F26EA8D1E8FB29D00820FD2 /* FLPAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F26EA8C1E8FB29D00820FD2 /* FLPAppDelegate.m */; };
+		6F26EA8F1E8FB3A200820FD2 /* TwitterKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6F26EA8E1E8FB3A200820FD2 /* TwitterKeys.plist */; };
+		6F26EA951E8FB5EE00820FD2 /* FLPTwitterPhotos.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F26EA941E8FB5EE00820FD2 /* FLPTwitterPhotos.m */; };
 		6F33AC7C1998C14000FBF9C4 /* FLPCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F33AC7B1998C14000FBF9C4 /* FLPCollectionViewCell.m */; };
+		6F38449C1E9006E600CD4472 /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F38449B1E9006E600CD4472 /* ImageDownloader.swift */; };
 		6F39356B1E86918200226DCE /* FLPScoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3935691E86918200226DCE /* FLPScoreViewController.m */; };
 		6F39356C1E86918200226DCE /* FLPScoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F39356A1E86918200226DCE /* FLPScoreViewController.xib */; };
 		6F39356E1E86919600226DCE /* ScorePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F39356D1E86919600226DCE /* ScorePresenter.swift */; };
@@ -55,7 +58,6 @@
 		6F5579F61E46258D008FB1BB /* MainViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5579F51E46258D008FB1BB /* MainViewControllerDelegate.swift */; };
 		6F5579F81E46259E008FB1BB /* MainPresenterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5579F71E46259E008FB1BB /* MainPresenterDelegate.swift */; };
 		6F557A031E462754008FB1BB /* PresenterInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F557A021E462754008FB1BB /* PresenterInstances.swift */; };
-		6F67A358197FD19600AC9CF5 /* FLPLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F67A357197FD19600AC9CF5 /* FLPLogFormatter.m */; };
 		6F8782FE199BB11000AA118E /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8782FD199BB11000AA118E /* AdSupport.framework */; };
 		6F878300199BB11900AA118E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8782FF199BB11900AA118E /* AudioToolbox.framework */; };
 		6F878302199BB12900AA118E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F878301199BB12900AA118E /* AVFoundation.framework */; };
@@ -74,7 +76,7 @@
 		6F9469761E584DBD003D102B /* photo_12.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F94696A1E584DBD003D102B /* photo_12.jpg */; };
 		6F9469791E584DEE003D102B /* photo_2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F9469771E584DEE003D102B /* photo_2.jpg */; };
 		6F94697A1E584DEE003D102B /* photo_5.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F9469781E584DEE003D102B /* photo_5.jpg */; };
-		6F94697D1E585A08003D102B /* DWPAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F94697C1E585A08003D102B /* DWPAlertController.m */; };
+		6F94697D1E585A08003D102B /* AlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F94697C1E585A08003D102B /* AlertController.m */; };
 		6FAD88DC1A25F7FB00E08609 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6FAD88D91A25F7FB00E08609 /* Roboto-Bold.ttf */; };
 		6FAD88DD1A25F7FB00E08609 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6FAD88D91A25F7FB00E08609 /* Roboto-Bold.ttf */; };
 		6FAD88DE1A25F7FB00E08609 /* Pacifico.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6FAD88DA1A25F7FB00E08609 /* Pacifico.ttf */; };
@@ -142,7 +144,6 @@
 		6F1AA1601973EAA400101766 /* Flip-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Flip-Info.plist"; sourceTree = "<group>"; };
 		6F1AA1661973EAA400101766 /* Flip-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Flip-Prefix.pch"; sourceTree = "<group>"; };
 		6F1AA1671973EAA400101766 /* FLPAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FLPAppDelegate.h; sourceTree = "<group>"; };
-		6F1AA1681973EAA400101766 /* FLPAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FLPAppDelegate.m; sourceTree = "<group>"; };
 		6F1AA1701973EAA400101766 /* FLPMainScrenViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FLPMainScrenViewController.h; sourceTree = "<group>"; };
 		6F1AA1711973EAA400101766 /* FLPMainScrenViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FLPMainScrenViewController.m; sourceTree = "<group>"; };
 		6F1AA1731973EAA400101766 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -160,8 +161,13 @@
 		6F22B29C1E50767500237258 /* SizeViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SizeViewDelegate.swift; sourceTree = "<group>"; };
 		6F26EA881E8FA5F400820FD2 /* Defaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Defaults.swift; sourceTree = "<group>"; };
 		6F26EA891E8FA5F400820FD2 /* DefaultsDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultsDelegate.swift; sourceTree = "<group>"; };
+		6F26EA8C1E8FB29D00820FD2 /* FLPAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPAppDelegate.m; sourceTree = "<group>"; };
+		6F26EA8E1E8FB3A200820FD2 /* TwitterKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TwitterKeys.plist; sourceTree = "<group>"; };
+		6F26EA931E8FB5EE00820FD2 /* FLPTwitterPhotos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPTwitterPhotos.h; sourceTree = "<group>"; };
+		6F26EA941E8FB5EE00820FD2 /* FLPTwitterPhotos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPTwitterPhotos.m; sourceTree = "<group>"; };
 		6F33AC7A1998C14000FBF9C4 /* FLPCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPCollectionViewCell.h; sourceTree = "<group>"; };
 		6F33AC7B1998C14000FBF9C4 /* FLPCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPCollectionViewCell.m; sourceTree = "<group>"; };
+		6F38449B1E9006E600CD4472 /* ImageDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDownloader.swift; sourceTree = "<group>"; };
 		6F3935681E86918200226DCE /* FLPScoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPScoreViewController.h; sourceTree = "<group>"; };
 		6F3935691E86918200226DCE /* FLPScoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPScoreViewController.m; sourceTree = "<group>"; };
 		6F39356A1E86918200226DCE /* FLPScoreViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FLPScoreViewController.xib; sourceTree = "<group>"; };
@@ -190,8 +196,6 @@
 		6F557A021E462754008FB1BB /* PresenterInstances.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresenterInstances.swift; sourceTree = "<group>"; };
 		6F5AD5C51987ABF600B65D09 /* FLPFacebookPhotoSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPFacebookPhotoSource.h; sourceTree = "<group>"; };
 		6F5AD5C61987ABF600B65D09 /* FLPFacebookPhotoSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPFacebookPhotoSource.m; sourceTree = "<group>"; };
-		6F67A356197FD19600AC9CF5 /* FLPLogFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPLogFormatter.h; sourceTree = "<group>"; };
-		6F67A357197FD19600AC9CF5 /* FLPLogFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPLogFormatter.m; sourceTree = "<group>"; };
 		6F8782FD199BB11000AA118E /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		6F8782FF199BB11900AA118E /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		6F878301199BB12900AA118E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -210,8 +214,8 @@
 		6F94696A1E584DBD003D102B /* photo_12.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = photo_12.jpg; sourceTree = "<group>"; };
 		6F9469771E584DEE003D102B /* photo_2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = photo_2.jpg; sourceTree = "<group>"; };
 		6F9469781E584DEE003D102B /* photo_5.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = photo_5.jpg; sourceTree = "<group>"; };
-		6F94697B1E585A08003D102B /* DWPAlertController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DWPAlertController.h; sourceTree = "<group>"; };
-		6F94697C1E585A08003D102B /* DWPAlertController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DWPAlertController.m; sourceTree = "<group>"; };
+		6F94697B1E585A08003D102B /* AlertController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertController.h; sourceTree = "<group>"; };
+		6F94697C1E585A08003D102B /* AlertController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertController.m; sourceTree = "<group>"; };
 		6FAD88D91A25F7FB00E08609 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		6FAD88DA1A25F7FB00E08609 /* Pacifico.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Pacifico.ttf; sourceTree = "<group>"; };
 		6FAD88DB1A25F7FB00E08609 /* CantoraOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CantoraOne-Regular.ttf"; sourceTree = "<group>"; };
@@ -370,7 +374,7 @@
 				6F1AA1901973EAF000101766 /* controllers */,
 				6F1AA15F1973EAA400101766 /* Supporting Files */,
 				6F1AA1671973EAA400101766 /* FLPAppDelegate.h */,
-				6F1AA1681973EAA400101766 /* FLPAppDelegate.m */,
+				6F26EA8C1E8FB29D00820FD2 /* FLPAppDelegate.m */,
 			);
 			path = Flip;
 			sourceTree = "<group>";
@@ -378,6 +382,7 @@
 		6F1AA15F1973EAA400101766 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6F26EA8E1E8FB3A200820FD2 /* TwitterKeys.plist */,
 				6FB0C2D31E8D94790041D108 /* main.m */,
 				6FB0C2D11E8D92260041D108 /* LaunchScreen.storyboard */,
 				6F1AA1601973EAA400101766 /* Flip-Info.plist */,
@@ -422,6 +427,15 @@
 				6F26EA891E8FA5F400820FD2 /* DefaultsDelegate.swift */,
 			);
 			name = defaults;
+			sourceTree = "<group>";
+		};
+		6F26EA901E8FB56D00820FD2 /* photos */ = {
+			isa = PBXGroup;
+			children = (
+				6F26EA931E8FB5EE00820FD2 /* FLPTwitterPhotos.h */,
+				6F26EA941E8FB5EE00820FD2 /* FLPTwitterPhotos.m */,
+			);
+			name = photos;
 			sourceTree = "<group>";
 		};
 		6F3935671E86913700226DCE /* score */ = {
@@ -524,10 +538,9 @@
 		6F67A355197FD17F00AC9CF5 /* utils */ = {
 			isa = PBXGroup;
 			children = (
-				6F67A356197FD19600AC9CF5 /* FLPLogFormatter.h */,
-				6F67A357197FD19600AC9CF5 /* FLPLogFormatter.m */,
-				6F94697B1E585A08003D102B /* DWPAlertController.h */,
-				6F94697C1E585A08003D102B /* DWPAlertController.m */,
+				6F38449B1E9006E600CD4472 /* ImageDownloader.swift */,
+				6F94697B1E585A08003D102B /* AlertController.h */,
+				6F94697C1E585A08003D102B /* AlertController.m */,
 				6F039E5C1E633DEA00236FC9 /* DWPDevice.h */,
 				6F039E5D1E633DEA00236FC9 /* DWPDevice.m */,
 			);
@@ -574,6 +587,7 @@
 		6FF999071E88070A00FAD8B3 /* data */ = {
 			isa = PBXGroup;
 			children = (
+				6F26EA901E8FB56D00820FD2 /* photos */,
 				6F26EA871E8FA5E000820FD2 /* defaults */,
 				6FF9990A1E88075C00FAD8B3 /* DataSource.swift */,
 				6FF999081E88074B00FAD8B3 /* DataSourceDelegate.swift */,
@@ -699,6 +713,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F26EA8F1E8FB3A200820FD2 /* TwitterKeys.plist in Resources */,
 				6F94696D1E584DBD003D102B /* photo_3.jpg in Resources */,
 				6F103A661E56D189007C0E21 /* FLPGridViewController.xib in Resources */,
 				6F3AB3781E5A21D100CE62CE /* FLPCollectionViewCell.xib in Resources */,
@@ -849,9 +864,8 @@
 				6FF528EA1E4F75950081747E /* TitleView.swift in Sources */,
 				6F103A681E56D1A9007C0E21 /* GridViewControllerDelegate.swift in Sources */,
 				6F3935721E8691B100226DCE /* ScoreViewControllerDelegate.swift in Sources */,
-				6F67A358197FD19600AC9CF5 /* FLPLogFormatter.m in Sources */,
 				6F103A6C1E56D1F4007C0E21 /* GridPresenterDelegate.swift in Sources */,
-				6F94697D1E585A08003D102B /* DWPAlertController.m in Sources */,
+				6F94697D1E585A08003D102B /* AlertController.m in Sources */,
 				6F5579EB1E4624B4008FB1BB /* Router.swift in Sources */,
 				6FF528E41E4F6A7A0081747E /* SourceView.swift in Sources */,
 				6FF9990B1E88075C00FAD8B3 /* DataSource.swift in Sources */,
@@ -865,6 +879,7 @@
 				6F33AC7C1998C14000FBF9C4 /* FLPCollectionViewCell.m in Sources */,
 				6FF528E81E4F71EE0081747E /* SourceViewDelegate.swift in Sources */,
 				6F5579F81E46259E008FB1BB /* MainPresenterDelegate.swift in Sources */,
+				6F26EA8D1E8FB29D00820FD2 /* FLPAppDelegate.m in Sources */,
 				6FB3BEEE1E474718007933CB /* FLPBasePresenter.m in Sources */,
 				6FF999061E8806B800FAD8B3 /* Records.swift in Sources */,
 				6F039E5B1E63393400236FC9 /* GridCollectionController.swift in Sources */,
@@ -877,12 +892,13 @@
 				6FF528F71E4F91E10081747E /* RecordsViewDelegate.swift in Sources */,
 				6F3AB3761E5A152600CE62CE /* MutableCollection+Extension.swift in Sources */,
 				6FB0C2D71E8D97100041D108 /* RouterDelegate.swift in Sources */,
+				6F38449C1E9006E600CD4472 /* ImageDownloader.swift in Sources */,
 				6FEEC3451E6981460077BECA /* GridCollectionControllerDelegate.swift in Sources */,
+				6F26EA951E8FB5EE00820FD2 /* FLPTwitterPhotos.m in Sources */,
 				6F3935701E8691A200226DCE /* ScorePresenterDelegate.swift in Sources */,
 				6FF999091E88074B00FAD8B3 /* DataSourceDelegate.swift in Sources */,
 				6FF528F01E4F78430081747E /* UIViewFromNib.swift in Sources */,
 				6F103A6A1E56D1CD007C0E21 /* GridPresenter.swift in Sources */,
-				6F1AA1691973EAA400101766 /* FLPAppDelegate.m in Sources */,
 				6F26EA8B1E8FA5F400820FD2 /* DefaultsDelegate.swift in Sources */,
 				6F22B29D1E50767500237258 /* SizeViewDelegate.swift in Sources */,
 				6F26EA8A1E8FA5F400820FD2 /* Defaults.swift in Sources */,
