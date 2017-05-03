@@ -8,6 +8,7 @@
 
 #import <AFNetworking/AFNetworking.h>
 //#import <FacebookSDK/FacebookSDK.h>
+#import "AFOAuth1Client.h"
 
 #import "FLPAppDelegate.h"
 #import "FLPMainScrenViewController.h"
@@ -87,10 +88,10 @@
         } else {
             
             // TODO: uncomment
-//            NSNotification *notification = [NSNotification notificationWithName:kAFApplicationLaunchedWithURLNotification
-//                                                                         object:nil
-//                                                                       userInfo:@{kAFApplicationLaunchOptionsURLKey: url}];
-//            [[NSNotificationCenter defaultCenter] postNotification:notification];
+            NSNotification *notification = [NSNotification notificationWithName:kAFApplicationLaunchedWithURLNotification
+                                                                         object:nil
+                                                                       userInfo:@{kAFApplicationLaunchOptionsURLKey: url}];
+            [[NSNotificationCenter defaultCenter] postNotification:notification];
         }
         return YES;
     }
