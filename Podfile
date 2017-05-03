@@ -11,7 +11,7 @@ use_frameworks!
 def flip_pods
     
     #pod 'Facebook-iOS-SDK'
-    pod 'PFTwitterSignOn'
+    pod 'PFTwitterSignOn', :git => 'https://github.com/jesseditson/PFTwitterSignOn.git'
     pod 'STTwitter'
 	pod 'SCNetworkReachability'
     pod 'RZSquaresLoading'

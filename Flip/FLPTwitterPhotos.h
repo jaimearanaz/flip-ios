@@ -18,6 +18,8 @@ typedef enum : NSUInteger {
 
 @interface FLPTwitterPhotos : NSObject
 
-- (void)getPhotos:(NSInteger)numberOfPhotos success:(void(^)(NSArray* photos))success failure:(void(^)(TwitterErrorType error))failure;
+- (void)getPhotos:(NSInteger)numberOfPhotos
+          success:(void(^)(NSArray* photos))success
+          failure:(void(^)(TwitterErrorType error))failure;
 
 @end

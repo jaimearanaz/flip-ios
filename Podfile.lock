@@ -9,7 +9,7 @@ PODS:
   - NSData+Base64 (1.0.0)
   - OAuthCore (0.0.1):
     - NSData+Base64
-  - PFTwitterSignOn (0.1.0):
+  - PFTwitterSignOn (0.1.1):
     - AFOAuth1Client (~> 0.3.3)
     - LVTwitterOAuthClient (~> 0.0.1)
   - RZSquaresLoading (1.1)
@@ -17,7 +17,7 @@ PODS:
     - SCNetworkReachability/Core (= 2.0.5)
   - SCNetworkReachability/Core (2.0.5):
     - macros_blocks (= 0.0.1)
-  - SDCAlertView (7.1)
+  - SDCAlertView (7.1.2)
   - SDWebImage (4.0.0):
     - SDWebImage/Core (= 4.0.0)
   - SDWebImage/Core (4.0.0)
@@ -26,7 +26,7 @@ PODS:
     - JRSwizzle (~> 1.0)
 
 DEPENDENCIES:
-  - PFTwitterSignOn
+  - PFTwitterSignOn (from `https://github.com/jesseditson/PFTwitterSignOn.git`)
   - RZSquaresLoading
   - SCNetworkReachability
   - SDCAlertView (from `https://github.com/sberrevoets/SDCAlertView`)
@@ -35,12 +35,17 @@ DEPENDENCIES:
   - UINavigationControllerWithCompletionBlock
 
 EXTERNAL SOURCES:
+  PFTwitterSignOn:
+    :git: https://github.com/jesseditson/PFTwitterSignOn.git
   SDCAlertView:
     :git: https://github.com/sberrevoets/SDCAlertView
 
 CHECKOUT OPTIONS:
+  PFTwitterSignOn:
+    :commit: be956fb85a62544f529c902b5cf1fb21e24aa07a
+    :git: https://github.com/jesseditson/PFTwitterSignOn.git
   SDCAlertView:
-    :commit: 47e3626aa7cda2be777653870fdd94f93e731b2d
+    :commit: 49a76768c403b539abf4b97a44b6d1d850a88faa
     :git: https://github.com/sberrevoets/SDCAlertView
 
 SPEC CHECKSUMS:
@@ -51,14 +56,14 @@ SPEC CHECKSUMS:
   macros_blocks: da2106a0975514e16f3669f2f50a02efaff642cf
   NSData+Base64: 4e84902c4db907a15673474677e57763ef3903e4
   OAuthCore: 43dce261db846a1fe20234d95654257e00e78581
-  PFTwitterSignOn: 628e0d6e380c31c2955c39f59353d96aa63dfc95
+  PFTwitterSignOn: f8f46693a5f743707db85b6ae3dd5503c3d16a2b
   RZSquaresLoading: c0aefa508119a76497424829e439e1b8b0d12fdc
   SCNetworkReachability: 14026e754d9abb264c157131539e8e2c2131cb62
-  SDCAlertView: a8fa1ad92b82de0feea0f6a50475c63c70b840a5
+  SDCAlertView: 896c7a91d98d947c9b69dd40af0c0344bf2e7dd2
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
   STTwitter: 30ee2f79eff78c3d633a1edc869e97db9c9ead59
   UINavigationControllerWithCompletionBlock: c043176ee769b1e108761fff73ed776645f0f9d0
 
-PODFILE CHECKSUM: d0e7a7289a6b94bb99e7d2a6810f35ef22113f7f
+PODFILE CHECKSUM: 742dce57e76f46fd1a2ca9949c9d54b04fb3d012
 
-COCOAPODS: 1.2.0
+COCOAPODS: 1.2.1
