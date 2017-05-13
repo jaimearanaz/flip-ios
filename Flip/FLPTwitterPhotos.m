@@ -58,8 +58,8 @@
     self.numberOfPhotos = numberOfPhotos;
     
     // Login with Twitter
-    // Two ways to login:
-    // a) with user account in device, through the selectCallback in this method
+    // Two possible ways to login:
+    // a) with the user account/s setup in device, through the selectCallback in this method
     // b) with Twitter login web view, through |application:openURL:sourceApplication:annotation:| method in app delegate
     
     [PFTwitterSignOn setCredentialsWithConsumerKey:self.consumerKey andSecret:self.secretKey];
@@ -87,8 +87,6 @@
         }
         
     }];
-    
-    [self unsubscribeFromTwitterCancelNotifications];
 }
 
 #pragma mark - Private methods
