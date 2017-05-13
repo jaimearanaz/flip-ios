@@ -10,6 +10,7 @@
 
 #import <PFTwitterSignOn/PFTwitterSignOn.h>
 #import "STTwitterAPI.h"
+#import <Accounts/ACAccount.h>
 
 #import "AlertController.h"
 
@@ -96,7 +97,12 @@
                             success:(void(^)(ACAccount *selectedAccount))success
                             failure:(void(^)(TwitterErrorType error))failure
 {
-    NSMutableArray *names = [accounts valueForKey:@"username"];
+    NSMutableArray *usernames = [[NSMutableArray alloc] init];
+    [accounts enumerateObjectsUsingBlock:^(ACAccount * _Nonnull oneAccount, NSUInteger idx, BOOL * _Nonnull stop) {
+
+        NSString *username = [NSString stringWithFormat:@"@%@", [oneAccount.username lowercaseString]];
+        [usernames addObject:username];
+    }];
     
     AlertControllerSheetCancelCompletion selectAccountBlock = ^(NSInteger option) {
         ACAccount *account = accounts[option];
@@ -108,13 +114,13 @@
     };
     
     NSMutableArray *optionsBlocks = [[NSMutableArray alloc] init];
-    for (int i = 0; i < names.count; i++) {
+    for (int i = 0; i < usernames.count; i++) {
         [optionsBlocks addObject:selectAccountBlock];
     }
     
     [AlertController showActionSheetWithMessage:NSLocalizedString(@"MAIN_SELECT_TWITTER", @"Select Twitter account")
                                           title:@""
-                                  optionsTitles:names
+                                  optionsTitles:usernames
                                   optionsBlocks:optionsBlocks
                                     cancelTitle:NSLocalizedString(@"OTHER_CANCEL", @"Cancel Twitter account selection")
                                     cancelBlock:cancelBlock];

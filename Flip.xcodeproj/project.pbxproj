@@ -230,6 +230,7 @@
 		6FB3BEF01E474773007933CB /* FLPBasePresenterDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPBasePresenterDelegate.h; sourceTree = "<group>"; };
 		6FC031821E64079000857D9D /* GridColumnsAndRows.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridColumnsAndRows.swift; sourceTree = "<group>"; };
 		6FDB63F91E462E6D00A0DF1D /* Flip-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Flip-Bridging-Header.h"; sourceTree = "<group>"; };
+		6FE7F5EF1EC7511900D409AD /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		6FEEC3441E6981460077BECA /* GridCollectionControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridCollectionControllerDelegate.swift; sourceTree = "<group>"; };
 		6FF528E31E4F6A7A0081747E /* SourceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SourceView.swift; sourceTree = "<group>"; };
 		6FF528E51E4F6A8B0081747E /* SourceView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SourceView.xib; sourceTree = "<group>"; };
@@ -338,6 +339,7 @@
 		6F1AA1571973EAA400101766 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6FE7F5EF1EC7511900D409AD /* Accounts.framework */,
 				6F878307199BB14C00AA118E /* SystemConfiguration.framework */,
 				6F878305199BB14100AA118E /* StoreKit.framework */,
 				6F878303199BB13500AA118E /* MessageUI.framework */,
