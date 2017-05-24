@@ -22,6 +22,7 @@
 "MAIN_ENOUGH_PHOTOS_OTHER" = "You must have at least %d photos!";
 "MAIN_SELECT_TWITTER" = "Select one Twitter account";
 "MAIN_GENERIC_ERROR" = "There was an error getting your photos from selected source. Please try again.";
+"MAIN_CANCELLED_LOGIN" = "Login in source has been cancelled!";
 "MAIN_INERNET_CONNECTION" = "You need an internet connection to download photos from this source.";
 "MAIN_RECORDS_TITLE" = "My Records";
 "MAIN_RECORDS_NONE" = "--:--:---";

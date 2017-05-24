@@ -22,6 +22,7 @@
 "MAIN_ENOUGH_PHOTOS_OTHER" = "¡Necesitas tener al menos %d fotos!";
 "MAIN_SELECT_TWITTER" = "Selecciona una cuenta de Twitter";
 "MAIN_GENERIC_ERROR" = "Ha habido un error obteniendo tus fotos de la fuente seleccionada. Por favor, inténtalo de nuevo.";
+"MAIN_CANCELLED_LOGIN" = "¡Se ha cancelado el proceso de login!";
 "MAIN_INERNET_CONNECTION" = "Necesitas una conexión a Internet para descargar fotos de esta fuente.";
 "MAIN_RECORDS_TITLE" = "Mis Récords";
 "MAIN_RECORDS_NONE" = "--:--:---";

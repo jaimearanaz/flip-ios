@@ -39,28 +39,43 @@ class MainPresenter: FLPBasePresenter, MainPresenterDelegate {
     }
     
     // MARK: - MainPresenterDelegate methods
-        
+    
     func didSelectOptions(source: GameSource, size: GameSize) {
+        
+        switch source {
+            
+            case .twitter:
+                
+                getPhotosFromTwitter(forSize: size)
+                break
+            
+            default: break
+        }
+        
+        //downloadImages(fromSource: source, size: size)
+    }
+    
+    func getPhotosFromTwitter(forSize size: GameSize) {
         
         controllerDelegate.startLoadingState()
         
         dataSource.getTwitterPhotos(forSize: size,
                                     success: { (photos) in
                                         
-            self.controllerDelegate.stopLoadingState()
+                                        self.controllerDelegate.stopLoadingState()
                                         
+                                        // TODO: show grid
         }, failure: { (error) in
             
             self.controllerDelegate.stopLoadingState()
-            self.showTwitterError(error, forSize: size)
             self.controllerDelegate.showSourceView(withAnimation: true)
+            self.showTwitterError(error, forSize: size)
         })
-
-        //downloadImages(fromSource: source, size: size)
     }
     
     // MARK: - Private methods
     
+    // TODO: delete?
     fileprivate func downloadImages(fromSource source: GameSource, size: GameSize) {
         
         controllerDelegate.startLoadingState()
@@ -94,7 +109,12 @@ class MainPresenter: FLPBasePresenter, MainPresenterDelegate {
             let message = String(format: localized, numberOfImages)
             controllerDelegate.showMessage(message)
             
-        } else if (error == .unknown) {
+        } else if (error == .cancelled) {
+            
+            let message = NSLocalizedString("MAIN_CANCELLED_LOGIN", comment: "Error message when user has cancelled login")
+            controllerDelegate.showMessage(message)
+            
+        } else {
             
             showGenericError()
         }
