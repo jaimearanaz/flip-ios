@@ -73,21 +73,20 @@
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
-    // Callback from Facebook web login
     if ([self handleFacebookUrl:url]) {
+        
         return YES;
         
-    // Callback from Twitter web login
     } else if ([self isUrlFromTwitterLogin:url]) {
         
-        // User has canceled Twitter login
-        if ([[url absoluteString] rangeOfString:@"denied="].location != NSNotFound) {
+        BOOL userHasCanceled = ([[url absoluteString] rangeOfString:@"denied="].location != NSNotFound);
+        
+        if (userHasCanceled) {
+            
             [[NSNotificationCenter defaultCenter] postNotificationName:FLP_WEB_LOGIN_TWITTER_CANCELED_NOTIFICATION object:nil];
-            
-        // User logged successfuly in Twitter web
+
         } else {
-            
-            // TODO: uncomment
+
             NSNotification *notification = [NSNotification notificationWithName:kAFApplicationLaunchedWithURLNotification
                                                                          object:nil
                                                                        userInfo:@{kAFApplicationLaunchOptionsURLKey: url}];
