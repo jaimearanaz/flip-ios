@@ -11,6 +11,7 @@ import Foundation
 enum PhotosErrorType: Int {
     case notEnough
     case cancelled
+    case downloading
     case unknown
 }
 

@@ -13,7 +13,7 @@ class GridPresenter: FLPBasePresenter, GridPresenterDelegate {
     fileprivate var dataSource: DataSourceDelegate!
     fileprivate var controllerDelegate: GridViewControllerDelegate!
     fileprivate var router: RouterDelegate!
-    fileprivate var images = [UIImage]()
+    fileprivate var images = [String]()
     fileprivate var gameSize: GameSize = .small
     
     // MARK: - Public methods
@@ -32,7 +32,7 @@ class GridPresenter: FLPBasePresenter, GridPresenterDelegate {
         return controllerDelegate as? UIViewController
     }
     
-    func showGrid(withImages images: [UIImage], andSize size: GameSize) {
+    func showGrid(withImages images: [String], andSize size: GameSize) {
         
         self.images = images
         gameSize = size
@@ -77,7 +77,7 @@ class GridPresenter: FLPBasePresenter, GridPresenterDelegate {
     
     // MARK: - Private methods
     
-    fileprivate func createGridCells(withImages images: [UIImage]) -> [GridCell] {
+    fileprivate func createGridCells(withImages images: [String]) -> [GridCell] {
     
         var mirroredImages = images
         mirroredImages.append(contentsOf: images)
@@ -85,6 +85,7 @@ class GridPresenter: FLPBasePresenter, GridPresenterDelegate {
         
         var cellsForGrid = [GridCell]()
         var currentIndex = 0
+        
         for image in mirroredImages {
             
             var pairIndex = 0;

@@ -37,7 +37,7 @@ import UINavigationControllerWithCompletionBlock
         }
     }
     
-    func presentGrid(withImages images: [UIImage], andSize size: GameSize, completion: @escaping (()->Void)) {
+    func presentGrid(withImages images: [String], andSize size: GameSize, completion: @escaping (()->Void)) {
 
         let presenter = presenterInstances.gridPresenter
         let viewController = presenterInstances.gridPresenter.viewController()

@@ -56,6 +56,9 @@ class DataSource: DataSourceDelegate {
         case TwitterErrorCancelled:
             error = .cancelled
             break
+        case TwitterErrorDownloading:
+            error = .downloading
+            break
         default:
             error = .unknown
             break

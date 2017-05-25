@@ -60,11 +60,12 @@ class MainPresenter: FLPBasePresenter, MainPresenterDelegate {
         controllerDelegate.startLoadingState()
         
         dataSource.getTwitterPhotos(forSize: size,
-                                    success: { (photos) in
+                                    success: { (images) in
                                         
                                         self.controllerDelegate.stopLoadingState()
-                                        
-                                        // TODO: show grid
+                                        Router.sharedInstance.presentGrid(withImages: images, andSize: size, completion: {
+                                            self.controllerDelegate.showSourceView(withAnimation: false)
+                                        })
         }, failure: { (error) in
             
             self.controllerDelegate.stopLoadingState()
@@ -93,37 +94,47 @@ class MainPresenter: FLPBasePresenter, MainPresenterDelegate {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             
             self.controllerDelegate.stopLoadingState()
-            Router.sharedInstance.presentGrid(withImages: images, andSize: size, completion: {
-                self.controllerDelegate.showSourceView(withAnimation: false)
-            })
+//            Router.sharedInstance.presentGrid(withImages: images, andSize: size, completion: {
+//                self.controllerDelegate.showSourceView(withAnimation: false)
+//            })
         }
     }
 
     fileprivate func showTwitterError(_ error: PhotosErrorType, forSize size: GameSize) {
 
-        if (error == .notEnough) {
-
+        switch error {
+            
+        case .notEnough:
+            
             let localized = NSLocalizedString("MAIN_ENOUGH_PHOTOS_TWITTER",
                                               comment: "Error message when user has not enough users in Twitter")
             let numberOfImages = (size.rawValue / 2)
             let message = String(format: localized, numberOfImages)
             controllerDelegate.showMessage(message)
+            break
             
-        } else if (error == .cancelled) {
+        case .cancelled:
             
             let message = NSLocalizedString("MAIN_CANCELLED_LOGIN", comment: "Error message when user has cancelled login")
             controllerDelegate.showMessage(message)
+            break
             
-        } else {
+        case .downloading:
+            
+            let message = NSLocalizedString("MAIN_ERROR_DOWNLOADING", comment: "Error message when photos downloading fails")
+            controllerDelegate.showMessage(message)
+            break
+            
+        default:
             
             showGenericError()
+            break
         }
     }
     
     fileprivate func showGenericError() {
         
-        let message = NSLocalizedString("MAIN_GENERIC_ERROR",
-                                        comment: "Generic error message for any source of photos")
+        let message = NSLocalizedString("MAIN_GENERIC_ERROR", comment: "Generic error message for any source of photos")
         controllerDelegate.showMessage(message)
     }
 }

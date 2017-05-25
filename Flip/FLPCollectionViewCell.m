@@ -8,6 +8,8 @@
 
 #import "FLPCollectionViewCell.h"
 
+#import <SDWebImage/UIImageView+WebCache.h>
+
 @interface FLPCollectionViewCell ()
 
 @end
@@ -18,7 +20,8 @@
 
 - (void)setupCellWithModel:(nonnull GridCell *)gridCell andNumber:(NSInteger)position;
 {
-    self.userImage.image = gridCell.image;
+    NSURL *url = [NSURL URLWithString:gridCell.image];
+    [self.userImage sd_setImageWithURL:url];
     self.number.text = [NSString stringWithFormat:@"%@", @(position)];
 }
 

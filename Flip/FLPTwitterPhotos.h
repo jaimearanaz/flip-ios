@@ -13,6 +13,7 @@
 typedef enum : NSUInteger {
     TwitterErrorNotEnough,
     TwitterErrorCancelled,
+    TwitterErrorDownloading,
     TwitterErrorUnknown
 } TwitterErrorType;
 

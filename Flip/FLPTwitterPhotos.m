@@ -206,7 +206,7 @@
                                      if (completed == urls.count) {
                                          success(photos);
                                      } else {
-                                         failure(TwitterErrorUnknown);
+                                         failure(TwitterErrorDownloading);
                                      }
                                  }];
 }
