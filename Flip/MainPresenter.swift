@@ -51,8 +51,6 @@ class MainPresenter: FLPBasePresenter, MainPresenterDelegate {
             
             default: break
         }
-        
-        //downloadImages(fromSource: source, size: size)
     }
     
     func getPhotosFromTwitter(forSize size: GameSize) {
