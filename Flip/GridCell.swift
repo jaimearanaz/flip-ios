@@ -10,6 +10,6 @@ import Foundation
 
 @objc class GridCell: NSObject {
     
-    var image: UIImage = UIImage()
+    var image: String = ""
     var equalIndex: Int = 0
 }

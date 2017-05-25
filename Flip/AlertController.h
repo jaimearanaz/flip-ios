@@ -8,20 +8,27 @@
 
 #import <Foundation/Foundation.h>
 
+typedef void (^AlertControllerSheetOptionCompletion)(NSInteger option);
+typedef void (^AlertControllerSheetCancelCompletion)();
+
 @import SDCAlertView;
 
-// Builds and shows alert messages
-@interface DWPAlertController : NSObject
+@interface AlertController : NSObject
 
-// Shows an alert with the given title, message and executes given block when user presses localized ACCEPT buttom
 + (void)showAlertWithMessage:(NSString *)message title:(NSString *)title completionBlock:(void (^)(void))completion;
 
-// Shows an alert with the given, title, message and custom buttons, and executes blocks according user answer
 + (void)showAlertWithMessage:(NSString *)message
                        title:(NSString *)title
             firstButtonTitle:(NSString *)firstTitle
            secondButtonTitle:(NSString *)secondTitle
                   firstBlock:(void (^)(void))firstBlock
                  secondBlock:(void (^)(void))secondBlock;
+
++ (void)showActionSheetWithMessage:(NSString *)message
+                             title:(NSString *)title
+                     optionsTitles:(NSArray *)optionsTitles
+                     optionsBlocks:(NSArray *)optionsBlocks
+                       cancelTitle:(NSString *)cancelTitle
+                       cancelBlock:(AlertControllerSheetCancelCompletion)cancelBlock;
 
 @end

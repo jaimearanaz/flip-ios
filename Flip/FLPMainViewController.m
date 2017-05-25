@@ -165,9 +165,14 @@
     [self updateRecordsIfReady];
 }
 
-- (void)showSourceView
+- (void)showSourceViewWithAnimation:(BOOL)withAnimation
 {
-    [self showSourceView:NO];
+    [self showSourceView:withAnimation];
+}
+
+- (void)showMessage:(NSString *)message
+{
+    [AlertController showAlertWithMessage:message title:@"" completionBlock:^{}];
 }
 
 #pragma mark - Private methods

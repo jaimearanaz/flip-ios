@@ -8,14 +8,10 @@
 
 #import <AFNetworking/AFNetworking.h>
 //#import <FacebookSDK/FacebookSDK.h>
+#import "AFOAuth1Client.h"
 
 #import "FLPAppDelegate.h"
-#import "FLPLogFormatter.h"
 #import "FLPMainScrenViewController.h"
-
-#import "DDASLLogger.h"
-#import "DDLog.h"
-#import "DDTTYLogger.h"
 
 @implementation FLPAppDelegate
 
@@ -75,69 +71,26 @@
  }
  */
 
-/**
- *  Sets all log frameworks levels
- */
-- (void)setLogLevels
-{
-#ifdef DEBUG
-    FLPLogDebug(@"Set debug log levels");
-    int appLogLevel = LOG_LEVEL_VERBOSE;
-#else
-    int appLogLevel = LOG_LEVEL_WARN;
-#endif
-    
-    // App logs
-    [DDLog addLogger:[DDASLLogger sharedInstance] withLevel:appLogLevel];
-    [DDLog addLogger:[DDTTYLogger sharedInstance] withLevel:appLogLevel];
-    FLPLogFormatter* logFormatter = [FLPLogFormatter new];
-    [[DDASLLogger sharedInstance] setLogFormatter:logFormatter];
-    [[DDTTYLogger sharedInstance] setLogFormatter:logFormatter];
-}
-
-/**
- *  Checks if given callback URL responds to Facebook callback
- *  @return YES if callback URL responds to Facebook callback, NO otherwise
- */
-- (bool)handleFacebookUrl:(NSURL *)callbackUrl
-{
-    return false;
-    // TODO: uncoment
-    //return [FBSession.activeSession handleOpenURL:callbackUrl];
-}
-
-/**
- *  Checks if given callback URL responds to Twitter callback
- *  @return YES if callback URL responds to Twitter callback, NO otherwise
- */
-- (bool)handleTwitterUrl:(NSURL *)callbackUrl
-{
-    return ([[callbackUrl scheme] rangeOfString:@"mobioakflip"].location != NSNotFound);
-}
-
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
-    FLPLogDebug(@"url %@", url);
-    
-    // Callback from Facebook web login
     if ([self handleFacebookUrl:url]) {
+        
         return YES;
         
-    // Callback from Twitter web login
-    } else if ([self handleTwitterUrl:url]) {
+    } else if ([self isUrlFromTwitterLogin:url]) {
         
-        // User has canceled Twitter login
-        if ([[url absoluteString] rangeOfString:@"denied="].location != NSNotFound) {
+        BOOL userHasCanceled = ([[url absoluteString] rangeOfString:@"denied="].location != NSNotFound);
+        
+        if (userHasCanceled) {
+            
             [[NSNotificationCenter defaultCenter] postNotificationName:FLP_WEB_LOGIN_TWITTER_CANCELED_NOTIFICATION object:nil];
-            
-        // User logged successfuly in Twitter web
+
         } else {
-            
-            // TODO: uncomment
-//            NSNotification *notification = [NSNotification notificationWithName:kAFApplicationLaunchedWithURLNotification
-//                                                                         object:nil
-//                                                                       userInfo:@{kAFApplicationLaunchOptionsURLKey: url}];
-//            [[NSNotificationCenter defaultCenter] postNotification:notification];
+
+            NSNotification *notification = [NSNotification notificationWithName:kAFApplicationLaunchedWithURLNotification
+                                                                         object:nil
+                                                                       userInfo:@{kAFApplicationLaunchOptionsURLKey: url}];
+            [[NSNotificationCenter defaultCenter] postNotification:notification];
         }
         return YES;
     }
@@ -170,6 +123,24 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+#pragma mark - Private methods
+
+/**
+ *  Checks if given callback URL responds to Facebook callback
+ *  @return YES if callback URL responds to Facebook callback, NO otherwise
+ */
+- (bool)handleFacebookUrl:(NSURL *)callbackUrl
+{
+    return false;
+    // TODO: uncoment
+    //return [FBSession.activeSession handleOpenURL:callbackUrl];
+}
+
+- (bool)isUrlFromTwitterLogin:(NSURL *)url
+{
+    return ([[url scheme] rangeOfString:@"mobioakflip"].location != NSNotFound);
 }
 
 @end

@@ -127,11 +127,11 @@
 {
     [self pauseTimer];
 
-    [DWPAlertController showAlertWithMessage:NSLocalizedString(@"GRID_EXIT_CONFIRM", @"")
-                                       title:@""
-                            firstButtonTitle:NSLocalizedString(@"OTHER_CANCEL", @"")
-                           secondButtonTitle:NSLocalizedString(@"GRID_EXIT", @"")
-                                  firstBlock:^{
+    [AlertController showAlertWithMessage:NSLocalizedString(@"GRID_EXIT_CONFIRM", @"")
+                                    title:@""
+                         firstButtonTitle:NSLocalizedString(@"OTHER_CANCEL", @"")
+                        secondButtonTitle:NSLocalizedString(@"GRID_EXIT", @"")
+                               firstBlock:^{
                                       
                                       [self resumeTimer];
                                   }

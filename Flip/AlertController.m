@@ -6,9 +6,9 @@
 //  Copyright (c) 2015 Corpora360. All rights reserved.
 //
 
-#import "DWPAlertController.h"
+#import "AlertController.h"
 
-@implementation DWPAlertController
+@implementation AlertController
 
 #pragma mark - Public methods
 
@@ -61,6 +61,47 @@
                                                  }
                                              }]];
 
+    dispatch_async(dispatch_get_main_queue(), ^(void){
+        [alert presentAnimated:YES completion:nil];
+    });
+}
+
++ (void)showActionSheetWithMessage:(NSString *)message
+                             title:(NSString *)title
+                     optionsTitles:(NSArray *)optionsTitles
+                     optionsBlocks:(NSArray *)optionsBlocks
+                       cancelTitle:(NSString *)cancelTitle
+                       cancelBlock:(AlertControllerSheetCancelCompletion)cancelBlock
+
+{
+    if (optionsTitles.count != optionsBlocks.count) {
+        return;
+    }
+    
+    SDCAlertController *alert = [[SDCAlertController alloc] initWithTitle:title
+                                                                  message:message
+                                                           preferredStyle:SDCAlertControllerStyleActionSheet];
+    
+    [alert add:[[SDCAlertAction alloc] initWithTitle:cancelTitle
+                                               style:SDCAlertActionStyleDestructive
+                                             handler:^(SDCAlertAction * _Nonnull action) {
+                                                 
+                                                 if (cancelBlock) {
+                                                     cancelBlock();
+                                                 }
+                                             }]];
+    
+    for (int i = 0; i < optionsTitles.count; i++) {
+        
+        [alert add:[[SDCAlertAction alloc] initWithTitle:optionsTitles[i]
+                                                   style:SDCAlertActionStyleNormal
+                                                 handler:^(SDCAlertAction * _Nonnull action) {
+                                                     
+                                                    AlertControllerSheetOptionCompletion completion = optionsBlocks[i];
+                                                    completion(i);
+                                                 }]];
+    }
+    
     dispatch_async(dispatch_get_main_queue(), ^(void){
         [alert presentAnimated:YES completion:nil];
     });
