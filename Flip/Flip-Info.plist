@@ -48,6 +48,15 @@
 	<string>798572336849605</string>
 	<key>FacebookDisplayName</key>
 	<string>Flip Your Photos</string>
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+        <string>fbapi</string>
+        <string>fb-messenger-api</string>
+        <string>fbauth2</string>
+        <string>fbshareextension</string>
+    </array>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Download your friend's profile pictures and use them in the grid</string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
 	<key>LSRequiresIPhoneOS</key>

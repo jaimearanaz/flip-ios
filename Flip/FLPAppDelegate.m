@@ -6,17 +6,21 @@
 //  Copyright (c) 2014 MobiOak. All rights reserved.
 //
 
+#import "FLPAppDelegate.h"
+
 #import <AFNetworking/AFNetworking.h>
 //#import <FacebookSDK/FacebookSDK.h>
 #import "AFOAuth1Client.h"
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
 
-#import "FLPAppDelegate.h"
 #import "FLPMainScrenViewController.h"
 
 @implementation FLPAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
+    
     CGRect frame = [UIScreen mainScreen].bounds;
     self.window = [[UIWindow alloc] initWithFrame:frame];
     self.window.backgroundColor = [UIColor whiteColor];
@@ -74,7 +78,13 @@
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
     if ([self handleFacebookUrl:url]) {
-        
+
+//        BOOL handled = [[FBSDKApplicationDelegate sharedInstance] application:application
+//                                                                      openURL:url
+//                                                            sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]
+//                                                                   annotation:options[UIApplicationOpenURLOptionsAnnotationKey]];
+//        return handled;
+
         return YES;
         
     } else if ([self isUrlFromTwitterLogin:url]) {
