@@ -13,6 +13,7 @@ class DataSource: DataSourceDelegate {
     // TODO: use dependency injection
     fileprivate var defaults = Defaults()
     fileprivate var twitterPhotos = FLPTwitterPhotos()
+    fileprivate var facebookPhotos = FacebookPhotos()
     
     // MARK: - DataSourceDelegate methods
     
@@ -31,9 +32,9 @@ class DataSource: DataSourceDelegate {
                           failure: @escaping ((_ error: PhotosErrorType) -> Void)) {
         
         let numberOfPhotos = (size.rawValue / 2)
-        twitterPhotos.getPhotos(numberOfPhotos, success: { (pics) in
+        twitterPhotos.getPhotos(numberOfPhotos, success: { (images) in
             
-            let photos = pics as! [String]
+            let photos = images as! [String]
             success(photos)
             
         }, failure: { (error) in
@@ -41,6 +42,23 @@ class DataSource: DataSourceDelegate {
             let photosError = self.photosError(fromTwitterError: error)
             failure(photosError)
         })
+    }
+    
+    
+    func getFacebookPhotos(forSize size: GameSize,
+                           inViewController viewController: AnyObject,
+                           success: @escaping ((_ photos: [String]) -> Void),
+                           failure: @escaping ((_ error: PhotosErrorType) -> Void)) {
+        
+        let numberOfPhotos = (size.rawValue / 2)
+        facebookPhotos.getPhotos(numberOfPhotos,
+                                 inViewController: viewController,
+                                 success: { (images) in
+                                    
+        }, failure: { (error) in
+            
+        })
+        
     }
     
     // MARK: - Private methods

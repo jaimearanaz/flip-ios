@@ -75,15 +75,16 @@
  }
  */
 
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation
 {
-    if ([self handleFacebookUrl:url]) {
-
-//        BOOL handled = [[FBSDKApplicationDelegate sharedInstance] application:application
-//                                                                      openURL:url
-//                                                            sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]
-//                                                                   annotation:options[UIApplicationOpenURLOptionsAnnotationKey]];
-//        return handled;
+    BOOL isFacebookUrl = [[FBSDKApplicationDelegate sharedInstance] application:application
+                                                                        openURL:url
+                                                              sourceApplication:sourceApplication
+                                                                     annotation:annotation];
+    if (isFacebookUrl) {
 
         return YES;
         
@@ -136,17 +137,6 @@
 }
 
 #pragma mark - Private methods
-
-/**
- *  Checks if given callback URL responds to Facebook callback
- *  @return YES if callback URL responds to Facebook callback, NO otherwise
- */
-- (bool)handleFacebookUrl:(NSURL *)callbackUrl
-{
-    return false;
-    // TODO: uncoment
-    //return [FBSession.activeSession handleOpenURL:callbackUrl];
-}
 
 - (bool)isUrlFromTwitterLogin:(NSURL *)url
 {

@@ -49,27 +49,13 @@ class MainPresenter: FLPBasePresenter, MainPresenterDelegate {
                 getPhotosFromTwitter(forSize: size)
                 break
             
+            case .facebook:
+                
+                getPhotosFromFacebook(forSize: size)
+                break
+            
             default: break
         }
-    }
-    
-    func getPhotosFromTwitter(forSize size: GameSize) {
-        
-        controllerDelegate.startLoadingState()
-        
-        dataSource.getTwitterPhotos(forSize: size,
-                                    success: { (images) in
-                                        
-                                        self.controllerDelegate.stopLoadingState()
-                                        Router.sharedInstance.presentGrid(withImages: images, andSize: size, completion: {
-                                            self.controllerDelegate.showSourceView(withAnimation: false)
-                                        })
-        }, failure: { (error) in
-            
-            self.controllerDelegate.stopLoadingState()
-            self.controllerDelegate.showSourceView(withAnimation: true)
-            self.showTwitterError(error, forSize: size)
-        })
     }
     
     // MARK: - Private methods
@@ -96,6 +82,52 @@ class MainPresenter: FLPBasePresenter, MainPresenterDelegate {
 //                self.controllerDelegate.showSourceView(withAnimation: false)
 //            })
         }
+    }
+    
+    fileprivate func getPhotosFromFacebook(forSize size: GameSize) {
+        
+        controllerDelegate.startLoadingState()
+        
+        dataSource.getFacebookPhotos(forSize: size,
+                                     inViewController: viewController()!,
+                                     success: { (images) in
+                                        
+                                        self.stopLoadingAndPresentGrid(withImages: images, andSize: size)
+                                        
+        }, failure: { (error) in
+            
+            self.controllerDelegate.stopLoadingState()
+            self.controllerDelegate.showSourceView(withAnimation: true)
+            
+            // TODO: implement generic method for source erros
+            //self.showTwitterError(error, forSize: size)
+        })
+    }
+    
+    fileprivate func getPhotosFromTwitter(forSize size: GameSize) {
+        
+        controllerDelegate.startLoadingState()
+        
+        dataSource.getTwitterPhotos(forSize: size,
+                                    success: { (images) in
+                                        
+                                        self.stopLoadingAndPresentGrid(withImages: images, andSize: size)
+        }, failure: { (error) in
+            
+            self.controllerDelegate.stopLoadingState()
+            self.controllerDelegate.showSourceView(withAnimation: true)
+            
+            // TODO: implement generic method for source erros
+            self.showTwitterError(error, forSize: size)
+        })
+    }
+    
+    fileprivate func stopLoadingAndPresentGrid(withImages images: [String], andSize size: GameSize) {
+        
+        self.controllerDelegate.stopLoadingState()
+        Router.sharedInstance.presentGrid(withImages: images, andSize: size, completion: {
+            self.controllerDelegate.showSourceView(withAnimation: false)
+        })
     }
 
     fileprivate func showTwitterError(_ error: PhotosErrorType, forSize size: GameSize) {
