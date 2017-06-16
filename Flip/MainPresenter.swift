@@ -98,9 +98,7 @@ class MainPresenter: FLPBasePresenter, MainPresenterDelegate {
             
             self.controllerDelegate.stopLoadingState()
             self.controllerDelegate.showSourceView(withAnimation: true)
-            
-            // TODO: implement generic method for source erros
-            //self.showTwitterError(error, forSize: size)
+            self.showError(error, forSource: .facebook, andSize: size)
         })
     }
     
@@ -116,9 +114,7 @@ class MainPresenter: FLPBasePresenter, MainPresenterDelegate {
             
             self.controllerDelegate.stopLoadingState()
             self.controllerDelegate.showSourceView(withAnimation: true)
-            
-            // TODO: implement generic method for source erros
-            self.showTwitterError(error, forSize: size)
+            self.showError(error, forSource: .twitter, andSize: size)
         })
     }
     
@@ -130,17 +126,13 @@ class MainPresenter: FLPBasePresenter, MainPresenterDelegate {
         })
     }
 
-    fileprivate func showTwitterError(_ error: PhotosErrorType, forSize size: GameSize) {
+    fileprivate func showError(_ error: PhotosErrorType, forSource source: GameSource, andSize size: GameSize) {
 
         switch error {
             
         case .notEnough:
             
-            let localized = NSLocalizedString("MAIN_ENOUGH_PHOTOS_TWITTER",
-                                              comment: "Error message when user has not enough users in Twitter")
-            let numberOfImages = (size.rawValue / 2)
-            let message = String(format: localized, numberOfImages)
-            controllerDelegate.showMessage(message)
+            showNotEnoughError(forSource: source)
             break
             
         case .cancelled:
@@ -160,6 +152,29 @@ class MainPresenter: FLPBasePresenter, MainPresenterDelegate {
             showGenericError()
             break
         }
+    }
+    
+    fileprivate func showNotEnoughError(forSource source: GameSource) {
+        
+        var message = ""
+        
+        switch source {
+            
+        case .twitter:
+            message = NSLocalizedString("MAIN_ENOUGH_PHOTOS_TWITTER",
+                                        comment: "Error message when user has not enough followings in Twitter")
+            break
+        case .facebook:
+            message = NSLocalizedString("MAIN_ENOUGH_PHOTOS_FACEBOOK",
+                                        comment: "Error message when user has not enough friends in Facebook")
+            break
+        case .camera:
+            message = NSLocalizedString("MAIN_ENOUGH_PHOTOS_CAMERA",
+                                        comment: "Error message when user has not enough photos in Camera")
+            break
+        }
+        
+        controllerDelegate.showMessage(message)
     }
     
     fileprivate func showGenericError() {
