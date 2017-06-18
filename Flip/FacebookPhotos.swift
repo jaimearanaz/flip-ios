@@ -21,9 +21,12 @@ enum FacebookErrorType {
 
 class FacebookPhotos {
     
+    fileprivate var photosIds = [String]()
+    
     // MARK: - Public methods
     
-    fileprivate let permissions = ["public_profile", "user_friends", "email"]
+    //fileprivate let permissions = ["public_profile", "user_friends", "email", "user_photos"]
+    fileprivate let permissions = ["user_photos"]
     
     func getPhotos(_ numOfPhotos: Int,
                    inViewController viewController: AnyObject,
@@ -36,6 +39,8 @@ class FacebookPhotos {
             
             if (hasToken) {
 
+                getUserPhotos()
+                
             } else {
                 
                 loginInFacebook(withViewController: viewController, success: success, failure: failure)
@@ -60,8 +65,60 @@ class FacebookPhotos {
                                  from: viewController,
                                  handler: { (result, error) in
 
+                                    if (error != nil) {
+                                        
+                                        self.getUserPhotos()
+                                        
+                                    } else {
+                                        
+                                        failure(.unknown)
+                                    }
+                                    
             })
             
         }
+    }
+    
+    func getUserPhotos(after: String = "") {
+        
+        var parameters = ["type": "uploaded", "fields": "id"]
+        if (!after.isEmpty) {
+            parameters["after"] = after
+        }
+        let request = FBSDKGraphRequest.init(graphPath: "me/photos", parameters: parameters)
+        
+        _ = request?.start(completionHandler: { (connection, result, error) in
+            
+            if (error == nil) {
+
+                if let dictionary = result as? Dictionary<String, AnyObject> {
+                 
+                    if let data = dictionary["data"] as? [AnyObject] {
+
+                        _ = data.map({
+                            
+                            if let onePhoto = $0 as? Dictionary<String, String> {
+                             
+                                self.photosIds.append(onePhoto["id"] ?? "")
+                            }
+                        })
+                    }
+
+                    if let paging = dictionary["paging"] as? Dictionary<String, AnyObject>,
+                        let cursors = paging["cursors"] as? Dictionary<String, AnyObject>,
+                        let after = cursors["after"] as? String {
+                        
+                        self.getUserPhotos(after: after)
+                        
+                    } else {
+                        
+                        print(self.photosIds.count)
+                    }
+                }
+                
+            } else {
+                // TODO: error
+            }
+        })
     }
 }
