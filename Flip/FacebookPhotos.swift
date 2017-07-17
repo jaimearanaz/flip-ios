@@ -36,9 +36,21 @@ class FacebookPhotos {
             
             let hasToken = (FBSDKAccessToken.current() != nil)
             if (hasToken) {
-                getUserPhotos(numOfPhotos: numOfPhotos, success: success, failure: failure)
+                
+                let hasEnough = (photosUrls.count >= numOfPhotos)
+                if (hasEnough) {
+                    let random = self.photosUrls[randomPick: numOfPhotos]
+                    success(random)
+                } else {
+                    getUserPhotos(numOfPhotos: numOfPhotos, success: success, failure: failure)
+                }
+
             } else {
-                loginInFacebook(numOfPhotos: numOfPhotos, withViewController: viewController, success: success, failure: failure)
+                
+                loginAndGetUserPhotos(numOfPhotos: numOfPhotos,
+                                      withViewController: viewController,
+                                      success: success,
+                                      failure: failure)
             }
 
         } else {
@@ -49,10 +61,10 @@ class FacebookPhotos {
     
     // MARK: - Private methods
     
-    fileprivate func loginInFacebook(numOfPhotos: Int,
-                                     withViewController viewController: AnyObject,
-                                     success: @escaping ((_ photos: [String]) -> Void),
-                                     failure: @escaping ((_ error: FacebookErrorType) -> Void)) {
+    fileprivate func loginAndGetUserPhotos(numOfPhotos: Int,
+                                           withViewController viewController: AnyObject,
+                                           success: @escaping ((_ photos: [String]) -> Void),
+                                           failure: @escaping ((_ error: FacebookErrorType) -> Void)) {
     
         if let viewController = viewController as? UIViewController {
             
