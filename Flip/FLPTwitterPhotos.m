@@ -24,7 +24,6 @@
 @property (nonatomic) NSString *oauthToken;
 @property (nonatomic) NSString *oauthTokenSecret;
 @property (nonatomic) NSString *screenName;
-@property (nonatomic, copy, nullable) void (^successBlock)(NSArray *photos);
 @property (nonatomic, copy, nullable) void (^failureBlock)(TwitterErrorType error);
 @property (nonatomic, nullable) STTwitterAPI *twitterApi;
 @property (nonatomic) NSInteger numberOfPhotos;
@@ -56,7 +55,6 @@
 
 - (void)getPhotos:(NSInteger)numberOfPhotos success:(void(^)(NSArray* photos))success failure:(void(^)(TwitterErrorType error))failure
 {
-    self.successBlock = success;
     self.failureBlock = failure;
     self.numberOfPhotos = numberOfPhotos;
     BOOL userIsLogged = (self.accountInfo != nil);
@@ -77,7 +75,7 @@
         NSArray *urls = [self.photosUrls selectRandom:self.numberOfPhotos];
         success(urls);
     } else {
-        [self getFollowingsAndContinueWithAccount:self.accountInfo success:success failure:failure];
+        [self getFollowingsWithSuccess:success failure:failure];
     }
 }
 
@@ -86,13 +84,13 @@
     [PFTwitterSignOn setCredentialsWithConsumerKey:self.consumerKey andSecret:self.secretKey];
     [self subscribeToTwitterCancelNotifications];
     
-    // Two possible ways to login in Twitter:
-    // 1) through an account setup in the device, if exists
-    // 2) if not, through a webview requesting Twitter login page; AppDelete will be called with the response
+    // Ways to login in Twitter:
+    // 1) there is one or more accounts setup in the device settings
+    // 2) use a webview with Twitter official login page; AppDelegate will be called with the response and will launch a notification to us
     
     [PFTwitterSignOn requestAuthenticationWithSelectCallback:^(NSArray *accounts, twitterAccountCallback callback) {
         
-        // User has more than one account in the device, show action sheet to pick one
+        // User has more than one account in the device, so show action sheet to pick one
         
         [self showActionSheetWithAccounts:accounts
                                   success:^(ACAccount *selectedAccount) {
@@ -104,12 +102,6 @@
         // User logged in, via device account or Twitter website
         
         [self unsubscribeFromTwitterCancelNotifications];
-        
-        // Steps to retrieve followings photos:
-        // 1. Get followings IDs
-        // 2. Get descriptions for these IDs
-        // 3. Get avatar URLs from these descriptions
-        // 3. Download N avatar photos
         
         if (!error) {
             self.accountInfo = accountInfo;
@@ -153,20 +145,19 @@
                                     cancelBlock:cancelBlock];
 }
 
-- (void)getFollowingsAndContinueWithAccount:(NSDictionary *)accountInfo
-                                    success:(void(^)(NSArray *photos))success
-                                    failure:(void(^)(TwitterErrorType error))failure
+- (void)getFollowingsWithSuccess:(void(^)(NSArray *photos))success
+                         failure:(void(^)(TwitterErrorType error))failure
 {
-    BOOL validAccountInfo = (accountInfo != nil) && (accountInfo.count >= 3);
+    BOOL validAccountInfo = (self.accountInfo != nil) && (self.accountInfo.count >= 3);
     
     if (!validAccountInfo) {
         failure(TwitterErrorUnknown);
         return;
     }
     
-    self.oauthToken = accountInfo[@"accessToken"];
-    self.oauthTokenSecret = accountInfo[@"tokenSecret"];
-    self.screenName = accountInfo[@"screen_name"];
+    self.oauthToken = self.accountInfo[@"accessToken"];
+    self.oauthTokenSecret = self.accountInfo[@"tokenSecret"];
+    self.screenName = self.accountInfo[@"screen_name"];
     
     self.twitterApi = [STTwitterAPI twitterAPIWithOAuthConsumerKey:self.consumerKey
                                                     consumerSecret:self.secretKey
@@ -175,15 +166,15 @@
     
     [self.twitterApi getFriendsIDsForScreenName:self.screenName
                                    successBlock:^(NSArray *followings) {
-                                       [self getDescriptionsAndContinueWithFollowings:followings succes:success failure:failure];
+                                       [self getDescriptionForFollowings:followings succes:success failure:failure];
                                    } errorBlock:^(NSError *error) {
                                          failure(TwitterErrorUnknown);
                                      }];
 }
 
-- (void)getDescriptionsAndContinueWithFollowings:(NSArray *)followings
-                                          succes:(void(^)(NSArray *photos))success
-                                         failure:(void(^)(TwitterErrorType error))failure
+- (void)getDescriptionForFollowings:(NSArray *)followings
+                             succes:(void(^)(NSArray *photos))success
+                            failure:(void(^)(TwitterErrorType error))failure
 {
     NSMutableArray *all = [[NSMutableArray alloc] init];
     [self getAllDescriptionsForFollowings:followings
@@ -237,7 +228,6 @@
                                                                         lastIndex:lastIndex + length
                                                                            succes:success
                                                                           failure:failure];
-                                            
                                         } else {
                                             
                                             success(newAllDescriptions);
