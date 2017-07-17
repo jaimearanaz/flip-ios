@@ -28,7 +28,8 @@
 @property (nonatomic, copy, nullable) void (^failureBlock)(TwitterErrorType error);
 @property (nonatomic, nullable) STTwitterAPI *twitterApi;
 @property (nonatomic) NSInteger numberOfPhotos;
-@property (nonatomic) NSArray *photosUrls;
+@property (strong, nonatomic) NSArray *photosUrls;
+@property (strong, nonatomic) NSDictionary *accountInfo;
 
 @end
 
@@ -58,7 +59,30 @@
     self.successBlock = success;
     self.failureBlock = failure;
     self.numberOfPhotos = numberOfPhotos;
+    BOOL userIsLogged = (self.accountInfo != nil);
     
+    if (userIsLogged) {
+        [self getLoggedUserPhotosWithSuccess:success failure:failure];
+    } else {
+        [self getNotLoggedUserPhotosWithSuccess:success failure:failure];
+    }
+}
+
+#pragma mark - Private methods
+
+- (void)getLoggedUserPhotosWithSuccess:(void(^)(NSArray* photos))success failure:(void(^)(TwitterErrorType error))failure
+{
+    BOOL hasEnough = ((self.photosUrls) && (self.photosUrls.count >= self.numberOfPhotos));
+    if (hasEnough) {
+        NSArray *urls = [self.photosUrls selectRandom:self.numberOfPhotos];
+        success(urls);
+    } else {
+        [self getFollowingsAndContinueWithAccount:self.accountInfo success:success failure:failure];
+    }
+}
+
+- (void)getNotLoggedUserPhotosWithSuccess:(void(^)(NSArray* photos))success failure:(void(^)(TwitterErrorType error))failure
+{
     [PFTwitterSignOn setCredentialsWithConsumerKey:self.consumerKey andSecret:self.secretKey];
     [self subscribeToTwitterCancelNotifications];
     
@@ -74,10 +98,10 @@
                                   success:^(ACAccount *selectedAccount) {
                                       callback(selectedAccount);
                                   } failure: failure];
-    
+        
     } andCompletion:^(NSDictionary *accountInfo, NSError *error) {
-    
-        // User tried login, via device account or Twitter website
+        
+        // User logged in, via device account or Twitter website
         
         [self unsubscribeFromTwitterCancelNotifications];
         
@@ -88,22 +112,13 @@
         // 3. Download N avatar photos
         
         if (!error) {
-            
-            BOOL hasEnough = ((self.photosUrls) && (self.photosUrls.count >= numberOfPhotos));
-            if (hasEnough) {
-                NSArray *urls = [self.photosUrls selectRandom:self.numberOfPhotos];
-                success(urls);
-            } else {
-                [self getFollowingsAndContinueWithAccount:accountInfo success:success failure:failure];
-            }
-
+            self.accountInfo = accountInfo;
+           [self getLoggedUserPhotosWithSuccess:success failure:failure];
         } else {
             failure(TwitterErrorUnknown);
         }
     }];
 }
-
-#pragma mark - Private methods
 
 - (void)showActionSheetWithAccounts:(NSArray *)accounts
                             success:(void(^)(ACAccount *selectedAccount))success
