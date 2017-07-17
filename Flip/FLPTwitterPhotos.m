@@ -13,6 +13,7 @@
 #import <Accounts/ACAccount.h>
 
 #import "AlertController.h"
+#import "NSArray+Extras.h"
 
 @interface FLPTwitterPhotos()
 
@@ -158,7 +159,8 @@
                                           succes:(void(^)(NSArray *photos))success
                                          failure:(void(^)(TwitterErrorType error))failure
 {
-    NSArray *randomUsers = [self selectRandom:100 fromUsers:[NSMutableArray arrayWithArray:followings]];
+    [followings selectRandom:100];
+    NSArray *randomUsers = [followings selectRandom:100];
     NSString *allUsers = [randomUsers componentsJoinedByString:@","];
     
     [self.twitterApi getUsersLookupForScreenName:nil
@@ -170,8 +172,8 @@
                                         BOOL areEnough = (validUsers.count >= self.numberOfPhotos);
                                         
                                         if (areEnough) {
-                                            
-                                            NSArray *randomUsers = [self selectRandom:self.numberOfPhotos fromUsers:validUsers];
+
+                                            NSArray *randomUsers = [validUsers selectRandom:self.numberOfPhotos];
                                             NSArray *urls = [self getURLsFromUsers:randomUsers];
                                             success(urls);
                                             
@@ -212,28 +214,6 @@
     }];
 
     return usersWithAvatar;
-}
-
-- (NSArray *)selectRandom:(NSInteger)number fromUsers:(NSArray *)users
-{
-    NSMutableArray *usersMutable = [NSMutableArray arrayWithArray:users];
-    NSMutableArray *result = [[NSMutableArray alloc] init];
-    BOOL hasEnoughUsers = (usersMutable.count > number);
-    
-    if (hasEnoughUsers) {
-        
-        for (int i = 0; i < number; i++) {
-            NSInteger randomIndex = arc4random() % usersMutable.count;
-            [result addObject:[usersMutable objectAtIndex:randomIndex]];
-            [usersMutable removeObjectAtIndex:randomIndex];
-        }
-        
-    } else {
-        
-        [result addObjectsFromArray:usersMutable];
-    }
-    
-    return result;
 }
 
 - (void)twitterLoginCanceledNotification
