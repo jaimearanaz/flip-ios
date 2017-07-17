@@ -44,7 +44,6 @@ class DataSource: DataSourceDelegate {
         })
     }
     
-    
     func getFacebookPhotos(forSize size: GameSize,
                            inViewController viewController: AnyObject,
                            success: @escaping ((_ photos: [String]) -> Void),
@@ -55,10 +54,13 @@ class DataSource: DataSourceDelegate {
                                  inViewController: viewController,
                                  success: { (images) in
                                     
+                                    success(images)
+                                    
         }, failure: { (error) in
             
+            let photosError = self.photosError(fromFacebookError: error)
+            failure(photosError)
         })
-        
     }
     
     // MARK: - Private methods
@@ -75,6 +77,28 @@ class DataSource: DataSourceDelegate {
             error = .cancelled
             break
         case TwitterErrorDownloading:
+            error = .downloading
+            break
+        default:
+            error = .unknown
+            break
+        }
+        
+        return error
+    }
+    
+    fileprivate func photosError(fromFacebookError facebookError: FacebookErrorType) -> PhotosErrorType {
+        
+        var error: PhotosErrorType!
+        
+        switch facebookError {
+        case .notEnough:
+            error = .notEnough
+            break
+        case .cancelled:
+            error = .cancelled
+            break
+        case .downloading:
             error = .downloading
             break
         default:

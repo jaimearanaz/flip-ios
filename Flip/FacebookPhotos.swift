@@ -21,11 +21,10 @@ enum FacebookErrorType {
 
 class FacebookPhotos {
     
-    fileprivate var photosIds = [String]()
+    fileprivate var photosUrls = [String]()
     
     // MARK: - Public methods
-    
-    //fileprivate let permissions = ["public_profile", "user_friends", "email", "user_photos"]
+
     fileprivate let permissions = ["user_photos"]
     
     func getPhotos(_ numOfPhotos: Int,
@@ -36,14 +35,10 @@ class FacebookPhotos {
         if let viewController = viewController as? UIViewController {
             
             let hasToken = (FBSDKAccessToken.current() != nil)
-            
             if (hasToken) {
-
-                getUserPhotos()
-                
+                getUserPhotos(numOfPhotos: numOfPhotos, success: success, failure: failure)
             } else {
-                
-                loginInFacebook(withViewController: viewController, success: success, failure: failure)
+                loginInFacebook(numOfPhotos: numOfPhotos, withViewController: viewController, success: success, failure: failure)
             }
 
         } else {
@@ -54,9 +49,10 @@ class FacebookPhotos {
     
     // MARK: - Private methods
     
-    func loginInFacebook(withViewController viewController: AnyObject,
-                         success: @escaping ((_ photos: [String]) -> Void),
-                         failure: @escaping ((_ error: FacebookErrorType) -> Void)) {
+    fileprivate func loginInFacebook(numOfPhotos: Int,
+                                     withViewController viewController: AnyObject,
+                                     success: @escaping ((_ photos: [String]) -> Void),
+                                     failure: @escaping ((_ error: FacebookErrorType) -> Void)) {
     
         if let viewController = viewController as? UIViewController {
             
@@ -66,22 +62,20 @@ class FacebookPhotos {
                                  handler: { (result, error) in
 
                                     if (error != nil) {
-                                        
-                                        self.getUserPhotos()
-                                        
+                                        self.getUserPhotos(numOfPhotos: numOfPhotos, success: success, failure: failure)
                                     } else {
-                                        
                                         failure(.unknown)
                                     }
-                                    
             })
-            
         }
     }
     
-    func getUserPhotos(after: String = "") {
+    fileprivate func getUserPhotos(after: String = "",
+                                   numOfPhotos: Int,
+                                   success: @escaping ((_ photos: [String]) -> Void),
+                                   failure: @escaping ((_ error: FacebookErrorType) -> Void)) {
         
-        var parameters = ["type": "uploaded", "fields": "id"]
+        var parameters = ["type": "uploaded", "fields": "images"]
         if (!after.isEmpty) {
             parameters["after"] = after
         }
@@ -92,33 +86,59 @@ class FacebookPhotos {
             if (error == nil) {
 
                 if let dictionary = result as? Dictionary<String, AnyObject> {
-                 
                     if let data = dictionary["data"] as? [AnyObject] {
-
-                        _ = data.map({
-                            
-                            if let onePhoto = $0 as? Dictionary<String, String> {
-                             
-                                self.photosIds.append(onePhoto["id"] ?? "")
-                            }
-                        })
+                        let urls = self.getUrls(fromPhotos: data)
+                        self.photosUrls.append(contentsOf: urls)
                     }
 
                     if let paging = dictionary["paging"] as? Dictionary<String, AnyObject>,
                         let cursors = paging["cursors"] as? Dictionary<String, AnyObject>,
                         let after = cursors["after"] as? String {
-                        
-                        self.getUserPhotos(after: after)
-                        
+                        self.getUserPhotos(after: after, numOfPhotos: numOfPhotos, success: success, failure: failure)
                     } else {
-                        
-                        print(self.photosIds.count)
+                        let enough = (self.photosUrls.count >= numOfPhotos)
+                        if (enough) {
+                            let random = self.photosUrls[randomPick: numOfPhotos]
+                            success(random)
+                        } else {
+                            failure(.notEnough)
+                        }
                     }
                 }
                 
             } else {
-                // TODO: error
+                failure(.downloading)
             }
         })
+    }
+    
+    fileprivate func getUrls(fromPhotos photos: [AnyObject]) -> [String] {
+        
+        var urls = [String]()
+        
+        _ = photos.map({
+            if let onePhoto = $0 as? Dictionary<String, AnyObject> {
+                
+                let images = onePhoto["images"] as? [AnyObject]
+                let maxResolution: Int32 = 320
+                var higherResolution: Int32 = 0
+                var source = ""
+                
+                for oneImage in images! {
+                    if let height = oneImage["height"] as? Int32, let imageSource = oneImage["source"] as? String {
+                        let isBetterResolution = (higherResolution == 0) || ((height > higherResolution) && (height <= maxResolution)) ||
+                            ((higherResolution > maxResolution) && (height <= maxResolution))
+                        if (isBetterResolution) {
+                            higherResolution = height
+                            source = imageSource
+                        }
+                    }
+                }
+                
+                urls.append(source)
+            }
+        })
+        
+        return urls
     }
 }
