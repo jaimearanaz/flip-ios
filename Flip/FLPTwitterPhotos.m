@@ -172,9 +172,9 @@
                                         if (areEnough) {
                                             
                                             NSArray *randomUsers = [self selectRandom:self.numberOfPhotos fromUsers:validUsers];
-                                            [self downloadPhotosFromUsers:randomUsers
-                                                                   succes:success
-                                                                  failure:failure];
+                                            NSArray *urls = [self getURLsFromUsers:randomUsers];
+                                            success(urls);
+                                            
                                         } else {
                                             
                                             failure(TwitterErrorNotEnough);
@@ -186,29 +186,17 @@
                                     }];
 }
 
-- (void)downloadPhotosFromUsers:(NSArray *)users
-                         succes:(void(^)(NSArray* photos))success
-                        failure:(void(^)(TwitterErrorType error))failure
+- (NSArray *)getURLsFromUsers:(NSArray *)users
 {
     NSMutableArray *urls = [[NSMutableArray alloc] init];
-    NSMutableArray *photos = [[NSMutableArray alloc] init];
     [users enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull oneUser, NSUInteger idx, BOOL * _Nonnull stop) {
         
         NSString *imageString = [oneUser objectForKey:@"profile_image_url"];
         imageString = [imageString stringByReplacingOccurrencesOfString:@"_normal" withString:@"_bigger"];
-        [photos addObject:imageString];
-        [urls addObject:[NSURL URLWithString:imageString]];
+        [urls addObject:imageString];
     }];
     
-    [ImageDownloader downloadAndCacheImages:urls
-                                 completion:^(NSUInteger completed, NSUInteger skipped) {
-        
-                                     if (completed == urls.count) {
-                                         success(photos);
-                                     } else {
-                                         failure(TwitterErrorDownloading);
-                                     }
-                                 }];
+    return urls;
 }
 
 - (NSArray *)filterUsersWithAvatar:(NSArray *)users

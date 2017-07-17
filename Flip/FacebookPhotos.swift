@@ -107,6 +107,7 @@ class FacebookPhotos {
                 }
                 
             } else {
+                
                 failure(.downloading)
             }
         })

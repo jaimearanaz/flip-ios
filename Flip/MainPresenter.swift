@@ -59,31 +59,7 @@ class MainPresenter: FLPBasePresenter, MainPresenterDelegate {
     }
     
     // MARK: - Private methods
-    
-    // TODO: delete?
-    fileprivate func downloadImages(fromSource source: GameSource, size: GameSize) {
-        
-        controllerDelegate.startLoadingState()
-        
-        let numberOfImages = (size.rawValue / 2)
-        var images = [UIImage]()
-        
-        for index in 1...numberOfImages {
-            
-            let name = "photo_\(index).jpg"
-            let oneImage = UIImage(named: name)
-            images.append(oneImage!)
-        }
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            
-            self.controllerDelegate.stopLoadingState()
-//            Router.sharedInstance.presentGrid(withImages: images, andSize: size, completion: {
-//                self.controllerDelegate.showSourceView(withAnimation: false)
-//            })
-        }
-    }
-    
+
     fileprivate func getPhotosFromFacebook(forSize size: GameSize) {
         
         controllerDelegate.startLoadingState()
@@ -92,13 +68,11 @@ class MainPresenter: FLPBasePresenter, MainPresenterDelegate {
                                      inViewController: viewController()!,
                                      success: { (images) in
                                         
-                                        self.stopLoadingAndPresentGrid(withImages: images, andSize: size)
+                                        self.downloadImagesAndPresentGrid(images: images, forSource: .facebook, andSize: size)
                                         
         }, failure: { (error) in
             
-            self.controllerDelegate.stopLoadingState()
-            self.controllerDelegate.showSourceView(withAnimation: true)
-            self.showError(error, forSource: .facebook, andSize: size)
+            self.stopLoadingAndShowError(error: error, forSource: .facebook, andSize: size)
         })
     }
     
@@ -109,12 +83,26 @@ class MainPresenter: FLPBasePresenter, MainPresenterDelegate {
         dataSource.getTwitterPhotos(forSize: size,
                                     success: { (images) in
                                         
-                                        self.stopLoadingAndPresentGrid(withImages: images, andSize: size)
+                                        self.downloadImagesAndPresentGrid(images: images, forSource: .twitter, andSize: size)
         }, failure: { (error) in
             
-            self.controllerDelegate.stopLoadingState()
-            self.controllerDelegate.showSourceView(withAnimation: true)
-            self.showError(error, forSource: .twitter, andSize: size)
+            self.stopLoadingAndShowError(error: error, forSource: .twitter, andSize: size)
+        })
+    }
+    
+    fileprivate func downloadImagesAndPresentGrid(images: [String], forSource source: GameSource, andSize size: GameSize) {
+        
+        var urls = [URL]()
+        _ = images.map {
+            urls.append(URL(string: $0)!)
+        }
+        
+        ImageDownloader.downloadAndCacheImages(urls, completion: { (success) in
+            if (success) {
+                self.stopLoadingAndPresentGrid(withImages: images, andSize: size)
+            } else {
+                self.stopLoadingAndShowError(error: .downloading, forSource: source, andSize: size)
+            }
         })
     }
     
@@ -124,6 +112,13 @@ class MainPresenter: FLPBasePresenter, MainPresenterDelegate {
         Router.sharedInstance.presentGrid(withImages: images, andSize: size, completion: {
             self.controllerDelegate.showSourceView(withAnimation: false)
         })
+    }
+    
+    fileprivate func stopLoadingAndShowError(error: PhotosErrorType, forSource source: GameSource, andSize size: GameSize) {
+        
+        self.controllerDelegate.stopLoadingState()
+        self.controllerDelegate.showSourceView(withAnimation: true)
+        self.showError(error, forSource: source, andSize: size)
     }
 
     fileprivate func showError(_ error: PhotosErrorType, forSource source: GameSource, andSize size: GameSize) {
