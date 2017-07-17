@@ -15,6 +15,8 @@
 #import "AlertController.h"
 #import "NSArray+Extras.h"
 
+#define kMaxFollowingsPerRequest 100
+
 @interface FLPTwitterPhotos()
 
 @property (nonatomic) NSString *secretKey;
@@ -26,6 +28,7 @@
 @property (nonatomic, copy, nullable) void (^failureBlock)(TwitterErrorType error);
 @property (nonatomic, nullable) STTwitterAPI *twitterApi;
 @property (nonatomic) NSInteger numberOfPhotos;
+@property (nonatomic) NSArray *photosUrls;
 
 @end
 
@@ -85,7 +88,15 @@
         // 3. Download N avatar photos
         
         if (!error) {
-            [self getFollowingsAndContinueWithAccount:accountInfo success:success failure:failure];
+            
+            BOOL hasEnough = ((self.photosUrls) && (self.photosUrls.count >= numberOfPhotos));
+            if (hasEnough) {
+                NSArray *urls = [self.photosUrls selectRandom:self.numberOfPhotos];
+                success(urls);
+            } else {
+                [self getFollowingsAndContinueWithAccount:accountInfo success:success failure:failure];
+            }
+
         } else {
             failure(TwitterErrorUnknown);
         }
@@ -159,27 +170,62 @@
                                           succes:(void(^)(NSArray *photos))success
                                          failure:(void(^)(TwitterErrorType error))failure
 {
-    [followings selectRandom:100];
-    NSArray *randomUsers = [followings selectRandom:100];
-    NSString *allUsers = [randomUsers componentsJoinedByString:@","];
+    NSMutableArray *all = [[NSMutableArray alloc] init];
+    [self getAllDescriptionsForFollowings:followings
+                             descriptions:all
+                                lastIndex:0
+                                   succes:^(NSArray *descriptions) {
+                                      
+                                       BOOL areEnough = (descriptions.count >= self.numberOfPhotos);
+                                       if (areEnough) {
+                                           
+                                           self.photosUrls = [self getURLsFromDescriptions:descriptions];
+                                           NSArray *urls = [self.photosUrls selectRandom:self.numberOfPhotos];
+                                           success(urls);
+                                           
+                                       } else {
+                                           
+                                           failure(TwitterErrorNotEnough);
+                                       }
+                                       
+                                   } failure:^(TwitterErrorType error) {
+                                       
+                                   }];
+}
+
+- (void)getAllDescriptionsForFollowings:(NSArray *)followings
+                           descriptions:(NSMutableArray *)allDescriptions
+                              lastIndex:(NSInteger)lastIndex
+                                 succes:(void(^)(NSArray *descriptions))success
+                                failure:(void(^)(TwitterErrorType error))failure
+{
+    BOOL lastCall = ((lastIndex + kMaxFollowingsPerRequest) >= followings.count);
+    NSInteger length = (lastCall) ? (followings.count - lastIndex) : kMaxFollowingsPerRequest;
+    NSRange range = NSMakeRange(lastIndex, length);
+    NSArray *subFollowings = [followings subarrayWithRange:range];
+    NSString *ids = [subFollowings componentsJoinedByString:@","];
     
     [self.twitterApi getUsersLookupForScreenName:nil
-                                        orUserID:allUsers
+                                        orUserID:ids
                                  includeEntities:0
                                     successBlock:^(NSArray *descriptions) {
                                         
                                         NSArray *validUsers = [self filterUsersWithAvatar:descriptions];
-                                        BOOL areEnough = (validUsers.count >= self.numberOfPhotos);
+                                        NSArray *partialDescriptions = [allDescriptions arrayByAddingObjectsFromArray:validUsers];
+                                        NSMutableArray *newAllDescriptions = [NSMutableArray arrayWithArray:partialDescriptions];
+                                        BOOL moreFollowings = (length == kMaxFollowingsPerRequest);
                                         
-                                        if (areEnough) {
-
-                                            NSArray *randomUsers = [validUsers selectRandom:self.numberOfPhotos];
-                                            NSArray *urls = [self getURLsFromUsers:randomUsers];
-                                            success(urls);
+                                        if (moreFollowings) {
+                                            
+                                            [self getAllDescriptionsForFollowings:followings
+                                                                     descriptions:newAllDescriptions
+                                                                        lastIndex:lastIndex + length
+                                                                           succes:success
+                                                                          failure:failure];
                                             
                                         } else {
                                             
-                                            failure(TwitterErrorNotEnough);
+                                            success(newAllDescriptions);
                                         }
                                         
                                     } errorBlock:^(NSError *error) {
@@ -188,10 +234,10 @@
                                     }];
 }
 
-- (NSArray *)getURLsFromUsers:(NSArray *)users
+- (NSArray *)getURLsFromDescriptions:(NSArray *)descriptions
 {
     NSMutableArray *urls = [[NSMutableArray alloc] init];
-    [users enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull oneUser, NSUInteger idx, BOOL * _Nonnull stop) {
+    [descriptions enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull oneUser, NSUInteger idx, BOOL * _Nonnull stop) {
         
         NSString *imageString = [oneUser objectForKey:@"profile_image_url"];
         imageString = [imageString stringByReplacingOccurrencesOfString:@"_normal" withString:@"_bigger"];
