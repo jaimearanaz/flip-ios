@@ -13,6 +13,7 @@ class DataSource: DataSourceDelegate {
     // TODO: use dependency injection
     fileprivate var defaults = Defaults()
     fileprivate var twitterPhotos = FLPTwitterPhotos()
+    fileprivate var facebookPhotos = FacebookPhotos()
     
     // MARK: - DataSourceDelegate methods
     
@@ -31,14 +32,33 @@ class DataSource: DataSourceDelegate {
                           failure: @escaping ((_ error: PhotosErrorType) -> Void)) {
         
         let numberOfPhotos = (size.rawValue / 2)
-        twitterPhotos.getPhotos(numberOfPhotos, success: { (pics) in
+        twitterPhotos.getPhotos(numberOfPhotos, success: { (images) in
             
-            let photos = pics as! [String]
+            let photos = images as! [String]
             success(photos)
             
         }, failure: { (error) in
             
             let photosError = self.photosError(fromTwitterError: error)
+            failure(photosError)
+        })
+    }
+    
+    func getFacebookPhotos(forSize size: GameSize,
+                           inViewController viewController: AnyObject,
+                           success: @escaping ((_ photos: [String]) -> Void),
+                           failure: @escaping ((_ error: PhotosErrorType) -> Void)) {
+        
+        let numberOfPhotos = (size.rawValue / 2)
+        facebookPhotos.getPhotos(numberOfPhotos,
+                                 inViewController: viewController,
+                                 success: { (images) in
+                                    
+                                    success(images)
+                                    
+        }, failure: { (error) in
+            
+            let photosError = self.photosError(fromFacebookError: error)
             failure(photosError)
         })
     }
@@ -57,6 +77,28 @@ class DataSource: DataSourceDelegate {
             error = .cancelled
             break
         case TwitterErrorDownloading:
+            error = .downloading
+            break
+        default:
+            error = .unknown
+            break
+        }
+        
+        return error
+    }
+    
+    fileprivate func photosError(fromFacebookError facebookError: FacebookErrorType) -> PhotosErrorType {
+        
+        var error: PhotosErrorType!
+        
+        switch facebookError {
+        case .notEnough:
+            error = .notEnough
+            break
+        case .cancelled:
+            error = .cancelled
+            break
+        case .downloading:
             error = .downloading
             break
         default:

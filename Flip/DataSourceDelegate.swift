@@ -24,4 +24,9 @@ protocol DataSourceDelegate {
     func getTwitterPhotos(forSize size: GameSize,
                           success: @escaping ((_ photos: [String]) -> Void),
                           failure: @escaping ((_ error: PhotosErrorType) -> Void))
+    
+    func getFacebookPhotos(forSize size: GameSize,
+                           inViewController viewController: AnyObject,
+                           success: @escaping ((_ photos: [String]) -> Void),
+                           failure: @escaping ((_ error: PhotosErrorType) -> Void))
 }

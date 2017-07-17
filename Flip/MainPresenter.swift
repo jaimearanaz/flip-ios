@@ -49,66 +49,85 @@ class MainPresenter: FLPBasePresenter, MainPresenterDelegate {
                 getPhotosFromTwitter(forSize: size)
                 break
             
+            case .facebook:
+                
+                getPhotosFromFacebook(forSize: size)
+                break
+            
             default: break
         }
     }
     
-    func getPhotosFromTwitter(forSize size: GameSize) {
+    // MARK: - Private methods
+
+    fileprivate func getPhotosFromFacebook(forSize size: GameSize) {
+        
+        controllerDelegate.startLoadingState()
+        
+        dataSource.getFacebookPhotos(forSize: size,
+                                     inViewController: viewController()!,
+                                     success: { (images) in
+                                        
+                                        self.downloadImagesAndPresentGrid(images: images, forSource: .facebook, andSize: size)
+                                        
+        }, failure: { (error) in
+            
+            self.stopLoadingAndShowError(error: error, forSource: .facebook, andSize: size)
+        })
+    }
+    
+    fileprivate func getPhotosFromTwitter(forSize size: GameSize) {
         
         controllerDelegate.startLoadingState()
         
         dataSource.getTwitterPhotos(forSize: size,
                                     success: { (images) in
                                         
-                                        self.controllerDelegate.stopLoadingState()
-                                        Router.sharedInstance.presentGrid(withImages: images, andSize: size, completion: {
-                                            self.controllerDelegate.showSourceView(withAnimation: false)
-                                        })
+                                        self.downloadImagesAndPresentGrid(images: images, forSource: .twitter, andSize: size)
         }, failure: { (error) in
             
-            self.controllerDelegate.stopLoadingState()
-            self.controllerDelegate.showSourceView(withAnimation: true)
-            self.showTwitterError(error, forSize: size)
+            self.stopLoadingAndShowError(error: error, forSource: .twitter, andSize: size)
         })
     }
     
-    // MARK: - Private methods
+    fileprivate func downloadImagesAndPresentGrid(images: [String], forSource source: GameSource, andSize size: GameSize) {
+        
+        var urls = [URL]()
+        _ = images.map {
+            urls.append(URL(string: $0)!)
+        }
+        
+        ImageDownloader.downloadAndCacheImages(urls, completion: { (success) in
+            if (success) {
+                self.stopLoadingAndPresentGrid(withImages: images, andSize: size)
+            } else {
+                self.stopLoadingAndShowError(error: .downloading, forSource: source, andSize: size)
+            }
+        })
+    }
     
-    // TODO: delete?
-    fileprivate func downloadImages(fromSource source: GameSource, size: GameSize) {
+    fileprivate func stopLoadingAndPresentGrid(withImages images: [String], andSize size: GameSize) {
         
-        controllerDelegate.startLoadingState()
+        self.controllerDelegate.stopLoadingState()
+        Router.sharedInstance.presentGrid(withImages: images, andSize: size, completion: {
+            self.controllerDelegate.showSourceView(withAnimation: false)
+        })
+    }
+    
+    fileprivate func stopLoadingAndShowError(error: PhotosErrorType, forSource source: GameSource, andSize size: GameSize) {
         
-        let numberOfImages = (size.rawValue / 2)
-        var images = [UIImage]()
-        
-        for index in 1...numberOfImages {
-            
-            let name = "photo_\(index).jpg"
-            let oneImage = UIImage(named: name)
-            images.append(oneImage!)
-        }
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            
-            self.controllerDelegate.stopLoadingState()
-//            Router.sharedInstance.presentGrid(withImages: images, andSize: size, completion: {
-//                self.controllerDelegate.showSourceView(withAnimation: false)
-//            })
-        }
+        self.controllerDelegate.stopLoadingState()
+        self.controllerDelegate.showSourceView(withAnimation: true)
+        self.showError(error, forSource: source, andSize: size)
     }
 
-    fileprivate func showTwitterError(_ error: PhotosErrorType, forSize size: GameSize) {
+    fileprivate func showError(_ error: PhotosErrorType, forSource source: GameSource, andSize size: GameSize) {
 
         switch error {
             
         case .notEnough:
             
-            let localized = NSLocalizedString("MAIN_ENOUGH_PHOTOS_TWITTER",
-                                              comment: "Error message when user has not enough users in Twitter")
-            let numberOfImages = (size.rawValue / 2)
-            let message = String(format: localized, numberOfImages)
-            controllerDelegate.showMessage(message)
+            showNotEnoughError(forSource: source)
             break
             
         case .cancelled:
@@ -128,6 +147,29 @@ class MainPresenter: FLPBasePresenter, MainPresenterDelegate {
             showGenericError()
             break
         }
+    }
+    
+    fileprivate func showNotEnoughError(forSource source: GameSource) {
+        
+        var message = ""
+        
+        switch source {
+            
+        case .twitter:
+            message = NSLocalizedString("MAIN_ENOUGH_PHOTOS_TWITTER",
+                                        comment: "Error message when user has not enough followings in Twitter")
+            break
+        case .facebook:
+            message = NSLocalizedString("MAIN_ENOUGH_PHOTOS_FACEBOOK",
+                                        comment: "Error message when user has not enough friends in Facebook")
+            break
+        case .camera:
+            message = NSLocalizedString("MAIN_ENOUGH_PHOTOS_CAMERA",
+                                        comment: "Error message when user has not enough photos in Camera")
+            break
+        }
+        
+        controllerDelegate.showMessage(message)
     }
     
     fileprivate func showGenericError() {

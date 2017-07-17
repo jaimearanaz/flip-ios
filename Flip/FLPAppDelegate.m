@@ -6,17 +6,21 @@
 //  Copyright (c) 2014 MobiOak. All rights reserved.
 //
 
+#import "FLPAppDelegate.h"
+
 #import <AFNetworking/AFNetworking.h>
 //#import <FacebookSDK/FacebookSDK.h>
 #import "AFOAuth1Client.h"
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
 
-#import "FLPAppDelegate.h"
 #import "FLPMainScrenViewController.h"
 
 @implementation FLPAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
+    
     CGRect frame = [UIScreen mainScreen].bounds;
     self.window = [[UIWindow alloc] initWithFrame:frame];
     self.window.backgroundColor = [UIColor whiteColor];
@@ -71,10 +75,17 @@
  }
  */
 
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation
 {
-    if ([self handleFacebookUrl:url]) {
-        
+    BOOL isFacebookUrl = [[FBSDKApplicationDelegate sharedInstance] application:application
+                                                                        openURL:url
+                                                              sourceApplication:sourceApplication
+                                                                     annotation:annotation];
+    if (isFacebookUrl) {
+
         return YES;
         
     } else if ([self isUrlFromTwitterLogin:url]) {
@@ -126,17 +137,6 @@
 }
 
 #pragma mark - Private methods
-
-/**
- *  Checks if given callback URL responds to Facebook callback
- *  @return YES if callback URL responds to Facebook callback, NO otherwise
- */
-- (bool)handleFacebookUrl:(NSURL *)callbackUrl
-{
-    return false;
-    // TODO: uncoment
-    //return [FBSession.activeSession handleOpenURL:callbackUrl];
-}
 
 - (bool)isUrlFromTwitterLogin:(NSURL *)url
 {
