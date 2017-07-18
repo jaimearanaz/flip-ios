@@ -175,7 +175,7 @@
     [AlertController showAlertWithMessage:message title:@"" completionBlock:^{}];
 }
 
-- (void)showMessage:(NSString *)message yes:(void (^)(void))yes no:(void (^)(void))no
+- (void)show3GWarningMessageWithYes:(void (^)(void))yes no:(void (^)(void))no
 {
     [AlertController showAlertWithMessage:NSLocalizedString(@"MAIN_3G_CONNECTION", "Warning about use of data connection")
                                     title:nil

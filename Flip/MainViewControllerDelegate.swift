@@ -20,5 +20,5 @@ import Foundation
     
     func showMessage(_ message: String)
     
-    func showMessage(_ message: String, yes: (() -> Void), no: (() -> Void))
+    func show3GWarningMessage(yes: (() -> Void), no: (() -> Void))
 }
