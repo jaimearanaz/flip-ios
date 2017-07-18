@@ -33,6 +33,15 @@ class CameraPhotos {
             let result = PHAsset.fetchAssets(with: .image, options: nil)
             
             var manager = PHImageManager.default()
+
+            result.enumerateObjects({ asset, index, stop in
+                
+                if let asset = asset as? PHAsset {
+                    let date = asset.creationDate
+                    print("\(date)")
+                }
+                
+            })
             
         }, notGranted: {
             
