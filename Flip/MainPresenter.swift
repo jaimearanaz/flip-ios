@@ -11,9 +11,12 @@ import UIKit
 
 class MainPresenter: FLPBasePresenter, MainPresenterDelegate {
     
+    fileprivate let reachabilityHost = "www.google.com"
     fileprivate var controllerDelegate: MainViewControllerDelegate!
     fileprivate var router: RouterDelegate!
     fileprivate var dataSource: DataSourceDelegate!
+    fileprivate var gameSource = GameSource.unkown
+    fileprivate var gameSize = GameSize.unkown
     fileprivate var is3GAllowed = false
     
     // MARK: - Public methods
@@ -43,73 +46,97 @@ class MainPresenter: FLPBasePresenter, MainPresenterDelegate {
     
     func didSelectOptions(source: GameSource, size: GameSize) {
         
-        let reachability = Reachability(hostName: "www.google.com")
-        let underWifi = reachability?.currentReachabilityStatus() == ReachableViaWiFi
-        
-        if (underWifi) || (is3GAllowed) {
-            getPhotos(forSource: source, andSize: size)
-        } else {
-            show3GWarningBeforeGetPhotos(forSource: source, andSize: size)
-        }
-    }
-    
-    fileprivate func getPhotos(forSource source: GameSource, andSize size: GameSize) {
+        gameSource = source
+        gameSize = size
         
         switch source {
-            
-        case .twitter:
-            getPhotosFromTwitter(forSize: size)
+        case .twitter,
+             .facebook:
+            checkReachabilityAndGetPhotos()
             break
-        case .facebook:
-            getPhotosFromFacebook(forSize: size)
+        case .camera:
             break
         default: break
         }
     }
     
-    fileprivate func show3GWarningBeforeGetPhotos(forSource source: GameSource, andSize size: GameSize) {
+    // MARK: - Private methods
+    
+    fileprivate func checkReachabilityAndGetPhotos() {
+        
+        let reachability = Reachability(hostName: reachabilityHost)
+        let isConnectionAvailable = (reachability?.currentReachabilityStatus() != NotReachable)
+        
+        if (isConnectionAvailable) {
+            checkConnectionTypeAndGetPhotos()
+        } else {
+            let message = NSLocalizedString("MAIN_INERNET_CONNECTION", comment: "Error when there is no connection")
+            controllerDelegate.showMessage(message)
+        }
+    }
+    
+    fileprivate func checkConnectionTypeAndGetPhotos() {
+        
+        let reachability = Reachability(hostName: reachabilityHost)
+        let underWifi = (reachability?.currentReachabilityStatus() == ReachableViaWiFi)
+        
+        if (underWifi) || (is3GAllowed) {
+            getPhotos()
+        } else {
+            show3GWarningBeforeGettingPhotos()
+        }
+    }
+    
+    fileprivate func show3GWarningBeforeGettingPhotos() {
         
         controllerDelegate.show3GWarningMessage(yes: {
             is3GAllowed = true
-            getPhotos(forSource: source, andSize: size)
+            getPhotos()
         }, no: {
             is3GAllowed = false
         })
     }
     
-    // MARK: - Private methods
+    fileprivate func getPhotos() {
+        
+        if (gameSource == .twitter) {
+            getPhotosFromTwitter()
+        } else {
+            getPhotosFromFacebook()
+        }
+    }
 
-    fileprivate func getPhotosFromFacebook(forSize size: GameSize) {
+    fileprivate func getPhotosFromFacebook() {
         
         controllerDelegate.startLoadingState()
         
-        dataSource.getFacebookPhotos(forSize: size,
+        dataSource.getFacebookPhotos(forSize: gameSize,
                                      inViewController: viewController()!,
                                      success: { (images) in
                                         
-                                        self.downloadImagesAndPresentGrid(images: images, forSource: .facebook, andSize: size)
+                                        self.downloadImagesAndPresentGrid(images: images)
                                         
         }, failure: { (error) in
             
-            self.stopLoadingAndShowError(error: error, forSource: .facebook, andSize: size)
+            self.stopLoadingAndShowError(error: error)
         })
     }
     
-    fileprivate func getPhotosFromTwitter(forSize size: GameSize) {
+    fileprivate func getPhotosFromTwitter() {
         
         controllerDelegate.startLoadingState()
         
-        dataSource.getTwitterPhotos(forSize: size,
+        dataSource.getTwitterPhotos(forSize: gameSize,
                                     success: { (images) in
                                         
-                                        self.downloadImagesAndPresentGrid(images: images, forSource: .twitter, andSize: size)
+                                        self.downloadImagesAndPresentGrid(images: images)
         }, failure: { (error) in
             
-            self.stopLoadingAndShowError(error: error, forSource: .twitter, andSize: size)
+            self.stopLoadingAndShowError(error: error)
         })
     }
     
-    fileprivate func downloadImagesAndPresentGrid(images: [String], forSource source: GameSource, andSize size: GameSize) {
+    fileprivate func downloadImagesAndPresentGrid(images: [String]) {
         
         var urls = [URL]()
         _ = images.map {
@@ -118,35 +145,35 @@ class MainPresenter: FLPBasePresenter, MainPresenterDelegate {
         
         ImageDownloader.downloadAndCacheImages(urls, completion: { (success) in
             if (success) {
-                self.stopLoadingAndPresentGrid(withImages: images, andSize: size)
+                self.stopLoadingAndPresentGrid(withImages: images)
             } else {
-                self.stopLoadingAndShowError(error: .downloading, forSource: source, andSize: size)
+                self.stopLoadingAndShowError(error: .downloading)
             }
         })
     }
     
-    fileprivate func stopLoadingAndPresentGrid(withImages images: [String], andSize size: GameSize) {
+    fileprivate func stopLoadingAndPresentGrid(withImages images: [String]) {
         
         self.controllerDelegate.stopLoadingState()
-        Router.sharedInstance.presentGrid(withImages: images, andSize: size, completion: {
+        Router.sharedInstance.presentGrid(withImages: images, andSize: gameSize, completion: {
             self.controllerDelegate.showSourceView(withAnimation: false)
         })
     }
     
-    fileprivate func stopLoadingAndShowError(error: PhotosErrorType, forSource source: GameSource, andSize size: GameSize) {
+    fileprivate func stopLoadingAndShowError(error: PhotosErrorType) {
         
         self.controllerDelegate.stopLoadingState()
         self.controllerDelegate.showSourceView(withAnimation: true)
-        self.showError(error, forSource: source, andSize: size)
+        self.showError(error)
     }
 
-    fileprivate func showError(_ error: PhotosErrorType, forSource source: GameSource, andSize size: GameSize) {
+    fileprivate func showError(_ error: PhotosErrorType) {
 
         switch error {
             
         case .notEnough:
             
-            showNotEnoughError(forSource: source)
+            showNotEnoughError()
             break
             
         case .cancelled:
@@ -168,11 +195,11 @@ class MainPresenter: FLPBasePresenter, MainPresenterDelegate {
         }
     }
     
-    fileprivate func showNotEnoughError(forSource source: GameSource) {
+    fileprivate func showNotEnoughError() {
         
         var message = ""
         
-        switch source {
+        switch gameSource {
             
         case .twitter:
             message = NSLocalizedString("MAIN_ENOUGH_PHOTOS_TWITTER",
@@ -185,6 +212,8 @@ class MainPresenter: FLPBasePresenter, MainPresenterDelegate {
         case .camera:
             message = NSLocalizedString("MAIN_ENOUGH_PHOTOS_CAMERA",
                                         comment: "Error message when user has not enough photos in Camera")
+            break
+        default:
             break
         }
         
