@@ -14,7 +14,7 @@
 
 + (void)showAlertWithMessage:(NSString *)message title:(NSString *)title completionBlock:(void (^)(void))completion
 {
-    NSString *action = NSLocalizedString(@"ACCEPT", @"Accept button");
+    NSString *action = NSLocalizedString(@"OTHER_OK", @"Accept button");
 
     SDCAlertController *alert = [[SDCAlertController alloc] initWithTitle:title
                                                                   message:message
