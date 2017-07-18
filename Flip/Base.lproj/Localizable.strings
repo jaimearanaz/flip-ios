@@ -30,6 +30,9 @@
 "MAIN_START" = "Start new game";
 "MAIN_LOGIN_ERROR_FACEBOOK" = "There was an error login with Facebook. Please try again.";
 "MAIN_LOGIN_ERROR_TWITTER" = "There was an error login with Twitter. Please try again.";
+"MAIN_3G_CONNECTION" = "Your device data connection will be used to download photos. Do you want to continue?";
+"MAIN_3G_CONNECTION_YES" = "Download";
+"MAIN_3G_CONNECTION_NO" = "Cancel";
 
 // Grid screen
 "GRID_EXIT" = "Exit";

@@ -14,6 +14,7 @@ class MainPresenter: FLPBasePresenter, MainPresenterDelegate {
     fileprivate var controllerDelegate: MainViewControllerDelegate!
     fileprivate var router: RouterDelegate!
     fileprivate var dataSource: DataSourceDelegate!
+    fileprivate var is3GAllowed = false
     
     // MARK: - Public methods
     
@@ -42,20 +43,38 @@ class MainPresenter: FLPBasePresenter, MainPresenterDelegate {
     
     func didSelectOptions(source: GameSource, size: GameSize) {
         
+        let reachability = Reachability(hostName: "www.google.com")
+        let underWifi = reachability?.currentReachabilityStatus() == ReachableViaWiFi
+        
+        if (underWifi) || (is3GAllowed) {
+            getPhotos(forSource: source, andSize: size)
+        } else {
+            show3GWarningBeforeGetPhotos(forSource: source, andSize: size)
+        }
+    }
+    
+    fileprivate func getPhotos(forSource source: GameSource, andSize size: GameSize) {
+        
         switch source {
             
-            case .twitter:
-                
-                getPhotosFromTwitter(forSize: size)
-                break
-            
-            case .facebook:
-                
-                getPhotosFromFacebook(forSize: size)
-                break
-            
-            default: break
+        case .twitter:
+            getPhotosFromTwitter(forSize: size)
+            break
+        case .facebook:
+            getPhotosFromFacebook(forSize: size)
+            break
+        default: break
         }
+    }
+    
+    fileprivate func show3GWarningBeforeGetPhotos(forSource source: GameSource, andSize size: GameSize) {
+        
+        controllerDelegate.show3GWarningMessage(yes: {
+            is3GAllowed = true
+            getPhotos(forSource: source, andSize: size)
+        }, no: {
+            is3GAllowed = false
+        })
     }
     
     // MARK: - Private methods
