@@ -120,6 +120,8 @@ class GridPresenter: FLPBasePresenter, GridPresenterDelegate {
         case .big:
             penalization = errors * GamePenalization.big.rawValue
             break
+        default:
+            break
         }
         
         return penalization
@@ -142,6 +144,8 @@ class GridPresenter: FLPBasePresenter, GridPresenterDelegate {
             case .small:
                 newRecord = (records.small == 0) || (records.small > time)
                 break
+            default:
+                break
             }
             
             completion(newRecord, records)
@@ -160,6 +164,8 @@ class GridPresenter: FLPBasePresenter, GridPresenterDelegate {
             break
         case .small:
             records.small = time
+            break
+        default:
             break
         }
         

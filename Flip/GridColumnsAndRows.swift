@@ -39,7 +39,8 @@ class GridColumnsAndRows {
             return iPhone4and4_7Small
         case .medium:
             return iPhone4and4_7Medium
-        case .big:
+        case .big,
+             .unkown:
             return iPhone4and4_7Big
         }
     }
@@ -54,7 +55,8 @@ class GridColumnsAndRows {
                 return (iPhone5_5AndiPadSmall.rows, iPhone5_5AndiPadSmall.columns)
             case .medium:
                 return (iPhone5_5AndiPadMedium.rows, iPhone5_5AndiPadMedium.columns)
-            case .big:
+            case .big,
+                 .unkown:
                 return (iPhone5_5AndiPadBig.rows, iPhone5_5AndiPadBig.columns)
             }
             
@@ -65,7 +67,8 @@ class GridColumnsAndRows {
                 return iPhone5_5AndiPadSmall
             case .medium:
                 return iPhone5_5AndiPadMedium
-            case .big:
+            case .big,
+                 .unkown:
                 return iPhone5_5AndiPadBig
             }
         }
