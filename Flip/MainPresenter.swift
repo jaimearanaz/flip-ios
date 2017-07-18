@@ -55,6 +55,7 @@ class MainPresenter: FLPBasePresenter, MainPresenterDelegate {
             checkReachabilityAndGetPhotos()
             break
         case .camera:
+            getPhotosFromCamera()
             break
         default: break
         }
@@ -81,7 +82,7 @@ class MainPresenter: FLPBasePresenter, MainPresenterDelegate {
         let underWifi = (reachability?.currentReachabilityStatus() == ReachableViaWiFi)
         
         if (underWifi) || (is3GAllowed) {
-            getPhotos()
+            getPhotosFromRemote()
         } else {
             show3GWarningBeforeGettingPhotos()
         }
@@ -91,13 +92,13 @@ class MainPresenter: FLPBasePresenter, MainPresenterDelegate {
         
         controllerDelegate.show3GWarningMessage(yes: {
             is3GAllowed = true
-            getPhotos()
+            getPhotosFromRemote()
         }, no: {
             is3GAllowed = false
         })
     }
     
-    fileprivate func getPhotos() {
+    fileprivate func getPhotosFromRemote() {
         
         if (gameSource == .twitter) {
             getPhotosFromTwitter()
@@ -130,6 +131,21 @@ class MainPresenter: FLPBasePresenter, MainPresenterDelegate {
                                     success: { (images) in
                                         
                                         self.downloadImagesAndPresentGrid(images: images)
+        }, failure: { (error) in
+            
+            self.stopLoadingAndShowError(error: error)
+        })
+    }
+    
+    fileprivate func getPhotosFromCamera() {
+        
+        controllerDelegate.startLoadingState()
+        
+        dataSource.getCameraPhotos(forSize: gameSize,
+                                   success: { (images) in
+                                    
+                                    self.controllerDelegate.stopLoadingState()
+                                    
         }, failure: { (error) in
             
             self.stopLoadingAndShowError(error: error)

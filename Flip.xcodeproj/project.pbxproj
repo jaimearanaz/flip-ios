@@ -16,6 +16,7 @@
 		6F103A6A1E56D1CD007C0E21 /* GridPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F103A691E56D1CD007C0E21 /* GridPresenter.swift */; };
 		6F103A6C1E56D1F4007C0E21 /* GridPresenterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F103A6B1E56D1F4007C0E21 /* GridPresenterDelegate.swift */; };
 		6F12D9FB1F1DEC320020A60F /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F12D9FA1F1DEC320020A60F /* Reachability.m */; };
+		6F12DA001F1E23950020A60F /* CameraPhotos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F12D9FF1F1E23950020A60F /* CameraPhotos.swift */; };
 		6F19F69B19A3A8870047F269 /* camera-shutter-click-01.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6F19F69A19A3A8870047F269 /* camera-shutter-click-01.wav */; };
 		6F19F69D19A3AC760047F269 /* polaroid-camera-take-picture-01.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6F19F69C19A3AC760047F269 /* polaroid-camera-take-picture-01.wav */; };
 		6F1AA1591973EAA400101766 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F1AA1581973EAA400101766 /* Foundation.framework */; };
@@ -145,6 +146,7 @@
 		6F103A6B1E56D1F4007C0E21 /* GridPresenterDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridPresenterDelegate.swift; sourceTree = "<group>"; };
 		6F12D9F91F1DEC320020A60F /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		6F12D9FA1F1DEC320020A60F /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		6F12D9FF1F1E23950020A60F /* CameraPhotos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraPhotos.swift; sourceTree = "<group>"; };
 		6F19F69A19A3A8870047F269 /* camera-shutter-click-01.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "camera-shutter-click-01.wav"; sourceTree = "<group>"; };
 		6F19F69C19A3AC760047F269 /* polaroid-camera-take-picture-01.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "polaroid-camera-take-picture-01.wav"; sourceTree = "<group>"; };
 		6F1AA1551973EAA400101766 /* Flip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flip.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -464,6 +466,7 @@
 				6F26EA931E8FB5EE00820FD2 /* FLPTwitterPhotos.h */,
 				6F26EA941E8FB5EE00820FD2 /* FLPTwitterPhotos.m */,
 				6F880A511EF4391B005945A0 /* FacebookPhotos.swift */,
+				6F12D9FF1F1E23950020A60F /* CameraPhotos.swift */,
 			);
 			name = photos;
 			sourceTree = "<group>";
@@ -906,6 +909,7 @@
 				6FF528EA1E4F75950081747E /* TitleView.swift in Sources */,
 				6F103A681E56D1A9007C0E21 /* GridViewControllerDelegate.swift in Sources */,
 				6F3935721E8691B100226DCE /* ScoreViewControllerDelegate.swift in Sources */,
+				6F12DA001F1E23950020A60F /* CameraPhotos.swift in Sources */,
 				6F103A6C1E56D1F4007C0E21 /* GridPresenterDelegate.swift in Sources */,
 				6F94697D1E585A08003D102B /* AlertController.m in Sources */,
 				6F5579EB1E4624B4008FB1BB /* Router.swift in Sources */,

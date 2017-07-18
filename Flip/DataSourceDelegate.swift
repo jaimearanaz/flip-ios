@@ -29,4 +29,8 @@ protocol DataSourceDelegate {
                            inViewController viewController: AnyObject,
                            success: @escaping ((_ photos: [String]) -> Void),
                            failure: @escaping ((_ error: PhotosErrorType) -> Void))
+    
+    func getCameraPhotos(forSize size: GameSize,
+                         success: @escaping ((_ photos: [String]) -> Void),
+                         failure: @escaping ((_ error: PhotosErrorType) -> Void))
 }
