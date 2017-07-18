@@ -12,6 +12,7 @@ import Photos
 enum CameraErrorType {
     
     case notEnough
+    case notGranted
     case unknown
 }
 
@@ -23,15 +24,39 @@ class CameraPhotos {
                    success: @escaping ((_ photos: [String]) -> Void),
                    failure: @escaping ((_ error: CameraErrorType) -> Void)) {
         
-
-        let requestOptions = PHImageRequestOptions()
-        requestOptions.resizeMode = .exact
-        requestOptions.deliveryMode = .highQualityFormat
-        requestOptions.isSynchronous = true
-        let result = PHAsset.fetchAssets(with: .image, options: nil)
-
-        var manager = PHImageManager.default()
+        checkPhotoLibraryPermission(granted: {
+            
+            let requestOptions = PHImageRequestOptions()
+            requestOptions.resizeMode = .exact
+            requestOptions.deliveryMode = .highQualityFormat
+            requestOptions.isSynchronous = true
+            let result = PHAsset.fetchAssets(with: .image, options: nil)
+            
+            var manager = PHImageManager.default()
+            
+        }, notGranted: {
+            
+            failure(.notGranted)
+        })
     }
     
     // MARK: - Private methods
+    
+    fileprivate func checkPhotoLibraryPermission(granted: @escaping (()->Void), notGranted: @escaping (()->Void)) {
+        
+        let status = PHPhotoLibrary.authorizationStatus()
+        switch status {
+        case .authorized:
+            granted()
+            break
+        case .denied, .restricted :
+            notGranted()
+            break
+        case .notDetermined:
+            
+            PHPhotoLibrary.requestAuthorization() { status in
+                self.checkPhotoLibraryPermission(granted: granted, notGranted: notGranted)
+            }
+        }
+    }
 }

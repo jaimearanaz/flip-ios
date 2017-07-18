@@ -17,6 +17,7 @@
 		6F103A6C1E56D1F4007C0E21 /* GridPresenterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F103A6B1E56D1F4007C0E21 /* GridPresenterDelegate.swift */; };
 		6F12D9FB1F1DEC320020A60F /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F12D9FA1F1DEC320020A60F /* Reachability.m */; };
 		6F12DA001F1E23950020A60F /* CameraPhotos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F12D9FF1F1E23950020A60F /* CameraPhotos.swift */; };
+		6F12DA021F1E28AB0020A60F /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F12DA011F1E28AB0020A60F /* Photos.framework */; };
 		6F19F69B19A3A8870047F269 /* camera-shutter-click-01.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6F19F69A19A3A8870047F269 /* camera-shutter-click-01.wav */; };
 		6F19F69D19A3AC760047F269 /* polaroid-camera-take-picture-01.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6F19F69C19A3AC760047F269 /* polaroid-camera-take-picture-01.wav */; };
 		6F1AA1591973EAA400101766 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F1AA1581973EAA400101766 /* Foundation.framework */; };
@@ -147,6 +148,7 @@
 		6F12D9F91F1DEC320020A60F /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		6F12D9FA1F1DEC320020A60F /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		6F12D9FF1F1E23950020A60F /* CameraPhotos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraPhotos.swift; sourceTree = "<group>"; };
+		6F12DA011F1E28AB0020A60F /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		6F19F69A19A3A8870047F269 /* camera-shutter-click-01.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "camera-shutter-click-01.wav"; sourceTree = "<group>"; };
 		6F19F69C19A3AC760047F269 /* polaroid-camera-take-picture-01.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "polaroid-camera-take-picture-01.wav"; sourceTree = "<group>"; };
 		6F1AA1551973EAA400101766 /* Flip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flip.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -280,6 +282,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F12DA021F1E28AB0020A60F /* Photos.framework in Frameworks */,
 				6F878308199BB14C00AA118E /* SystemConfiguration.framework in Frameworks */,
 				6F878306199BB14100AA118E /* StoreKit.framework in Frameworks */,
 				6F8922C91ED7FB6B00E65D7E /* FBSDKShareKit.framework in Frameworks */,
@@ -363,6 +366,7 @@
 		6F1AA1571973EAA400101766 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6F12DA011F1E28AB0020A60F /* Photos.framework */,
 				6F8922C21ED7FB6B00E65D7E /* Bolts.framework */,
 				6F8922C31ED7FB6B00E65D7E /* FBSDKCoreKit.framework */,
 				6F8922C41ED7FB6B00E65D7E /* FBSDKLoginKit.framework */,
