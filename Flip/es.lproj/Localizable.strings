@@ -30,6 +30,9 @@
 "MAIN_START" = "Empezar nuevo juego";
 "MAIN_LOGIN_ERROR_FACEBOOK" = "Ha habido un error haciendo login con Facebook. Por favor, inténtalo de nuevo.";
 "MAIN_LOGIN_ERROR_TWITTER" = "Ha habido un error haciendo login con Twitter. Por favor, inténtalo de nuevo.";
+"MAIN_3G_CONNECTION" = "Se usará tu conexión de datos para descargar las fotos. ¿Quieres continuar?";
+"MAIN_3G_CONNECTION_YES" = "Sí, descargar fotos";
+"MAIN_3G_CONNECTION_NO" = "Cancelar";
 
 // Grid screen
 "GRID_EXIT" = "Salir";

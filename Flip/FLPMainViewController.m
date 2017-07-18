@@ -175,6 +175,20 @@
     [AlertController showAlertWithMessage:message title:@"" completionBlock:^{}];
 }
 
+- (void)showMessage:(NSString *)message yes:(void (^)(void))yes no:(void (^)(void))no
+{
+    [AlertController showAlertWithMessage:NSLocalizedString(@"MAIN_3G_CONNECTION", "Warning about use of data connection")
+                                    title:nil
+                         firstButtonTitle:NSLocalizedString(@"MAIN_3G_CONNECTION_YES", "accept use of data connection")
+                        secondButtonTitle:NSLocalizedString(@"MAIN_3G_CONNECTION_NO", "Refuse use of data connection")
+                               firstBlock:^{
+                                   yes();
+                               }
+                              secondBlock:^{
+                                  no();
+                              }];
+}
+
 #pragma mark - Private methods
 
 - (void)updateRecordsIfReady

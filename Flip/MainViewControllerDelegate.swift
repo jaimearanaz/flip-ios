@@ -19,4 +19,6 @@ import Foundation
     func showSourceView(withAnimation: Bool)
     
     func showMessage(_ message: String)
+    
+    func showMessage(_ message: String, yes: (() -> Void), no: (() -> Void))
 }
