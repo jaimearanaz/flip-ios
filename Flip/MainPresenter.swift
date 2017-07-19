@@ -91,16 +91,16 @@ class MainPresenter: FLPBasePresenter, MainPresenterDelegate {
     fileprivate func show3GWarningBeforeGettingPhotos() {
         
         let message = NSLocalizedString("MAIN_3G_CONNECTION", comment: "Warning about use of data connection")
-        let leftTitle = NSLocalizedString("MAIN_3G_CONNECTION_YES", comment: "Accept use of data connection")
-        let rightTitle = NSLocalizedString("MAIN_3G_CONNECTION_NO", comment: "Refuse use of data connection")
+        let rightTitle = NSLocalizedString("MAIN_3G_CONNECTION_YES", comment: "Accept use of data connection")
+        let leftTitle = NSLocalizedString("MAIN_3G_CONNECTION_NO", comment: "Refuse use of data connection")
         
         let mainMessage = MainMessage(message: message, leftTitle: leftTitle, rightTitle: rightTitle)
         
         controllerDelegate.showMessage(mainMessage, leftOption: {
+            is3GAllowed = false
+        }, rightOption: {
             is3GAllowed = true
             getPhotosFromRemote()
-        }, rightOption: {
-            is3GAllowed = false
         })
     }
     
@@ -267,13 +267,13 @@ class MainPresenter: FLPBasePresenter, MainPresenterDelegate {
     fileprivate func showNotGrantedError() {
         
         let message = NSLocalizedString("MAIN_NOT_GRANTED", comment: "Error message when permission is not granted")
-        let leftTitle = NSLocalizedString("MAIN_NOT_GRANTED_YES", comment: "Go to settings")
-        let rightTitle = NSLocalizedString("MAIN_NOT_GRANTED_NO", comment: "Don't grant permission")
+        let rightTitle = NSLocalizedString("MAIN_NOT_GRANTED_YES", comment: "Go to settings")
+        let leftTitle = NSLocalizedString("MAIN_NOT_GRANTED_NO", comment: "Don't grant permission")
         
         let mainMessage = MainMessage(message: message, leftTitle: leftTitle, rightTitle: rightTitle)
         
-        controllerDelegate.showMessage(mainMessage, leftOption: {
+        controllerDelegate.showMessage(mainMessage, leftOption: {}, rightOption: {
             UIApplication.shared.open(URL(string:UIApplicationOpenSettingsURLString)!)
-        }, rightOption: {})
+        })
     }
 }
