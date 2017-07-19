@@ -65,7 +65,7 @@ class DataSource: DataSourceDelegate {
     }
     
     func getCameraPhotos(forSize size: GameSize,
-                         success: @escaping ((_ photos: [String]) -> Void),
+                         success: @escaping ((_ photos: [UIImage]) -> Void),
                          failure: @escaping ((_ error: PhotosErrorType) -> Void)) {
         
         let numberOfPhotos = (size.rawValue / 2)
@@ -134,6 +134,9 @@ class DataSource: DataSourceDelegate {
         switch cameraError {
         case .notEnough:
             error = .notEnough
+            break
+        case .notGranted:
+            error = .notGranted
             break
         default:
             error = .unknown

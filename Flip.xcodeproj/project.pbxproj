@@ -61,6 +61,7 @@
 		6F5579F61E46258D008FB1BB /* MainViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5579F51E46258D008FB1BB /* MainViewControllerDelegate.swift */; };
 		6F5579F81E46259E008FB1BB /* MainPresenterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5579F71E46259E008FB1BB /* MainPresenterDelegate.swift */; };
 		6F557A031E462754008FB1BB /* PresenterInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F557A021E462754008FB1BB /* PresenterInstances.swift */; };
+		6F5CFE8F1F1F44940022B76F /* URL+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5CFE8E1F1F44940022B76F /* URL+Extension.swift */; };
 		6F8782FE199BB11000AA118E /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8782FD199BB11000AA118E /* AdSupport.framework */; };
 		6F878300199BB11900AA118E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8782FF199BB11900AA118E /* AudioToolbox.framework */; };
 		6F878302199BB12900AA118E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F878301199BB12900AA118E /* AVFoundation.framework */; };
@@ -210,6 +211,7 @@
 		6F557A021E462754008FB1BB /* PresenterInstances.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresenterInstances.swift; sourceTree = "<group>"; };
 		6F5AD5C51987ABF600B65D09 /* FLPFacebookPhotoSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPFacebookPhotoSource.h; sourceTree = "<group>"; };
 		6F5AD5C61987ABF600B65D09 /* FLPFacebookPhotoSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPFacebookPhotoSource.m; sourceTree = "<group>"; };
+		6F5CFE8E1F1F44940022B76F /* URL+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URL+Extension.swift"; sourceTree = "<group>"; };
 		6F8782FD199BB11000AA118E /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		6F8782FF199BB11900AA118E /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		6F878301199BB12900AA118E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -629,6 +631,7 @@
 				6F39357D1E86E99D00226DCE /* UIView+Constraints.swift */,
 				6F3AB3751E5A152600CE62CE /* MutableCollection+Extension.swift */,
 				6F8DE3671F1CB24E00E13D41 /* Array+Extension.swift */,
+				6F5CFE8E1F1F44940022B76F /* URL+Extension.swift */,
 			);
 			name = extensions;
 			sourceTree = "<group>";
@@ -912,6 +915,7 @@
 				6F39356B1E86918200226DCE /* FLPScoreViewController.m in Sources */,
 				6FF528EA1E4F75950081747E /* TitleView.swift in Sources */,
 				6F103A681E56D1A9007C0E21 /* GridViewControllerDelegate.swift in Sources */,
+				6F5CFE8F1F1F44940022B76F /* URL+Extension.swift in Sources */,
 				6F3935721E8691B100226DCE /* ScoreViewControllerDelegate.swift in Sources */,
 				6F12DA001F1E23950020A60F /* CameraPhotos.swift in Sources */,
 				6F103A6C1E56D1F4007C0E21 /* GridPresenterDelegate.swift in Sources */,

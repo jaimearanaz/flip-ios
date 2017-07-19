@@ -24,6 +24,7 @@
 "MAIN_GENERIC_ERROR" = "There was an error getting your photos from selected source. Please try again.";
 "MAIN_CANCELLED_LOGIN" = "Login in source has been cancelled!";
 "MAIN_ERROR_DOWNLOADING" = "There was an error fetching the photos. Please try again";
+"MAIN_NOT_GRANTED" = "You need to grant permission to selected source";
 "MAIN_INERNET_CONNECTION" = "You need an internet connection to download photos from this source.";
 "MAIN_RECORDS_TITLE" = "My Records";
 "MAIN_RECORDS_NONE" = "--:--:---";

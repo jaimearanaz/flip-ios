@@ -12,7 +12,9 @@ protocol RouterDelegate {
     
     func presenMain()
 
-    func presentGrid(withImages images: [String], andSize size: GameSize, completion: @escaping (()->Void))
+    func presentGrid(withImageUrls imageUrls: [String], andSize size: GameSize, completion: @escaping (()->Void))
+    
+    func presentGrid(withImages images: [UIImage], andSize size: GameSize, completion: @escaping (()->Void))
     
     func presentLastGrid()
     
