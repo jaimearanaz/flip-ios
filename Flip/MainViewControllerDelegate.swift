@@ -8,6 +8,22 @@
 
 import Foundation
 
+@objc class MainMessage: NSObject {
+    
+    var message = ""
+    var leftTitle = ""
+    var rightTitle = ""
+    
+    init(message: String, leftTitle: String, rightTitle: String) {
+        
+        super.init()
+        
+        self.message = message
+        self.leftTitle = leftTitle
+        self.rightTitle = rightTitle
+    }
+}
+
 @objc protocol MainViewControllerDelegate: FLPBaseViewControllerDelegate {
 
     func startLoadingState()
@@ -20,5 +36,5 @@ import Foundation
     
     func showMessage(_ message: String)
     
-    func show3GWarningMessage(yes: (() -> Void), no: (() -> Void))
+    func showMessage(_ message: MainMessage, leftOption: (() -> Void), rightOption: (() -> Void))
 }

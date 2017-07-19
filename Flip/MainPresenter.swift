@@ -90,10 +90,16 @@ class MainPresenter: FLPBasePresenter, MainPresenterDelegate {
     
     fileprivate func show3GWarningBeforeGettingPhotos() {
         
-        controllerDelegate.show3GWarningMessage(yes: {
+        let message = NSLocalizedString("MAIN_3G_CONNECTION", comment: "Warning about use of data connection")
+        let leftTitle = NSLocalizedString("MAIN_3G_CONNECTION_YES", comment: "Accept use of data connection")
+        let rightTitle = NSLocalizedString("MAIN_3G_CONNECTION_NO", comment: "Refuse use of data connection")
+        
+        let mainMessage = MainMessage(message: message, leftTitle: leftTitle, rightTitle: rightTitle)
+        
+        controllerDelegate.showMessage(mainMessage, leftOption: {
             is3GAllowed = true
             getPhotosFromRemote()
-        }, no: {
+        }, rightOption: {
             is3GAllowed = false
         })
     }
@@ -216,8 +222,7 @@ class MainPresenter: FLPBasePresenter, MainPresenterDelegate {
             
         case .notGranted:
             
-            let message = NSLocalizedString("MAIN_NOT_GRANTED", comment: "Error message when permission is not granted")
-            controllerDelegate.showMessage(message)
+            showNotGrantedError()
             break
             
         default:
@@ -257,5 +262,18 @@ class MainPresenter: FLPBasePresenter, MainPresenterDelegate {
         
         let message = NSLocalizedString("MAIN_GENERIC_ERROR", comment: "Generic error message for any source of photos")
         controllerDelegate.showMessage(message)
+    }
+    
+    fileprivate func showNotGrantedError() {
+        
+        let message = NSLocalizedString("MAIN_NOT_GRANTED", comment: "Error message when permission is not granted")
+        let leftTitle = NSLocalizedString("MAIN_NOT_GRANTED_YES", comment: "Go to settings")
+        let rightTitle = NSLocalizedString("MAIN_NOT_GRANTED_NO", comment: "Don't grant permission")
+        
+        let mainMessage = MainMessage(message: message, leftTitle: leftTitle, rightTitle: rightTitle)
+        
+        controllerDelegate.showMessage(mainMessage, leftOption: {
+            UIApplication.shared.open(URL(string:UIApplicationOpenSettingsURLString)!)
+        }, rightOption: {})
     }
 }
