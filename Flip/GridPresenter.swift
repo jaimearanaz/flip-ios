@@ -13,7 +13,8 @@ class GridPresenter: FLPBasePresenter, GridPresenterDelegate {
     fileprivate var dataSource: DataSourceDelegate!
     fileprivate var controllerDelegate: GridViewControllerDelegate!
     fileprivate var router: RouterDelegate!
-    fileprivate var images = [String]()
+    fileprivate var imageUrls = [String]()
+    fileprivate var imageObjects = [UIImage]()
     fileprivate var gameSize: GameSize = .small
     
     // MARK: - Public methods
@@ -32,17 +33,35 @@ class GridPresenter: FLPBasePresenter, GridPresenterDelegate {
         return controllerDelegate as? UIViewController
     }
     
-    func showGrid(withImages images: [String], andSize size: GameSize) {
+    func showGrid(withImageUrls imageUrls: [String], andSize size: GameSize) {
         
-        self.images = images
+        self.imageUrls = imageUrls
+        self.imageObjects = [UIImage]()
+        
         gameSize = size
-        let gridCells = createGridCells(withImages: images)
+        let gridCells = createGridCells(withImages: imageUrls as [AnyObject])
+        controllerDelegate.showItems(gridCells, withSize: size)
+    }
+    
+    func showGrid(withImages images: [UIImage], andSize size: GameSize) {
+        
+        self.imageObjects = images
+        self.imageUrls = [String]()
+        
+        gameSize = size
+        let gridCells = createGridCells(withImages: images as [AnyObject])
         controllerDelegate.showItems(gridCells, withSize: size)
     }
     
     func repeatLastGrid() {
         
-        let gridCells = createGridCells(withImages: images)
+        var gridCells = [GridCell]()
+        if (imageUrls.count > 0) {
+            gridCells = createGridCells(withImages: imageUrls as [AnyObject])
+        } else if (imageObjects.count > 0) {
+            gridCells = createGridCells(withImages: imageObjects as [AnyObject])
+        }
+        
         controllerDelegate.showItems(gridCells, withSize: gameSize)
     }
     
@@ -77,7 +96,7 @@ class GridPresenter: FLPBasePresenter, GridPresenterDelegate {
     
     // MARK: - Private methods
     
-    fileprivate func createGridCells(withImages images: [String]) -> [GridCell] {
+    fileprivate func createGridCells(withImages images: [AnyObject]) -> [GridCell] {
     
         var mirroredImages = images
         mirroredImages.append(contentsOf: images)
@@ -90,14 +109,20 @@ class GridPresenter: FLPBasePresenter, GridPresenterDelegate {
             
             var pairIndex = 0;
             for pairImage in mirroredImages {
-                if (pairImage == image) && (currentIndex != pairIndex) {
+                if (pairImage === image) && (currentIndex != pairIndex) {
                     break;
                 }
                 pairIndex += 1
             }
             
             let gridCell = GridCell()
-            gridCell.image = image
+            
+            if let image = image as? String {
+                gridCell.imageUrl = image
+            } else if let image = image as? UIImage {
+                gridCell.image = image
+            }
+            
             gridCell.equalIndex = pairIndex;
             cellsForGrid.append(gridCell)
             currentIndex += 1

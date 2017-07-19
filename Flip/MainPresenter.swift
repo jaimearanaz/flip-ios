@@ -55,6 +55,7 @@ class MainPresenter: FLPBasePresenter, MainPresenterDelegate {
             checkReachabilityAndGetPhotos()
             break
         case .camera:
+            getPhotosFromCamera()
             break
         default: break
         }
@@ -81,7 +82,7 @@ class MainPresenter: FLPBasePresenter, MainPresenterDelegate {
         let underWifi = (reachability?.currentReachabilityStatus() == ReachableViaWiFi)
         
         if (underWifi) || (is3GAllowed) {
-            getPhotos()
+            getPhotosFromRemote()
         } else {
             show3GWarningBeforeGettingPhotos()
         }
@@ -89,15 +90,21 @@ class MainPresenter: FLPBasePresenter, MainPresenterDelegate {
     
     fileprivate func show3GWarningBeforeGettingPhotos() {
         
-        controllerDelegate.show3GWarningMessage(yes: {
-            is3GAllowed = true
-            getPhotos()
-        }, no: {
+        let message = NSLocalizedString("MAIN_3G_CONNECTION", comment: "Warning about use of data connection")
+        let rightTitle = NSLocalizedString("MAIN_3G_CONNECTION_YES", comment: "Accept use of data connection")
+        let leftTitle = NSLocalizedString("MAIN_3G_CONNECTION_NO", comment: "Refuse use of data connection")
+        
+        let mainMessage = MainMessage(message: message, leftTitle: leftTitle, rightTitle: rightTitle)
+        
+        controllerDelegate.showMessage(mainMessage, leftOption: {
             is3GAllowed = false
+        }, rightOption: {
+            is3GAllowed = true
+            getPhotosFromRemote()
         })
     }
     
-    fileprivate func getPhotos() {
+    fileprivate func getPhotosFromRemote() {
         
         if (gameSource == .twitter) {
             getPhotosFromTwitter()
@@ -136,6 +143,21 @@ class MainPresenter: FLPBasePresenter, MainPresenterDelegate {
         })
     }
     
+    fileprivate func getPhotosFromCamera() {
+        
+        controllerDelegate.startLoadingState()
+        
+        dataSource.getCameraPhotos(forSize: gameSize,
+                                   success: { (images) in
+                                    
+                                    self.stopLoadingAndPresentGrid(withImages: images)
+                                    
+        }, failure: { (error) in
+            
+            self.stopLoadingAndShowError(error: error)
+        })
+    }
+    
     fileprivate func downloadImagesAndPresentGrid(images: [String]) {
         
         var urls = [URL]()
@@ -145,26 +167,36 @@ class MainPresenter: FLPBasePresenter, MainPresenterDelegate {
         
         ImageDownloader.downloadAndCacheImages(urls, completion: { (success) in
             if (success) {
-                self.stopLoadingAndPresentGrid(withImages: images)
+                self.stopLoadingAndPresentGrid(withImages: images as [AnyObject])
             } else {
                 self.stopLoadingAndShowError(error: .downloading)
             }
         })
     }
     
-    fileprivate func stopLoadingAndPresentGrid(withImages images: [String]) {
+    fileprivate func stopLoadingAndPresentGrid(withImages images: [AnyObject]) {
         
         self.controllerDelegate.stopLoadingState()
-        Router.sharedInstance.presentGrid(withImages: images, andSize: gameSize, completion: {
-            self.controllerDelegate.showSourceView(withAnimation: false)
-        })
+        
+        if let images = images as? [String] {
+            Router.sharedInstance.presentGrid(withImageUrls: images, andSize: gameSize, completion: {
+                self.controllerDelegate.showSourceView(withAnimation: false)
+            })
+        } else if let images = images as? [UIImage] {
+            Router.sharedInstance.presentGrid(withImages: images, andSize: gameSize, completion: {
+                self.controllerDelegate.showSourceView(withAnimation: false)
+            })
+        }
     }
     
     fileprivate func stopLoadingAndShowError(error: PhotosErrorType) {
         
-        self.controllerDelegate.stopLoadingState()
-        self.controllerDelegate.showSourceView(withAnimation: true)
-        self.showError(error)
+        DispatchQueue.main.async {
+            
+            self.controllerDelegate.stopLoadingState()
+            self.controllerDelegate.showSourceView(withAnimation: true)
+            self.showError(error)
+        }
     }
 
     fileprivate func showError(_ error: PhotosErrorType) {
@@ -186,6 +218,11 @@ class MainPresenter: FLPBasePresenter, MainPresenterDelegate {
             
             let message = NSLocalizedString("MAIN_ERROR_DOWNLOADING", comment: "Error message when photos downloading fails")
             controllerDelegate.showMessage(message)
+            break
+            
+        case .notGranted:
+            
+            showNotGrantedError()
             break
             
         default:
@@ -217,12 +254,26 @@ class MainPresenter: FLPBasePresenter, MainPresenterDelegate {
             break
         }
         
-        controllerDelegate.showMessage(message)
+        let formatted = String(format: message, gameSize.rawValue)
+        controllerDelegate.showMessage(formatted)
     }
     
     fileprivate func showGenericError() {
         
         let message = NSLocalizedString("MAIN_GENERIC_ERROR", comment: "Generic error message for any source of photos")
         controllerDelegate.showMessage(message)
+    }
+    
+    fileprivate func showNotGrantedError() {
+        
+        let message = NSLocalizedString("MAIN_NOT_GRANTED", comment: "Error message when permission is not granted")
+        let rightTitle = NSLocalizedString("MAIN_NOT_GRANTED_YES", comment: "Go to settings")
+        let leftTitle = NSLocalizedString("MAIN_NOT_GRANTED_NO", comment: "Don't grant permission")
+        
+        let mainMessage = MainMessage(message: message, leftTitle: leftTitle, rightTitle: rightTitle)
+        
+        controllerDelegate.showMessage(mainMessage, leftOption: {}, rightOption: {
+            UIApplication.shared.open(URL(string:UIApplicationOpenSettingsURLString)!)
+        })
     }
 }

@@ -24,6 +24,7 @@
 "MAIN_GENERIC_ERROR" = "Ha habido un error obteniendo tus fotos de la fuente seleccionada. Por favor, inténtalo de nuevo.";
 "MAIN_CANCELLED_LOGIN" = "¡Se ha cancelado el proceso de login!";
 "MAIN_ERROR_DOWNLOADING" = "Ha habido un error descargando las fotos. Por favor, inténtalo de nuevo";
+"MAIN_NOT_GRANTED" = "Flip Your Photos necesita permiso para acceder a tus fotos locales. ¿Quieres ir a Ajustes para habilitarlo?";
 "MAIN_INERNET_CONNECTION" = "Necesitas una conexión a Internet para descargar fotos de esta fuente.";
 "MAIN_RECORDS_TITLE" = "Mis Récords";
 "MAIN_RECORDS_NONE" = "--:--:---";
@@ -33,6 +34,8 @@
 "MAIN_3G_CONNECTION" = "Se usará tu conexión de datos para descargar las fotos. ¿Quieres continuar?";
 "MAIN_3G_CONNECTION_YES" = "Descargar";
 "MAIN_3G_CONNECTION_NO" = "Cancelar";
+"MAIN_NOT_GRANTED_YES" = "Ir a Ajustes";
+"MAIN_NOT_GRANTED_NO" = "Cancelar";
 
 // Grid screen
 "GRID_EXIT" = "Salir";

@@ -24,6 +24,7 @@
 "MAIN_GENERIC_ERROR" = "There was an error getting your photos from selected source. Please try again.";
 "MAIN_CANCELLED_LOGIN" = "Login in source has been cancelled!";
 "MAIN_ERROR_DOWNLOADING" = "There was an error fetching the photos. Please try again";
+"MAIN_NOT_GRANTED" = "Flip Your Photos needs permission to access your local photos. Do you want to grant it from Settings?";
 "MAIN_INERNET_CONNECTION" = "You need an internet connection to download photos from this source.";
 "MAIN_RECORDS_TITLE" = "My Records";
 "MAIN_RECORDS_NONE" = "--:--:---";
@@ -33,6 +34,8 @@
 "MAIN_3G_CONNECTION" = "Your device data connection will be used to download photos. Do you want to continue?";
 "MAIN_3G_CONNECTION_YES" = "Download";
 "MAIN_3G_CONNECTION_NO" = "Cancel";
+"MAIN_NOT_GRANTED_YES" = "Open Settings";
+"MAIN_NOT_GRANTED_NO" = "Cancel";
 
 // Grid screen
 "GRID_EXIT" = "Exit";

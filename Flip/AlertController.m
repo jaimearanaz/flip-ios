@@ -54,7 +54,7 @@
     
     
     [alert add:[[SDCAlertAction alloc] initWithTitle:secondTitle
-                                               style:SDCAlertActionStyleNormal
+                                               style:SDCAlertActionStylePreferred
                                              handler:^(SDCAlertAction * _Nonnull action) {
                                                  if (secondBlock) {
                                                      secondBlock();

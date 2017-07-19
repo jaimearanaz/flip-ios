@@ -9,9 +9,11 @@
 import Foundation
 
 enum PhotosErrorType: Int {
+    
     case notEnough
     case cancelled
     case downloading
+    case notGranted
     case unknown
 }
 
@@ -29,4 +31,8 @@ protocol DataSourceDelegate {
                            inViewController viewController: AnyObject,
                            success: @escaping ((_ photos: [String]) -> Void),
                            failure: @escaping ((_ error: PhotosErrorType) -> Void))
+    
+    func getCameraPhotos(forSize size: GameSize,
+                         success: @escaping ((_ photos: [UIImage]) -> Void),
+                         failure: @escaping ((_ error: PhotosErrorType) -> Void))
 }

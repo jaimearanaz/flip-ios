@@ -20,8 +20,16 @@
 
 - (void)setupCellWithModel:(nonnull GridCell *)gridCell andNumber:(NSInteger)position;
 {
-    NSURL *url = [NSURL URLWithString:gridCell.image];
-    [self.userImage sd_setImageWithURL:url];
+    BOOL isUrl = (gridCell.imageUrl && [gridCell.imageUrl compare:@""] != NSOrderedSame);
+    BOOL isImage = (gridCell.image);
+    
+    if (isUrl) {
+        NSURL *url = [NSURL URLWithString:gridCell.imageUrl];
+        [self.userImage sd_setImageWithURL:url];
+    } else if (isImage) {
+        [self.userImage setImage:gridCell.image];
+    }
+    
     self.number.text = [NSString stringWithFormat:@"%@", @(position)];
 }
 

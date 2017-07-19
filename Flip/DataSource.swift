@@ -14,6 +14,7 @@ class DataSource: DataSourceDelegate {
     fileprivate var defaults = Defaults()
     fileprivate var twitterPhotos = FLPTwitterPhotos()
     fileprivate var facebookPhotos = FacebookPhotos()
+    fileprivate var cameraPhotos = CameraPhotos()
     
     // MARK: - DataSourceDelegate methods
     
@@ -63,6 +64,23 @@ class DataSource: DataSourceDelegate {
         })
     }
     
+    func getCameraPhotos(forSize size: GameSize,
+                         success: @escaping ((_ photos: [UIImage]) -> Void),
+                         failure: @escaping ((_ error: PhotosErrorType) -> Void)) {
+        
+        let numberOfPhotos = (size.rawValue / 2)
+        cameraPhotos.getPhotos(numberOfPhotos,
+                               success: { (images) in
+                                
+                                success(images)
+                                
+        }, failure: { (error) in
+            
+            let photosError = self.photosError(fromCameraError: error)
+            failure(photosError)
+        })
+    }
+    
     // MARK: - Private methods
     
     fileprivate func photosError(fromTwitterError twitterError: TwitterErrorType) -> PhotosErrorType {
@@ -100,6 +118,25 @@ class DataSource: DataSourceDelegate {
             break
         case .downloading:
             error = .downloading
+            break
+        default:
+            error = .unknown
+            break
+        }
+        
+        return error
+    }
+    
+    fileprivate func photosError(fromCameraError cameraError: CameraErrorType) -> PhotosErrorType {
+        
+        var error: PhotosErrorType!
+        
+        switch cameraError {
+        case .notEnough:
+            error = .notEnough
+            break
+        case .notGranted:
+            error = .notGranted
             break
         default:
             error = .unknown

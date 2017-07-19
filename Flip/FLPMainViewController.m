@@ -175,17 +175,17 @@
     [AlertController showAlertWithMessage:message title:@"" completionBlock:^{}];
 }
 
-- (void)show3GWarningMessageWithYes:(void (^)(void))yes no:(void (^)(void))no
+- (void)showMessage:(MainMessage *)mainMessage leftOption:(void (^)(void))leftOption rightOption:(void (^)(void))rightOption
 {
-    [AlertController showAlertWithMessage:NSLocalizedString(@"MAIN_3G_CONNECTION", "Warning about use of data connection")
+    [AlertController showAlertWithMessage:mainMessage.message
                                     title:nil
-                         firstButtonTitle:NSLocalizedString(@"MAIN_3G_CONNECTION_YES", "accept use of data connection")
-                        secondButtonTitle:NSLocalizedString(@"MAIN_3G_CONNECTION_NO", "Refuse use of data connection")
+                         firstButtonTitle:mainMessage.leftTitle
+                        secondButtonTitle:mainMessage.rightTitle
                                firstBlock:^{
-                                   yes();
+                                   leftOption();
                                }
                               secondBlock:^{
-                                  no();
+                                  rightOption();
                               }];
 }
 
