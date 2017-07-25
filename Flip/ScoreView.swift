@@ -18,6 +18,8 @@ import UIKit
     @IBOutlet var finalTimeView: ScoreResultView!
     @IBOutlet var centerConstraints: [NSLayoutConstraint]!
     
+    var delegate: ScoreViewDelegate?
+    
     fileprivate let animationDuration = 0.5
     fileprivate let delayDuration = 0.2
     fileprivate var trailingConstraints = [NSLayoutConstraint]()
@@ -107,6 +109,8 @@ import UIKit
                             self.view.layoutIfNeeded()
                             
             }, completion: { (completed) in
+                
+                self.delegate?.didFinishAnimation()
             })
         }
     }

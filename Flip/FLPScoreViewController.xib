@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -16,9 +16,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FLPScoreViewController">
             <connections>
-                <outlet property="main" destination="rc7-Ix-CjZ" id="nTv-8E-owJ"/>
                 <outlet property="recordView" destination="ZMr-B3-fdz" id="L5s-qM-iRH"/>
                 <outlet property="scoreView" destination="i5M-Pr-FkT" id="w7W-Yj-ism"/>
+                <outlet property="tapGesture" destination="RV9-K5-NIy" id="Ark-g0-oFU"/>
                 <outlet property="tryAgain" destination="rAt-47-2zb" id="j7C-V9-LXo"/>
                 <outlet property="view" destination="KNv-9q-UaH" id="6uc-6w-6fo"/>
             </connections>
@@ -42,17 +42,6 @@
                         <action selector="didSelectTryAgain" destination="-1" eventType="touchUpInside" id="IV1-34-iC6"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rc7-Ix-CjZ">
-                    <rect key="frame" x="279" y="27" width="80" height="30"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="80" id="L3x-Cw-eVv"/>
-                        <constraint firstAttribute="height" constant="30" id="xa2-Qw-noI"/>
-                    </constraints>
-                    <state key="normal" title="Main"/>
-                    <connections>
-                        <action selector="didSelectMain" destination="-1" eventType="touchUpInside" id="DZg-Gc-00T"/>
-                    </connections>
-                </button>
                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZMr-B3-fdz" userLabel="New record">
                     <rect key="frame" x="16" y="460" width="343" height="30"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -74,7 +63,6 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="95e-U6-2ii" secondAttribute="trailing" id="03t-2E-Aze"/>
-                <constraint firstItem="rc7-Ix-CjZ" firstAttribute="top" secondItem="KNv-9q-UaH" secondAttribute="top" constant="27" id="2AW-ZJ-hWF"/>
                 <constraint firstItem="i5M-Pr-FkT" firstAttribute="centerY" secondItem="KNv-9q-UaH" secondAttribute="centerY" id="4MP-DN-l8R"/>
                 <constraint firstItem="ZMr-B3-fdz" firstAttribute="leading" secondItem="KNv-9q-UaH" secondAttribute="leading" constant="16" id="4va-ws-ivY"/>
                 <constraint firstItem="95e-U6-2ii" firstAttribute="leading" secondItem="KNv-9q-UaH" secondAttribute="leading" id="6I7-nP-Ad5"/>
@@ -86,10 +74,17 @@
                 <constraint firstItem="rAt-47-2zb" firstAttribute="leading" secondItem="KNv-9q-UaH" secondAttribute="leading" constant="16" id="rH2-ZL-QOc"/>
                 <constraint firstItem="95e-U6-2ii" firstAttribute="top" secondItem="KNv-9q-UaH" secondAttribute="top" id="uEt-zE-MyR"/>
                 <constraint firstItem="i5M-Pr-FkT" firstAttribute="leading" secondItem="KNv-9q-UaH" secondAttribute="leading" constant="16" id="vLF-9g-sgp"/>
-                <constraint firstAttribute="trailing" secondItem="rc7-Ix-CjZ" secondAttribute="trailing" constant="16" id="wJm-DT-EfM"/>
             </constraints>
+            <connections>
+                <outletCollection property="gestureRecognizers" destination="RV9-K5-NIy" appends="YES" id="0j2-Wb-Iwt"/>
+            </connections>
             <point key="canvasLocation" x="-106.5" y="787.5"/>
         </view>
+        <tapGestureRecognizer id="RV9-K5-NIy" userLabel="Next Tap Gesture Recognizer">
+            <connections>
+                <action selector="didSelectMain" destination="-1" id="dfH-vw-Enm"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
     <resources>
         <image name="background" width="320" height="568"/>

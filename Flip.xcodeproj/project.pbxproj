@@ -62,6 +62,7 @@
 		6F5579F81E46259E008FB1BB /* MainPresenterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5579F71E46259E008FB1BB /* MainPresenterDelegate.swift */; };
 		6F557A031E462754008FB1BB /* PresenterInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F557A021E462754008FB1BB /* PresenterInstances.swift */; };
 		6F5CFE8F1F1F44940022B76F /* URL+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5CFE8E1F1F44940022B76F /* URL+Extension.swift */; };
+		6F5EA2111F2786C900B258EB /* ScoreViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5EA2101F2786C900B258EB /* ScoreViewDelegate.swift */; };
 		6F8782FE199BB11000AA118E /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8782FD199BB11000AA118E /* AdSupport.framework */; };
 		6F878300199BB11900AA118E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8782FF199BB11900AA118E /* AudioToolbox.framework */; };
 		6F878302199BB12900AA118E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F878301199BB12900AA118E /* AVFoundation.framework */; };
@@ -194,6 +195,7 @@
 		6F5579F71E46259E008FB1BB /* MainPresenterDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainPresenterDelegate.swift; sourceTree = "<group>"; };
 		6F557A021E462754008FB1BB /* PresenterInstances.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresenterInstances.swift; sourceTree = "<group>"; };
 		6F5CFE8E1F1F44940022B76F /* URL+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URL+Extension.swift"; sourceTree = "<group>"; };
+		6F5EA2101F2786C900B258EB /* ScoreViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreViewDelegate.swift; sourceTree = "<group>"; };
 		6F8782FD199BB11000AA118E /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		6F8782FF199BB11900AA118E /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		6F878301199BB12900AA118E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -434,6 +436,7 @@
 				6F3935771E86A00D00226DCE /* ScoreResultView.swift */,
 				6F3935791E86A03200226DCE /* ScoreView.xib */,
 				6F3935751E869AE700226DCE /* ScoreView.swift */,
+				6F5EA2101F2786C900B258EB /* ScoreViewDelegate.swift */,
 				6F39356A1E86918200226DCE /* FLPScoreViewController.xib */,
 				6F3935681E86918200226DCE /* FLPScoreViewController.h */,
 				6F3935691E86918200226DCE /* FLPScoreViewController.m */,
@@ -874,6 +877,7 @@
 				6F3AB3761E5A152600CE62CE /* MutableCollection+Extension.swift in Sources */,
 				6FB0C2D71E8D97100041D108 /* RouterDelegate.swift in Sources */,
 				6F38449C1E9006E600CD4472 /* ImageDownloader.swift in Sources */,
+				6F5EA2111F2786C900B258EB /* ScoreViewDelegate.swift in Sources */,
 				6FEEC3451E6981460077BECA /* GridCollectionControllerDelegate.swift in Sources */,
 				6F26EA951E8FB5EE00820FD2 /* FLPTwitterPhotos.m in Sources */,
 				6F3935701E8691A200226DCE /* ScorePresenterDelegate.swift in Sources */,

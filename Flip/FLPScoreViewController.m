@@ -8,12 +8,12 @@
 
 #import "FLPScoreViewController.h"
 
-@interface FLPScoreViewController ()
+@interface FLPScoreViewController () <ScoreViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *tryAgain;
-@property (weak, nonatomic) IBOutlet UIButton *main;
 @property (weak, nonatomic) IBOutlet ScoreView *scoreView;
 @property (weak, nonatomic) IBOutlet UILabel *recordView;
+@property (weak, nonatomic) IBOutlet UITapGestureRecognizer *tapGesture;
 
 @property (strong, nonatomic, nonnull) id<ScorePresenterDelegate> presenterDelegate;
 @property (strong, nonatomic) NSTimer *recordBlinkTimer;
@@ -29,6 +29,7 @@
 {
     [super viewDidLoad];
     
+    self.scoreView.delegate = self;
     [self localizeTexts];
 }
 
@@ -70,9 +71,17 @@
 - (void)showScore:(Score *)score isNewRecord:(BOOL)isNewRecord
 {
     [self.scoreView showScore:score];
+    self.tapGesture.enabled = NO;
     if (isNewRecord) {
         [self startBlinking];
     }
+}
+
+#pragma mark - ScoreViewDelegate methods
+
+- (void)didFinishAnimation
+{
+    self.tapGesture.enabled = YES;
 }
 
 #pragma mark - Private methods
