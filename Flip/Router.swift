@@ -31,9 +31,17 @@ import UINavigationControllerWithCompletionBlock
     
     func presenMain() {
         
-        let mainPresenter = Router.sharedInstance.presenterInstances.mainPresenter
-        navigationController.popToRootViewController(animated: true) { 
-            mainPresenter.showRecords()
+        if (navigationController.viewControllers.count > 1) {
+            
+            navigationController.viewControllers = [presenterInstances.scorePresenter.viewController()!]
+            
+            let mainPresenter = presenterInstances.mainPresenter
+            let viewController = mainPresenter.viewController()!
+            navigationController.pushViewController(viewController, animated: true) {
+                
+                mainPresenter.showRecords()
+                self.navigationController.viewControllers = [viewController]
+            }
         }
     }
     
@@ -73,6 +81,7 @@ import UINavigationControllerWithCompletionBlock
         let viewController = presenterInstances.scorePresenter.viewController()
         
         navigationController.pushViewController(viewController, animated: true) {
+            
             presenter.showScore(score, isNewRecord: isNewRecord)
         }
     }
@@ -80,5 +89,15 @@ import UINavigationControllerWithCompletionBlock
     func dismissCurrentViewController() {
         
         navigationController.popViewController(animated: true)
+    }
+    
+    func updateCircularPushedViewControllers() {
+
+        if (navigationController.viewControllers.count == 3) {
+            
+            let root = navigationController.viewControllers[0]
+            let newRoot = navigationController.viewControllers[1]
+            
+        }
     }
 }
