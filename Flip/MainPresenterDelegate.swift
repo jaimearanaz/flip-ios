@@ -8,7 +8,6 @@
 
 import Foundation
 
-// TODO: rename to PhotoSource
 @objc enum GameSource: Int {
     case camera
     case facebook
@@ -16,7 +15,6 @@ import Foundation
     case unkown
 }
 
-// TODO: rename to GridSize
 @objc enum GameSize: Int {
     case small = 12
     case medium = 18
