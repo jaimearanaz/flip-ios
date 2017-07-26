@@ -181,7 +181,8 @@ import Foundation
         let availableHeight = collectionHeight - (minMargin * CGFloat(rows + 1))
         cellHeight = availableHeight / CGFloat(rows)
         // TODO: ñapa, solve this!
-        cellHeight *= CGFloat(0.90)
+        let wierdFactor: CGFloat = 0.89
+        cellHeight *= wierdFactor
         cellWidth = cellHeight / cellRatio
         
         let horizontalOffset = collectionWidth - (cellWidth * CGFloat(columns)) - (minMargin * CGFloat(columns + 1))
@@ -191,7 +192,7 @@ import Foundation
             let offsetPerCell = abs(horizontalOffset) / CGFloat(columns)
             cellWidth -= (offsetPerCell)
             // TODO: ñapa, solve this!
-            cellWidth *= CGFloat(0.90)
+            cellWidth *= wierdFactor
             cellHeight = cellWidth * cellRatio
         }
 
