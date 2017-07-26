@@ -31,6 +31,9 @@
 @property (strong, nonatomic, nullable) NSDate *startDate;
 @property (nonatomic) NSTimeInterval timeNotPaused;
 @property (nonatomic) BOOL isStartingGame;
+@property (strong, nonatomic, nullable) dispatch_block_t showAllBlock;
+@property (strong, nonatomic, nullable) NSMutableArray *flipAllBlocks;
+@property (strong, nonatomic, nullable) dispatch_block_t startBlock;
 
 @end
 
@@ -138,6 +141,7 @@
                                  secondBlock:^{
                                      
                                      [self stopTimer];
+                                     [self cancelAllBlocks];
                                      [self.presenterDelegate didSelectExit];
                                  }];
 }
@@ -324,8 +328,12 @@
 
 - (void)showAllUserImagesForAWhile
 {
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, kFirstLookDuration * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+    self.showAllBlock = dispatch_block_create(DISPATCH_BLOCK_INHERIT_QOS_CLASS, ^{
         [self hideAllUserImagesAndStartGame];
+    });
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, kFirstLookDuration * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        self.showAllBlock();
     });
 }
 
@@ -334,6 +342,8 @@
 {
     NSTimeInterval delay = 0;
     NSInteger numOfSections = [self.collectionView numberOfSections];
+    
+    self.flipAllBlocks = [[NSMutableArray alloc] init];
     
     for (int oneSection = 0; oneSection < numOfSections; oneSection++) {
         
@@ -346,8 +356,12 @@
         }
     }
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, delay * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+    self.startBlock = dispatch_block_create(DISPATCH_BLOCK_INHERIT_QOS_CLASS, ^{
         [self gameStarts];
+    });
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, delay * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        self.startBlock();
     });
 }
 
@@ -365,7 +379,11 @@
     NSInvocation *invocation = [self invocationToFlipCellToCover:cell];
     NSInteger numOfSections = [self.collectionView numberOfSections];
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, delay * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+    if (self.flipAllBlocks == nil) {
+        self.flipAllBlocks = [[NSMutableArray alloc] init];
+    }
+    
+    dispatch_block_t oneBlock = dispatch_block_create(DISPATCH_BLOCK_INHERIT_QOS_CLASS, ^{
         
         NSInteger indexInModel = [self indexInsideModelForIndexPath:indexPath];
         BOOL isLastCell = ((indexPath.section == (numOfSections - 1)) && ((self.gridCellsModels.count - 1) == indexInModel));
@@ -373,6 +391,12 @@
             self.isUserInteractionEnabled = YES;
         }
         [invocation invoke];
+    });
+    
+    [self.flipAllBlocks addObject:oneBlock];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, delay * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        oneBlock();
     });
 }
 
@@ -389,6 +413,22 @@
     [invocation setArgument:&completion atIndex:3];
     
     return invocation;
+}
+
+- (void)cancelAllBlocks
+{
+    if (self.showAllBlock) {
+        dispatch_block_cancel(self.showAllBlock);
+    }
+    
+    [self.flipAllBlocks enumerateObjectsUsingBlock:^(dispatch_block_t _Nonnull oneBlock, NSUInteger idx, BOOL * _Nonnull stop) {
+       dispatch_block_cancel(oneBlock);
+    }];
+    [self.flipAllBlocks removeAllObjects];
+    
+    if (self.startBlock) {
+        dispatch_block_cancel(self.startBlock);
+    }
 }
 
 @end
