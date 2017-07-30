@@ -90,14 +90,4 @@ import UINavigationControllerWithCompletionBlock
         
         navigationController.popViewController(animated: true)
     }
-    
-    func updateCircularPushedViewControllers() {
-
-        if (navigationController.viewControllers.count == 3) {
-            
-            let root = navigationController.viewControllers[0]
-            let newRoot = navigationController.viewControllers[1]
-            
-        }
-    }
 }

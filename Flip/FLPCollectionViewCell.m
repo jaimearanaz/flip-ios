@@ -21,7 +21,7 @@
 - (void)setupCellWithModel:(nonnull GridCell *)gridCell andNumber:(NSInteger)position;
 {
     BOOL isUrl = (gridCell.imageUrl && [gridCell.imageUrl compare:@""] != NSOrderedSame);
-    BOOL isImage = (gridCell.image);
+    BOOL isImage = (gridCell.image != nil);
     
     if (isUrl) {
         NSURL *url = [NSURL URLWithString:gridCell.imageUrl];
