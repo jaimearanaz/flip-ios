@@ -14,6 +14,8 @@
 
 @implementation FLPBaseViewController
 
+@synthesize viewController;
+
 #pragma mark - FLPBaseViewControllerDelegate methods
 
 - (UIViewController *)viewController

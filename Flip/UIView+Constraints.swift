@@ -59,7 +59,7 @@ extension UIView {
         var constraints = [NSLayoutConstraint]()
         
         guard let _ = superview else {
-            NSLog("error adding constraint \(identifier), there is no superview")
+            NSLog("error adding constraint \(String(describing: identifier)), there is no superview")
             return constraints
         }
         
@@ -95,7 +95,7 @@ extension UIView {
     func addCenterVerticallyInSuperviewConstraint(withIdentifier identifier: String? = nil) -> NSLayoutConstraint {
         
         guard let superview = superview else {
-            NSLog("error adding constraint \(identifier), there is no superview")
+            NSLog("error adding constraint \(String(describing: identifier)), there is no superview")
             return NSLayoutConstraint()
         }
         
@@ -118,7 +118,7 @@ extension UIView {
     func addCenterHorizontallyInSuperviewConstraint(withIdentifier identifier: String? = nil) -> NSLayoutConstraint {
         
         guard let superview = superview else {
-            NSLog("error adding constraint \(identifier), there is no superview")
+            NSLog("error adding constraint \(String(describing: identifier)), there is no superview")
             return NSLayoutConstraint()
         }
         
@@ -141,7 +141,7 @@ extension UIView {
     func addTopSpaceToSuperviewConstraint(topSpace: CGFloat, withIdentifier identifier: String? = nil)  -> NSLayoutConstraint {
         
         guard let superview = superview else {
-            NSLog("error adding constraint \(identifier), there is no superview")
+            NSLog("error adding constraint \(String(describing: identifier)), there is no superview")
             return NSLayoutConstraint()
         }
         
@@ -164,7 +164,7 @@ extension UIView {
     func addBottomSpaceToSuperviewConstraint(bottomSpace: CGFloat, withIdentifier identifier: String? = nil) -> NSLayoutConstraint {
         
         guard let superview = superview else {
-            NSLog("error adding constraint \(identifier), there is no superview")
+            NSLog("error adding constraint \(String(describing: identifier)), there is no superview")
             return NSLayoutConstraint()
         }
         
@@ -187,7 +187,7 @@ extension UIView {
     func addLeadingSpaceToSuperviewConstraint(leadingSpace: CGFloat, withIdentifier identifier: String? = nil) -> NSLayoutConstraint {
         
         guard let superview = superview else {
-            NSLog("error adding constraint \(identifier), there is no superview")
+            NSLog("error adding constraint \(String(describing: identifier)), there is no superview")
             return NSLayoutConstraint()
         }
         
@@ -210,7 +210,7 @@ extension UIView {
     func addTrailingSpaceToSuperviewConstraint(trailingSpace: CGFloat, withIdentifier identifier: String? = nil) -> NSLayoutConstraint {
         
         guard let superview = superview else {
-            NSLog("error adding constraint \(identifier), there is no superview")
+            NSLog("error adding constraint \(String(describing: identifier)), there is no superview")
             return NSLayoutConstraint()
         }
         
@@ -233,7 +233,7 @@ extension UIView {
     func addVerticalSpaceConstraint(verticalSpace: CGFloat, toBelowView belowView: UIView, withIdentifier identifier: String? = nil) -> NSLayoutConstraint {
         
         guard let superview = superview else {
-            NSLog("error adding constraint \(identifier), there is no superview")
+            NSLog("error adding constraint \(String(describing: identifier)), there is no superview")
             return NSLayoutConstraint()
         }
         
@@ -256,7 +256,7 @@ extension UIView {
     func addHotizontalSpaceConstraint(horizontalSpace: CGFloat, toLeftView leftView: UIView, withIdentifier identifier: String? = nil) -> NSLayoutConstraint {
         
         guard let superview = superview else {
-            NSLog("error adding constraint \(identifier), there is no superview")
+            NSLog("error adding constraint \(String(describing: identifier)), there is no superview")
             return NSLayoutConstraint()
         }
         

@@ -14,10 +14,10 @@
 
 @interface FLPCollectionViewCell : UICollectionViewCell
 
-@property (weak, nonatomic) IBOutlet UIView *imageSide;
-@property (weak, nonatomic) IBOutlet UIImageView *userImage;
-@property (weak, nonatomic) IBOutlet UIView *coverSide;
-@property (weak, nonatomic) IBOutlet UILabel *number;
+@property (weak, nonatomic, nullable) IBOutlet  UIView *imageSide;
+@property (weak, nonatomic, nullable) IBOutlet UIImageView *userImage;
+@property (weak, nonatomic, nullable) IBOutlet UIView *coverSide;
+@property (weak, nonatomic, nullable) IBOutlet UILabel *number;
 
 - (void)setupCellWithModel:(nonnull GridCell *)gridCell andNumber:(NSInteger)position;
 
