@@ -8,43 +8,23 @@
 
 #import <UIKit/UIKit.h>
 
-/**
- * This class represents a single cell inside the collection view, in the grid screen.
- * It's build up with to "sides": a user's image and a cover with a number. User flips between two sides when touches.
- */
+#define kFLPCollectionViewCellIdentifier @"FLPCollectionViewCell"
+
+@class GridCell;
+
 @interface FLPCollectionViewCell : UICollectionViewCell
 
-// Cell side with the user image
-@property (nonatomic, weak) IBOutlet UIView *imageSide;
-// Cell side with the numbered cover
-@property (nonatomic, weak) IBOutlet UIView *coverSide;
-// Image object inside |imageSide|
-@property (nonatomic, weak) IBOutlet UIImageView *photoView;
-// Number inside |coverSide|
-@property (nonatomic, weak) IBOutlet UILabel *coverLbl;
+@property (weak, nonatomic, nullable) IBOutlet  UIView *imageSide;
+@property (weak, nonatomic, nullable) IBOutlet UIImageView *userImage;
+@property (weak, nonatomic, nullable) IBOutlet UIView *coverSide;
+@property (weak, nonatomic, nullable) IBOutlet UILabel *number;
 
-/**
- *  Flips cell to show user image
- *  @param animated   YES to animate transition, NO otherwise
- *  @param completion Block to execute when animation is complete
- */
-- (void)flipCellToImageAnimated:(NSNumber *)animated onCompletion:(void(^)())completion;
+- (void)setupCellWithModel:(nonnull GridCell *)gridCell andNumber:(NSInteger)position;
 
-/**
- * Flips cell to show cover
- * @param animated YES to animate transition, NO otherwise
- */
-- (void)flipCellToCoverAnimated:(NSNumber *)animated;
+- (void)flipToUserImageWithAnimation:(nonnull NSNumber *)animated onCompletion:(nullable void(^)())completion;
 
-/**
- * Checks if cell is showing image or not
- * @return YES if cell is showing image, NO otherwise
- */
-- (BOOL)isShowingImage;
+- (void)flipToCoverWithAnimation:(nonnull NSNumber *)animated onCompletion:(nullable void(^)())completion;
 
-/**
- * Starts a silly fade animation to use when two images are matched
- */
-- (void)matchedAnimation;
+- (void)showPairedAnimation:(nullable void(^)())completion;
 
 @end

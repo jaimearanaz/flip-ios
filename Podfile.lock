@@ -1,77 +1,69 @@
 PODS:
-  - ABMultiton (2.0.5):
-    - ABMultiton/Core
-  - ABMultiton/Core (2.0.5)
   - AFNetworking (1.3.4)
   - AFOAuth1Client (0.3.3):
     - AFNetworking (~> 1.3)
-  - CocoaLumberjack (1.6.5.1):
-    - CocoaLumberjack/Core
-    - CocoaLumberjack/Extensions
-  - CocoaLumberjack/Core (1.6.5.1)
-  - CocoaLumberjack/Extensions (1.6.5.1):
-    - CocoaLumberjack/Core
-  - Facebook-iOS-SDK (3.12.0)
+  - JRSwizzle (1.0)
   - LVTwitterOAuthClient (0.0.1):
     - OAuthCore
   - macros_blocks (0.0.1)
-  - MBProgressHUD (0.8)
   - NSData+Base64 (1.0.0)
   - OAuthCore (0.0.1):
     - NSData+Base64
   - PFTwitterSignOn (0.1.1):
     - AFOAuth1Client (~> 0.3.3)
     - LVTwitterOAuthClient (~> 0.0.1)
-  - SCNetworkReachability (2.0.0):
-    - SCNetworkReachability/All
-    - SCNetworkReachability/Compatibility
-    - SCNetworkReachability/Core
-    - SCNetworkReachability/Multithreading
-    - SCNetworkReachability/Shared
-  - SCNetworkReachability/All (2.0.0):
-    - SCNetworkReachability/Compatibility
-    - SCNetworkReachability/Core
-    - SCNetworkReachability/Multithreading
-    - SCNetworkReachability/Shared
-  - SCNetworkReachability/Compatibility (2.0.0):
-    - SCNetworkReachability/Core
-  - SCNetworkReachability/Core (2.0.0):
+  - RZSquaresLoading (1.1)
+  - SCNetworkReachability (2.0.5):
+    - SCNetworkReachability/Core (= 2.0.5)
+  - SCNetworkReachability/Core (2.0.5):
     - macros_blocks (= 0.0.1)
-  - SCNetworkReachability/Multithreading (2.0.0):
-    - SCNetworkReachability/Core
-  - SCNetworkReachability/Shared (2.0.0):
-    - ABMultiton (~> 2.0)
-    - SCNetworkReachability/Core
-  - STTwitter (0.1.4)
-  - WCAlertView (1.0.1)
+  - SDCAlertView (7.1.2)
+  - SDWebImage (4.0.0):
+    - SDWebImage/Core (= 4.0.0)
+  - SDWebImage/Core (4.0.0)
+  - STTwitter (0.2.6)
+  - UINavigationControllerWithCompletionBlock (0.0.8):
+    - JRSwizzle (~> 1.0)
 
 DEPENDENCIES:
-  - CocoaLumberjack (~> 1.6.2)
-  - Facebook-iOS-SDK (~> 3.12.0)
-  - MBProgressHUD (~> 0.8)
   - PFTwitterSignOn (from `https://github.com/jesseditson/PFTwitterSignOn.git`)
+  - RZSquaresLoading
   - SCNetworkReachability
-  - STTwitter (~> 0.1.4)
-  - WCAlertView (~> 1.0.1)
+  - SDCAlertView (from `https://github.com/sberrevoets/SDCAlertView`)
+  - SDWebImage
+  - STTwitter
+  - UINavigationControllerWithCompletionBlock
 
 EXTERNAL SOURCES:
   PFTwitterSignOn:
     :git: https://github.com/jesseditson/PFTwitterSignOn.git
+  SDCAlertView:
+    :git: https://github.com/sberrevoets/SDCAlertView
+
+CHECKOUT OPTIONS:
+  PFTwitterSignOn:
+    :commit: be956fb85a62544f529c902b5cf1fb21e24aa07a
+    :git: https://github.com/jesseditson/PFTwitterSignOn.git
+  SDCAlertView:
+    :commit: 49a76768c403b539abf4b97a44b6d1d850a88faa
+    :git: https://github.com/sberrevoets/SDCAlertView
 
 SPEC CHECKSUMS:
-  ABMultiton: 25c3aab81c12b1dcc42bed0691b72000cba2bd0a
-  AFNetworking: 80c4e0652b08eb34e25b9c0ff3c82556fe5967b4
-  AFOAuth1Client: 53c76d9cadd73142a9f73854456d5d970bdc147a
-  CocoaLumberjack: baf4a09a3bcbdfea3363556a90104e026d3504e2
-  Facebook-iOS-SDK: 91763fa21b97c175dc072b5278a606b2aff62366
-  LVTwitterOAuthClient: cba0c6c4dac87affb49db4427cf1016f2a7cf682
-  macros_blocks: 5d2cb43d020128f7881def9855886e97af062764
-  MBProgressHUD: c356980b0cd097f19acec959b49dca5eb8ec31be
-  NSData+Base64: aae92a2e3f0bd88b29fe6093551ded3f5c062548
-  OAuthCore: 09d3c56dd3f64a61d1ffcbf103f28118ff8ca2e9
-  PFTwitterSignOn: 00c29dee27976e0f1cfc3e10e780b4ce79fffebb
-  SCNetworkReachability: fb5159bf6b5542d2e985f69edd93de958891631f
-  STTwitter: 809f63f856341fdd103fbc6d9e4818d48a91be0c
-  WCAlertView: 91e70d413b87d4e97f7c42574ef6a6b46881baf9
+  AFNetworking: cf8e418e16f0c9c7e5c3150d019a3c679d015018
+  AFOAuth1Client: 7bac5f9f00a2a97d99d4cb9942a09d0812c5e5b7
+  JRSwizzle: dd5ead5d913a0f29e7f558200165849f006bb1e3
+  LVTwitterOAuthClient: a8a181580614f5f8ded93fc100b1aefa22704d7c
+  macros_blocks: da2106a0975514e16f3669f2f50a02efaff642cf
+  NSData+Base64: 4e84902c4db907a15673474677e57763ef3903e4
+  OAuthCore: 43dce261db846a1fe20234d95654257e00e78581
+  PFTwitterSignOn: f8f46693a5f743707db85b6ae3dd5503c3d16a2b
+  RZSquaresLoading: c0aefa508119a76497424829e439e1b8b0d12fdc
+  SCNetworkReachability: 14026e754d9abb264c157131539e8e2c2131cb62
+  SDCAlertView: 896c7a91d98d947c9b69dd40af0c0344bf2e7dd2
+  SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
+  STTwitter: 30ee2f79eff78c3d633a1edc869e97db9c9ead59
+  UINavigationControllerWithCompletionBlock: c043176ee769b1e108761fff73ed776645f0f9d0
 
-COCOAPODS: 0.33.1
+PODFILE CHECKSUM: 742dce57e76f46fd1a2ca9949c9d54b04fb3d012
+
+COCOAPODS: 1.2.1

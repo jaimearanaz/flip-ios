@@ -2,487 +2,433 @@
 //  FLPGridViewController.m
 //  Flip
 //
-//  Created by Jaime Aranaz on 24/07/14.
-//  Copyright (c) 2014 MobiOak. All rights reserved.
+//  Created by Jaime on 17/02/2017.
+//  Copyright © 2017 MobiOak. All rights reserved.
 //
 
 #import "FLPGridViewController.h"
+
+#import "DWPDevice.h"
 #import "FLPCollectionViewCell.h"
-#import "FLPGridItem.h"
-#import "FLPScoreViewController.h"
 
-#import "WCAlertView.h"
-#import "GADBannerView.h"
+#define kFirstLookDuration 4.0f
+#define kNextCellDelayDuration 0.2f
 
-@interface FLPGridViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
+@interface FLPGridViewController () <GridCollectionControllerDelegate>
 
-@property (nonatomic, weak) IBOutlet UIButton *backBtn;
-@property (nonatomic, weak) IBOutlet UILabel *timerLbl;
-@property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
-@property (nonatomic, weak) IBOutlet UIView *bannerView;
+@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
-// Constraint used to remove banner when iPhone is 3.5 inchs and grid size is small
-@property (nonatomic, weak) IBOutlet NSLayoutConstraint *bannerConstraint;
-
-// Array with the duplicated images in grid, it represents indexes from |photos| array
-// e.g. [0, 1, 3, 0, 4, 4, 3, 5, 2, 1, 5, 2]
-@property (nonatomic, strong) NSMutableArray *photosInGrid;
-// Total number of images in grid
-@property (nonatomic) NSInteger numOfPhotos;
-// Number of images matched in grid
-@property (nonatomic) NSInteger numOfPhotosMatched;
-// Number of errors trying to match images in grid
-@property (nonatomic) NSInteger numOfErrors;
-// Starting game time
-@property (nonatomic) NSDate *startDate;
-// Ending game time
-@property (nonatomic) NSDate *endDate;
-// Timer to update game timing
-@property (nonatomic, strong) NSTimer *timer;
-// First image to try match
-@property (nonatomic) FLPGridItem *firstPhoto;
-// Second image to try match
-@property (nonatomic) FLPGridItem *secondPhoto;
-// YES if game has started, NO if photos are being showed to user
-@property (nonatomic) NSNumber *started;
-// Play camera sound effect when photos are matched
-@property (nonatomic, strong) AVAudioPlayer *playerCamera;
-
-- (IBAction)backButtonPressed:(id)sender;
+@property (strong, nonatomic, nonnull) id<GridPresenterDelegate> presenterDelegate;
+@property (strong, nonatomic, nullable) GridCollectionController *collectionViewDelegate;
+@property (strong, nonatomic, nonnull) NSArray *gridCellsModels;
+@property (nonatomic) GameSize gameSize;
+@property (strong, nonatomic, nullable) NSIndexPath *flippedIndexPath;
+@property (nonatomic) BOOL isUserInteractionEnabled;
+@property (nonatomic) NSInteger numberOfMatches;
+@property (nonatomic) NSInteger numberOfErrors;
+@property (strong, nonatomic, nullable) NSTimer *timer;
+@property (strong, nonatomic, nullable) NSDate *startDate;
+@property (nonatomic) NSTimeInterval timeNotPaused;
+@property (nonatomic) BOOL isStartingGame;
+@property (strong, nonatomic, nullable) dispatch_block_t showAllBlock;
+@property (strong, nonatomic, nullable) NSMutableArray *flipAllBlocks;
+@property (strong, nonatomic, nullable) dispatch_block_t startBlock;
 
 @end
 
 @implementation FLPGridViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
+#pragma mark - Lifecycle methods
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    switch (_gridSize) {
-        case GridSizeSmall:
-            _numOfPhotos = kGridSmallPhotos;
-            break;
-        case GridSizeMedium:
-            _numOfPhotos = kGridNormalPhotos;
-            break;
-        case GridSizeBig:
-            _numOfPhotos = kGridBigPhotos;
-            break;
-        default:
-            break;
-    }
-    
-    _numOfPhotosMatched = 0;
-    _numOfErrors = 0;
+ 
+    [self setupCollectionViewIfReady];
+}
 
-    [_backBtn.titleLabel setFont:[UIFont fontWithName:@"Roboto-Bold" size:17]];
-    [_backBtn setTitle:NSLocalizedString(@"OTHER_EXIT", @"") forState:UIControlStateNormal];
-    [_timerLbl setFont:[UIFont fontWithName:@"CantoraOne-Regular" size:20]];
-    
-    // Configure |photosInGrid|, for example [0, 1, 3, 0, 4, 4, 3, 5, 2, 1, 5, 2]
-    _photosInGrid = [[NSMutableArray alloc] init];
-    for (int i=0; i < (_numOfPhotos); i++) {
-        FLPGridItem *gridItem = [[FLPGridItem alloc] init];
-        gridItem.imageIndex = (i % (_numOfPhotos/2));
-        gridItem.isShowing = [NSNumber numberWithBool:YES];
-        gridItem.isMatched = [NSNumber numberWithBool:NO];
-        [_photosInGrid addObject:gridItem];
-    }
-    
-    // Sort the array randomly
-    _photosInGrid = [self sortRandomlyArray:_photosInGrid];
-    
-    // Configure banner
-    GADBannerView *banner = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner];
-    // AdMob key is stored in a plist file, not tracked in git repository
-    NSString *adMobPlist = [[NSBundle mainBundle] pathForResource:@"AdMobKey" ofType:@"plist"];
-    NSDictionary *adMobKey = [[NSDictionary alloc] initWithContentsOfFile:adMobPlist];
-    banner.adUnitID = [adMobKey objectForKey:@"key"];
-    banner.rootViewController = self;
-    [_bannerView addSubview:banner];
-    [banner loadRequest:[GADRequest request]];
-    
-    // If 3.5 inches and small grid, remove banner for better performance
-    if ((!isiPhone5) && (_gridSize == GridSizeSmall)) {
-        [self.view removeConstraint:_bannerConstraint];
-    }
-    
-    // Camera sound, play only if no other sound is playing (i.e. music player)
-    if (![[AVAudioSession sharedInstance] isOtherAudioPlaying]) {
-        NSString *cameraSoundPath = [[NSBundle mainBundle] pathForResource:@"camera-shutter-click-01" ofType:@"wav"];
-        NSURL *cameraSoundURL = [NSURL fileURLWithPath:cameraSoundPath];
-        _playerCamera = [[AVAudioPlayer alloc] initWithContentsOfURL:cameraSoundURL error:nil];
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+    [self setupCollectionView];
+}
+
+#pragma mark - Public methods
+
+- (void)setupViewController:(id<GridPresenterDelegate>)presenterDelegate
+{
+    self.presenterDelegate = presenterDelegate;
+}
+
+#pragma mark - Action methods
+
+- (IBAction)didSelectExit:(id)sender
+{
+    [self confirmExit];
+}
+
+#pragma mark - GridCollectionControllerDelegate methods
+
+- (void)collectionViewIsBuilt
+{
+    if (self.isStartingGame) {
+        [self showAllUserImagesForAWhile];
+        self.isStartingGame = NO;
     }
 }
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)didSelectCellWithIndexPath:(NSIndexPath *)indexPath
 {
-    [super viewDidAppear:animated];
-    
-    if (![_started boolValue]) {
-        double delay;
-        switch (_gridSize) {
-            case GridSizeSmall:
-                delay = kGridSmallDelay;
-                break;
-            case GridSizeMedium:
-                delay = kGridMediumDelay;
-                break;
-            case GridSizeBig:
-                delay = kGridBigDelay;
-                break;
-            default:
-                delay = kGridSmallDelay;
-        }
-        [self performSelector:@selector(startGame)
-                   withObject:nil
-                   afterDelay:delay
-                      inModes:[NSArray arrayWithObject:NSRunLoopCommonModes]];
-    }
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if (_playerCamera) {
-        [_playerCamera stop];
-        _playerCamera = nil;
-    }
-    
-    if ([segue.identifier isEqualToString:@"scoreFromGridSegue"]) {
-        FLPScoreViewController *scoreViewController=(FLPScoreViewController *)segue.destinationViewController;
-        scoreViewController.time = _endDate;
-        scoreViewController.numOfErrors = _numOfErrors;
-        scoreViewController.gridSize = _gridSize;
-        scoreViewController.photos = _photos;
-    }
-}
-
-#pragma mark - IBAction methods
-
-- (IBAction)backButtonPressed:(id)sender
-{
-    [WCAlertView showAlertWithTitle:NSLocalizedString(@"GRID_EXIT", @"")
-                            message:NSLocalizedString(@"GRID_EXIT_CONFIRM", @"")
-                 customizationBlock:nil
-                    completionBlock:^(NSUInteger buttonIndex, WCAlertView *alertView) {
-                        if (buttonIndex == 1) {
-                            [self exitGame];
-                        }
-                    }
-                  cancelButtonTitle:NSLocalizedString(@"OTHER_CANCEL", @"")
-                  otherButtonTitles:NSLocalizedString(@"OTHER_YES", @""), nil];
-}
-
-#pragma mark - UICollectionViewDataSource methods
-
-- (NSInteger)numberOfSectionsInCollectionView: (UICollectionView *)collectionView
-{
-    return 1;
-}
-
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
-{
-    return (_numOfPhotos);
-}
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    FLPCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"gridCell" forIndexPath:indexPath];
-    FLPGridItem *gridItem = [_photosInGrid objectAtIndex:indexPath.row];
-    
-    // Configure cell
-    UIImage *image = (UIImage *)[_photos objectAtIndex:gridItem.imageIndex];
-    if (image.size.height != image.size.width) {
-        [cell.photoView setImage:[self imageCrop:image]];
-    } else {
-        [cell.photoView setImage:image];
-    }
-    [cell.coverLbl setFont:[UIFont fontWithName:@"CantoraOne-Regular" size:40]];
-    cell.coverLbl.text = [NSString stringWithFormat:@"%ld", (indexPath.row + 1)];
-
-    // Game is not started yet, show all images
-    if ((![_started boolValue]) && ([gridItem.isShowing boolValue])) {
-        [cell flipCellToImageAnimated:[NSNumber numberWithBool:NO] onCompletion:nil];
+    if (self.isUserInteractionEnabled) {
         
-    // Game is started
-    } else {
+        NSInteger index = [self indexInsideModelForIndexPath:indexPath];
+        GridCellStatus *selectedModel = [self.gridCellsModels objectAtIndex:index];
+        FLPCollectionViewCell *selectedCell = (FLPCollectionViewCell *) [self.collectionView cellForItemAtIndexPath:indexPath];
         
-        // Matched
-        if ([gridItem.isMatched boolValue]) {
-            [cell flipCellToImageAnimated:[NSNumber numberWithBool:NO] onCompletion:nil];
-        } else {
-            // Selected
-            if ([gridItem.isShowing boolValue]) {
-                [cell flipCellToImageAnimated:[NSNumber numberWithBool:NO] onCompletion:nil];
-            // Not selected
-            } else {
-                [cell flipCellToCoverAnimated:[NSNumber numberWithBool:NO]];
-            }
-        }
-    }
-    
-    return cell;
-}
-
-#pragma mark - UICollectionViewDelegate methods
-
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    FLPCollectionViewCell *cell = (FLPCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
-    FLPGridItem *gridItem = [_photosInGrid objectAtIndex:indexPath.row];
-
-    // Game is running and new photo has been selected
-    if (([_started boolValue]) &&
-        (_secondPhoto == nil) &&
-        ([gridItem.isMatched boolValue] == NO) &&
-        ([gridItem.isShowing boolValue] == NO)) {
-
-        // It's first photo
-        if (_firstPhoto == nil) {
-            gridItem.isShowing = [NSNumber numberWithBool:YES];
-            _firstPhoto = gridItem;
-            [cell flipCellToImageAnimated:[NSNumber numberWithBool:YES] onCompletion:nil];
-            
-        // It's second photo
-        } else {
-            
-            if (gridItem != _firstPhoto) {
-                gridItem.isShowing = [NSNumber numberWithBool:YES];
-                _secondPhoto = gridItem;
-                
-                NSInteger firstPhotoRow = [_photosInGrid indexOfObject:_firstPhoto];
-                NSIndexPath *firstIndexPath = [NSIndexPath indexPathForItem:firstPhotoRow inSection:0];
-                FLPCollectionViewCell *firstCell = (FLPCollectionViewCell *)[_collectionView cellForItemAtIndexPath:firstIndexPath];
-                FLPCollectionViewCell *secondCell = cell;
-                
-                // Photos match, keep showing
-                if (_firstPhoto.imageIndex == _secondPhoto.imageIndex) {
-                    
-                        [cell flipCellToImageAnimated:[NSNumber numberWithBool:YES] onCompletion:^{
-                            
-                            // Flash animation
-                            [firstCell matchedAnimation];
-                            [secondCell matchedAnimation];
-                            
-                            // Camera sound
-                            if ((_playerCamera) && (![[AVAudioSession sharedInstance] isOtherAudioPlaying])) {
-                                [_playerCamera play];
-                            }
-                            
-                            _firstPhoto.isMatched = [NSNumber numberWithBool:YES];
-                            _firstPhoto = nil;
-                            _secondPhoto.isMatched = [NSNumber numberWithBool:YES];
-                            _secondPhoto = nil;
-                            _numOfPhotosMatched += 2;
-                            
-                            // All photos matched, return to main view
-                            if (_numOfPhotosMatched == _numOfPhotos) {
-                                [self stopTimer];
-                                
-                                // Final time
-                                NSDate *currentDate = [NSDate date];
-                                NSTimeInterval timeInterval = [currentDate timeIntervalSinceDate:_startDate];
-                                _endDate = [NSDate dateWithTimeIntervalSince1970:timeInterval];
-                                
-                                [self performSelector:@selector(endGame)
-                                           withObject:nil
-                                           afterDelay:kGridGeneralDelay
-                                              inModes:[NSArray arrayWithObject:NSRunLoopCommonModes]];
-                            }
-                        }];
-                    
-                // Photos don't match, hide them
-                } else {
-                    [cell flipCellToImageAnimated:[NSNumber numberWithBool:YES] onCompletion:^{
-                        [firstCell flipCellToCoverAnimated:[NSNumber numberWithBool:YES]];
-                        [secondCell flipCellToCoverAnimated:[NSNumber numberWithBool:YES]];
-                        _firstPhoto.isShowing = [NSNumber numberWithBool:NO];
-                        _firstPhoto = nil;
-                        _secondPhoto.isShowing = [NSNumber numberWithBool:NO];
-                        _secondPhoto = nil;
-                        _numOfErrors++;
-                    }];
-                }
-            }
+        if (!selectedModel.isFlipped) {
+            [self flipSelectedCell:selectedCell atIndex:indexPath withModel:selectedModel];
         }
     }
 }
 
-#pragma mark - UICollectionViewDelegateFlowLayout methods
+#pragma mark - GridViewControllerDelegate methods
 
-- (CGSize)collectionView:(UICollectionView *)collectionView
-                  layout:(UICollectionViewLayout*)collectionViewLayout
-  sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+- (void)showItems:(NSArray<GridCell *> *)items withSize:(GameSize)size
 {
-    return CGSizeMake(90, 100);
-}
-
-- (CGFloat)collectionView:(UICollectionView *)collectionView
-                   layout:(UICollectionViewLayout*)collectionViewLayout
-minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
-{
-    return 3;
+    self.gridCellsModels = [self createGridCellsFromItems:items];
+    self.gameSize = size;
+    self.isStartingGame = YES;
+    [self resetTimeLabel];
+    [self setupCollectionViewIfReady];
 }
 
 #pragma mark - Private methods
 
-/**
- *  Starts game hidding photos and starting timer
- */
-- (void)startGame
+- (void)setupCollectionViewIfReady
 {
-    [self hideAllPhotos];
+    BOOL ready = ((self.collectionView != nil) && (self.gridCellsModels != nil));
+    if (ready) {
+        
+        [self setupCollectionView];
+    }
+}
+
+- (void)setupCollectionView
+{
+    self.collectionViewDelegate = [[GridCollectionController alloc] initWithCollectionView:self.collectionView
+                                                                                       size:self.gameSize
+                                                                                     models:self.gridCellsModels
+                                                                             isStartingGame:self.isStartingGame
+                                                                                   delegate:self];
+    self.collectionView.delegate = self.collectionViewDelegate;
+    self.collectionView.dataSource = self.collectionViewDelegate;
+    [self.collectionView reloadData];
+}
+
+- (void)confirmExit
+{
+    [self pauseTimer];
+
+    [AlertController showAlertWithMessage:NSLocalizedString(@"GRID_EXIT_CONFIRM", @"")
+                                    title:@""
+                         firstButtonTitle:NSLocalizedString(@"OTHER_CANCEL", @"")
+                        secondButtonTitle:NSLocalizedString(@"GRID_EXIT", @"")
+                               firstBlock:^{
+                                      
+                                      [self resumeTimer];
+                                  }
+                                 secondBlock:^{
+                                     
+                                     [self stopTimer];
+                                     [self cancelAllBlocks];
+                                     [self.presenterDelegate didSelectExit];
+                                 }];
+}
+
+- (NSArray *)createGridCellsFromItems:(NSArray *)items
+{
+    NSMutableArray *gridCells = [[NSMutableArray alloc] init];
+    [items enumerateObjectsUsingBlock:^(GridCell * _Nonnull oneItem, NSUInteger idx, BOOL * _Nonnull stop) {
+        
+        GridCellStatus *oneGridCell = [[GridCellStatus alloc] init];
+        oneGridCell.gridCell = oneItem;
+        oneGridCell.isPaired = NO;
+        oneGridCell.isFlipped = NO;
+        
+        [gridCells addObject:oneGridCell];
+        
+    }];
+    
+    return gridCells;
+}
+
+- (void)flipSelectedCell:(FLPCollectionViewCell *)selectedCell
+                 atIndex:(NSIndexPath *)indexPath
+               withModel:(GridCellStatus *)selectedModel
+{
+    selectedModel.isFlipped = YES;
+    BOOL isFirstOfTwoCells = (self.flippedIndexPath == nil);
+    
+    self.flippedIndexPath = (isFirstOfTwoCells) ? indexPath : self.flippedIndexPath;
+    self.isUserInteractionEnabled = (isFirstOfTwoCells) ? YES : NO;
+
+    [selectedCell flipToUserImageWithAnimation:@(YES) onCompletion:^{
+        
+        if (!isFirstOfTwoCells) {
+            [self checkIfCellsMatchWithSelectedCell:selectedCell andModel:selectedModel];
+        }
+    }];
+}
+
+- (void)checkIfCellsMatchWithSelectedCell:(FLPCollectionViewCell *)selectedCell andModel:(GridCellStatus *)selectedModel
+{
+    NSInteger indexForFlippedItem = [self indexInsideModelForIndexPath:self.flippedIndexPath];
+    GridCellStatus *flippedModel = [self.gridCellsModels objectAtIndex:indexForFlippedItem];
+    FLPCollectionViewCell *flippedCell = (FLPCollectionViewCell *) [self.collectionView cellForItemAtIndexPath:self.flippedIndexPath];
+
+    BOOL isAMatch = selectedModel.gridCell.equalIndex == indexForFlippedItem;
+    NSArray *cells = @[selectedCell, flippedCell];
+    NSArray *models = @[selectedModel, flippedModel];
+    
+    if (isAMatch) {
+        [self cellsMatch:cells withModels:models];
+    } else {
+        [self cellsDoesntMatch:cells withModels:models];
+    }
+}
+
+- (NSInteger)indexInsideModelForIndexPath:(NSIndexPath *)indexPath
+{
+    NSInteger itemsPerSection = [self.collectionView numberOfItemsInSection:0];
+    NSInteger modelIndex = (itemsPerSection * indexPath.section) + indexPath.item;
+    
+    return modelIndex;
+}
+
+- (void)cellsMatch:(NSArray *)cell withModels:(NSArray *)models
+{
+    FLPCollectionViewCell *selectedCell = cell[0];
+    GridCellStatus *selectedModel = models[0];
+    
+    FLPCollectionViewCell *flippedCell = cell[1];
+    GridCellStatus *flippedModel = models[1];
+    
+    self.flippedIndexPath = nil;
+    self.isUserInteractionEnabled = NO;
+    
+    [selectedCell showPairedAnimation:^{
+    
+        selectedModel.isFlipped = YES;
+        selectedModel.isPaired = YES;
+    }];
+    
+    [flippedCell showPairedAnimation:^{
+        
+        flippedModel.isPaired = YES;
+        self.isUserInteractionEnabled = YES;
+        self.numberOfMatches += 2;
+        [self finishGameIfAllCellsMatch];
+    }];
+}
+
+- (void)cellsDoesntMatch:(NSArray *)cells withModels:(NSArray *)models
+{
+    FLPCollectionViewCell *selectedCell = cells[0];
+    GridCellStatus *selectedModel = models[0];
+    
+    FLPCollectionViewCell *flippedCell = cells[1];
+    GridCellStatus *flippedModel = models[1];
+    
+    self.isUserInteractionEnabled = NO;
+    self.numberOfErrors++;
+    
+    [selectedCell flipToCoverWithAnimation:@(YES) onCompletion:^{
+        selectedModel.isFlipped = NO;
+    }];
+    
+    [flippedCell flipToCoverWithAnimation:@(YES) onCompletion:^{
+        
+        flippedModel.isFlipped = NO;
+        self.flippedIndexPath = nil;
+        self.isUserInteractionEnabled = YES;
+    }];
+}
+
+- (void)finishGameIfAllCellsMatch
+{
+    BOOL isGameFinshed = self.gridCellsModels.count == self.numberOfMatches;
+    
+    if (isGameFinshed) {
+    
+        [self stopTimer];
+        NSDate *now = [NSDate date];
+        NSTimeInterval totalTime = [now timeIntervalSinceDate:self.startDate] + self.timeNotPaused;
+        
+        [self.presenterDelegate gameFinishedWithTime:totalTime numberOfErrors:self.numberOfErrors];
+    }
+}
+
+- (void)startTimer
+{
+    self.startDate = [NSDate date];
+    self.timeNotPaused = 0;
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1
+                                                  target:self
+                                                selector:@selector(updateTimeLabel)
+                                                userInfo:nil
+                                                 repeats:YES];
+    
+    NSRunLoop *runloop = [NSRunLoop currentRunLoop];
+    [runloop addTimer:self.timer forMode:NSRunLoopCommonModes];
+    [runloop addTimer:self.timer forMode:UITrackingRunLoopMode];
+}
+
+- (void)pauseTimer
+{
+    NSDate *now = [NSDate date];
+    NSTimeInterval elapsedTime = [now timeIntervalSinceDate:self.startDate];
+    self.timeNotPaused += elapsedTime;
+    
+    [self stopTimer];
+}
+
+- (void)resumeTimer
+{
     [self startTimer];
 }
 
-/**
- *  Starts timer to update time of game
- */
-- (void)startTimer
-{
-    if (_timer == nil) {
-        _startDate = [NSDate date];
-        _timer = [NSTimer scheduledTimerWithTimeInterval:1
-                                                  target:self
-                                                selector:@selector(updateTimer)
-                                                userInfo:nil
-                                                repeats:YES];
-        NSRunLoop *runloop = [NSRunLoop currentRunLoop];
-        [runloop addTimer:_timer forMode:NSRunLoopCommonModes];
-        [runloop addTimer:_timer forMode:UITrackingRunLoopMode];
-    }
-}
-
-/**
- *  Stops timer to end updating time of game
- */
 - (void)stopTimer
 {
-    [_timer invalidate];
-    _timer = nil;
+    [self.timer invalidate];
+    self.timer = nil;
 }
 
-/**
- * Updates time label
- */
-- (void)updateTimer
+- (void)updateTimeLabel
 {
-    NSDate *currentDate = [NSDate date];
-    NSTimeInterval timeInterval = [currentDate timeIntervalSinceDate:_startDate];
-    _endDate = [NSDate dateWithTimeIntervalSince1970:timeInterval];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"mm:ss"];
-    [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0.0]];
-    NSString *timeString=[dateFormatter stringFromDate:_endDate];
-    _timerLbl.text = timeString;
+    if (self.timer != nil) {
+        
+        NSDate *now = [NSDate date];
+        NSTimeInterval totalTime = [now timeIntervalSinceDate:self.startDate] + self.timeNotPaused;
+        
+        NSDate *totalDate = [NSDate dateWithTimeIntervalSince1970:totalTime];
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"mm:ss"];
+        [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0.0]];
+        NSString *totalTimeFormatted = [dateFormatter stringFromDate:totalDate];
+        
+        self.timeLabel.text = totalTimeFormatted;
+    }
 }
 
-/**
- * Called when user exits game before ending
- */
-- (void)exitGame
+- (void)resetTimeLabel
 {
-    [self stopTimer];
-    [self performSegueWithIdentifier:@"mainFromGridSegue" sender:self];
+    self.timeLabel.text = @"00:00";
 }
 
-/**
- * Called when user completes game
- */
-- (void)endGame
+- (void)showAllUserImagesForAWhile
 {
-    [self performSegueWithIdentifier:@"scoreFromGridSegue" sender:self];
+    self.showAllBlock = dispatch_block_create(DISPATCH_BLOCK_INHERIT_QOS_CLASS, ^{
+        [self hideAllUserImagesAndStartGame];
+    });
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, kFirstLookDuration * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        self.showAllBlock();
+    });
 }
 
-/**
- * Hides all photos in grid, used when game starts
- */
-- (void)hideAllPhotos
+// TODO: bug, last images are flipped simultaneously
+- (void)hideAllUserImagesAndStartGame
 {
-    // Set model data
-    double delay = 0;
-    for (int i=0; i < (_numOfPhotos); i++) {
-        FLPGridItem *gridItem = [_photosInGrid objectAtIndex:i];
-        gridItem.isShowing = NO;
-        NSIndexPath *indexPath = [NSIndexPath indexPathForItem:i inSection:0];
-        FLPCollectionViewCell *cell = (FLPCollectionViewCell *)[_collectionView cellForItemAtIndexPath:indexPath];
-            [cell performSelector:@selector(flipCellToCoverAnimated:)
-                       withObject:[NSNumber numberWithBool:YES]
-                       afterDelay:delay
-                          inModes:[NSArray arrayWithObject:NSRunLoopCommonModes]];
-        delay += 0.1;
+    NSTimeInterval delay = 0;
+    NSInteger numOfSections = [self.collectionView numberOfSections];
+    
+    self.flipAllBlocks = [[NSMutableArray alloc] init];
+    
+    for (int oneSection = 0; oneSection < numOfSections; oneSection++) {
+        
+        NSInteger numOfItems = [self.collectionView numberOfItemsInSection:oneSection];
+        
+        for (int oneItem = 0; oneItem < numOfItems; oneItem++) {
+            NSIndexPath *indexPath = [NSIndexPath indexPathForItem:oneItem inSection:oneSection];
+            [self flipCellToCoverAtIndex:indexPath withDelay:delay];
+            delay += kNextCellDelayDuration;
+        }
     }
     
-    [self performSelector:@selector(setStarted:) withObject:[NSNumber numberWithBool:YES] afterDelay:delay];
+    self.startBlock = dispatch_block_create(DISPATCH_BLOCK_INHERIT_QOS_CLASS, ^{
+        [self gameStarts];
+    });
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, delay * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        self.startBlock();
+    });
 }
 
-/**
- * Crops and returns the given image to be squared
- * @param original Image to crop
- * @return Image cropped
- */
-- (UIImage *)imageCrop:(UIImage*)original
+- (void)gameStarts
 {
-    UIImage *ret = nil;
-    
-    // This calculates the crop area.
-    
-    float originalWidth  = original.size.width;
-    float originalHeight = original.size.height;
-    
-    float edge = fminf(originalWidth, originalHeight);
-    
-    float posX = (originalWidth   - edge) / 2.0f;
-    float posY = (originalHeight  - edge) / 2.0f;
-    
-    
-    CGRect cropSquare = CGRectMake(posX, posY,
-                                   edge, edge);
-    
-    
-    // This performs the image cropping.
-    
-    CGImageRef imageRef = CGImageCreateWithImageInRect([original CGImage], cropSquare);
-    
-    ret = [UIImage imageWithCGImage:imageRef
-                              scale:original.scale
-                        orientation:original.imageOrientation];
-    
-    CGImageRelease(imageRef);
-    
-    return ret;
+    [self startTimer];
+    self.isUserInteractionEnabled = YES;
+    self.numberOfErrors = 0;
+    self.numberOfMatches = 0;
 }
 
-/**
- *  Sorts the given array randomly
- *  @param array Array to sort randomly
- *  @return The given array sorted randomly
- */
-- (NSMutableArray *)sortRandomlyArray:(NSMutableArray *)array
+- (void)flipCellToCoverAtIndex:(NSIndexPath *)indexPath withDelay:(NSTimeInterval)delay
 {
-    NSUInteger count = [array count];
-    for (NSUInteger i = 0; i < count; ++i) {
-        NSUInteger numElements = count - i;
-        NSUInteger n = (arc4random() % numElements) + i;
-        [array exchangeObjectAtIndex:i withObjectAtIndex:n];
+    FLPCollectionViewCell *cell = (FLPCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+    NSInvocation *invocation = [self invocationToFlipCellToCover:cell];
+    NSInteger numOfSections = [self.collectionView numberOfSections];
+    
+    if (self.flipAllBlocks == nil) {
+        self.flipAllBlocks = [[NSMutableArray alloc] init];
     }
     
-    return array;
+    dispatch_block_t oneBlock = dispatch_block_create(DISPATCH_BLOCK_INHERIT_QOS_CLASS, ^{
+        
+        NSInteger indexInModel = [self indexInsideModelForIndexPath:indexPath];
+        BOOL isLastCell = ((indexPath.section == (numOfSections - 1)) && ((self.gridCellsModels.count - 1) == indexInModel));
+        if (isLastCell) {
+            self.isUserInteractionEnabled = YES;
+        }
+        [invocation invoke];
+    });
+    
+    [self.flipAllBlocks addObject:oneBlock];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, delay * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        oneBlock();
+    });
+}
+
+- (NSInvocation *)invocationToFlipCellToCover:(FLPCollectionViewCell *)cell
+{
+    SEL selector = NSSelectorFromString(@"flipToCoverWithAnimation:onCompletion:");
+    NSNumber *animated = [NSNumber numberWithBool:YES];
+    void (^completion)(void) = ^void(){};
+    
+    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[cell methodSignatureForSelector:selector]];
+    [invocation setSelector:selector];
+    [invocation setTarget:cell];
+    [invocation setArgument:&animated atIndex:2];
+    [invocation setArgument:&completion atIndex:3];
+    
+    return invocation;
+}
+
+- (void)cancelAllBlocks
+{
+    if (self.showAllBlock) {
+        dispatch_block_cancel(self.showAllBlock);
+    }
+    
+    [self.flipAllBlocks enumerateObjectsUsingBlock:^(dispatch_block_t _Nonnull oneBlock, NSUInteger idx, BOOL * _Nonnull stop) {
+       dispatch_block_cancel(oneBlock);
+    }];
+    [self.flipAllBlocks removeAllObjects];
+    
+    if (self.startBlock) {
+        dispatch_block_cancel(self.startBlock);
+    }
 }
 
 @end

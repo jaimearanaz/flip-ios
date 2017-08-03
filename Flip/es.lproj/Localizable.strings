@@ -17,17 +17,25 @@
 "MAIN_SOURCE" = "Cambiar origen de las fotos";
 "MAIN_ALERT" = "Error";
 "MAIN_ENOUGH_PHOTOS_CAMERA" = "¡Necesitas tener al menos %d fotos en tu Carrete!";
-"MAIN_ENOUGH_PHOTOS_TWITTER" = "¡Necesitas tener al menos %d followers y following con una imagen de perfil válida en Twitter!";
+"MAIN_ENOUGH_PHOTOS_TWITTER" = "¡Necesitas seguir al menos a %d usuarios con un avatar válido en Twitter!";
 "MAIN_ENOUGH_PHOTOS_FACEBOOK" = "¡Necesitas tener al menos %d fotos en Facebook!";
 "MAIN_ENOUGH_PHOTOS_OTHER" = "¡Necesitas tener al menos %d fotos!";
 "MAIN_SELECT_TWITTER" = "Selecciona una cuenta de Twitter";
 "MAIN_GENERIC_ERROR" = "Ha habido un error obteniendo tus fotos de la fuente seleccionada. Por favor, inténtalo de nuevo.";
+"MAIN_CANCELLED_LOGIN" = "¡Se ha cancelado el proceso de login!";
+"MAIN_ERROR_DOWNLOADING" = "Ha habido un error descargando las fotos. Por favor, inténtalo de nuevo";
+"MAIN_NOT_GRANTED" = "Flip Your Photos necesita permiso para acceder a tus fotos locales. ¿Quieres ir a Ajustes para habilitarlo?";
 "MAIN_INERNET_CONNECTION" = "Necesitas una conexión a Internet para descargar fotos de esta fuente.";
 "MAIN_RECORDS_TITLE" = "Mis Récords";
 "MAIN_RECORDS_NONE" = "--:--:---";
 "MAIN_START" = "Empezar nuevo juego";
 "MAIN_LOGIN_ERROR_FACEBOOK" = "Ha habido un error haciendo login con Facebook. Por favor, inténtalo de nuevo.";
 "MAIN_LOGIN_ERROR_TWITTER" = "Ha habido un error haciendo login con Twitter. Por favor, inténtalo de nuevo.";
+"MAIN_3G_CONNECTION" = "Se usará tu conexión de datos para descargar las fotos. ¿Quieres continuar?";
+"MAIN_3G_CONNECTION_YES" = "Descargar";
+"MAIN_3G_CONNECTION_NO" = "Cancelar";
+"MAIN_NOT_GRANTED_YES" = "Ir a Ajustes";
+"MAIN_NOT_GRANTED_NO" = "Cancelar";
 
 // Grid screen
 "GRID_EXIT" = "Salir";
@@ -48,4 +56,3 @@
 "OTHER_CANCEL" = "Cancelar";
 "OTHER_YES" = "Sí";
 "OTHER_EXIT" = "Salir";
-"OTHER_MAIN" = "Inicio";

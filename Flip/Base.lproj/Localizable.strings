@@ -17,17 +17,25 @@
 "MAIN_SOURCE" = "Change source";
 "MAIN_ALERT" = "Error";
 "MAIN_ENOUGH_PHOTOS_CAMERA" = "You need at least %d photos in your Camera Roll!";
-"MAIN_ENOUGH_PHOTOS_TWITTER" = "You need at least %d followers and following with a valid image profile in Twitter!";
+"MAIN_ENOUGH_PHOTOS_TWITTER" = "You need to follow at least %d users with a valid avatar in Twitter!";
 "MAIN_ENOUGH_PHOTOS_FACEBOOK" = "You need at least %d photos in Facebook!";
 "MAIN_ENOUGH_PHOTOS_OTHER" = "You must have at least %d photos!";
 "MAIN_SELECT_TWITTER" = "Select one Twitter account";
 "MAIN_GENERIC_ERROR" = "There was an error getting your photos from selected source. Please try again.";
+"MAIN_CANCELLED_LOGIN" = "Login in source has been cancelled!";
+"MAIN_ERROR_DOWNLOADING" = "There was an error fetching the photos. Please try again";
+"MAIN_NOT_GRANTED" = "Flip Your Photos needs permission to access your local photos. Do you want to grant it from Settings?";
 "MAIN_INERNET_CONNECTION" = "You need an internet connection to download photos from this source.";
 "MAIN_RECORDS_TITLE" = "My Records";
 "MAIN_RECORDS_NONE" = "--:--:---";
 "MAIN_START" = "Start new game";
 "MAIN_LOGIN_ERROR_FACEBOOK" = "There was an error login with Facebook. Please try again.";
 "MAIN_LOGIN_ERROR_TWITTER" = "There was an error login with Twitter. Please try again.";
+"MAIN_3G_CONNECTION" = "Your device data connection will be used to download photos. Do you want to continue?";
+"MAIN_3G_CONNECTION_YES" = "Download";
+"MAIN_3G_CONNECTION_NO" = "Cancel";
+"MAIN_NOT_GRANTED_YES" = "Open Settings";
+"MAIN_NOT_GRANTED_NO" = "Cancel";
 
 // Grid screen
 "GRID_EXIT" = "Exit";
@@ -48,4 +56,3 @@
 "OTHER_CANCEL" = "Cancel";
 "OTHER_YES" = "Yes";
 "OTHER_EXIT" = "Exit";
-"OTHER_MAIN" = "Main";
