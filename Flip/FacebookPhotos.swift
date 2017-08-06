@@ -73,7 +73,7 @@ class FacebookPhotos {
                                  from: viewController,
                                  handler: { (result, error) in
 
-                                    if (error != nil) {
+                                    if (error == nil) {
                                         self.getUserPhotos(numOfPhotos: numOfPhotos, success: success, failure: failure)
                                     } else {
                                         failure(.unknown)
